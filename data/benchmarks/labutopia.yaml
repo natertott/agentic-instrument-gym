@@ -1,5 +1,7 @@
 id: labutopia
 record_type: benchmark
+inclusion: reference
+inclusion_reason: unverified discovery-sweep stub; promote to core after full extraction
 name: 'LabUtopia: High-Fidelity Simulation and Hierarchical Benchmark for Scientific Embodied Agents'
 short_name: LabUtopia
 year: 2025

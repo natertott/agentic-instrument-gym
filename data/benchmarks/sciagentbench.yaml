@@ -1,5 +1,7 @@
 id: sciagentbench
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'SciAgentGym / SciAgentBench: Benchmarking Multi-Step Scientific Tool-use in LLM Agents'
 short_name: SciAgentBench
 year: 2026

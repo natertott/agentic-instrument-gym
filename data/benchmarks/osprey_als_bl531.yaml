@@ -1,5 +1,7 @@
 id: osprey_als_bl531
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: Orchestrating agentic systems at ALS beamline 5.3.1 with Osprey and Bluesky
 short_name: Osprey-BL531
 year: 2026

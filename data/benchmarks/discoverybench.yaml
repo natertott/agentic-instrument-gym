@@ -1,5 +1,7 @@
 id: discoverybench
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'DiscoveryBench: Towards Data-Driven Discovery with Large Language Models'
 short_name: DiscoveryBench
 year: 2024

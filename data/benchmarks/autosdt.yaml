@@ -1,5 +1,7 @@
 id: autosdt
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'AutoSDT: Scaling Data-Driven Discovery Tasks Toward Open Co-Scientists'
 short_name: AutoSDT
 year: 2025

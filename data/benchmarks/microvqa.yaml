@@ -1,5 +1,7 @@
 id: microvqa
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'MicroVQA: A Multimodal Reasoning Benchmark for Microscopy-Based Scientific Research'
 short_name: MicroVQA
 year: 2025

@@ -1,5 +1,7 @@
 id: chemistry3d
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: 'Chemistry3D: Robotic Interaction Benchmark for Chemistry Experiments'
 short_name: Chemistry3D
 year: 2024

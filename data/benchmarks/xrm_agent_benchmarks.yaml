@@ -1,5 +1,7 @@
 id: xrm_agent_benchmarks
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: Agentic self-driving microscopy benchmarks support qualification but do not necessarily generalize to unseen
   tasks
 short_name: XRM agent benchmarks

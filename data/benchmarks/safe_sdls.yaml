@@ -1,5 +1,7 @@
 id: safe_sdls
 record_type: framework
+inclusion: reference
+inclusion_reason: 'record_type is framework: evaluation is not a reusable task set with a scoring rule'
 name: Steering towards safe self-driving laboratories
 short_name: Safe SDLs (Leong et al.)
 year: 2025

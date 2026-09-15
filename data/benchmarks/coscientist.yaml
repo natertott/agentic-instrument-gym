@@ -1,5 +1,7 @@
 id: coscientist
 record_type: benchmark
+inclusion: reference
+inclusion_reason: unverified discovery-sweep stub; promote to core after full extraction
 name: Autonomous chemical research with large language models (Coscientist)
 short_name: Coscientist
 year: 2023

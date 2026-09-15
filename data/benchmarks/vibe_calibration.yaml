@@ -1,5 +1,7 @@
 id: vibe_calibration
 record_type: benchmark
+inclusion: reference
+inclusion_reason: unverified discovery-sweep stub; promote to core after full extraction
 name: 'Vibe Calibration: Autonomous Bring-up of a 112-Qubit Superconducting Quantum Processor by a Skill-Orchestrating
   Language Agent'
 short_name: Vibe Calibration

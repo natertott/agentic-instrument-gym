@@ -5,7 +5,7 @@ from collections import Counter
 from typing import Any
 
 from .features import FeatureEncoder, GROUP_OF_PREFIX, get_path, modalities
-from .records import load_vocab
+from .records import load_vocab, select
 
 
 def gower_distance(a: dict[str, float | None], b: dict[str, float | None], columns: list[dict[str, Any]], group: str | None = None) -> float | None:
@@ -81,12 +81,13 @@ def _reps(card: dict[str, Any]) -> bool:
     return not (s.startswith("1") or s.startswith("single") or s.startswith("none") or s.startswith("no "))
 
 
-def axis_coverage(cards: list[dict[str, Any]]) -> dict[str, Any]:
-    """Which cards cover which axes, plus the axes nobody covers (the gaps WP3 must fill)."""
+def axis_coverage(cards: list[dict[str, Any]], scope: str = "core") -> dict[str, Any]:
+    """Which cards cover which axes, plus the axes nobody covers (the gaps WP3 must fill).
+
+    Restricted to the core analysis set by default; pass scope="all" to include reference records.
+    """
     table: dict[str, dict[str, bool]] = {}
-    for card in cards:
-        if card.get("record_type") not in ("benchmark", "system"):
-            continue
+    for card in select(cards, scope):
         table[card["id"]] = {axis: bool(pred(card)) for axis, _, pred in AXES}
     counts = Counter()
     for row in table.values():

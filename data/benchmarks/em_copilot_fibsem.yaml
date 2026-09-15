@@ -1,5 +1,7 @@
 id: em_copilot_fibsem
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: 'LLM-Driven Automation in FIB-SEM: Enhancing Microscope Control with AutoScript and Vision-Based AI (EM CoPilot)'
 short_name: EM CoPilot
 year: 2025

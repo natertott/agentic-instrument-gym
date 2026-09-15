@@ -1,5 +1,7 @@
 id: autoxrd
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'AutoXRD: Autonomous LLM Agents and Comprehensive Evaluation for Powder Diffraction Analysis'
 short_name: AutoXRD / XRDBench
 year: 2026

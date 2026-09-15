@@ -1,5 +1,7 @@
 id: prism
 record_type: benchmark
+inclusion: reference
+inclusion_reason: unverified discovery-sweep stub; promote to core after full extraction
 name: 'PRISM: Protocol Refinement through Intelligent Simulation Modeling'
 short_name: PRISM
 year: 2026

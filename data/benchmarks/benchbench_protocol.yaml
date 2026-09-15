@@ -1,5 +1,7 @@
 id: benchbench_protocol
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'BenchBench-Protocol: Evaluating Real-World Wet-Lab Protocol Reasoning and Modification'
 short_name: BenchBench-Protocol
 year: 2026

@@ -1,5 +1,7 @@
 id: biolp_bench
 record_type: benchmark
+inclusion: reference
+inclusion_reason: no task count reported, so size and coverage cannot be compared
 name: 'BioLP-bench: Measuring understanding of biological lab protocols by large language models'
 short_name: BioLP-bench
 year: 2024

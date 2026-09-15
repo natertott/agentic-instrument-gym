@@ -9,7 +9,7 @@ from typing import Any
 from . import SITE_DATA_DIR
 from .compare import axis_coverage, distance_matrix, nearest_neighbours, vocabulary_usage
 from .features import FeatureEncoder, coverage, modalities
-from .records import load_cards, load_executions, load_vocab
+from .records import load_cards, load_executions, load_vocab, select
 
 
 def _strip(card: dict[str, Any]) -> dict[str, Any]:
@@ -20,7 +20,7 @@ def build_site_data(out_dir: Path | None = None) -> dict[str, Path]:
     out_dir = out_dir or SITE_DATA_DIR
     out_dir.mkdir(parents=True, exist_ok=True)
     cards = load_cards()
-    cards.sort(key=lambda c: (c.get("record_type") != "benchmark", -int(c.get("year", 0)), c.get("name", "")))
+    cards.sort(key=lambda c: (c.get("inclusion") != "core", c.get("record_type") != "benchmark", -int(c.get("year", 0)), c.get("name", "")))
     vocab = load_vocab()
     enc = FeatureEncoder()
     columns, rows = enc.encode_all(cards)
@@ -55,8 +55,8 @@ def build_site_data(out_dir: Path | None = None) -> dict[str, Path]:
         "benchmarks.json": {"generated_on": date.today().isoformat(), "n_cards": len(cards), "cards": payload_cards},
         "vocab.json": vocab,
         "features.json": {"columns": enc.columns, "ids": [c["id"] for c in cards], "rows": rows},
-        "distances.json": {"ids": ids_all, "all": mat_all, "by_group": groups, "nearest": nearest_neighbours(cards)},
-        "axes.json": axis_coverage(cards),
+        "distances.json": {"ids": ids_all, "all": mat_all, "by_group": groups, "nearest": nearest_neighbours(cards), "core_ids": [c["id"] for c in select(cards, "core")]},
+        "axes.json": axis_coverage(cards, scope="all"),
         "vocab_usage.json": {k: dict(v) for k, v in vocabulary_usage(cards).items()},
         "executions_summary.json": exec_summary,
     }

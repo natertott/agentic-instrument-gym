@@ -1,5 +1,7 @@
 id: lost_in_benchmarks_irt
 record_type: framework
+inclusion: reference
+inclusion_reason: 'record_type is framework: evaluation is not a reusable task set with a scoring rule'
 name: Lost in Benchmarks? Rethinking Large Language Model Benchmarking with Item Response Theory
 short_name: PSN-IRT / Lost in Benchmarks
 year: 2026

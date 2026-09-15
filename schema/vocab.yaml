@@ -8,6 +8,17 @@
 #   - nominal vocabularies are one-hot encoded
 #   - "mixed" means the benchmark spans several values; "unknown" means not reported
 
+inclusion:
+  kind: nominal
+  values:
+    core: >-
+      In the core analysis set. A card qualifies when it is a benchmark (a defined task set with a scoring rule),
+      reports a task count, names at least one metric, and is not an unverified discovery-sweep stub.
+      Set by scripts/set_inclusion.py; a reason beginning "manual:" is never overwritten.
+    reference: >-
+      Kept for reference and excluded from coverage, distance and gap analysis: systems whose evaluation is a
+      demonstration, frameworks and surveys with no task set, and stub cards awaiting full extraction.
+
 record_type:
   kind: nominal
   values:

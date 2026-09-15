@@ -1,5 +1,7 @@
 id: clairify
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: 'CLAIRify: Errors are Useful Prompts - Instruction Guided Task Programming with Verifier-Assisted Iterative
   Prompting / Large language models for chemistry robotics'
 short_name: CLAIRify

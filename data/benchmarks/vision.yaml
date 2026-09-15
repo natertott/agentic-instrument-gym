@@ -1,5 +1,7 @@
 id: vision
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: 'VISION: A Modular AI Assistant for Natural Human-Instrument Interaction at Scientific User Facilities'
 short_name: VISION
 year: 2025

@@ -1,5 +1,7 @@
 id: rfia
 record_type: benchmark
+inclusion: reference
+inclusion_reason: unverified discovery-sweep stub; promote to core after full extraction
 name: 'RF Instrument Agent (RFIA): Empowering RF Instruments with Natural Language Understanding, Scheduling and
   Execution of Complex Tasks'
 short_name: RFIA

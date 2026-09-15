@@ -258,11 +258,13 @@ def normalise(card: dict, cid: str, sources: list[str]) -> dict:
         "reviewer_notes": f"Merged from {', '.join(sources)}." if len(sources) > 1 else None,
     }
     # drop unknown top-level keys
-    allowed_top = {"id", "record_type", "name", "short_name", "year", "venue", "authors_short", "arxiv", "doi", "url", "code_url", "data_url", "license", "status", "summary", "schema_axes_proposed", "benchmark_features", "task_features", "sample_environment_features", "agent_features_evaluated", "transfer_relevant_findings", "limitations", "related", "notes", "provenance"}
+    card.setdefault("inclusion", "reference")
+    card.setdefault("inclusion_reason", "newly ingested; run scripts/set_inclusion.py")
+    allowed_top = {"id", "record_type", "inclusion", "inclusion_reason", "name", "short_name", "year", "venue", "authors_short", "arxiv", "doi", "url", "code_url", "data_url", "license", "status", "summary", "schema_axes_proposed", "benchmark_features", "task_features", "sample_environment_features", "agent_features_evaluated", "transfer_relevant_findings", "limitations", "related", "notes", "provenance"}
     for k in list(card):
         if k not in allowed_top:
             card.pop(k)
-    order = ["id", "record_type", "name", "short_name", "year", "venue", "authors_short", "arxiv", "doi", "url", "code_url", "data_url", "license", "status", "summary", "schema_axes_proposed", "benchmark_features", "task_features", "sample_environment_features", "agent_features_evaluated", "transfer_relevant_findings", "limitations", "related", "notes", "provenance"]
+    order = ["id", "record_type", "inclusion", "inclusion_reason", "name", "short_name", "year", "venue", "authors_short", "arxiv", "doi", "url", "code_url", "data_url", "license", "status", "summary", "schema_axes_proposed", "benchmark_features", "task_features", "sample_environment_features", "agent_features_evaluated", "transfer_relevant_findings", "limitations", "related", "notes", "provenance"]
     return {k: card[k] for k in order if k in card}
 
 

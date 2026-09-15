@@ -1,5 +1,7 @@
 id: researchcodebench
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'ResearchCodeBench: Benchmarking LLMs on Implementing Novel Machine Learning Research Code'
 short_name: ResearchCodeBench
 year: 2025

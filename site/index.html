@@ -10,7 +10,7 @@
   --accent:#b4602a; --accent-ink:#8f4a1e; --accent-soft:#f4e6db; --focus:#2a78d6;
   --heat-hi:#184f95; --heat-lo:#f3f5f7;
   --em-physical_instrument:#2a78d6; --em-digital_twin:#eb6834; --em-simulator:#1baf7a; --em-execution_trace:#eda100; --em-static_code_eval:#e87ba4; --em-static_text:#008300; --em-hybrid:#4a3aa7; --em-none:#7a8a98;
-  --good:#0ca30c; --warn:#fab219; --crit:#d03b3b;
+  --crit:#d03b3b;
   --shadow:0 12px 40px rgba(22,33,43,.14);
   --sans:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
   --serif:"Instrument Serif","Iowan Old Style",Georgia,serif;
@@ -23,6 +23,7 @@
     --accent:#d9884f; --accent-ink:#e9a373; --accent-soft:#3a281c; --focus:#5598e7;
     --heat-hi:#6da7ec; --heat-lo:#0f161d;
     --em-physical_instrument:#3987e5; --em-digital_twin:#d95926; --em-simulator:#199e70; --em-execution_trace:#c98500; --em-static_code_eval:#d55181; --em-static_text:#3fa33f; --em-hybrid:#9085e9; --em-none:#8395a5;
+    --crit:#e66767;
     --shadow:0 12px 40px rgba(0,0,0,.5);
   }
 }
@@ -32,6 +33,7 @@
   --accent:#d9884f; --accent-ink:#e9a373; --accent-soft:#3a281c; --focus:#5598e7;
   --heat-hi:#6da7ec; --heat-lo:#0f161d;
   --em-physical_instrument:#3987e5; --em-digital_twin:#d95926; --em-simulator:#199e70; --em-execution_trace:#c98500; --em-static_code_eval:#d55181; --em-static_text:#3fa33f; --em-hybrid:#9085e9; --em-none:#8395a5;
+  --crit:#e66767;
   --shadow:0 12px 40px rgba(0,0,0,.5);
 }
 *{box-sizing:border-box}
@@ -46,8 +48,7 @@ h1,h2,h3{text-wrap:balance;margin:0}
 .num{font-variant-numeric:tabular-nums}
 .eyebrow{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:500}
 
-/* ---------- shell ---------- */
-.shell{max-width:1440px;margin:0 auto;padding-block:0 4rem;padding-inline:clamp(16px,3vw,40px)}
+.shell{max-width:1500px;margin:0 auto;padding-block:0 4rem;padding-inline:clamp(16px,3vw,40px)}
 header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:1rem 2rem;padding-block:1.6rem 1rem;border-bottom:1px solid var(--line)}
 .brand h1{font-family:var(--serif);font-weight:400;font-size:clamp(1.9rem,3.2vw,2.6rem);line-height:1.05;letter-spacing:-.005em}
 .brand p{margin:.35rem 0 0;color:var(--ink-2);max-width:60ch}
@@ -55,36 +56,53 @@ nav.views{display:flex;flex-wrap:wrap;gap:.25rem}
 nav.views a{padding:.45rem .8rem;border-radius:4px;color:var(--ink-2);font-weight:500;font-size:.92rem;border:1px solid transparent}
 nav.views a:hover{text-decoration:none;background:var(--surface-2)}
 nav.views a.active{color:var(--ink);background:var(--surface);border-color:var(--line-2)}
-.stats{display:flex;flex-wrap:wrap;gap:.4rem 1.6rem;padding-block:.9rem;color:var(--ink-2);font-size:.9rem}
-.stats b{color:var(--ink);font-weight:600}
-main{padding-block:1rem}
-.view{display:none}.view.active{display:block}
 
-/* ---------- benchmarks view ---------- */
-.browse{display:grid;grid-template-columns:250px minmax(0,1fr);gap:2rem}
-@media (max-width:820px){.browse{grid-template-columns:1fr}}
-aside.rail{position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto;padding-block:.5rem;scrollbar-width:thin}
-.facet{padding-block:.8rem;border-top:1px solid var(--line)}
-.facet:first-of-type{border-top:0}
+.app{display:grid;grid-template-columns:262px minmax(0,1fr);gap:2rem;padding-top:1rem;align-items:start}
+@media (max-width:900px){.app{grid-template-columns:1fr;gap:1rem}}
+.railwrap{position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto;scrollbar-width:thin;border:0}
+.railwrap>summary{display:none}
+@media (max-width:900px){
+  .railwrap{position:static;max-height:none;border:1px solid var(--line-2);border-radius:4px;background:var(--surface)}
+  .railwrap>summary{display:flex;gap:.5rem;align-items:center;cursor:pointer;padding:.6rem .8rem;font-weight:500;list-style:none}
+  .railwrap>summary::-webkit-details-marker{display:none}
+  .railwrap>summary::after{content:"▾";margin-left:auto;color:var(--muted)}
+  .railwrap[open]>summary::after{content:"▴"}
+  .railbody{padding:0 .8rem .8rem}
+}
+.railbody{display:block;padding-block:.5rem}
+.scopebox{border:1px solid var(--line-2);border-radius:4px;background:var(--surface);padding:.6rem .7rem;margin-bottom:.8rem}
+.scopebox h3{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:.45rem}
+.scopebox label{display:flex;align-items:baseline;gap:.5rem;padding:.2rem 0;font-size:.9rem;cursor:pointer;color:var(--ink-2)}
+.scopebox label:hover{color:var(--ink)}
+.scopebox input{accent-color:var(--accent);margin:0}
+.scopebox .n{margin-left:auto;font-family:var(--mono);font-size:.78rem;color:var(--muted)}
+.scopebox p{margin:.4rem 0 0;font-size:.78rem;color:var(--muted);line-height:1.4}
+.facet{padding-block:.75rem;border-top:1px solid var(--line)}
 .facet h3{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:.45rem}
 .facet label{display:flex;align-items:center;gap:.5rem;padding:.16rem 0;font-size:.9rem;color:var(--ink-2);cursor:pointer}
 .facet label:hover{color:var(--ink)}
 .facet input{accent-color:var(--accent);margin:0}
-.facet .cnt{margin-left:auto;color:var(--muted);font-size:.78rem}
+.facet .cnt{margin-left:auto;color:var(--muted);font-size:.78rem;font-variant-numeric:tabular-nums}
 .facet .sw{width:.6rem;height:.6rem;border-radius:2px;flex:none}
 .search{width:100%;padding:.55rem .7rem;border:1px solid var(--line-2);border-radius:4px;background:var(--surface);color:var(--ink);font:inherit}
 .search::placeholder{color:var(--muted)}
-.railtop{display:flex;gap:.5rem;align-items:center;margin-bottom:.4rem}
 .linkbtn{background:none;border:0;padding:0;color:var(--accent-ink);cursor:pointer;font-size:.82rem}
 .linkbtn:hover{text-decoration:underline}
 
-.listhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.5rem;margin-bottom:.6rem}
-.listhead .eyebrow{font-size:.78rem}
+.content{min-width:0}
+.filterline{display:flex;flex-wrap:wrap;gap:.4rem .8rem;align-items:baseline;padding-bottom:.7rem;margin-bottom:.9rem;border-bottom:1px solid var(--line);font-size:.88rem;color:var(--ink-2)}
+.filterline b{color:var(--ink);font-weight:600}
+.filterline .pill{display:inline-flex;align-items:center;gap:.35rem;border:1px solid var(--line-2);border-radius:999px;padding:.1rem .3rem .1rem .6rem;background:var(--surface);font-size:.8rem}
+.filterline .pill button{border:0;background:var(--surface-2);border-radius:50%;width:1.2rem;height:1.2rem;cursor:pointer;line-height:1;font-size:.8rem}
+.view{display:none}.view.active{display:block}
+
+.listhead{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:.5rem;margin-bottom:.4rem}
 .sort{display:flex;gap:.3rem;align-items:center;font-size:.85rem;color:var(--ink-2)}
 .sort select{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line-2);border-radius:4px;padding:.25rem .4rem}
 .rows{display:flex;flex-direction:column;border-top:1px solid var(--line)}
 .row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:.3rem 1.5rem;padding-block:.95rem;border-bottom:1px solid var(--line);cursor:pointer;text-align:left;background:none;border-inline:0;border-top:0;width:100%}
 .row:hover{background:var(--surface)}
+.row.ref{opacity:.82}
 .row .t{font-family:var(--serif);font-size:1.32rem;line-height:1.15;color:var(--ink)}
 .row .t i{color:var(--ink-2)}
 .row .m{color:var(--muted);font-size:.83rem;margin-top:.1rem}
@@ -97,9 +115,9 @@ aside.rail{position:sticky;top:0;align-self:start;max-height:100vh;overflow:auto
 .chip .dot{width:.5rem;height:.5rem;border-radius:50%;background:var(--em-none)}
 .chip.em{border-color:transparent;background:var(--surface-2);color:var(--ink)}
 .chip.rt{font-family:var(--mono);letter-spacing:.02em}
+.chip.refb{border-color:var(--line-2);color:var(--muted)}
 .empty{padding:3rem 0;color:var(--muted);text-align:center}
 
-/* ---------- detail drawer ---------- */
 .scrim{position:fixed;inset:0;background:rgba(10,16,22,.45);opacity:0;pointer-events:none;transition:opacity .2s}
 .drawer{position:fixed;top:0;right:0;bottom:0;width:min(760px,100%);background:var(--surface);border-left:1px solid var(--line);box-shadow:var(--shadow);transform:translateX(102%);transition:transform .25s ease;overflow:auto;z-index:20;scrollbar-width:thin}
 body.open .scrim{opacity:1;pointer-events:auto;z-index:19}
@@ -112,6 +130,8 @@ body.open .drawer{transform:none}
 .meta{color:var(--ink-2);font-size:.9rem;margin-top:.4rem}
 .links{display:flex;flex-wrap:wrap;gap:.4rem .9rem;margin-top:.6rem;font-size:.85rem}
 .summary{font-size:1.02rem;margin:1rem 0;max-width:68ch;color:var(--ink)}
+.incbox{display:flex;gap:.6rem;align-items:flex-start;padding:.6rem .8rem;border-radius:4px;background:var(--surface-2);font-size:.85rem;color:var(--ink-2);margin-bottom:1rem}
+.incbox b{color:var(--ink)}
 .dgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem 2rem;margin-top:1rem}
 .group{border-top:2px solid var(--line-2);padding-top:.6rem}
 .group h3{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--accent-ink);font-weight:600;margin-bottom:.5rem}
@@ -125,7 +145,7 @@ dd.null{color:var(--muted);font-style:italic}
 .sect ul{margin:0;padding-left:1.1rem;font-size:.9rem;color:var(--ink)}
 .sect li{margin:.2rem 0}
 .nn{display:flex;flex-wrap:wrap;gap:.4rem}
-.nn button{border:1px solid var(--line-2);background:var(--surface-2);border-radius:4px;padding:.3rem .6rem;cursor:pointer;font-size:.85rem}
+.nn button{border:1px solid var(--line-2);background:var(--surface);border-radius:4px;padding:.3rem .6rem;cursor:pointer;font-size:.85rem}
 .nn button:hover{border-color:var(--accent)}
 .prov{margin-top:1.4rem;padding:.7rem .9rem;background:var(--surface-2);border-radius:4px;font-size:.82rem;color:var(--ink-2)}
 .covbar{display:flex;gap:2px;height:6px;margin:.4rem 0 .2rem}
@@ -133,7 +153,6 @@ dd.null{color:var(--muted);font-style:italic}
 .covbar span i{position:absolute;inset:0;right:auto;background:var(--accent)}
 .covlab{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted)}
 
-/* ---------- compare ---------- */
 .pick{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin-bottom:1rem}
 .pick select{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line-2);border-radius:4px;padding:.4rem .5rem;max-width:100%}
 .pick .tag{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line-2);border-radius:999px;padding:.2rem .3rem .2rem .7rem;background:var(--surface);font-size:.85rem}
@@ -150,7 +169,6 @@ table.cmp td .chip{margin:.05rem .15rem .05rem 0}
 .toggle{display:inline-flex;align-items:center;gap:.4rem;font-size:.85rem;color:var(--ink-2);margin-left:auto}
 .toggle input{accent-color:var(--accent)}
 
-/* ---------- similarity ---------- */
 .simhead{display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;align-items:center;margin-bottom:.8rem}
 .seg{display:inline-flex;border:1px solid var(--line-2);border-radius:4px;overflow:hidden}
 .seg button{border:0;background:var(--surface);padding:.35rem .7rem;cursor:pointer;font-size:.85rem;color:var(--ink-2)}
@@ -164,11 +182,9 @@ svg.heat rect.c:hover{stroke:var(--accent);stroke-width:2}
 .tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);padding:.4rem .6rem;border-radius:4px;font-size:.8rem;max-width:280px;z-index:30;display:none}
 .legend{display:flex;align-items:center;gap:.5rem;font-size:.8rem;color:var(--ink-2)}
 .legend .ramp{width:120px;height:8px;border-radius:2px;background:linear-gradient(90deg,var(--heat-lo),var(--heat-hi));border:1px solid var(--line)}
-.note{color:var(--ink-2);font-size:.9rem;max-width:72ch;margin:.4rem 0 1rem}
+.note{color:var(--ink-2);font-size:.9rem;max-width:72ch;margin:.2rem 0 1rem}
 
-/* ---------- gaps ---------- */
-.axes{display:grid;grid-template-columns:minmax(0,1fr);gap:1.4rem}
-.bars{display:grid;grid-template-columns:max-content minmax(0,1fr) 3ch;gap:.35rem .8rem;align-items:center;font-size:.88rem;max-width:720px}
+.bars{display:grid;grid-template-columns:max-content minmax(0,1fr) 5ch;gap:.35rem .8rem;align-items:center;font-size:.88rem;max-width:720px}
 .bars .lab{color:var(--ink-2)}
 .bars .bar{height:14px;background:var(--surface-2);border-radius:2px;overflow:hidden}
 .bars .bar i{display:block;height:100%;background:var(--accent);border-radius:2px}
@@ -177,7 +193,7 @@ svg.heat rect.c:hover{stroke:var(--accent);stroke-width:2}
 table.gap{border-collapse:collapse;font-size:.82rem;background:var(--surface)}
 table.gap th,table.gap td{border-bottom:1px solid var(--line);padding:.35rem .5rem;text-align:center}
 table.gap th{font-weight:500;color:var(--ink-2);background:var(--surface-2);position:sticky;top:0}
-table.gap th.rot{height:150px;vertical-align:bottom;padding:0 .2rem}
+table.gap th.rot{height:168px;vertical-align:bottom;padding:0 .2rem}
 table.gap th.rot div{writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;font-size:.75rem;padding:.3rem 0}
 table.gap td:first-child,table.gap th:first-child{text-align:left;white-space:nowrap;position:sticky;left:0;background:var(--surface)}
 table.gap td.y{color:var(--accent);font-weight:600}
@@ -185,7 +201,6 @@ table.gap td.n{color:var(--line-2)}
 table.gap tr:hover td{background:var(--surface-2)}
 .gapnote{padding:.8rem 1rem;border-left:3px solid var(--crit);background:var(--surface);margin:.6rem 0 1.2rem;max-width:72ch;font-size:.92rem}
 
-/* ---------- schema ---------- */
 .schema{display:grid;grid-template-columns:minmax(0,1fr);gap:1.4rem;max-width:960px}
 .schema p{max-width:68ch;color:var(--ink-2)}
 .vocab{border:1px solid var(--line);border-radius:4px;background:var(--surface);overflow:hidden}
@@ -222,77 +237,78 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
       <a href="#/schema" data-view="schema">Schema</a>
     </nav>
   </header>
-  <div class="stats" id="stats"></div>
 
-  <main>
-    <section class="view" id="view-benchmarks">
-      <div class="browse">
-        <aside class="rail" id="rail"></aside>
-        <div>
-          <div class="listhead">
-            <span class="eyebrow" id="count"></span>
-            <label class="sort">Sort <select id="sort">
-              <option value="year">newest first</option>
-              <option value="name">name</option>
-              <option value="n_tasks">most tasks</option>
-              <option value="coverage">most complete card</option>
-            </select></label>
+  <div class="app">
+    <details class="railwrap" id="railwrap" open>
+      <summary>Scope &amp; filters</summary>
+      <div class="railbody" id="rail"></div>
+    </details>
+
+    <div class="content">
+      <div class="filterline" id="filterline"></div>
+
+      <section class="view" id="view-benchmarks">
+        <div class="listhead">
+          <span class="eyebrow" id="count"></span>
+          <label class="sort">Sort <select id="sort">
+            <option value="year">newest first</option>
+            <option value="name">name</option>
+            <option value="n_tasks">most tasks</option>
+            <option value="coverage">most complete card</option>
+          </select></label>
+        </div>
+        <div class="rows" id="rows"></div>
+      </section>
+
+      <section class="view" id="view-compare">
+        <p class="note">Pick up to four records from the filtered set. Rows where they disagree are marked with a copper edge; toggle to show only those.</p>
+        <div class="pick" id="pick"></div>
+        <div class="tblwrap" id="cmp"></div>
+      </section>
+
+      <section class="view" id="view-similarity">
+        <p class="note">Similarity is 1 − weighted Gower distance over the encoded schema features. Fields unreported for either record are dropped pairwise, so a high similarity between two thinly described cards means less than one between two full ones. Click a cell to compare the pair.</p>
+        <div class="simhead">
+          <div class="seg" id="simgroup">
+            <button data-g="all" class="on">All features</button>
+            <button data-g="benchmark">Benchmark design</button>
+            <button data-g="task">Task</button>
+            <button data-g="sample_environment">Sample / environment</button>
+            <button data-g="agent">Agent</button>
           </div>
-          <div class="rows" id="rows"></div>
+          <div class="legend">less similar <span class="ramp"></span> more similar</div>
         </div>
-      </div>
-    </section>
+        <div class="heatwrap" id="heat"></div>
+      </section>
 
-    <section class="view" id="view-compare">
-      <p class="note">Pick up to four benchmarks. Rows where the picked benchmarks disagree are marked with a copper edge; toggle to show only those.</p>
-      <div class="pick" id="pick"></div>
-      <div class="tblwrap" id="cmp"></div>
-    </section>
-
-    <section class="view" id="view-similarity">
-      <p class="note">Similarity is 1 − weighted Gower distance over the encoded schema features (see <a href="#/schema">Schema</a>). Fields that are unreported for either benchmark are dropped pairwise, so a high similarity between two thinly described cards means less than one between two full ones. Click a cell to compare the pair.</p>
-      <div class="simhead">
-        <div class="seg" id="simgroup">
-          <button data-g="all" class="on">All features</button>
-          <button data-g="benchmark">Benchmark design</button>
-          <button data-g="task">Task</button>
-          <button data-g="sample_environment">Sample / environment</button>
-          <button data-g="agent">Agent</button>
-        </div>
-        <div class="legend">less similar <span class="ramp"></span> more similar</div>
-      </div>
-      <div class="heatwrap" id="heat"></div>
-    </section>
-
-    <section class="view" id="view-gaps">
-      <p class="note">Sixteen design axes the transferability programme depends on, and how many surveyed benchmarks or systems cover each. Axes nobody covers are exactly what a new microscopy testbed has to supply.</p>
-      <div class="axes">
+      <section class="view" id="view-gaps">
+        <p class="note">Sixteen design axes the transferability programme depends on, and how many of the filtered records cover each. Axes nobody covers are what a new microscopy testbed has to supply.</p>
         <div id="axesbars" class="bars"></div>
         <div id="gapnote"></div>
         <div class="tblwrap"><table class="gap" id="gaptbl"></table></div>
-      </div>
-    </section>
+      </section>
 
-    <section class="view" id="view-schema">
-      <div class="schema">
-        <div>
-          <h2 style="font-family:var(--serif);font-weight:400;font-size:1.8rem">One row per execution, four descriptor groups</h2>
-          <p>Every benchmark card and every execution record carries the same four groups. Changing either the agent or the evidence changes what a benchmark result licenses, so both sides are recorded explicitly and never collapsed into a single score. Full field definitions live in <a href="https://github.com/natertott/agentic-instrument-gym/blob/main/schema/SCHEMA.md">schema/SCHEMA.md</a>; machine-readable definitions in <span class="mono">schema/benchmark_card.schema.json</span> and <span class="mono">schema/execution_record.schema.json</span>.</p>
+      <section class="view" id="view-schema">
+        <div class="schema">
+          <div>
+            <h2 style="font-family:var(--serif);font-weight:400;font-size:1.8rem">One row per execution, four descriptor groups</h2>
+            <p>Every benchmark card and every execution record carries the same four groups. Changing either the agent or the evidence changes what a benchmark result licenses, so both sides are recorded explicitly and never collapsed into a single score. Full field definitions live in <a href="https://github.com/natertott/agentic-instrument-gym/blob/main/schema/SCHEMA.md">schema/SCHEMA.md</a>; machine-readable definitions in <span class="mono">schema/benchmark_card.schema.json</span> and <span class="mono">schema/execution_record.schema.json</span>.</p>
+          </div>
+          <div class="four">
+            <div><h3>Agent</h3><p>Model, vision, retrieval / memory, planner, tool surface, verifier, guards, multi-agent, deterministic execution.</p></div>
+            <div><h3>Task</h3><p>Instrument, workflow depth, perceptual and reasoning demand, tool composition, quantitative tolerance, closed-loop feedback, safety criticality, the benchmark's own taxonomy.</p></div>
+            <div><h3>Sample / environment</h3><p>Material and form factor, real or simulated, signal quality, novelty level held out, calibration and API state, injected faults.</p></div>
+            <div><h3>Benchmark</h3><p>Target population, task source and sampling, size and repetitions, metric type and granularity, split design, leakage risk, safety and abstention scoring.</p></div>
+          </div>
+          <div>
+            <h2 style="font-family:var(--serif);font-weight:400;font-size:1.5rem;margin-bottom:.3rem">Controlled vocabularies</h2>
+            <p>Each vocabulary with its gloss, and how many of the <span id="vocabscope">filtered</span> records use each value. Ordinal vocabularies are listed low to high and encoded as ranks; nominal ones are one-hot.</p>
+            <div id="vocab" style="display:flex;flex-direction:column;gap:.5rem"></div>
+          </div>
         </div>
-        <div class="four">
-          <div><h3>Agent</h3><p>Model, vision, retrieval / memory, planner, tool surface, verifier, guards, multi-agent, deterministic execution.</p></div>
-          <div><h3>Task</h3><p>Instrument, workflow depth, perceptual and reasoning demand, tool composition, quantitative tolerance, closed-loop feedback, safety criticality, the benchmark's own taxonomy.</p></div>
-          <div><h3>Sample / environment</h3><p>Material and form factor, real or simulated, signal quality, novelty level held out, calibration and API state, injected faults.</p></div>
-          <div><h3>Benchmark</h3><p>Target population, task source and sampling, size and repetitions, metric type and granularity, split design, leakage risk, safety and abstention scoring.</p></div>
-        </div>
-        <div>
-          <h2 style="font-family:var(--serif);font-weight:400;font-size:1.5rem;margin-bottom:.3rem">Controlled vocabularies</h2>
-          <p>Each vocabulary with its gloss and how many surveyed cards use each value. Ordinal vocabularies are listed low to high and encoded as ranks; nominal ones are one-hot.</p>
-          <div id="vocab" style="display:flex;flex-direction:column;gap:.5rem"></div>
-        </div>
-      </div>
-    </section>
-  </main>
+      </section>
+    </div>
+  </div>
 
   <footer>
     <span>agentic-instrument-gym · WP1 benchmark evidence schema</span>
@@ -302,55 +318,33 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
 </div>
 
 <div class="scrim" id="scrim"></div>
-<aside class="drawer" id="drawer" aria-label="Benchmark detail"><div class="in" id="dbody"></div></aside>
+<aside class="drawer" id="drawer" aria-label="Record detail"><div class="in" id="dbody"></div></aside>
 <div class="tip" id="tip"></div>
 
 <script>
 (async function(){
-  // ---------- data ----------
   async function load(name){
     const inl=document.getElementById('data-'+name);
     if(inl) return JSON.parse(inl.textContent);
     const r=await fetch('data/'+name+'.json'); if(!r.ok) throw new Error('missing '+name); return r.json();
   }
-  const [B,V,D,AX,VU]=await Promise.all([load('benchmarks'),load('vocab'),load('distances'),load('axes'),load('vocab_usage')]);
-  const cards=B.cards; const byId=Object.fromEntries(cards.map(c=>[c.id,c]));
-  const bench=cards.filter(c=>c.record_type==='benchmark'||c.record_type==='system');
+  const [B,V,D,AX]=await Promise.all([load('benchmarks'),load('vocab'),load('distances'),load('axes')]);
+  const cards=B.cards, byId=Object.fromEntries(cards.map(c=>[c.id,c]));
+  const nCore=cards.filter(c=>c.inclusion==='core').length;
 
   const LABEL={physical_instrument:'Physical instrument',digital_twin:'Digital twin',simulator:'Simulator',execution_trace:'Execution trace',static_code_eval:'Static code eval',static_text:'Static text',hybrid:'Hybrid'};
   const words=s=>s==null?'':String(s).replace(/_/g,' ');
   const esc=s=>String(s??'').replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
   const get=(o,p)=>p.split('.').reduce((a,k)=>a==null?a:a[k],o);
   const fmt=n=>n==null?'—':Number(n).toLocaleString();
+  const nameOf=c=>c.short_name||c.name;
 
-  // ---------- stats ----------
-  const nPhys=bench.filter(c=>['physical_instrument','hybrid'].includes(get(c,'benchmark_features.execution_mode'))).length;
-  const nMic=bench.filter(c=>c._derived.modalities.includes('microscopy')).length;
-  const nTasks=bench.reduce((a,c)=>a+(get(c,'benchmark_features.n_tasks')||0),0);
-  document.getElementById('stats').innerHTML=
-    `<span><b>${cards.length}</b> records</span><span><b>${bench.length}</b> benchmarks &amp; systems</span><span><b>${nMic}</b> touch a microscope</span><span><b>${nPhys}</b> run on real hardware</span><span><b>${fmt(nTasks)}</b> tasks catalogued</span>`;
   document.getElementById('gen').textContent='Data generated '+B.generated_on;
 
-  // ---------- routing ----------
-  const views=['benchmarks','compare','similarity','gaps','schema'];
-  let compareIds=[];
-  function route(){
-    const h=location.hash||'#/benchmarks';
-    const m=h.match(/^#\/([a-z]+)(?:\/(.*))?$/); let v=m?m[1]:'benchmarks'; const arg=m&&m[2]?decodeURIComponent(m[2]):'';
-    if(v==='b'){ openDetail(arg); v=currentView||'benchmarks'; }
-    else { closeDetail(false); }
-    if(!views.includes(v)) v='benchmarks';
-    if(v==='compare'&&arg){ compareIds=arg.split(',').filter(x=>byId[x]).slice(0,4); }
-    currentView=v;
-    views.forEach(x=>document.getElementById('view-'+x).classList.toggle('active',x===v));
-    document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('active',a.dataset.view===v));
-    if(v==='compare') renderCompare();
-    if(v==='similarity') renderHeat();
-  }
-  let currentView='benchmarks';
-  window.addEventListener('hashchange',route);
+  // ---------- global state: scope + facets + search ----------
+  const SCOPES={core:'Core benchmarks',reference:'Reference only',all:'All records'};
+  let scope='core', q='', compareIds=[], simGroup='all', onlyDiff=false, currentView='benchmarks';
 
-  // ---------- facets ----------
   const FACETS=[
     {key:'record_type',label:'Record type',path:'record_type'},
     {key:'execution_mode',label:'Execution mode',path:'benchmark_features.execution_mode',color:true},
@@ -362,49 +356,77 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
     {key:'confidence',label:'Card confidence',path:'provenance.confidence',order:['high','medium','low']},
     {key:'year',label:'Year',path:'year'},
   ];
-  const sel={}; FACETS.forEach(f=>sel[f.key]=new Set()); let q='';
+  const sel={}; FACETS.forEach(f=>sel[f.key]=new Set());
+
   function valsOf(c,f){ const v=get(c,f.path); if(v==null) return ['unreported']; return f.multi?(v.length?v:['unreported']):[String(v)]; }
-  function matches(c,skip){
+  function inScope(c){ return scope==='all'||c.inclusion===scope; }
+  function matches(c,skipFacet){
+    if(!inScope(c)) return false;
     if(q){ const hay=[c.name,c.short_name,c.summary,c.authors_short,(get(c,'benchmark_features.scientific_domains')||[]).join(' '),(get(c,'benchmark_features.instruments')||[]).map(i=>i.name).join(' ')].join(' ').toLowerCase(); if(!hay.includes(q)) return false; }
-    for(const f of FACETS){ if(f.key===skip||!sel[f.key].size) continue; if(!valsOf(c,f).some(v=>sel[f.key].has(v))) return false; }
+    for(const f of FACETS){ if(f.key===skipFacet||!sel[f.key].size) continue; if(!valsOf(c,f).some(v=>sel[f.key].has(v))) return false; }
     return true;
   }
+  const visible=()=>cards.filter(c=>matches(c));
+  const activeFacets=()=>FACETS.flatMap(f=>[...sel[f.key]].map(v=>({f,v})));
+
+  // ---------- rail ----------
   function renderRail(){
     const rail=document.getElementById('rail');
-    let html=`<div class="railtop"><input class="search" id="q" type="search" placeholder="Search name, instrument, domain…" value="${esc(q)}" aria-label="Search"></div>`;
+    const counts={core:nCore,reference:cards.length-nCore,all:cards.length};
+    let html=`<div class="scopebox"><h3>Analysis scope</h3>`+
+      Object.entries(SCOPES).map(([k,l])=>`<label><input type="radio" name="scope" value="${k}" ${scope===k?'checked':''}><span>${l}</span><span class="n">${counts[k]}</span></label>`).join('')+
+      `<p>Core holds benchmarks with a reported task set, a named metric and verified extraction. Systems, frameworks, surveys and unverified stubs are kept as reference and stay out of the coverage, similarity and gap analysis.</p></div>`;
+    html+=`<input class="search" id="q" type="search" placeholder="Search name, instrument, domain…" value="${esc(q)}" aria-label="Search records">`;
     for(const f of FACETS){
-      const counts={}; cards.filter(c=>matches(c,f.key)).forEach(c=>valsOf(c,f).forEach(v=>counts[v]=(counts[v]||0)+1));
-      const all=new Set([...Object.keys(counts),...sel[f.key]]);
-      let keys=[...all]; if(f.order) keys.sort((a,b)=>f.order.indexOf(a)-f.order.indexOf(b)); else if(f.key==='year') keys.sort((a,b)=>b-a); else keys.sort((a,b)=>(counts[b]||0)-(counts[a]||0));
+      const counts2={}; cards.filter(c=>matches(c,f.key)).forEach(c=>valsOf(c,f).forEach(v=>counts2[v]=(counts2[v]||0)+1));
+      let keys=[...new Set([...Object.keys(counts2),...sel[f.key]])];
+      if(f.order) keys.sort((a,b)=>f.order.indexOf(a)-f.order.indexOf(b));
+      else if(f.key==='year') keys.sort((a,b)=>b-a);
+      else keys.sort((a,b)=>(counts2[b]||0)-(counts2[a]||0));
       keys=keys.filter(k=>k!=='unreported').concat(keys.includes('unreported')?['unreported']:[]);
-      html+=`<div class="facet"><h3>${f.label}</h3>`+keys.map(k=>`<label><input type="checkbox" data-f="${f.key}" value="${esc(k)}" ${sel[f.key].has(k)?'checked':''}>${f.color?`<span class="sw" style="background:var(--em-${k},var(--em-none))"></span>`:''}<span>${f.key==='execution_mode'?(LABEL[k]||words(k)):words(k)}</span><span class="cnt num">${counts[k]||0}</span></label>`).join('')+`</div>`;
+      if(!keys.length) continue;
+      html+=`<div class="facet"><h3>${f.label}</h3>`+keys.map(k=>`<label><input type="checkbox" data-f="${f.key}" value="${esc(k)}" ${sel[f.key].has(k)?'checked':''}>${f.color?`<span class="sw" style="background:var(--em-${k},var(--em-none))"></span>`:''}<span>${f.key==='execution_mode'?(LABEL[k]||words(k)):words(k)}</span><span class="cnt">${counts2[k]||0}</span></label>`).join('')+`</div>`;
     }
     html+=`<div class="facet"><button class="linkbtn" id="clear">Clear filters</button></div>`;
     rail.innerHTML=html;
-    rail.querySelector('#q').addEventListener('input',e=>{q=e.target.value.trim().toLowerCase();renderRows();renderRail();const i=rail.querySelector('#q');i.focus();i.setSelectionRange(i.value.length,i.value.length);});
-    rail.querySelectorAll('input[type=checkbox]').forEach(cb=>cb.addEventListener('change',e=>{const s=sel[e.target.dataset.f]; e.target.checked?s.add(e.target.value):s.delete(e.target.value); renderRows(); renderRail();}));
-    rail.querySelector('#clear').addEventListener('click',()=>{FACETS.forEach(f=>sel[f.key].clear());q='';renderRows();renderRail();});
+    rail.querySelectorAll('input[name=scope]').forEach(r=>r.addEventListener('change',e=>{scope=e.target.value;compareIds=compareIds.filter(id=>inScope(byId[id]));renderAll();}));
+    const qi=rail.querySelector('#q');
+    qi.addEventListener('input',e=>{q=e.target.value.trim().toLowerCase();renderAll();const i=document.getElementById('q');i.focus();i.setSelectionRange(i.value.length,i.value.length);});
+    rail.querySelectorAll('input[type=checkbox]').forEach(cb=>cb.addEventListener('change',e=>{const s=sel[e.target.dataset.f];e.target.checked?s.add(e.target.value):s.delete(e.target.value);renderAll();}));
+    rail.querySelector('#clear').addEventListener('click',()=>{FACETS.forEach(f=>sel[f.key].clear());q='';renderAll();});
   }
+
+  function renderFilterLine(){
+    const v=visible(), af=activeFacets();
+    let html=`<span><b>${v.length}</b> of ${cards.length} records · scope <b>${SCOPES[scope].toLowerCase()}</b></span>`;
+    if(af.length) html+=af.map(({f,v:val})=>`<span class="pill">${f.label}: ${words(val)}<button data-f="${f.key}" data-v="${esc(val)}" aria-label="Remove filter">×</button></span>`).join('');
+    if(q) html+=`<span class="pill">search: ${esc(q)}<button data-q="1" aria-label="Clear search">×</button></span>`;
+    if(af.length||q) html+=`<button class="linkbtn" id="clear2">clear all</button>`;
+    const el=document.getElementById('filterline'); el.innerHTML=html;
+    el.querySelectorAll('button[data-f]').forEach(b=>b.addEventListener('click',()=>{sel[b.dataset.f].delete(b.dataset.v);renderAll();}));
+    const qb=el.querySelector('button[data-q]'); if(qb) qb.addEventListener('click',()=>{q='';renderAll();});
+    const c2=el.querySelector('#clear2'); if(c2) c2.addEventListener('click',()=>{FACETS.forEach(f=>sel[f.key].clear());q='';renderAll();});
+  }
+
+  // ---------- benchmarks list ----------
   function chipsFor(c){
-    const em=get(c,'benchmark_features.execution_mode');
-    const out=[];
+    const em=get(c,'benchmark_features.execution_mode'), out=[];
+    if(c.inclusion!=='core') out.push(`<span class="chip refb" title="${esc(c.inclusion_reason||'')}">reference</span>`);
     if(c.record_type!=='benchmark') out.push(`<span class="chip rt">${c.record_type}</span>`);
-    if((c.provenance||{}).confidence==='low') out.push(`<span class="chip rt" title="Identity-level stub from the discovery sweep; full extraction pending">stub</span>`);
     if(em) out.push(`<span class="chip em"><span class="dot" style="background:var(--em-${em})"></span>${LABEL[em]||words(em)}</span>`);
-    c._derived.modalities.forEach(m=>out.push(`<span class="chip">${words(m)}</span>`));
+    (c._derived.modalities||[]).forEach(m=>out.push(`<span class="chip">${words(m)}</span>`));
     (get(c,'benchmark_features.evaluation_target')||[]).slice(0,3).forEach(t=>out.push(`<span class="chip">${words(t)}</span>`));
     return out.join('');
   }
   function renderRows(){
     const sort=document.getElementById('sort').value;
-    let list=cards.filter(c=>matches(c));
     const cov=c=>Object.values(c._derived.coverage).reduce((a,b)=>a+b,0);
-    list.sort((a,b)=> sort==='name'?a.name.localeCompare(b.name): sort==='n_tasks'?((get(b,'benchmark_features.n_tasks')||0)-(get(a,'benchmark_features.n_tasks')||0)): sort==='coverage'?(cov(b)-cov(a)): (b.year-a.year||a.name.localeCompare(b.name)));
-    document.getElementById('count').textContent=`${list.length} of ${cards.length} records`;
+    const list=visible().slice().sort((a,b)=> sort==='name'?a.name.localeCompare(b.name): sort==='n_tasks'?((get(b,'benchmark_features.n_tasks')||0)-(get(a,'benchmark_features.n_tasks')||0)): sort==='coverage'?(cov(b)-cov(a)): (b.year-a.year||a.name.localeCompare(b.name)));
+    document.getElementById('count').textContent=`${list.length} record${list.length===1?'':'s'}`;
     document.getElementById('rows').innerHTML=list.length?list.map(c=>{
       const nt=get(c,'benchmark_features.n_tasks'), nr=get(c,'benchmark_features.n_instances_or_runs_reported'), na=(get(c,'agent_features_evaluated.models')||[]).length;
-      return `<button class="row" data-id="${c.id}"><div><div class="t">${esc(c.name)}${c.short_name&&c.short_name!==c.name?` <i>${esc(c.short_name)}</i>`:''}</div><div class="m">${c.year} · ${esc(c.venue||'')}${c.authors_short?' · '+esc(c.authors_short):''}</div><div class="s">${esc(c.summary)}</div></div><div class="kpi">${nt!=null?`<b>${fmt(nt)}</b> tasks<br>`:''}${nr!=null?`<b>${fmt(nr)}</b> runs<br>`:''}${na?`<b>${na}</b> models`:''}</div><div class="chips">${chipsFor(c)}</div></button>`;
-    }).join(''):`<div class="empty">No records match these filters.</div>`;
+      return `<button class="row ${c.inclusion!=='core'?'ref':''}" data-id="${c.id}"><div><div class="t">${esc(c.name)}${c.short_name&&c.short_name!==c.name?` <i>${esc(c.short_name)}</i>`:''}</div><div class="m">${c.year} · ${esc(c.venue||'')}${c.authors_short?' · '+esc(c.authors_short):''}</div><div class="s">${esc(c.summary)}</div></div><div class="kpi">${nt!=null?`<b>${fmt(nt)}</b> tasks<br>`:''}${nr!=null?`<b>${fmt(nr)}</b> runs<br>`:''}${na?`<b>${na}</b> models`:''}</div><div class="chips">${chipsFor(c)}</div></button>`;
+    }).join(''):`<div class="empty">No records match this scope and these filters.</div>`;
     document.querySelectorAll('.row').forEach(r=>r.addEventListener('click',()=>{location.hash='#/b/'+r.dataset.id;}));
   }
   document.getElementById('sort').addEventListener('change',renderRows);
@@ -423,23 +445,23 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
     if(key==='execution_mode') return `<dd><span class="chip em"><span class="dot" style="background:var(--em-${v})"></span>${LABEL[v]||words(v)}</span></dd>`;
     if(Array.isArray(v)){ if(v.length>8&&typeof v[0]==='string'&&v.join('').length>200) return `<dd><ul style="margin:0;padding-left:1rem">${v.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></dd>`; return `<dd>${v.map(x=>`<span class="chip">${esc(words(x))}</span>`).join('')}</dd>`; }
     if(typeof v==='number') return `<dd class="num">${fmt(v)}</dd>`;
-    const s=String(v); const enumish=/^[a-z_]+$/.test(s)&&s.length<32;
+    const s=String(v), enumish=/^[a-z_]+$/.test(s)&&s.length<32;
     return `<dd>${enumish?`<span class="chip">${words(s)}</span>`:esc(s)}</dd>`;
   }
   function openDetail(id){
     const c=byId[id]; if(!c) return;
     const links=[['Paper',c.url],['Code',c.code_url],['Data',c.data_url],c.arxiv?['arXiv '+c.arxiv,'https://arxiv.org/abs/'+c.arxiv]:null,c.doi?['DOI','https://doi.org/'+c.doi]:null].filter(x=>x&&x[1]);
-    const nn=(D.nearest[id]||[]).filter(([j])=>byId[j]);
-    const cov=c._derived.coverage;
+    const nn=(D.nearest[id]||[]).filter(([j])=>byId[j]), cov=c._derived.coverage;
     let html=`<div class="dhead"><div><span class="eyebrow">${c.record_type}${c.status?' · '+c.status:''}</span><h2>${esc(c.name)}</h2><div class="meta">${c.year} · ${esc(c.venue||'')}${c.authors_short?' · '+esc(c.authors_short):''}${c.license?' · '+esc(c.license):''}</div><div class="links">${links.map(([l,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(l)} ↗</a>`).join('')}</div></div><button class="close" id="dclose" aria-label="Close">Close</button></div>`;
     html+=`<p class="summary">${esc(c.summary)}</p>`;
+    html+=`<div class="incbox"><div><b>${c.inclusion==='core'?'In the core analysis set':'Reference only'}</b><div>${esc(c.inclusion_reason||'')}</div></div></div>`;
     if(c.schema_axes_proposed&&c.schema_axes_proposed.length) html+=`<div class="sect"><h3>Axes this work proposes</h3><ul>${c.schema_axes_proposed.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`;
     if((get(c,'benchmark_features.headline_results')||[]).length) html+=`<div class="sect"><h3>Headline results</h3><ul>${c.benchmark_features.headline_results.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`;
     html+=`<div class="dgrid">`+FIELD_GROUPS.map(([g,lab,keys])=>`<div class="group"><h3>${lab}</h3><dl>${keys.map(k=>`<dt>${words(k)}</dt>${val(get(c,g+'.'+k),k)}`).join('')}</dl></div>`).join('')+`</div>`;
     if((c.transfer_relevant_findings||[]).length) html+=`<div class="sect"><h3>Findings relevant to transfer</h3><ul>${c.transfer_relevant_findings.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`;
     if((c.limitations||[]).length) html+=`<div class="sect"><h3>Limitations</h3><ul>${c.limitations.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div>`;
-    if(nn.length) html+=`<div class="sect"><h3>Nearest in schema space</h3><div class="nn">${nn.map(([j,d])=>`<button data-id="${j}">${esc(byId[j].short_name||byId[j].name)} <span class="mono" style="color:var(--muted)">${(1-d).toFixed(2)}</span></button>`).join('')}<button data-cmp="${id}">Compare…</button></div></div>`;
-    if((c.related||[]).length) html+=`<div class="sect"><h3>Related records</h3><div class="nn">${c.related.filter(r=>byId[r]).map(r=>`<button data-id="${r}">${esc(byId[r].short_name||byId[r].name)}</button>`).join('')}</div></div>`;
+    if(nn.length) html+=`<div class="sect"><h3>Nearest in schema space</h3><div class="nn">${nn.map(([j,d])=>`<button data-id="${j}">${esc(nameOf(byId[j]))} <span class="mono" style="color:var(--muted)">${(1-d).toFixed(2)}</span></button>`).join('')}<button data-cmp="${id}">Compare…</button></div></div>`;
+    if((c.related||[]).length) html+=`<div class="sect"><h3>Related records</h3><div class="nn">${c.related.filter(r=>byId[r]).map(r=>`<button data-id="${r}">${esc(nameOf(byId[r]))}</button>`).join('')}</div></div>`;
     if(c.notes) html+=`<div class="sect"><h3>Notes</h3><p style="font-size:.88rem;margin:0;color:var(--ink-2)">${esc(c.notes)}</p></div>`;
     const p=c.provenance||{};
     html+=`<div class="prov"><div>Card completeness by group</div><div class="covbar">${['benchmark','task','sample_environment','agent'].map(g=>`<span title="${g}: ${Math.round((cov[g]||0)*100)}%"><i style="width:${Math.round((cov[g]||0)*100)}%"></i></span>`).join('')}</div><div class="covlab"><span>benchmark</span><span>task</span><span>sample/env</span><span>agent</span></div><div style="margin-top:.6rem">Extracted ${esc(p.extracted_on||'')} · ${words(p.extraction_method||'')} · confidence ${esc(p.confidence||'—')} · ${words(p.review_status||'unreviewed')}${p.sources_consulted&&p.sources_consulted.length?` · sources: ${p.sources_consulted.map(s=>`<a href="${esc(s)}" target="_blank" rel="noopener">${esc(s.replace(/^https?:\/\//,'').slice(0,40))}</a>`).join(', ')}`:''}</div>${p.reviewer_notes?`<div style="margin-top:.3rem">${esc(p.reviewer_notes)}</div>`:''}</div>`;
@@ -447,30 +469,33 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
     document.body.classList.add('open');
     body.querySelector('#dclose').addEventListener('click',()=>closeDetail(true));
     body.querySelectorAll('.nn button[data-id]').forEach(b=>b.addEventListener('click',()=>{location.hash='#/b/'+b.dataset.id;}));
-    const cb=body.querySelector('button[data-cmp]'); if(cb) cb.addEventListener('click',()=>{const ids=[id,...nn.slice(0,2).map(x=>x[0])]; location.hash='#/compare/'+ids.join(',');});
+    const cb=body.querySelector('button[data-cmp]'); if(cb) cb.addEventListener('click',()=>{location.hash='#/compare/'+[id,...nn.slice(0,2).map(x=>x[0])].join(',');});
   }
   function closeDetail(nav){ document.body.classList.remove('open'); if(nav&&location.hash.startsWith('#/b/')) location.hash='#/'+currentView; }
   document.getElementById('scrim').addEventListener('click',()=>closeDetail(true));
   document.addEventListener('keydown',e=>{if(e.key==='Escape'&&document.body.classList.contains('open')) closeDetail(true);});
 
   // ---------- compare ----------
-  let onlyDiff=false;
   function renderCompare(){
-    const pick=document.getElementById('pick');
-    const opts=cards.filter(c=>!compareIds.includes(c.id)).map(c=>`<option value="${c.id}">${esc(c.short_name||c.name)} (${c.year})</option>`).join('');
-    pick.innerHTML=compareIds.map(id=>`<span class="tag">${esc(byId[id].short_name||byId[id].name)}<button data-rm="${id}" aria-label="Remove">×</button></span>`).join('')+(compareIds.length<4?`<select id="addcmp" aria-label="Add benchmark"><option value="">Add a benchmark…</option>${opts}</select>`:'')+`<label class="toggle"><input type="checkbox" id="onlydiff" ${onlyDiff?'checked':''}> only differences</label>`;
-    pick.querySelectorAll('[data-rm]').forEach(b=>b.addEventListener('click',()=>{compareIds=compareIds.filter(x=>x!==b.dataset.rm);location.hash='#/compare/'+compareIds.join(',');}));
-    const add=pick.querySelector('#addcmp'); if(add) add.addEventListener('change',e=>{if(e.target.value){compareIds.push(e.target.value);location.hash='#/compare/'+compareIds.join(',');}});
+    const pool=visible(), pick=document.getElementById('pick');
+    const opts=pool.filter(c=>!compareIds.includes(c.id)).map(c=>`<option value="${c.id}">${esc(nameOf(c))} (${c.year})</option>`).join('');
+    pick.innerHTML=compareIds.map(id=>`<span class="tag">${esc(nameOf(byId[id]))}<button data-rm="${id}" aria-label="Remove">×</button></span>`).join('')+
+      (compareIds.length<4?`<select id="addcmp" aria-label="Add record"><option value="">Add from the ${pool.length} filtered records…</option>${opts}</select>`:'')+
+      `<label class="toggle"><input type="checkbox" id="onlydiff" ${onlyDiff?'checked':''}> only differences</label>`;
+    pick.querySelectorAll('[data-rm]').forEach(b=>b.addEventListener('click',()=>{compareIds=compareIds.filter(x=>x!==b.dataset.rm);syncCompareHash();renderCompare();}));
+    const add=pick.querySelector('#addcmp'); if(add) add.addEventListener('change',e=>{if(e.target.value){compareIds.push(e.target.value);syncCompareHash();renderCompare();}});
     pick.querySelector('#onlydiff').addEventListener('change',e=>{onlyDiff=e.target.checked;renderCompare();});
-    const cs=compareIds.map(id=>byId[id]);
-    const tbl=document.getElementById('cmp');
-    if(cs.length<2){ tbl.innerHTML=`<div class="empty">Choose at least two benchmarks to compare.${cs.length===0?' Try starting from a benchmark\'s “Compare…” button.':''}</div>`; return; }
+    const cs=compareIds.map(id=>byId[id]).filter(Boolean), tbl=document.getElementById('cmp');
+    if(cs.length<2){ tbl.innerHTML=`<div class="empty">Choose at least two records to compare.${pool.length<2?' Widen the scope or filters to get more than one.':''}</div>`; return; }
     let html=`<table class="cmp"><thead><tr><th class="f">Field</th>${cs.map(c=>`<th><a href="#/b/${c.id}">${esc(c.name)}</a><div style="color:var(--muted);font-weight:400;font-size:.78rem">${c.year} · ${esc(c.venue||'')}</div></th>`).join('')}</tr></thead><tbody>`;
-    const top=[['record_type','record type'],['year','year'],['summary','summary']];
-    for(const [k,l] of top){ const vs=cs.map(c=>c[k]); const diff=new Set(vs.map(v=>JSON.stringify(v))).size>1; if(onlyDiff&&!diff) continue; html+=`<tr class="${diff?'diff':''}"><td class="f">${l}</td>${vs.map(v=>`<td>${k==='summary'?esc(v):val(v,k).replace(/^<dd[^>]*>|<\/dd>$/g,'')}</td>`).join('')}</tr>`; }
+    const strip=h=>h.replace(/^<dd class="null">/,'<span style="color:var(--muted);font-style:italic">').replace(/^<dd[^>]*>/,'').replace(/<\/dd>$/,'').replace(/^(<span[^>]*>unreported)$/,'$1</span>');
+    for(const [k,l] of [['record_type','record type'],['inclusion','analysis scope'],['year','year'],['summary','summary']]){
+      const vs=cs.map(c=>c[k]); const diff=new Set(vs.map(v=>JSON.stringify(v))).size>1; if(onlyDiff&&!diff) continue;
+      html+=`<tr class="${diff?'diff':''}"><td class="f">${l}</td>${vs.map(v=>`<td>${k==='summary'?esc(v):strip(val(v,k))}</td>`).join('')}</tr>`;
+    }
     for(const [g,lab,keys] of FIELD_GROUPS){
       let rows='';
-      for(const k of keys){ const vs=cs.map(c=>get(c,g+'.'+k)); const diff=new Set(vs.map(v=>JSON.stringify(v??null))).size>1; if(onlyDiff&&!diff) continue; rows+=`<tr class="${diff?'diff':''}"><td class="f">${words(k)}</td>${vs.map(v=>`<td>${val(v,k).replace(/^<dd class="null">/,'<span style="color:var(--muted);font-style:italic">').replace(/^<dd[^>]*>/,'').replace(/<\/dd>$/,'').replace(/^(<span[^>]*>unreported)$/,'$1</span>')}</td>`).join('')}</tr>`; }
+      for(const k of keys){ const vs=cs.map(c=>get(c,g+'.'+k)); const diff=new Set(vs.map(v=>JSON.stringify(v??null))).size>1; if(onlyDiff&&!diff) continue; rows+=`<tr class="${diff?'diff':''}"><td class="f">${words(k)}</td>${vs.map(v=>`<td>${strip(val(v,k))}</td>`).join('')}</tr>`; }
       if(rows) html+=`<tr class="grp"><td colspan="${cs.length+1}">${lab}</td></tr>`+rows;
     }
     for(const [k,l] of [['headline_results','headline results'],['transfer_relevant_findings','transfer-relevant findings'],['limitations','limitations']]){
@@ -480,51 +505,88 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
     }
     tbl.innerHTML=html+`</tbody></table>`;
   }
+  function syncCompareHash(){ if(currentView==='compare') history.replaceState(null,'','#/compare'+(compareIds.length?'/'+compareIds.join(','):'')); }
 
-  // ---------- similarity heatmap ----------
-  let simGroup='all';
+  // ---------- similarity ----------
   document.querySelectorAll('#simgroup button').forEach(b=>b.addEventListener('click',()=>{simGroup=b.dataset.g;document.querySelectorAll('#simgroup button').forEach(x=>x.classList.toggle('on',x===b));renderHeat();}));
-  function mix(t){ // css color-mix between lo and hi tokens
-    return `color-mix(in oklab, var(--heat-hi) ${Math.round(t*100)}%, var(--heat-lo))`; }
+  const mix=t=>`color-mix(in oklab, var(--heat-hi) ${Math.round(t*100)}%, var(--heat-lo))`;
   function renderHeat(){
-    const ids=D.ids.filter(id=>byId[id]&&(byId[id].record_type==='benchmark'||byId[id].record_type==='system'));
     const idx=Object.fromEntries(D.ids.map((id,i)=>[id,i]));
+    const ids=visible().map(c=>c.id).filter(id=>idx[id]!=null);
+    const h=document.getElementById('heat');
+    if(ids.length<2){ h.innerHTML=`<div class="empty">Select at least two records to compare.</div>`; return; }
     const M=simGroup==='all'?D.all:D.by_group[simGroup];
-    const n=ids.length, cell=Math.max(18,Math.min(30,Math.floor(900/n))), left=190, top=170;
+    const n=ids.length, cell=Math.max(16,Math.min(30,Math.floor(1000/n))), left=190, top=170;
     const W=left+n*cell+10, H=top+n*cell+10;
-    let s=`<svg class="heat" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Benchmark similarity matrix">`;
-    ids.forEach((id,i)=>{ const nm=(byId[id].short_name||byId[id].name).slice(0,28);
+    let s=`<svg class="heat" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="Similarity matrix of the filtered records">`;
+    ids.forEach((id,i)=>{ const nm=nameOf(byId[id]).slice(0,28);
       s+=`<text class="lbl" x="${left-6}" y="${top+i*cell+cell/2+4}" text-anchor="end">${esc(nm)}</text>`;
       s+=`<text class="lbl" transform="translate(${left+i*cell+cell/2+4},${top-6}) rotate(-60)" text-anchor="start">${esc(nm)}</text>`; });
-    ids.forEach((a,i)=>ids.forEach((b,j)=>{ const d=M[idx[a]][idx[b]]; const sim=d==null?null:1-d; const fill=i===j?'var(--line-2)':(sim==null?'var(--surface-2)':mix(sim));
+    ids.forEach((a,i)=>ids.forEach((b,j)=>{ const d=M[idx[a]][idx[b]], sim=d==null?null:1-d;
+      const fill=i===j?'var(--line-2)':(sim==null?'var(--surface-2)':mix(sim));
       s+=`<rect class="c" x="${left+j*cell}" y="${top+i*cell}" width="${cell}" height="${cell}" fill="${fill}" data-a="${a}" data-b="${b}" data-s="${sim==null?'':sim.toFixed(2)}"></rect>`; }));
-    s+=`</svg>`;
-    const h=document.getElementById('heat'); h.innerHTML=s;
+    h.innerHTML=s+`</svg>`;
     const tip=document.getElementById('tip');
     h.querySelectorAll('rect.c').forEach(r=>{
-      r.addEventListener('mousemove',e=>{ const a=byId[r.dataset.a],b=byId[r.dataset.b]; tip.style.display='block'; tip.style.left=(e.clientX+12)+'px'; tip.style.top=(e.clientY+12)+'px'; tip.innerHTML=`<b>${esc(a.short_name||a.name)}</b> × <b>${esc(b.short_name||b.name)}</b><br>similarity ${r.dataset.s||'n/a (no shared fields)'}`; });
+      r.addEventListener('mousemove',e=>{ tip.style.display='block'; tip.style.left=(e.clientX+12)+'px'; tip.style.top=(e.clientY+12)+'px'; tip.innerHTML=`<b>${esc(nameOf(byId[r.dataset.a]))}</b> × <b>${esc(nameOf(byId[r.dataset.b]))}</b><br>similarity ${r.dataset.s||'n/a (no shared fields)'}`; });
       r.addEventListener('mouseleave',()=>tip.style.display='none');
-      r.addEventListener('click',()=>{ if(r.dataset.a!==r.dataset.b) location.hash='#/compare/'+r.dataset.a+','+r.dataset.b; else location.hash='#/b/'+r.dataset.a; });
+      r.addEventListener('click',()=>{ location.hash = r.dataset.a===r.dataset.b ? '#/b/'+r.dataset.a : '#/compare/'+r.dataset.a+','+r.dataset.b; });
     });
   }
 
-  // ---------- gaps ----------
+  // ---------- coverage & gaps ----------
+  const AXIS_SHORT={physical_execution:'Real hardware',digital_twin:'Digital twin',microscopy:'Microscopy',closed_loop:'Closed loop',image_interpretation:'Image interpretation',long_horizon:'Long horizon',quantitative_tolerance:'Quantitative tolerance',safety_eval:'Safety scored',abstention_eval:'Abstention scored',repetitions:'Repeated runs',family_holdout:'Family holdout',env_state_variation:'Env state varied',injected_faults:'Injected faults',agent_ablation:'Agent ablation',human_baseline:'Human baseline',open_source:'Open source'};
   function renderGaps(){
-    const axes=AX.axes, max=Math.max(1,...axes.map(a=>a.n_covering)), total=Object.keys(AX.table).length;
-    document.getElementById('axesbars').innerHTML=axes.map(a=>`<span class="lab">${esc(a.label)}</span><span class="bar ${a.n_covering?'':'zero'}"><i style="width:${Math.max(a.n_covering?2:0,100*a.n_covering/max)}%"></i></span><span class="n">${a.n_covering}</span>`).join('');
-    const gaps=axes.filter(a=>AX.gaps.includes(a.id)), rare=axes.filter(a=>AX.rare.includes(a.id));
-    document.getElementById('gapnote').innerHTML=`<div class="gapnote"><b>Of ${total} benchmarks and systems:</b> ${gaps.length?`no surveyed work covers <b>${gaps.map(a=>a.label.toLowerCase()).join('</b>, <b>')}</b>. `:'every axis is covered by at least one work. '}${rare.length?`Only one or two cover ${rare.map(a=>a.label.toLowerCase()).join(', ')}.`:''}</div>`;
-    const ids=Object.keys(AX.table).filter(id=>byId[id]).sort((a,b)=>Object.values(AX.table[b]).filter(Boolean).length-Object.values(AX.table[a]).filter(Boolean).length);
-    document.getElementById('gaptbl').innerHTML=`<thead><tr><th>Benchmark</th>${axes.map(a=>`<th class="rot"><div>${esc(a.label)}</div></th>`).join('')}<th class="rot"><div>axes covered</div></th></tr></thead><tbody>`+ids.map(id=>{const r=AX.table[id];const k=Object.values(r).filter(Boolean).length;return `<tr><td><a href="#/b/${id}">${esc(byId[id].short_name||byId[id].name)}</a></td>${axes.map(a=>`<td class="${r[a.id]?'y':'n'}">${r[a.id]?'●':'·'}</td>`).join('')}<td class="num">${k}/${axes.length}</td></tr>`;}).join('')+`</tbody>`;
+    const ids=visible().map(c=>c.id).filter(id=>AX.table[id]);
+    const axes=AX.axes.map(a=>({...a,n:ids.filter(id=>AX.table[id][a.id]).length}));
+    const max=Math.max(1,...axes.map(a=>a.n));
+    document.getElementById('axesbars').innerHTML=axes.map(a=>`<span class="lab">${esc(a.label)}</span><span class="bar ${a.n?'':'zero'}"><i style="width:${a.n?Math.max(2,100*a.n/max):0}%"></i></span><span class="n">${a.n}/${ids.length}</span>`).join('');
+    const gaps=axes.filter(a=>a.n===0), rare=axes.filter(a=>a.n>0&&a.n<=2);
+    document.getElementById('gapnote').innerHTML=ids.length?`<div class="gapnote"><b>Of ${ids.length} record${ids.length===1?'':'s'} in view:</b> ${gaps.length?`none covers <b>${gaps.map(a=>a.label.toLowerCase()).join('</b>, <b>')}</b>. `:'every axis is covered by at least one. '}${rare.length?`Only one or two cover ${rare.map(a=>a.label.toLowerCase()).join(', ')}.`:''}</div>`:'';
+    const sorted=ids.slice().sort((a,b)=>Object.values(AX.table[b]).filter(Boolean).length-Object.values(AX.table[a]).filter(Boolean).length);
+    document.getElementById('gaptbl').innerHTML=ids.length?`<thead><tr><th>Record</th>${axes.map(a=>`<th class="rot" title="${esc(a.label)}"><div>${esc(AXIS_SHORT[a.id]||a.label)}</div></th>`).join('')}<th class="rot"><div>axes covered</div></th></tr></thead><tbody>`+sorted.map(id=>{const r=AX.table[id],k=Object.values(r).filter(Boolean).length;return `<tr><td><a href="#/b/${id}">${esc(nameOf(byId[id]))}</a></td>${axes.map(a=>`<td class="${r[a.id]?'y':'n'}">${r[a.id]?'●':'·'}</td>`).join('')}<td class="num">${k}/${axes.length}</td></tr>`;}).join('')+`</tbody>`:`<tbody><tr><td class="empty">No records in view.</td></tr></tbody>`;
   }
 
-  // ---------- schema ----------
+  // ---------- schema vocabularies ----------
+  const VOCAB_PATHS={execution_mode:'benchmark_features.execution_mode',task_source:'benchmark_features.task_source',scoring_granularity:'benchmark_features.scoring_granularity',workflow_depth:'task_features.workflow_depth',perceptual_demand:'task_features.perceptual_demand',reasoning_demand:'task_features.reasoning_demand',safety_criticality:'task_features.safety_criticality',sample_real_or_simulated:'sample_environment_features.sample_real_or_simulated',planner:'agent_features_evaluated.planner',rag_or_memory:'agent_features_evaluated.rag_or_memory',verifier:'agent_features_evaluated.verifier_or_self_debug',guards:'agent_features_evaluated.guards_or_safety_layer',record_type:'record_type',inclusion:'inclusion',status:'status'};
+  const VOCAB_MULTI={evaluation_target:'benchmark_features.evaluation_target',metric_type:'benchmark_features.metric_types',tool_interface:'task_features.tool_interface',novelty_level:'sample_environment_features.novelty_levels_tested'};
   function renderSchema(){
-    const el=document.getElementById('vocab');
-    el.innerHTML=Object.entries(V).map(([k,def])=>{ const use=VU[k]||{}; const n=Object.values(use).filter(x=>x>0).length;
-      return `<details class="vocab"><summary><span class="k">${k}</span><span class="kind">${def.kind}${def.multi?' · multi':''}</span><span class="u">${Object.keys(def.values).length} values${VU[k]?` · ${n} in use`:''}</span></summary><table>${Object.entries(def.values).map(([v,g])=>`<tr><td class="v ${use[v]===0?'unused':''}">${v}</td><td>${esc(g)}</td><td class="c">${use[v]!=null?use[v]:''}</td></tr>`).join('')}</table></details>`; }).join('');
+    const list=visible();
+    document.getElementById('vocabscope').textContent=`${list.length} record${list.length===1?'':'s'} in view`;
+    const usage={};
+    for(const [k,path] of Object.entries(VOCAB_PATHS)){ usage[k]={}; list.forEach(c=>{const v=get(c,path); if(v!=null) usage[k][v]=(usage[k][v]||0)+1;}); }
+    for(const [k,path] of Object.entries(VOCAB_MULTI)){ usage[k]={}; list.forEach(c=>(get(c,path)||[]).forEach(v=>usage[k][v]=(usage[k][v]||0)+1)); }
+    usage.instrument_modality={}; list.forEach(c=>(c._derived.modalities||[]).forEach(m=>usage.instrument_modality[m]=(usage.instrument_modality[m]||0)+1));
+    document.getElementById('vocab').innerHTML=Object.entries(V).map(([k,def])=>{
+      const use=usage[k], n=use?Object.values(use).filter(x=>x>0).length:null;
+      return `<details class="vocab"><summary><span class="k">${k}</span><span class="kind">${def.kind}${def.multi?' · multi':''}</span><span class="u">${Object.keys(def.values).length} values${n!=null?` · ${n} in use`:''}</span></summary><table>${Object.entries(def.values).map(([v,g])=>`<tr><td class="v ${use&&!use[v]?'unused':''}">${v}</td><td>${esc(g)}</td><td class="c">${use?(use[v]||0):''}</td></tr>`).join('')}</table></details>`;
+    }).join('');
   }
 
-  renderRail(); renderRows(); renderGaps(); renderSchema(); route();
-})().catch(e=>{document.querySelector('main').innerHTML=`<div class="empty">Could not load data: ${String(e).replace(/</g,'&lt;')}<br>Run <code>python -m aig export</code> to generate site/data.</div>`;});
+  // ---------- routing ----------
+  const views=['benchmarks','compare','similarity','gaps','schema'];
+  function route(){
+    const h=location.hash||'#/benchmarks', m=h.match(/^#\/([a-z]+)(?:\/(.*))?$/);
+    let v=m?m[1]:'benchmarks'; const arg=m&&m[2]?decodeURIComponent(m[2]):'';
+    if(v==='b'){ openDetail(arg); v=currentView; } else { closeDetail(false); }
+    if(!views.includes(v)) v='benchmarks';
+    if(v==='compare'&&arg){ compareIds=arg.split(',').filter(x=>byId[x]).slice(0,4); }
+    currentView=v;
+    views.forEach(x=>document.getElementById('view-'+x).classList.toggle('active',x===v));
+    document.querySelectorAll('#nav a').forEach(a=>a.classList.toggle('active',a.dataset.view===v));
+    renderActive();
+  }
+  function renderActive(){
+    if(currentView==='benchmarks') renderRows();
+    else if(currentView==='compare') renderCompare();
+    else if(currentView==='similarity') renderHeat();
+    else if(currentView==='gaps') renderGaps();
+    else if(currentView==='schema') renderSchema();
+  }
+  function renderAll(){ renderRail(); renderFilterLine(); renderActive(); }
+  window.addEventListener('hashchange',route);
+
+  renderRail(); renderFilterLine(); route();
+  if(window.matchMedia('(max-width:900px)').matches) document.getElementById('railwrap').open=false;
+})().catch(e=>{document.querySelector('.content').innerHTML=`<div class="empty">Could not load data: ${String(e).replace(/</g,'&lt;')}<br>Run <code>python -m aig export</code> to generate site/data.</div>`;});
 </script>

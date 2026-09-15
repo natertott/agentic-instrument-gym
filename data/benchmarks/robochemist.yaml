@@ -1,5 +1,7 @@
 id: robochemist
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: 'RoboChemist: Long-Horizon and Safety-Compliant Robotic Chemical Experimentation'
 short_name: RoboChemist
 year: 2025

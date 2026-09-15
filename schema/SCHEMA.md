@@ -4,6 +4,14 @@ This document defines the **execution-level evidence schema** used to compare be
 
 It is deliberately **not** a universal benchmark ontology. It records what each benchmark actually measured, on what, with which agent, under which design choices, so that two benchmarks can be placed side by side and the gaps between them made explicit.
 
+## Scope: which cards enter the analysis
+
+Every card carries `inclusion` (`core` or `reference`) and `inclusion_reason`. A card is `core` when it is a benchmark
+(record_type `benchmark`), reports `n_tasks`, names at least one metric, and was not extracted at `low` confidence.
+Reference cards keep all their data and stay browsable, but are excluded from coverage, distance and gap analysis so
+that "how many benchmarks do X" counts only things that are actually benchmarks. `scripts/set_inclusion.py` applies the
+rule; a reason beginning `manual:` is preserved.
+
 ## Two levels
 
 | Level | File | One record is | Used for |

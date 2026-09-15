@@ -1,5 +1,7 @@
 id: llm_spm_2024
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: Synergizing human expertise and AI efficiency with language model for microscopy operation and automated experiment
   design
 short_name: LLM SPM operation (2024)

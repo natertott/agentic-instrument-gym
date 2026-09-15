@@ -1,5 +1,7 @@
 id: sdl_review_2026
 record_type: survey
+inclusion: reference
+inclusion_reason: 'record_type is survey: evaluation is not a reusable task set with a scoring rule'
 name: The past, present and future of self-driving laboratories
 short_name: SDL review (2026)
 year: 2026

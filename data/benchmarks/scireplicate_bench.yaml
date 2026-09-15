@@ -1,5 +1,7 @@
 id: scireplicate_bench
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'SciReplicate-Bench: Benchmarking LLMs in Agent-driven Algorithmic Reproduction from Research Papers'
 short_name: SciReplicate-Bench
 year: 2025

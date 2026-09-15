@@ -1,5 +1,7 @@
 id: eims
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: Embodied Intelligence Unlocks Autonomous Microscopy (EIMS)
 short_name: EIMS
 year: 2025

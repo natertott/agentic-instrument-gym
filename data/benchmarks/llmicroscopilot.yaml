@@ -1,5 +1,7 @@
 id: llmicroscopilot
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: 'LLMicroscopilot: An LLM assistant for scanning tunneling and transmission electron microscopy measurements'
 short_name: LLMicroscopilot
 year: 2024

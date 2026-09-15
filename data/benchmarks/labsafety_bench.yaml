@@ -1,5 +1,7 @@
 id: labsafety_bench
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'LabSafety Bench: Benchmarking LLMs on Safety Issues in Scientific Labs (journal title: Benchmarking large
   language models on safety risks in scientific laboratories)'
 short_name: LabSafety Bench

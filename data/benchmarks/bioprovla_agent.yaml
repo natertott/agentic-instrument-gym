@@ -1,5 +1,7 @@
 id: bioprovla_agent
 record_type: benchmark
+inclusion: reference
+inclusion_reason: unverified discovery-sweep stub; promote to core after full extraction
 name: 'BioProVLA-Agent: Protocol-Driven, Vision-Enhanced VLA-Enabled Embodied Multi-Agent System for Biological
   Laboratory Manipulation'
 short_name: BioProVLA-Agent

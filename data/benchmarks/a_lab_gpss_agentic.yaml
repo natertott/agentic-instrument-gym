@@ -1,5 +1,7 @@
 id: a_lab_gpss_agentic
 record_type: benchmark
+inclusion: reference
+inclusion_reason: unverified discovery-sweep stub; promote to core after full extraction
 name: Agentic LLM Reasoning in a Self-Driving Laboratory for Air-Sensitive Lithium Halide Spinel Conductors (A-Lab
   GPSS)
 short_name: A-Lab-GPSS-agentic

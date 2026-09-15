@@ -1,5 +1,7 @@
 id: eos_ai_agent
 record_type: benchmark
+inclusion: reference
+inclusion_reason: unverified discovery-sweep stub; promote to core after full extraction
 name: 'From Prompts to Protocols: An AI Agent for Laboratory Automation (EOS agent)'
 short_name: EOS-AI-agent
 year: 2026

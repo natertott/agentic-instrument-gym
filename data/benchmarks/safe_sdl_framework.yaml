@@ -1,5 +1,7 @@
 id: safe_sdl_framework
 record_type: framework
+inclusion: reference
+inclusion_reason: 'record_type is framework: evaluation is not a reusable task set with a scoring rule'
 name: 'Safe-SDL: Establishing Safety Boundaries and Control Mechanisms for AI-Driven Self-Driving Laboratories'
 short_name: Safe-SDL
 year: 2026

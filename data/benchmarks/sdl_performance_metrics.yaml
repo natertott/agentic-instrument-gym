@@ -1,5 +1,7 @@
 id: sdl_performance_metrics
 record_type: framework
+inclusion: reference
+inclusion_reason: 'record_type is framework: evaluation is not a reusable task set with a scoring rule'
 name: Performance metrics to unleash the power of self-driving labs in chemistry and materials science
 short_name: SDL performance metrics
 year: 2024

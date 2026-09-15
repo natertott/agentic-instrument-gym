@@ -1,5 +1,7 @@
 id: chemcrow
 record_type: benchmark
+inclusion: reference
+inclusion_reason: unverified discovery-sweep stub; promote to core after full extraction
 name: Augmenting large language models with chemistry tools (ChemCrow)
 short_name: ChemCrow
 year: 2024

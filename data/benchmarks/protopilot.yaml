@@ -1,5 +1,7 @@
 id: protopilot
 record_type: benchmark
+inclusion: reference
+inclusion_reason: unverified discovery-sweep stub; promote to core after full extraction
 name: A Self-Evolving Agentic System for Automated Generation and Execution of Biological Protocols (ProtoPilot)
 short_name: ProtoPilot
 year: 2026

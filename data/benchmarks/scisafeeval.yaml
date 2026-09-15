@@ -1,5 +1,7 @@
 id: scisafeeval
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'SciSafeEval: A Comprehensive Benchmark for Safety Alignment of Large Language Models in Scientific Tasks'
 short_name: SciSafeEval
 year: 2024

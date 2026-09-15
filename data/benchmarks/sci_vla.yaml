@@ -1,5 +1,7 @@
 id: sci_vla
 record_type: benchmark
+inclusion: reference
+inclusion_reason: unverified discovery-sweep stub; promote to core after full extraction
 name: 'Sci-VLA / AtomBridge: Agentic VLA Inference Plugin for Long-Horizon Tasks in Scientific Experiments'
 short_name: Sci-VLA
 year: 2026

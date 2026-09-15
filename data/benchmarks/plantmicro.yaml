@@ -1,5 +1,7 @@
 id: plantmicro
 record_type: benchmark
+inclusion: reference
+inclusion_reason: no task count reported, so size and coverage cannot be compared
 name: Benchmarking Vision-Language Models for Microscopic Plant Image Understanding (PlantMicro)
 short_name: PlantMicro
 year: 2026

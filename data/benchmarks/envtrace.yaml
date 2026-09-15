@@ -1,5 +1,7 @@
 id: envtrace
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'EnvTrace: Simulation-Based Semantic Evaluation of LLM Code via Execution Trace Alignment -- Demonstrated
   at Synchrotron Beamlines'
 short_name: EnvTrace

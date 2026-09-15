@@ -1,5 +1,7 @@
 id: chemagents
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: A Multiagent-Driven Robotic AI Chemist Enabling Autonomous Chemical Research On Demand (ChemAgents)
 short_name: ChemAgents
 year: 2025

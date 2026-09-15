@@ -1,5 +1,7 @@
 id: stemgym
 record_type: benchmark
+inclusion: reference
+inclusion_reason: unverified discovery-sweep stub; promote to core after full extraction
 name: 'STEMGym: Benchmarking Sequential Decision-Making under Dose Budgets in Autonomous Electron Microscopy'
 short_name: STEMGym
 year: 2026

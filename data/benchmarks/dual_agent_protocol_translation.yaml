@@ -1,5 +1,7 @@
 id: dual_agent_protocol_translation
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: Dual-Agent Framework for Cross-Model Verified Translation of Natural-Language Protocols into Robotic Laboratory
   Platform
 short_name: Dual-Agent-Protocol-Translation

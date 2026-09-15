@@ -1,5 +1,7 @@
 id: llm_xrm_2025
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: An Autonomous, Large Language Model Driven X-ray Microscope with Contextual Understanding of Domain Specific
   Experimental Workflows
 short_name: LLM-XRM (M&M 2025)

@@ -1,5 +1,7 @@
 id: protoact
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'ProtoAct: Turning Wet-Lab Protocols into Embodied Robotic Actions (introduces the BioP2E benchmark)'
 short_name: ProtoAct / BioP2E
 year: 2026

@@ -1,5 +1,7 @@
 id: scienceagentbench
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'ScienceAgentBench: Toward Rigorous Assessment of Language Agents for Data-Driven Scientific Discovery'
 short_name: ScienceAgentBench
 year: 2024

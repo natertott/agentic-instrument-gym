@@ -1,5 +1,7 @@
 id: domain_slm_spm_2026
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: 'Autonomous Laboratory Agent via Customized Domain-Specific Language Model and Modular AI Interface (later
   version titled: Integrating Domain-Specialized Language Models with AI Measurement Tools for Deterministic Atomic-Resolution
   Experimentation)'

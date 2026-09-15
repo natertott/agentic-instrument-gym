@@ -1,5 +1,7 @@
 id: autolabs
 record_type: benchmark
+inclusion: reference
+inclusion_reason: unverified discovery-sweep stub; promote to core after full extraction
 name: 'AutoLabs: Cognitive Multi-Agent Systems with Self-Correction for Autonomous Chemical Experimentation'
 short_name: AutoLabs
 year: 2026

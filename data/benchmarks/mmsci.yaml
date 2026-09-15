@@ -1,5 +1,7 @@
 id: mmsci
 record_type: benchmark
+inclusion: reference
+inclusion_reason: no task count reported, so size and coverage cannot be compared
 name: 'MMSci: A Dataset for Graduate-Level Multi-Discipline Multimodal Scientific Understanding'
 short_name: MMSci
 year: 2024

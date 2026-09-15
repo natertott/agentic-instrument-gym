@@ -1,5 +1,7 @@
 id: pipette_wetlab_sim
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: An Embodied Simulation Platform, Benchmark, and Data-Efficient Augmentation Framework for Wet-Lab Robotics
   (Pipette)
 short_name: Pipette

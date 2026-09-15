@@ -1,5 +1,7 @@
 id: autobio
 record_type: benchmark
+inclusion: reference
+inclusion_reason: unverified discovery-sweep stub; promote to core after full extraction
 name: 'AutoBio: A Simulation and Benchmark for Robotic Automation in Digital Biology Laboratory'
 short_name: AutoBio
 year: 2025

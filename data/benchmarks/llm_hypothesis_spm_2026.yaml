@@ -1,5 +1,7 @@
 id: llm_hypothesis_spm_2026
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: LLM-Guided Open Hypothesis Learning from Autonomous Scanning Probe Microscopy Experiments
 short_name: LLM hypothesis SPM
 year: 2026

@@ -1,5 +1,7 @@
 id: lab_bench
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'LAB-Bench: Measuring Capabilities of Language Models for Biology Research'
 short_name: LAB-Bench
 year: 2024

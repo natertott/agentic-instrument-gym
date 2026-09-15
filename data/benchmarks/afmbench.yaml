@@ -1,5 +1,7 @@
 id: afmbench
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: AFMBench / AILA (Artificially Intelligent Lab Assistant) -- Evaluating large language model agents for automation
   of atomic force microscopy
 short_name: AFMBench

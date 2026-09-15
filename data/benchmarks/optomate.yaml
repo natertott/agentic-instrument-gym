@@ -1,5 +1,7 @@
 id: optomate
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: AI-driven robotics for optics (OptoMate)
 short_name: OptoMate
 year: 2026

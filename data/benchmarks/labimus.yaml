@@ -1,5 +1,7 @@
 id: labimus
 record_type: benchmark
+inclusion: reference
+inclusion_reason: unverified discovery-sweep stub; promote to core after full extraction
 name: 'Labimus: A Simulation and Benchmark for Humanoid Dexterous Manipulation in Chemical Laboratory'
 short_name: Labimus
 year: 2026

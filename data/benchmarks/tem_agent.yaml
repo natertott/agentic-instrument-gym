@@ -1,5 +1,7 @@
 id: tem_agent
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: 'TEM Agent: enhancing transmission electron microscopy (TEM) with modern AI tools'
 short_name: TEM Agent
 year: 2025

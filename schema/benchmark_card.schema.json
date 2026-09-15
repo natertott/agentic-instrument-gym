@@ -4,127 +4,651 @@
   "title": "Benchmark card",
   "description": "Benchmark-level record in the execution-level evidence schema. One card per benchmark, system, framework or survey. Feature groups follow WP1: benchmark_features, task_features, sample_environment_features, agent_features_evaluated. Enum values are defined in schema/vocab.yaml.",
   "type": "object",
-  "required": ["id", "record_type", "name", "year", "url", "summary", "benchmark_features", "task_features", "sample_environment_features", "agent_features_evaluated", "provenance"],
+  "required": [
+    "id",
+    "record_type",
+    "name",
+    "year",
+    "url",
+    "summary",
+    "benchmark_features",
+    "task_features",
+    "sample_environment_features",
+    "agent_features_evaluated",
+    "provenance",
+    "inclusion"
+  ],
   "additionalProperties": false,
   "properties": {
-    "id": {"type": "string", "pattern": "^[a-z0-9_]+$"},
-    "record_type": {"enum": ["benchmark", "system", "framework", "survey"]},
-    "name": {"type": "string"},
-    "short_name": {"type": ["string", "null"]},
-    "year": {"type": "integer", "minimum": 2000, "maximum": 2100},
-    "venue": {"type": ["string", "null"]},
-    "authors_short": {"type": ["string", "null"]},
-    "arxiv": {"type": ["string", "null"]},
-    "doi": {"type": ["string", "null"]},
-    "url": {"type": "string"},
-    "code_url": {"type": ["string", "null"]},
-    "data_url": {"type": ["string", "null"]},
-    "license": {"type": ["string", "null"]},
-    "status": {"enum": ["published", "preprint", "withdrawn", null]},
-    "summary": {"type": "string"},
-    "schema_axes_proposed": {"type": "array", "items": {"type": "string"}},
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9_]+$"
+    },
+    "record_type": {
+      "enum": [
+        "benchmark",
+        "system",
+        "framework",
+        "survey"
+      ]
+    },
+    "inclusion": {
+      "enum": [
+        "core",
+        "reference"
+      ],
+      "description": "Whether this card is part of the core analysis set."
+    },
+    "inclusion_reason": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Why. A reason beginning \"manual:\" is preserved by scripts/set_inclusion.py."
+    },
+    "name": {
+      "type": "string"
+    },
+    "short_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "year": {
+      "type": "integer",
+      "minimum": 2000,
+      "maximum": 2100
+    },
+    "venue": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "authors_short": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "arxiv": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "doi": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "url": {
+      "type": "string"
+    },
+    "code_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "data_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "license": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "enum": [
+        "published",
+        "preprint",
+        "withdrawn",
+        null
+      ]
+    },
+    "summary": {
+      "type": "string"
+    },
+    "schema_axes_proposed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "benchmark_features": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "evaluation_target": {"type": "array", "items": {"$ref": "#/$defs/evaluation_target"}},
-        "execution_mode": {"$ref": "#/$defs/execution_mode_or_null"},
-        "instruments": {"type": "array", "items": {"$ref": "#/$defs/instrument"}},
-        "scientific_domains": {"type": "array", "items": {"type": "string"}},
-        "n_tasks": {"type": ["integer", "null"]},
-        "n_task_families": {"type": ["integer", "null"]},
-        "n_instances_or_runs_reported": {"type": ["integer", "null"]},
-        "repetitions_per_task": {"type": ["integer", "string", "null"]},
-        "target_population": {"type": ["string", "null"]},
-        "task_source": {"enum": ["expert_curated", "literature_derived", "synthetic_generated", "factorial_design", "crowd", "mixed", null]},
-        "sampling_strategy": {"type": ["string", "null"]},
-        "metric_types": {"type": "array", "items": {"enum": ["success_rate", "pass_at_k", "partial_credit", "trace_alignment", "llm_judge", "rubric", "human_eval", "cost", "time", "safety_violations", "calibration", "accuracy", "other"]}},
-        "primary_metric": {"type": ["string", "null"]},
-        "scoring_granularity": {"enum": ["binary", "partial", "continuous", "mixed", null]},
-        "has_human_baseline": {"type": ["boolean", "null"]},
-        "has_safety_eval": {"type": ["boolean", "null"]},
-        "has_abstention_eval": {"type": ["boolean", "null"]},
-        "holdout_or_split_design": {"type": ["string", "null"]},
-        "leakage_or_contamination_risk": {"type": ["string", "null"]},
-        "agents_evaluated": {"type": "array", "items": {"type": "string"}},
-        "n_agent_configs": {"type": ["integer", "null"]},
-        "headline_results": {"type": "array", "items": {"type": "string"}},
-        "open_source": {"type": ["boolean", "null"]}
+        "evaluation_target": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/evaluation_target"
+          }
+        },
+        "execution_mode": {
+          "$ref": "#/$defs/execution_mode_or_null"
+        },
+        "instruments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/instrument"
+          }
+        },
+        "scientific_domains": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "n_tasks": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "n_task_families": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "n_instances_or_runs_reported": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "repetitions_per_task": {
+          "type": [
+            "integer",
+            "string",
+            "null"
+          ]
+        },
+        "target_population": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "task_source": {
+          "enum": [
+            "expert_curated",
+            "literature_derived",
+            "synthetic_generated",
+            "factorial_design",
+            "crowd",
+            "mixed",
+            null
+          ]
+        },
+        "sampling_strategy": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "metric_types": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "success_rate",
+              "pass_at_k",
+              "partial_credit",
+              "trace_alignment",
+              "llm_judge",
+              "rubric",
+              "human_eval",
+              "cost",
+              "time",
+              "safety_violations",
+              "calibration",
+              "accuracy",
+              "other"
+            ]
+          }
+        },
+        "primary_metric": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "scoring_granularity": {
+          "enum": [
+            "binary",
+            "partial",
+            "continuous",
+            "mixed",
+            null
+          ]
+        },
+        "has_human_baseline": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "has_safety_eval": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "has_abstention_eval": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "holdout_or_split_design": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "leakage_or_contamination_risk": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "agents_evaluated": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "n_agent_configs": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "headline_results": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "open_source": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
       }
     },
     "task_features": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "workflow_depth": {"enum": ["single_step", "multi_step", "long_horizon", "mixed", null]},
-        "perceptual_demand": {"enum": ["none", "structured_readout", "image_reading", "image_interpretation", "mixed", null]},
-        "reasoning_demand": {"enum": ["low", "medium", "high", "mixed", null]},
-        "tool_interface": {"type": "array", "items": {"enum": ["python_api", "cli", "gui", "rest_api", "mcp", "natural_language", "physical"]}},
-        "tool_composition": {"type": ["string", "null"]},
-        "quantitative_tolerance": {"type": ["string", "null"]},
-        "closed_loop_feedback": {"type": ["boolean", "null"]},
-        "safety_criticality": {"enum": ["none", "low", "medium", "high", null]},
-        "task_taxonomy": {"type": "array", "items": {"type": "string"}}
+        "workflow_depth": {
+          "enum": [
+            "single_step",
+            "multi_step",
+            "long_horizon",
+            "mixed",
+            null
+          ]
+        },
+        "perceptual_demand": {
+          "enum": [
+            "none",
+            "structured_readout",
+            "image_reading",
+            "image_interpretation",
+            "mixed",
+            null
+          ]
+        },
+        "reasoning_demand": {
+          "enum": [
+            "low",
+            "medium",
+            "high",
+            "mixed",
+            null
+          ]
+        },
+        "tool_interface": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "python_api",
+              "cli",
+              "gui",
+              "rest_api",
+              "mcp",
+              "natural_language",
+              "physical"
+            ]
+          }
+        },
+        "tool_composition": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "quantitative_tolerance": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "closed_loop_feedback": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "safety_criticality": {
+          "enum": [
+            "none",
+            "low",
+            "medium",
+            "high",
+            null
+          ]
+        },
+        "task_taxonomy": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
       }
     },
     "sample_environment_features": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "sample_types": {"type": "array", "items": {"type": "string"}},
-        "sample_real_or_simulated": {"enum": ["real", "simulated", "dataset", "none", null]},
-        "signal_quality_variation": {"type": ["string", "null"]},
-        "novelty_control": {"type": ["string", "null"]},
-        "novelty_levels_tested": {"type": "array", "items": {"enum": ["seen_in_development", "held_out_instance", "held_out_task", "held_out_task_family", "held_out_sample_class", "held_out_environment", "held_out_combination"]}},
-        "calibration_or_api_state_variation": {"type": ["string", "null"]},
-        "injected_faults": {"type": ["boolean", "null"]},
-        "environment_description": {"type": ["string", "null"]}
+        "sample_types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sample_real_or_simulated": {
+          "enum": [
+            "real",
+            "simulated",
+            "dataset",
+            "none",
+            null
+          ]
+        },
+        "signal_quality_variation": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "novelty_control": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "novelty_levels_tested": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "seen_in_development",
+              "held_out_instance",
+              "held_out_task",
+              "held_out_task_family",
+              "held_out_sample_class",
+              "held_out_environment",
+              "held_out_combination"
+            ]
+          }
+        },
+        "calibration_or_api_state_variation": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "injected_faults": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "environment_description": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     },
     "agent_features_evaluated": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "models": {"type": "array", "items": {"type": "string"}},
-        "vision_used": {"enum": [true, false, "mixed", null]},
-        "rag_or_memory": {"enum": ["none", "static_docs", "episodic", "both", "some", "varied", "unknown", null]},
-        "planner": {"enum": ["none", "react", "plan_and_execute", "tree_search", "varied", "unknown", null]},
-        "tools": {"type": "array", "items": {"type": "string"}},
-        "verifier_or_self_debug": {"enum": ["none", "self_debug", "external_verifier", "verifier", "human", "varied", "unknown", null]},
-        "guards_or_safety_layer": {"enum": ["none", "allowlist", "human_in_loop", "both", "some", "varied", "unknown", null]},
-        "multi_agent": {"type": ["boolean", "null"]},
-        "deterministic_execution": {"type": ["boolean", "null"]}
+        "models": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vision_used": {
+          "enum": [
+            true,
+            false,
+            "mixed",
+            null
+          ]
+        },
+        "rag_or_memory": {
+          "enum": [
+            "none",
+            "static_docs",
+            "episodic",
+            "both",
+            "some",
+            "varied",
+            "unknown",
+            null
+          ]
+        },
+        "planner": {
+          "enum": [
+            "none",
+            "react",
+            "plan_and_execute",
+            "tree_search",
+            "varied",
+            "unknown",
+            null
+          ]
+        },
+        "tools": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "verifier_or_self_debug": {
+          "enum": [
+            "none",
+            "self_debug",
+            "external_verifier",
+            "verifier",
+            "human",
+            "varied",
+            "unknown",
+            null
+          ]
+        },
+        "guards_or_safety_layer": {
+          "enum": [
+            "none",
+            "allowlist",
+            "human_in_loop",
+            "both",
+            "some",
+            "varied",
+            "unknown",
+            null
+          ]
+        },
+        "multi_agent": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "deterministic_execution": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
       }
     },
-    "transfer_relevant_findings": {"type": "array", "items": {"type": "string"}},
-    "limitations": {"type": "array", "items": {"type": "string"}},
-    "related": {"type": "array", "items": {"type": "string"}},
-    "notes": {"type": ["string", "null"]},
+    "transfer_relevant_findings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "limitations": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "related": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "provenance": {
       "type": "object",
-      "required": ["extracted_on", "extraction_method"],
+      "required": [
+        "extracted_on",
+        "extraction_method"
+      ],
       "additionalProperties": false,
       "properties": {
-        "extracted_on": {"type": "string", "format": "date"},
-        "extraction_method": {"enum": ["manual", "llm_assisted", "llm_assisted_reviewed"]},
-        "sources_consulted": {"type": "array", "items": {"type": "string"}},
-        "confidence": {"enum": ["high", "medium", "low"]},
-        "review_status": {"enum": ["unreviewed", "reviewed", "author_confirmed"]},
-        "reviewer_notes": {"type": ["string", "null"]}
+        "extracted_on": {
+          "type": "string",
+          "format": "date"
+        },
+        "extraction_method": {
+          "enum": [
+            "manual",
+            "llm_assisted",
+            "llm_assisted_reviewed"
+          ]
+        },
+        "sources_consulted": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ]
+        },
+        "review_status": {
+          "enum": [
+            "unreviewed",
+            "reviewed",
+            "author_confirmed"
+          ]
+        },
+        "reviewer_notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     }
   },
   "$defs": {
-    "evaluation_target": {"enum": ["instrument_control", "code_generation", "computer_use", "question_answering", "perception", "protocol_planning", "data_analysis", "simulation_control", "safety"]},
-    "execution_mode_or_null": {"enum": ["physical_instrument", "digital_twin", "simulator", "execution_trace", "static_code_eval", "static_text", "hybrid", null]},
+    "evaluation_target": {
+      "enum": [
+        "instrument_control",
+        "code_generation",
+        "computer_use",
+        "question_answering",
+        "perception",
+        "protocol_planning",
+        "data_analysis",
+        "simulation_control",
+        "safety"
+      ]
+    },
+    "execution_mode_or_null": {
+      "enum": [
+        "physical_instrument",
+        "digital_twin",
+        "simulator",
+        "execution_trace",
+        "static_code_eval",
+        "static_text",
+        "hybrid",
+        null
+      ]
+    },
     "instrument": {
       "type": "object",
-      "required": ["name", "modality"],
+      "required": [
+        "name",
+        "modality"
+      ],
       "additionalProperties": false,
       "properties": {
-        "name": {"type": "string"},
-        "modality": {"enum": ["microscopy", "spectroscopy", "diffraction", "synchrotron", "liquid_handling", "robotics", "generic_lab", "computation", "none"]},
-        "real_or_simulated": {"enum": ["real", "digital_twin", "simulated", "dataset", "none", null]}
+        "name": {
+          "type": "string"
+        },
+        "modality": {
+          "enum": [
+            "microscopy",
+            "spectroscopy",
+            "diffraction",
+            "synchrotron",
+            "liquid_handling",
+            "robotics",
+            "generic_lab",
+            "computation",
+            "none"
+          ]
+        },
+        "real_or_simulated": {
+          "enum": [
+            "real",
+            "digital_twin",
+            "simulated",
+            "dataset",
+            "none",
+            null
+          ]
+        }
       }
     }
   }

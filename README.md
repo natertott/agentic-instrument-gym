@@ -13,7 +13,7 @@ what it was pointed at, and how the evidence was generated — rather than a sin
 | Path | Contents |
 |---|---|
 | `schema/` | The execution-level evidence schema: `benchmark_card.schema.json` (one record per benchmark), `execution_record.schema.json` (one row per agent run), `vocab.yaml` (every controlled vocabulary, with glosses), `SCHEMA.md` (field-by-field rationale) |
-| `data/benchmarks/` | One YAML card per benchmark, system, framework or survey (96 after the first ingest and discovery sweep; 31 are identity-level stubs marked `confidence: low`) |
+| `data/benchmarks/` | One YAML card per benchmark, system, framework or survey (96 after the first ingest and discovery sweep). Each card carries `inclusion: core` or `inclusion: reference` |
 | `data/executions/` | The transfer dataset: per-run rows re-encoded from released benchmark logs (1,896 rows so far: AFMBench 1,200 trials, X-ray microscopy agent benchmarks 660 runs) |
 | `data/raw/` | Verbatim extraction batches, released run logs, and their provenance notes |
 | `data/candidates.yaml` | Works examined in the discovery sweep and not given a card (adjacent or excluded), with the reason |
@@ -33,6 +33,18 @@ python -m pytest -q
 ```
 
 Open `site/index.html` through any static server (or the standalone file directly) to browse the atlas.
+
+## Core set vs reference
+
+Analysis runs on the **core set**: cards that are benchmarks in the strict sense, with a reported task set, a named
+metric and verified extraction (29 of 96 today). Everything else stays in the repository with its extracted data intact
+but is held as **reference**: agent and platform papers whose evaluation is a demonstration, metric frameworks and
+surveys with no task set, and discovery-sweep stubs awaiting full extraction. Reference cards are excluded from
+coverage, distance and gap analysis, and every card records why in `inclusion_reason`.
+
+`scripts/set_inclusion.py` applies the rule and never overwrites a reason beginning `manual:`, so hand decisions stick.
+The tooling defaults to the core set (`python -m aig report`, `python -m aig matrix`); pass `--scope reference` or
+`--scope all` to widen it. The atlas has the same switch in its filter rail, and every view respects it.
 
 ## The schema in one paragraph
 

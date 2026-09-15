@@ -1,5 +1,7 @@
 id: trust_irt
 record_type: framework
+inclusion: reference
+inclusion_reason: 'record_type is framework: evaluation is not a reusable task set with a scoring rule'
 name: Can We Trust Item Response Theory for AI Evaluation?
 short_name: Trust IRT for AI eval
 year: 2026

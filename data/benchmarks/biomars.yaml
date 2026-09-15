@@ -1,5 +1,7 @@
 id: biomars
 record_type: benchmark
+inclusion: reference
+inclusion_reason: unverified discovery-sweep stub; promote to core after full extraction
 name: 'BioMARS: A Multi-Agent Robotic System for Autonomous Biological Experiments'
 short_name: BioMARS
 year: 2025

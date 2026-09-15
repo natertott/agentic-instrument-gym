@@ -1,5 +1,7 @@
 id: agent_generalizability_survey
 record_type: survey
+inclusion: reference
+inclusion_reason: 'record_type is survey: evaluation is not a reusable task set with a scoring rule'
 name: 'Generalizability of Large Language Model-Based Agents: A Comprehensive Survey'
 short_name: Agent generalizability survey
 year: 2026

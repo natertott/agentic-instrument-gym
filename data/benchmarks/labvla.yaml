@@ -1,5 +1,7 @@
 id: labvla
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: 'LabVLA: Grounding Vision-Language-Action Models in Scientific Laboratories'
 short_name: LabVLA
 year: 2026

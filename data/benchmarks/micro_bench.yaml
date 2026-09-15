@@ -1,5 +1,7 @@
 id: micro_bench
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'µ-Bench (Micro-Bench): A Vision-Language Benchmark for Microscopy Understanding'
 short_name: µ-Bench
 year: 2024

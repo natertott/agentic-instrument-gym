@@ -1,5 +1,7 @@
 id: ai_xray_scientist
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: An agentic artificially intelligent X-ray scientist
 short_name: AI X-ray Scientist
 year: 2026

@@ -1,5 +1,7 @@
 id: starwhisper_telescope
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: 'StarWhisper Telescope: An AI framework for automating end-to-end astronomical observations'
 short_name: StarWhisper Telescope
 year: 2024

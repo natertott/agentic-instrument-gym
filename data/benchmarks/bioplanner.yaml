@@ -1,5 +1,7 @@
 id: bioplanner
 record_type: benchmark
+inclusion: reference
+inclusion_reason: no task count reported, so size and coverage cannot be compared
 name: 'BioPlanner: Automatic Evaluation of LLMs on Protocol Planning in Biology'
 short_name: BioPlanner
 year: 2023

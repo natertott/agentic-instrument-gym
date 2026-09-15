@@ -1,5 +1,7 @@
 id: microscopygpt
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: 'MicroscopyGPT: Generating Atomic-Structure Captions from Microscopy Images of 2D Materials with Vision-Language
   Transformers'
 short_name: MicroscopyGPT

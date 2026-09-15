@@ -1,5 +1,7 @@
 id: scienceworld
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'ScienceWorld: Is your Agent Smarter than a 5th Grader?'
 short_name: ScienceWorld
 year: 2022

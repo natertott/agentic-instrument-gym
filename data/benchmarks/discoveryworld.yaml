@@ -1,5 +1,7 @@
 id: discoveryworld
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'DiscoveryWorld: A Virtual Environment for Developing and Evaluating Automated Scientific Discovery Agents'
 short_name: DiscoveryWorld
 year: 2024

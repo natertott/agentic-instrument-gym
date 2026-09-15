@@ -1,5 +1,7 @@
 id: atomic_microscopy
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: 'ATOMIC — Zero-shot Autonomous Microscopy for Scalable and Intelligent Characterization of 2D Materials (also:
   Embodied Intelligence Unlocks Autonomous Microscopy, bioRxiv 2025)'
 short_name: ATOMIC

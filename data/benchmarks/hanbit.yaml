@@ -1,5 +1,7 @@
 id: hanbit
 record_type: benchmark
+inclusion: reference
+inclusion_reason: unverified discovery-sweep stub; promote to core after full extraction
 name: Virtual commissioning of the Korea Light Source Hard X-ray Nanoprobe beamline with multilingual natural language
   control (HANBIT)
 short_name: HANBIT

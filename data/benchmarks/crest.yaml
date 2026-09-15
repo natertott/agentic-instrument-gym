@@ -1,5 +1,7 @@
 id: crest
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: 'CRESt: Copilot for Real-world Experimental Scientists (multimodal robotic platform for multi-element electrocatalyst
   discovery)'
 short_name: CRESt

@@ -1,5 +1,7 @@
 id: bioprobench
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'BioProBench: A Corpus and Benchmark for Biological Protocol Reasoning in Autonomous Science (earlier title:
   Comprehensive Dataset and Benchmark in Biological Protocol Understanding and Reasoning)'
 short_name: BioProBench

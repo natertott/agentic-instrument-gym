@@ -1,5 +1,7 @@
 id: ai_native_biofoundry
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: 'An AI-Native Biofoundry for Autonomous Enzyme Engineering: Integrating Active Learning with Automated Experimentation'
 short_name: AI-Native Biofoundry
 year: 2026

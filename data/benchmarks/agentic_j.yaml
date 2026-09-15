@@ -1,5 +1,7 @@
 id: agentic_j
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: 'Agentic-J: An AI Agent for Biological Microscopy Image Analysis'
 short_name: Agentic-J
 year: 2026

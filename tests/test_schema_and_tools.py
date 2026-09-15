@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
-from aig.records import load_cards, load_executions, validate_cards, validate_executions, load_vocab  # noqa: E402
+from aig.records import load_cards, load_executions, select, validate_cards, validate_executions, load_vocab  # noqa: E402
 from aig.features import FeatureEncoder  # noqa: E402
 from aig.compare import distance_matrix, axis_coverage  # noqa: E402
 
@@ -68,3 +68,29 @@ def test_axis_coverage_shape():
 def test_cli_validate_runs():
     r = subprocess.run([sys.executable, "-m", "aig", "validate"], cwd=ROOT, capture_output=True, text=True)
     assert r.returncode == 0, r.stdout + r.stderr
+
+
+def test_every_card_has_an_inclusion_decision_with_a_reason():
+    for c in load_cards():
+        assert c.get("inclusion") in ("core", "reference"), c["id"]
+        assert c.get("inclusion_reason"), c["id"]
+
+
+def test_core_set_is_benchmarks_only_and_non_empty():
+    core = select(load_cards(), "core")
+    assert core, "core analysis set is empty"
+    for c in core:
+        assert c["record_type"] == "benchmark", c["id"]
+        assert c["benchmark_features"]["n_tasks"] is not None, c["id"]
+        assert c["provenance"]["confidence"] != "low", c["id"]
+
+
+def test_scopes_partition_the_cards():
+    cards = load_cards()
+    assert len(select(cards, "core")) + len(select(cards, "reference")) == len(cards) == len(select(cards, "all"))
+
+
+def test_axis_coverage_defaults_to_core():
+    cards = load_cards()
+    assert set(axis_coverage(cards)["table"]) == {c["id"] for c in select(cards, "core")}
+    assert len(axis_coverage(cards, scope="all")["table"]) == len(cards)

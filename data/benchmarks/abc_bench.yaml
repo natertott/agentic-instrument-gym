@@ -1,5 +1,7 @@
 id: abc_bench
 record_type: benchmark
+inclusion: reference
+inclusion_reason: unverified discovery-sweep stub; promote to core after full extraction
 name: 'ABC-Bench: An Agentic Bio-Capabilities Benchmark for Biosecurity'
 short_name: ABC-Bench
 year: 2026

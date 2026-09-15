@@ -1,5 +1,7 @@
 id: scienceboard
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'ScienceBoard: Evaluating Multimodal Autonomous Agents in Realistic Scientific Workflows'
 short_name: ScienceBoard
 year: 2025

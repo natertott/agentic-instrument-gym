@@ -1,5 +1,7 @@
 id: k_agents
 record_type: benchmark
+inclusion: reference
+inclusion_reason: unverified discovery-sweep stub; promote to core after full extraction
 name: Agents for self-driving laboratories applied to quantum computing (k-agents) / Automating quantum computing
   laboratory experiments with an agent-based AI framework
 short_name: k-agents

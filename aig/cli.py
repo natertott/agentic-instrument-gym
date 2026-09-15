@@ -9,7 +9,7 @@ from pathlib import Path
 from . import ROOT
 from .compare import axis_coverage, nearest_neighbours, vocabulary_usage
 from .export import build_site_data, inline_into_html
-from .records import load_cards, load_executions, validate_cards, validate_executions
+from .records import load_cards, load_executions, select, validate_cards, validate_executions
 
 
 def cmd_validate(_: argparse.Namespace) -> int:
@@ -22,11 +22,14 @@ def cmd_validate(_: argparse.Namespace) -> int:
     return 0 if rep.ok and rep2.ok else 1
 
 
-def cmd_report(_: argparse.Namespace) -> int:
+def cmd_report(args: argparse.Namespace) -> int:
     cards = load_cards()
-    bench = [c for c in cards if c.get("record_type") in ("benchmark", "system")]
-    print(f"{len(cards)} cards ({len(bench)} benchmarks/systems)\n")
-    cov = axis_coverage(cards)
+    scope = getattr(args, "scope", "core")
+    bench = select(cards, scope)
+    n_core = len(select(cards, "core"))
+    print(f"{len(cards)} cards; {n_core} in the core analysis set, {len(cards) - n_core} held as reference")
+    print(f"reporting on scope={scope} ({len(bench)} cards)\n")
+    cov = axis_coverage(cards, scope)
     print("Axis coverage (number of benchmarks covering each axis):")
     for a in cov["axes"]:
         bar = "#" * a["n_covering"]
@@ -56,7 +59,7 @@ def cmd_export(args: argparse.Namespace) -> int:
 
 def cmd_matrix(args: argparse.Namespace) -> int:
     from .compare import distance_matrix
-    cards = [c for c in load_cards() if c.get("record_type") in ("benchmark", "system")]
+    cards = select(load_cards(), args.scope)
     ids, mat = distance_matrix(cards, group=args.group)
     if args.format == "json":
         json.dump({"ids": ids, "matrix": mat}, sys.stdout, indent=1)
@@ -72,12 +75,15 @@ def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(prog="aig", description="agentic-instrument-gym tooling")
     sub = p.add_subparsers(dest="cmd", required=True)
     sub.add_parser("validate", help="validate all cards and execution records against the schemas").set_defaults(fn=cmd_validate)
-    sub.add_parser("report", help="print axis coverage, gaps, nearest neighbours").set_defaults(fn=cmd_report)
+    rp = sub.add_parser("report", help="print axis coverage, gaps, nearest neighbours")
+    rp.add_argument("--scope", choices=["core", "reference", "all"], default="core", help="which cards to analyse (default: the core benchmark set)")
+    rp.set_defaults(fn=cmd_report)
     e = sub.add_parser("export", help="write site/data/*.json for the explorer")
     e.add_argument("--standalone", action="store_true", help="also write site/index.standalone.html with data inlined")
     e.set_defaults(fn=cmd_export)
     m = sub.add_parser("matrix", help="print the Gower distance matrix")
     m.add_argument("--group", choices=["benchmark", "task", "sample_environment", "agent"], default=None)
+    m.add_argument("--scope", choices=["core", "reference", "all"], default="core")
     m.add_argument("--format", choices=["text", "json"], default="text")
     m.set_defaults(fn=cmd_matrix)
     args = p.parse_args(argv)

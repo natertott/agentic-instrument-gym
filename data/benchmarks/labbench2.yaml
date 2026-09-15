@@ -1,5 +1,7 @@
 id: labbench2
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'LABBench2: An Improved Benchmark for AI Systems Performing Biology Research'
 short_name: LABBench2
 year: 2026

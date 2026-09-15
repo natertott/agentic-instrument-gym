@@ -1,5 +1,7 @@
 id: spm_bench
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'SPM-Bench: Benchmarking Large Language Models for Scanning Probe Microscopy'
 short_name: SPM-Bench
 year: 2026

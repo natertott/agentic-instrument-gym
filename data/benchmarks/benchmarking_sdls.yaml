@@ -1,5 +1,7 @@
 id: benchmarking_sdls
 record_type: framework
+inclusion: reference
+inclusion_reason: 'record_type is framework: evaluation is not a reusable task set with a scoring rule'
 name: Benchmarking self-driving labs
 short_name: AF/EF SDL benchmarking
 year: 2026

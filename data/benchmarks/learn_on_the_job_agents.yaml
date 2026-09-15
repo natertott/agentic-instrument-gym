@@ -1,5 +1,7 @@
 id: learn_on_the_job_agents
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: Operating advanced scientific instruments with AI agents that learn on the job
 short_name: Learn-on-the-job agents
 year: 2025

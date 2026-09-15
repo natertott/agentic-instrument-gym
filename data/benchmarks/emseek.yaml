@@ -1,5 +1,7 @@
 id: emseek
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: Bridging electron microscopy and materials analysis with an autonomous agentic platform (EMSeek)
 short_name: EMSeek
 year: 2026

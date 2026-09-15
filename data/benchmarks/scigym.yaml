@@ -1,5 +1,7 @@
 id: scigym
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'SciGym: Measuring Scientific Capabilities of Language Models with a Systems Biology Dry Lab'
 short_name: SciGym
 year: 2025

@@ -1,5 +1,7 @@
 id: organa
 record_type: benchmark
+inclusion: reference
+inclusion_reason: unverified discovery-sweep stub; promote to core after full extraction
 name: 'ORGANA: A Robotic Assistant for Automated Chemistry Experimentation and Characterization'
 short_name: ORGANA
 year: 2024

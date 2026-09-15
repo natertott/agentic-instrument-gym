@@ -1,5 +1,7 @@
 id: labosbench
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'LabOSBench: Benchmarking Computer Use Agents for Scientific Instrument Control'
 short_name: LabOSBench
 year: 2026

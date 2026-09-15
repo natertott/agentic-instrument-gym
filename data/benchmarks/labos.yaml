@@ -1,5 +1,7 @@
 id: labos
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: 'LabOS: The AI-XR Co-Scientist That Sees and Works With Humans'
 short_name: LabOS
 year: 2025

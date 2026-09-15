@@ -1,5 +1,7 @@
 id: troubleshootingbench
 record_type: benchmark
+inclusion: reference
+inclusion_reason: no task count reported, so size and coverage cannot be compared
 name: TroubleshootingBench (OpenAI internal wet-lab troubleshooting evaluation)
 short_name: TroubleshootingBench
 year: 2025

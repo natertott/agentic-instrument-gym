@@ -1,5 +1,7 @@
 id: llm_sns_spm_2024
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: 'Leveraging Large Language Models and Social Media for Automation in Scanning Probe Microscopy (journal title:
   Leveraging large language model and social network service for automation in scanning probe microscopy)'
 short_name: LLM + SNS SPM automation

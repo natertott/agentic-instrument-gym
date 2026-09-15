@@ -1,5 +1,7 @@
 id: schema_bound_mcp_instrument_control
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: Schema-Bound LLM Control of Scientific Instrumentation through Model Context Protocol Skills
 short_name: Schema-bound MCP control
 year: 2026

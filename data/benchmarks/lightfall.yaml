@@ -1,5 +1,7 @@
 id: lightfall
 record_type: system
+inclusion: reference
+inclusion_reason: 'record_type is system: evaluation is not a reusable task set with a scoring rule'
 name: 'Lightfall: An API-first, LLM-addressable control platform for synchrotron beamlines'
 short_name: Lightfall
 year: 2026

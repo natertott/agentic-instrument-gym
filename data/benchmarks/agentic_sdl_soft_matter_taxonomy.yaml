@@ -1,5 +1,7 @@
 id: agentic_sdl_soft_matter_taxonomy
 record_type: survey
+inclusion: reference
+inclusion_reason: 'record_type is survey: evaluation is not a reusable task set with a scoring rule'
 name: 'Agentic AI for Self-Driving Laboratories in Soft Matter: Taxonomy, Benchmarks, and Open Challenges'
 short_name: Agentic SDL taxonomy
 year: 2026

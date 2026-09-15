@@ -36,6 +36,20 @@ def load_cards(directory: Path | None = None) -> list[dict[str, Any]]:
     return cards
 
 
+SCOPES = ("core", "reference", "all")
+
+
+def in_scope(card: dict[str, Any], scope: str = "core") -> bool:
+    """Whether a card belongs to the given analysis scope (see scripts/set_inclusion.py)."""
+    if scope == "all":
+        return True
+    return card.get("inclusion", "reference") == scope
+
+
+def select(cards: list[dict[str, Any]], scope: str = "core") -> list[dict[str, Any]]:
+    return [c for c in cards if in_scope(c, scope)]
+
+
 def load_executions(directory: Path | None = None) -> list[dict[str, Any]]:
     directory = directory or DATA_DIR / "executions"
     rows: list[dict[str, Any]] = []

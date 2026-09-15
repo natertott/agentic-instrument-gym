@@ -1,5 +1,7 @@
 id: agentabstain
 record_type: benchmark
+inclusion: core
+inclusion_reason: benchmark with a reported task count, a named metric and verified extraction
 name: 'AgentAbstain: Do LLM Agents Know When Not to Act?'
 short_name: AgentAbstain
 year: 2026

@@ -1,5 +1,7 @@
 id: thinking_microscopes
 record_type: survey
+inclusion: reference
+inclusion_reason: 'record_type is survey: evaluation is not a reusable task set with a scoring rule'
 name: 'Thinking microscopes: agentic AI and the future of electron microscopy'
 short_name: Thinking Microscopes
 year: 2026
