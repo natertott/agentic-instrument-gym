@@ -1,0 +1,96 @@
+id: clairify
+record_type: system
+name: 'CLAIRify: Errors are Useful Prompts - Instruction Guided Task Programming with Verifier-Assisted Iterative
+  Prompting / Large language models for chemistry robotics'
+short_name: CLAIRify
+year: 2023
+venue: null
+authors_short: null
+arxiv: '2303.14100'
+doi: 10.1007/s10514-023-10136-2
+url: https://dl.acm.org/doi/abs/10.1007/s10514-023-10136-2
+code_url: https://github.com/ac-rad/xdl-generation
+data_url: null
+license: null
+status: null
+summary: Verifier-assisted iterative prompting so LLMs emit syntactically valid XDL robot chemistry plans; executed
+  solubility and recrystallization experiments on a real robot; Autonomous Robots 2023. LLM plan generation for
+  physical robot chemistry with verification and real-robot execution (quantitative XDL validity rates in paper,
+  not in snippets).
+benchmark_features:
+  evaluation_target:
+  - instrument_control
+  execution_mode: hybrid
+  instruments:
+  - name: robot arm
+    modality: robotics
+    real_or_simulated: null
+  - name: chemistry glassware
+    modality: generic_lab
+    real_or_simulated: null
+  - name: Chemputer-style XDL executor
+    modality: generic_lab
+    real_or_simulated: null
+  scientific_domains: []
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: null
+  task_source: null
+  sampling_strategy: null
+  metric_types: []
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: null
+  has_abstention_eval: null
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results: []
+  open_source: true
+task_features:
+  workflow_depth: null
+  perceptual_demand: null
+  reasoning_demand: null
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: null
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: null
+  signal_quality_variation: null
+  novelty_control: null
+  novelty_levels_tested: []
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: null
+  deterministic_execution: null
+transfer_relevant_findings: []
+limitations: []
+related: []
+notes: 'STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are
+  recorded. Verified from: search snippet only. Needs full extraction.'
+provenance:
+  extracted_on: '2026-09-15'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://dl.acm.org/doi/abs/10.1007/s10514-023-10136-2
+  - https://github.com/ac-rad/xdl-generation
+  confidence: low
+  review_status: unreviewed
+  reviewer_notes: Discovery-sweep stub; full four-group extraction pending.

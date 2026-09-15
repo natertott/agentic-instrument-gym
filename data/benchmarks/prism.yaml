@@ -1,0 +1,100 @@
+id: prism
+record_type: benchmark
+name: 'PRISM: Protocol Refinement through Intelligent Simulation Modeling'
+short_name: PRISM
+year: 2026
+venue: null
+authors_short: null
+arxiv: '2601.05356'
+doi: 10.1039/D6DD00004E
+url: https://github.com/ramanathanlab/PRISM
+code_url: https://github.com/ramanathanlab/PRISM
+data_url: null
+license: null
+status: null
+summary: Argonne multi-agent LLM protocol planning + generation with mandatory NVIDIA Omniverse digital-twin simulation
+  gate before execution on an OT-2 / PF400 / Azenta sealer lab; PCR validated physically, Cell Painting computationally;
+  seven LLMs compared; Digital Discovery 2026. Digital-twin-gated LLM protocol generation with cross-model comparison
+  and real robotic execution.
+benchmark_features:
+  evaluation_target:
+  - instrument_control
+  execution_mode: hybrid
+  instruments:
+  - name: Opentrons OT-2
+    modality: liquid_handling
+    real_or_simulated: null
+  - name: PF400 arm
+    modality: robotics
+    real_or_simulated: null
+  - name: Azenta plate sealer/peeler
+    modality: liquid_handling
+    real_or_simulated: null
+  - name: qPCR
+    modality: generic_lab
+    real_or_simulated: null
+  scientific_domains: []
+  n_tasks: 2
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: null
+  task_source: null
+  sampling_strategy: null
+  metric_types: []
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: null
+  has_abstention_eval: null
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results:
+  - Compares GPT-5, GPT-4o, Claude Opus/Sonnet, Gemini Pro/Flash/Flash-Lite by correction iterations needed (numbers
+    not in README)
+  open_source: true
+task_features:
+  workflow_depth: null
+  perceptual_demand: null
+  reasoning_demand: null
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: null
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: null
+  signal_quality_variation: null
+  novelty_control: null
+  novelty_levels_tested: []
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: null
+  deterministic_execution: null
+transfer_relevant_findings: []
+limitations: []
+related: []
+notes: 'STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are
+  recorded. Verified from: https://github.com/ramanathanlab/PRISM. Needs full extraction.'
+provenance:
+  extracted_on: '2026-09-15'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://github.com/ramanathanlab/PRISM
+  - https://github.com/ramanathanlab/PRISM
+  confidence: low
+  review_status: unreviewed
+  reviewer_notes: Discovery-sweep stub; full four-group extraction pending.

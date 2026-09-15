@@ -359,6 +359,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
     {key:'workflow_depth',label:'Workflow depth',path:'task_features.workflow_depth',order:Object.keys(V.workflow_depth.values)},
     {key:'perceptual_demand',label:'Perceptual demand',path:'task_features.perceptual_demand',order:Object.keys(V.perceptual_demand.values)},
     {key:'safety_criticality',label:'Safety criticality',path:'task_features.safety_criticality',order:Object.keys(V.safety_criticality.values)},
+    {key:'confidence',label:'Card confidence',path:'provenance.confidence',order:['high','medium','low']},
     {key:'year',label:'Year',path:'year'},
   ];
   const sel={}; FACETS.forEach(f=>sel[f.key]=new Set()); let q='';
@@ -388,6 +389,7 @@ footer{margin-top:3rem;padding-top:1rem;border-top:1px solid var(--line);color:v
     const em=get(c,'benchmark_features.execution_mode');
     const out=[];
     if(c.record_type!=='benchmark') out.push(`<span class="chip rt">${c.record_type}</span>`);
+    if((c.provenance||{}).confidence==='low') out.push(`<span class="chip rt" title="Identity-level stub from the discovery sweep; full extraction pending">stub</span>`);
     if(em) out.push(`<span class="chip em"><span class="dot" style="background:var(--em-${em})"></span>${LABEL[em]||words(em)}</span>`);
     c._derived.modalities.forEach(m=>out.push(`<span class="chip">${words(m)}</span>`));
     (get(c,'benchmark_features.evaluation_target')||[]).slice(0,3).forEach(t=>out.push(`<span class="chip">${words(t)}</span>`));

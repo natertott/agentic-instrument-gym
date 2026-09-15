@@ -1,0 +1,90 @@
+id: abc_bench
+record_type: benchmark
+name: 'ABC-Bench: An Agentic Bio-Capabilities Benchmark for Biosecurity'
+short_name: ABC-Bench
+year: 2026
+venue: null
+authors_short: null
+arxiv: '2606.11150'
+doi: null
+url: https://arxiv.org/abs/2606.11150
+code_url: null
+data_url: null
+license: null
+status: null
+summary: Agentic tasks incl. writing code to operate liquid-handling robots (Gibson assembly on Opentrons), DNA
+  fragment design and synthesis-screening evasion; eight frontier models vs 175 h of expert human baselines; cited
+  in model cards. Quantitative agentic evaluation with a liquid-handling-robot control task and wet-lab confirmation
+  (o4-mini-high scripts assembled DNA correctly).
+benchmark_features:
+  evaluation_target:
+  - instrument_control
+  execution_mode: hybrid
+  instruments:
+  - name: Opentrons liquid handler
+    modality: liquid_handling
+    real_or_simulated: null
+  scientific_domains: []
+  n_tasks: 3
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: null
+  task_source: null
+  sampling_strategy: null
+  metric_types: []
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: null
+  has_abstention_eval: null
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results:
+  - Agents match or exceed expert baselines; o4-mini-high Opentrons scripts assembled DNA with expected sequences
+    (search snippet)
+  open_source: null
+task_features:
+  workflow_depth: null
+  perceptual_demand: null
+  reasoning_demand: null
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: null
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: null
+  signal_quality_variation: null
+  novelty_control: null
+  novelty_levels_tested: []
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: null
+  deterministic_execution: null
+transfer_relevant_findings: []
+limitations: []
+related: []
+notes: 'STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are
+  recorded. Verified from: search snippet only. Needs full extraction.'
+provenance:
+  extracted_on: '2026-09-15'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2606.11150
+  confidence: low
+  review_status: unreviewed
+  reviewer_notes: Discovery-sweep stub; full four-group extraction pending.

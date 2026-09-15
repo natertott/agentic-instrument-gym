@@ -1,0 +1,99 @@
+id: autobio
+record_type: benchmark
+name: 'AutoBio: A Simulation and Benchmark for Robotic Automation in Digital Biology Laboratory'
+short_name: AutoBio
+year: 2025
+venue: null
+authors_short: null
+arxiv: '2505.14030'
+doi: null
+url: https://arxiv.org/abs/2505.14030
+code_url: https://github.com/autobio-bench/AutoBio
+data_url: null
+license: null
+status: null
+summary: MuJoCo-based simulator + benchmark of biology-lab manipulation tasks (pipetting, centrifuge tubes, thermal
+  cycler lid) for language-conditioned VLA policies. Faithful simulator of lab instruments with standardized quantitative
+  evaluation of language-guided robot policies (pi0, RDT) on protocol steps.
+benchmark_features:
+  evaluation_target:
+  - simulation_control
+  execution_mode: simulator
+  instruments:
+  - name: pipette
+    modality: liquid_handling
+    real_or_simulated: simulated
+  - name: centrifuge
+    modality: generic_lab
+    real_or_simulated: simulated
+  - name: thermal cycler
+    modality: generic_lab
+    real_or_simulated: simulated
+  - name: thermal mixer
+    modality: generic_lab
+    real_or_simulated: simulated
+  scientific_domains: []
+  n_tasks: 9
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: null
+  task_source: null
+  sampling_strategy: null
+  metric_types: []
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: null
+  has_abstention_eval: null
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results:
+  - README lists 9 tasks across 3 difficulty levels; baselines pi0 and RDT show large gaps in precision manipulation
+    (no numbers in README)
+  open_source: true
+task_features:
+  workflow_depth: null
+  perceptual_demand: null
+  reasoning_demand: null
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: null
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: null
+  signal_quality_variation: null
+  novelty_control: null
+  novelty_levels_tested: []
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: null
+  deterministic_execution: null
+transfer_relevant_findings: []
+limitations: []
+related: []
+notes: 'STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are
+  recorded. Verified from: https://github.com/autobio-bench/AutoBio. Needs full extraction.'
+provenance:
+  extracted_on: '2026-09-15'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2505.14030
+  - https://github.com/autobio-bench/AutoBio
+  confidence: low
+  review_status: unreviewed
+  reviewer_notes: Discovery-sweep stub; full four-group extraction pending.

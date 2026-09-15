@@ -1,0 +1,1262 @@
+# Discovery sweep: benchmarks / quantitative evaluations of LLM/VLM agents on physical scientific instruments,
+# lab automation, and their simulators. 2023-01..2026-09. Written incrementally.
+- name: "AutoBio: A Simulation and Benchmark for Robotic Automation in Digital Biology Laboratory"
+  short_name: AutoBio
+  year: 2025
+  arxiv: "2505.14030"
+  doi: null
+  url: https://arxiv.org/abs/2505.14030
+  code_url: https://github.com/autobio-bench/AutoBio
+  one_line: MuJoCo-based simulator + benchmark of biology-lab manipulation tasks (pipetting, centrifuge tubes, thermal cycler lid) for language-conditioned VLA policies.
+  relevance: core
+  why: Faithful simulator of lab instruments with standardized quantitative evaluation of language-guided robot policies (pi0, RDT) on protocol steps.
+  instruments: [pipette, centrifuge, thermal cycler, thermal mixer]
+  execution_mode: simulator
+  n_tasks: 9
+  headline: "README lists 9 tasks across 3 difficulty levels; baselines pi0 and RDT show large gaps in precision manipulation (no numbers in README)"
+  verified_from: https://github.com/autobio-bench/AutoBio
+- name: "LabUtopia: High-Fidelity Simulation and Hierarchical Benchmark for Scientific Embodied Agents"
+  short_name: LabUtopia
+  year: 2025
+  arxiv: "2505.22634"
+  doi: null
+  url: https://arxiv.org/abs/2505.22634
+  code_url: https://github.com/Rui-li023/LabUtopia
+  one_line: Isaac Sim 5.1 lab simulator (LabSim) + procedural scene generator (LabScene) + 5-level hierarchical benchmark (LabBench) of 30 tasks, 200+ instrument assets; NeurIPS 2025.
+  relevance: core
+  why: Simulator of chemistry-lab instruments with a graded benchmark from atomic actions to long-horizon mobile manipulation, evaluated with diffusion/ACT policies.
+  instruments: [beakers, centrifuge, heater/stirrer, drawers, doors, generic chemistry-lab instruments]
+  execution_mode: simulator
+  n_tasks: 30
+  headline: "30 tasks, >200 scene/instrument assets, 5 complexity levels (NeurIPS 2025)"
+  verified_from: https://github.com/Rui-li023/LabUtopia
+- name: "Chemistry3D: Robotic Interaction Benchmark for Chemistry Experiments"
+  short_name: Chemistry3D
+  year: 2024
+  arxiv: "2406.08160"
+  doi: null
+  url: https://arxiv.org/abs/2406.08160
+  code_url: https://github.com/huangyan28/Chemistry3D
+  one_line: Isaac Sim/Omniverse toolkit simulating organic/inorganic chemistry experiments (pick/place/pour/stir/shake) with real-time temperature/colour/pH, RL tasks, transparent-object detection and an LLM multi-agent (mas.py) embodied-planning module.
+  relevance: core
+  why: Chemistry-lab simulator with an LLM agent planning component and task suite; README exposes LLM agent hooks but no quantitative agent results.
+  instruments: [beakers, test tubes, chemistry glassware, robot arm]
+  execution_mode: simulator
+  n_tasks: null
+  headline: null
+  verified_from: https://github.com/huangyan28/Chemistry3D
+- name: "ORGANA: A Robotic Assistant for Automated Chemistry Experimentation and Characterization"
+  short_name: ORGANA
+  year: 2024
+  arxiv: "2401.06949"
+  doi: "10.1016/j.matt.2024.10.015"
+  url: https://www.cell.com/matter/fulltext/S2590-2385(24)00542-3
+  code_url: https://github.com/ac-rad/organa
+  one_line: LLM-driven assistive robot chemist (goal derivation, disambiguation, planning with visual feedback) executing solubility, pH, recrystallization and electrochemistry experiments; Matter 2024.
+  relevance: core
+  why: LLM agent physically controlling robot + lab devices with quantitative user-study evaluation and a 19-step parallel electrochemistry plan.
+  instruments: [pH meter, potentiostat/electrochemistry cell, robot arm, lab glassware]
+  execution_mode: physical_instrument
+  n_tasks: 4
+  headline: "Users saved 80.3% of their time; frustration and physical demand reduced >50% (search snippet)"
+  verified_from: search snippet only
+- name: "CRESt: Copilot for Real-world Experimental Scientists (multimodal robotic platform for multi-element electrocatalyst discovery)"
+  short_name: CRESt
+  year: 2025
+  arxiv: null
+  doi: "10.1038/s41586-025-09640-5"
+  url: https://www.nature.com/articles/s41586-025-09640-5
+  code_url: null
+  one_line: MIT (Ju Li) multimodal LLM copilot combining literature, compositions, microstructure images, knowledge-assisted Bayesian optimisation and robotic synthesis/testing for catalyst discovery; Nature 2025.
+  relevance: core
+  why: LLM agent orchestrating robotic hardware in a closed loop with reported discovery outcomes, though evaluation is outcome-based (record catalyst) rather than a benchmark.
+  instruments: [liquid-handling robot, robotic arm, fuel-cell test station, SEM/microstructure imaging]
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: "Eight-element catalyst with 9.3x performance per dollar (search snippet)"
+  verified_from: search snippet only
+- name: "Autonomous chemical research with large language models (Coscientist)"
+  short_name: Coscientist
+  year: 2023
+  arxiv: null
+  doi: "10.1038/s41586-023-06792-0"
+  url: https://www.nature.com/articles/s41586-023-06792-0
+  code_url: https://github.com/gomesgroup/coscientist
+  one_line: GPT-4-driven agent with web/documentation search, code execution and Opentrons OT-2 / heater-shaker control; six demonstration tasks incl. Pd cross-coupling optimisation; Nature 2023.
+  relevance: core
+  why: Foundational LLM-agent-on-liquid-handler paper with quantitative sub-evaluations (documentation-grounded API use, reaction optimisation vs baselines).
+  instruments: [Opentrons OT-2 liquid handler, heater-shaker, UV-Vis plate reader]
+  execution_mode: physical_instrument
+  n_tasks: 6
+  headline: "Six tasks; successful Suzuki/Sonogashira optimisation on OT-2 (search snippet)"
+  verified_from: search snippet only
+- name: "El Agente: An Autonomous Agent for Quantum Chemistry"
+  short_name: El Agente
+  year: 2025
+  arxiv: "2505.02484"
+  doi: "10.1016/j.matt.2025.102263"
+  url: https://arxiv.org/abs/2505.02484
+  code_url: null
+  one_line: Hierarchical multi-agent LLM system generating and executing quantum-chemistry workflows; benchmarked on six university course exercises and two case studies; Matter 2025.
+  relevance: adjacent
+  why: Computational-chemistry (software) agent, no physical instrument; included as a quantitative scientific-agent baseline.
+  instruments: []
+  execution_mode: static_code_eval
+  n_tasks: 8
+  headline: ">87% average task success (search snippet)"
+  verified_from: search snippet only
+- name: "A Multiagent-Driven Robotic AI Chemist Enabling Autonomous Chemical Research On Demand (ChemAgents)"
+  short_name: ChemAgents
+  year: 2025
+  arxiv: null
+  doi: "10.1021/jacs.4c17738"
+  url: https://pubs.acs.org/doi/10.1021/jacs.4c17738
+  code_url: null
+  one_line: On-board Llama-3.1-70B hierarchical multi-agent system (Task Manager + Literature Reader, Experiment Designer, Computation Performer, Robot Operator) driving a robotic chemistry lab; three task categories (make&measure, exploration&screening, literature+computation); JACS 2025.
+  relevance: core
+  why: LLM multi-agent physically operating an automated lab with a graded task suite.
+  instruments: [mobile robot chemist, synthesis stations, characterisation instruments]
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "Labimus: A Simulation and Benchmark for Humanoid Dexterous Manipulation in Chemical Laboratory"
+  short_name: Labimus
+  year: 2026
+  arxiv: "2606.31037"
+  doi: null
+  url: https://labimus.github.io/
+  code_url: null
+  one_line: Humanoid dexterous-manipulation benchmark in organic-chemistry lab with 30+ real-to-sim assets, particle powder physics, closed-loop instrument readouts (balance), 6 atomic ops + 7-step solid-weighing SOP and a precision-aware metric.
+  relevance: core
+  why: Simulator with instrument readouts and precision-aware evaluation of lab manipulation policies.
+  instruments: [analytical balance, spatula, vials, organic-chemistry workstation]
+  execution_mode: simulator
+  n_tasks: 7
+  headline: "6 atomic operations + 7-step weighing workflow; gap between task completion and experimentally valid precision (search snippet)"
+  verified_from: search snippet only
+- name: "Pipette: An Embodied Simulation Platform, Benchmark, and Data-Efficient Augmentation Framework for Wet-Lab Robotics"
+  short_name: Pipette
+  year: 2026
+  arxiv: "2606.12936"
+  doi: null
+  url: https://arxiv.org/abs/2606.12936
+  code_url: null
+  one_line: 11-task wet-lab embodied benchmark with 43 editable assets and sim augmentation; ACT 65.5%, SmolVLA 44.1->74.7%, pi0 40.4->46.5%.
+  relevance: skip
+  why: Already covered by a teammate (Pipette wet-lab sim); recorded here only for numbers seen in snippet.
+  instruments: [pipette, culture-ware, lab devices]
+  execution_mode: simulator
+  n_tasks: 11
+  headline: "SmolVLA 44.1% -> 74.7% with augmentation (search snippet)"
+  verified_from: search snippet only
+- name: "MATTERIX: toward a digital twin for robotics-assisted chemistry laboratory automation"
+  short_name: MATTERIX
+  year: 2026
+  arxiv: "2601.13232"
+  doi: "10.1038/s43588-025-00924-4"
+  url: https://www.nature.com/articles/s43588-025-00924-4
+  code_url: null
+  one_line: Multiscale GPU-accelerated (Isaac Sim) digital twin of a chemistry lab simulating manipulation, powder/liquid dynamics, device function, heat transfer and reaction kinetics; zero-shot sim-to-real for pouring and multi-step reactions; Nat. Comput. Sci. 2026.
+  relevance: adjacent
+  why: Digital twin infrastructure relevant to agent evaluation but no LLM-agent benchmark reported (~3% FPS overhead, sim-to-real transfer are the headline metrics).
+  instruments: [robot arm, chemistry glassware, hotplate/heating devices]
+  execution_mode: digital_twin
+  n_tasks: null
+  headline: "Chemical-intelligence layer adds ~3% FPS overhead; zero-shot sim-to-real (search snippet)"
+  verified_from: search snippet only
+- name: "RoboChemist: Long-Horizon and Safety-Compliant Robotic Chemical Experimentation"
+  short_name: RoboChemist
+  year: 2025
+  arxiv: "2509.08820"
+  doi: null
+  url: https://arxiv.org/abs/2509.08820
+  code_url: null
+  one_line: Dual-loop VLM (planner, visual prompt generator, compliance monitor) + VLA framework for long-horizon chemistry experiments with hazardous/deformable substances; CoRL 2025.
+  relevance: core
+  why: VLM agent supervising physical robotic chemistry with quantitative success and compliance metrics vs VLA baselines.
+  instruments: [robot arm, chemistry glassware, reagents]
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: "+23.57% average success rate and +0.298 compliance rate over SOTA VLA baselines (search snippet)"
+  verified_from: search snippet only
+- name: "Agentic self-driving microscopy benchmarks support qualification but do not necessarily generalize to unseen tasks (ZEISS Versa XRM)"
+  short_name: Zeiss-XRM-agent-benchmark
+  year: 2026
+  arxiv: "2608.05266"
+  doi: null
+  url: https://arxiv.org/abs/2608.05266
+  code_url: null
+  one_line: The 'Zeiss agentic microscopy benchmark' IS the Johnson & Abshire arXiv 2608.05266 paper (53 tests, 105 agent configs, 1,949 runs, ZEISS Versa 515/630/730 with ZEN NavX Python API); also a 2025 M&M abstract (doi 10.1093/mam/ozaf048.1092).
+  relevance: skip
+  why: Duplicate of teammate-covered Johnson & Abshire; noted to resolve the uncertainty in the task brief.
+  instruments: [ZEISS Versa X-ray microscope]
+  execution_mode: hybrid
+  n_tasks: 53
+  headline: "53 benchmark tests, 105 configurations, 1,949 runs (search snippet)"
+  verified_from: search snippet only
+- name: "Virtual commissioning of the Korea Light Source Hard X-ray Nanoprobe beamline with multilingual natural language control (HANBIT)"
+  short_name: HANBIT
+  year: 2026
+  arxiv: null
+  doi: null
+  url: https://journals.iucr.org/s/issues/2026/05/00/ok5168/index.html
+  code_url: null
+  one_line: Browser-based virtual commissioning platform (ray-tracing engine + EPICS/Bluesky stack) for the KLS ID10 nanoprobe with a multilingual (KO/EN/JA) LLM agent interface; J. Synchrotron Rad. 2026.
+  relevance: core
+  why: LLM agent controlling a beamline digital twin with a quantitative test set and expert acceptance review.
+  instruments: [hard X-ray nanoprobe beamline (virtual), EPICS/Bluesky motors and detectors]
+  execution_mode: digital_twin
+  n_tasks: 228
+  headline: "98.2% automated action-identification accuracy on 228 test cases vs 67.3% expert acceptance (30.9-pt gap)"
+  verified_from: search snippet only
+- name: "Agentic Artificial Intelligence for Multistage Physics Experiments at a Large-Scale User Facility Particle Accelerator (ALS Accelerator Assistant)"
+  short_name: ALS-Accelerator-Assistant
+  year: 2026
+  arxiv: "2509.17255"
+  doi: "10.1103/jtqy-9jz1"
+  url: https://arxiv.org/abs/2509.17255
+  code_url: null
+  one_line: "First LM-driven multi-agent system deployed on a production synchrotron (ALS): plan-first orchestration, EPICS PV resolution, archive retrieval, script generation and controlled machine interaction; Phys. Rev. Research 8, L012017 (2026)."
+  relevance: core
+  why: LLM agent physically executing multi-stage accelerator physics experiments with safety constraints and a quantitative time-to-prepare result.
+  instruments: [ALS storage ring / accelerator EPICS control system]
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: "Preparation time reduced by two orders of magnitude vs expert manual scripting (search snippet)"
+  verified_from: search snippet only
+- name: "LABSHIELD: A Multimodal Benchmark for Safety-Critical Reasoning and Planning in Scientific Laboratories"
+  short_name: LABSHIELD
+  year: 2026
+  arxiv: "2603.11987"
+  doi: null
+  url: https://arxiv.org/abs/2603.11987
+  code_url: null
+  one_line: 164 operational lab tasks from three high-fidelity lab scenarios with synchronized multi-view observations; OSHA/GHS-grounded safety taxonomy; MCQ + semi-open QA; 32 models evaluated.
+  relevance: adjacent
+  why: Multimodal safety-planning QA for SDL operators (perception/planning), not closed-loop instrument control.
+  instruments: [generic wet-lab equipment (visual scenes)]
+  execution_mode: static_text
+  n_tasks: 164
+  headline: "Average 32.0% drop from general-domain MCQ to lab safety semi-open QA across 20 proprietary + 9 open + 3 embodied models (search snippet)"
+  verified_from: search snippet only
+- name: "Chemist Eye: A Visual Language Model-Powered System for Safety Monitoring and Robot Decision-Making in Self-Driving Laboratories"
+  short_name: Chemist Eye
+  year: 2026
+  arxiv: "2508.05148"
+  doi: "10.1039/D6DD00062B"
+  url: https://arxiv.org/abs/2508.05148
+  code_url: null
+  one_line: Distributed RGB/depth/IR camera stations with VLM decision-making that detects PPE violations, fire and downed workers and re-routes mobile robots in an SDL; Digital Discovery 2026.
+  relevance: adjacent
+  why: VLM acts on SDL mobile robots (safety re-routing) with quantitative detection/decision accuracy, but does not operate scientific instruments.
+  instruments: [mobile robots, safety cameras]
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: "97% hazard spotting, 95% decision-making performance on real SDL data with three mobile robots (search snippet)"
+  verified_from: search snippet only
+- name: "Operationalizing Serendipity: Multi-Agent AI Workflows for Enhanced Materials Characterization with Theory-in-the-Loop (SciLink)"
+  short_name: SciLink
+  year: 2025
+  arxiv: "2508.06569"
+  doi: null
+  url: https://arxiv.org/abs/2508.06569
+  code_url: null
+  one_line: Open-source multi-agent framework turning microscopy/hyperspectral data into falsifiable claims, novelty-scored against literature, with DFT theory-in-the-loop and proposed follow-up experiments.
+  relevance: adjacent
+  why: Characterization-data analysis agents, no instrument actuation or benchmark numbers found.
+  instruments: [STEM, hyperspectral (analysis only)]
+  execution_mode: static_text
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "MDCrow: Automating Molecular Dynamics Workflows with Large Language Models"
+  short_name: MDCrow
+  year: 2025
+  arxiv: "2502.09565"
+  doi: "10.1088/2632-2153/ae4b07"
+  url: https://arxiv.org/abs/2502.09565
+  code_url: https://github.com/ur-whitelab/md-agent
+  one_line: Agentic LLM assistant with 40 tools for MD setup/analysis; evaluated on 25 tasks across LLMs; ICLR 2025 workshop / MLST.
+  relevance: adjacent
+  why: Computational (simulation) workflow agent with quantitative task accuracy; no physical instrument.
+  instruments: []
+  execution_mode: static_code_eval
+  n_tasks: 25
+  headline: "GPT-4o 72% and Llama3-405b 68% task accuracy (search snippet)"
+  verified_from: search snippet only
+- name: "MDGym: Benchmarking AI Agents on Molecular Simulations"
+  short_name: MDGym
+  year: 2026
+  arxiv: "2605.08941"
+  doi: null
+  url: https://arxiv.org/abs/2605.08941
+  code_url: null
+  one_line: 169 expert-curated LAMMPS/GROMACS simulations, 303 tasks, 95 properties, three difficulty levels; Claude Code, Codex, OpenHands with four LLMs.
+  relevance: adjacent
+  why: Simulation-code agent benchmark (no instruments) but a useful methodological comparator; related MDArena (arXiv 2608.02642) and MDDataBench (github.com/matsunagalab/MDDataBench).
+  instruments: []
+  execution_mode: static_code_eval
+  n_tasks: 303
+  headline: "Best agent solves only 21% of easy tasks, <10% at higher difficulty (search snippet)"
+  verified_from: search snippet only
+- name: "BLADE: Benchmarking Language Model Agents for Data-Driven Science"
+  short_name: BLADE
+  year: 2024
+  arxiv: "2408.09667"
+  doi: null
+  url: https://github.com/behavioral-data/BLADE
+  code_url: https://github.com/behavioral-data/BLADE
+  one_line: 12 datasets/research questions with expert-derived ground-truth analysis decisions; EMNLP 2024 Findings.
+  relevance: skip
+  why: Data-analysis agent benchmark with no instrument, simulator or lab component.
+  instruments: []
+  execution_mode: static_code_eval
+  n_tasks: 12
+  headline: null
+  verified_from: search snippet only
+- name: "BixBench: a Comprehensive Benchmark for LLM-based Agents in Computational Biology"
+  short_name: BixBench
+  year: 2025
+  arxiv: "2503.00096"
+  doi: null
+  url: https://arxiv.org/abs/2503.00096
+  code_url: https://github.com/Future-House/BixBench
+  one_line: 53 real bioinformatics scenarios / 296 open-answer questions for agents (FutureHouse).
+  relevance: skip
+  why: Purely computational biology analysis; no lab hardware or simulator.
+  instruments: []
+  execution_mode: static_code_eval
+  n_tasks: 296
+  headline: "~17% open-answer accuracy for frontier agents (search snippet)"
+  verified_from: search snippet only
+- name: "TEM Agent: enhancing transmission electron microscopy (TEM) with modern AI tools"
+  short_name: TEM Agent
+  year: 2025
+  arxiv: "2511.08819"
+  doi: null
+  url: https://arxiv.org/abs/2511.08819
+  code_url: https://github.com/foundry-mcp/team05-mcp-server
+  one_line: LBNL Molecular Foundry framework where a commercial LLM (via Claude Code) drives MCP servers for the TEAM 0.5 microscope, 4D Camera (through Gatan DigitalMicrograph) and Distiller data platform/HPC to execute multi-step TEM workflows.
+  relevance: core
+  why: LLM agent physically controlling a TEM and detector via MCP tools with demonstrated workflows (quantitative benchmark not evident from snippets).
+  instruments: [TEAM 0.5 TEM, 4D Camera detector (Gatan DM), Distiller data platform, HPC]
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "Bridging electron microscopy and materials analysis with an autonomous agentic platform (EMSeek)"
+  short_name: EMSeek
+  year: 2026
+  arxiv: null
+  doi: "10.1126/sciadv.aed0583"
+  url: https://github.com/PEESEgroup/EMSeek
+  code_url: https://github.com/PEESEgroup/EMSeek
+  one_line: Cornell provenance-tracked multi-agent platform (segmentation, crystal reconstruction, property prediction, literature retrieval, physics checks) evaluated on 20 material systems and five tasks; Science Advances 2026.
+  relevance: adjacent
+  why: Post-acquisition EM analysis agents (no microscope control) with quantitative benchmarks.
+  instruments: [STEM/TEM images (analysis only)]
+  execution_mode: static_code_eval
+  n_tasks: 5
+  headline: "End-to-end analysis in 2-5 min/image (~50x faster than experts); >90% structural similarity on STEM2Mat (search snippet)"
+  verified_from: search snippet only
+- name: "Robin: A multi-agent system for automating scientific discovery (FutureHouse)"
+  short_name: Robin
+  year: 2026
+  arxiv: "2505.13400"
+  doi: "10.1038/s41586-026-10652-y"
+  url: https://github.com/Future-House/robin
+  code_url: https://github.com/Future-House/robin
+  one_line: Crow/Falcon/Finch agents for hypothesis generation, experiment proposal and data analysis; lab-in-the-loop with humans executing wet-lab experiments (dAMD, ripasudil); Nature 2026.
+  relevance: adjacent
+  why: Wet-lab validation exists but humans, not the agent, operate instruments; no instrument-control benchmark.
+  instruments: []
+  execution_mode: hybrid
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "Aviary: training language agents on challenging scientific tasks"
+  short_name: Aviary
+  year: 2024
+  arxiv: "2412.21154"
+  doi: null
+  url: https://github.com/Future-House/aviary
+  code_url: https://github.com/Future-House/aviary
+  one_line: Language-agent gym with five environments incl. DNA-construct manipulation (cloning), literature QA and protein stability engineering.
+  relevance: adjacent
+  why: Gym for scientific language agents but no lab-hardware or instrument simulator component.
+  instruments: []
+  execution_mode: simulator
+  n_tasks: 5
+  headline: "Open-weight agents match/exceed frontier LLMs and human experts on SeqQA/LitQA2 at up to 100x lower cost (search snippet)"
+  verified_from: search snippet only
+- name: "A Self-Evolving Agentic System for Automated Generation and Execution of Biological Protocols (ProtoPilot)"
+  short_name: ProtoPilot
+  year: 2026
+  arxiv: "2606.31763"
+  doi: null
+  url: https://arxiv.org/abs/2606.31763
+  code_url: null
+  one_line: Shanghai AI Lab / Genoria multi-agent system with runtime skill library generating protocols, SDK-compliant liquid-handler code and wet-lab revisions; expert-grounded benchmark of 294 tasks from 98 gold protocols with device validity gates and real runs.
+  relevance: core
+  why: Protocol-to-robot-code benchmark with device-level validity gates, Opentrons execution and wet-lab validation, multi-system comparison.
+  instruments: [Opentrons liquid handler, other liquid-handling platforms]
+  execution_mode: hybrid
+  n_tasks: 294
+  headline: "Top@3 expert-preference 90.2%; protocol-to-code gate pass 96.6%; Opentrons pass 88.2% vs 32.4% for Opentrons-AI"
+  verified_from: search snippet only
+- name: "ABC-Bench: An Agentic Bio-Capabilities Benchmark for Biosecurity"
+  short_name: ABC-Bench
+  year: 2026
+  arxiv: "2606.11150"
+  doi: null
+  url: https://arxiv.org/abs/2606.11150
+  code_url: null
+  one_line: Agentic tasks incl. writing code to operate liquid-handling robots (Gibson assembly on Opentrons), DNA fragment design and synthesis-screening evasion; eight frontier models vs 175 h of expert human baselines; cited in model cards.
+  relevance: core
+  why: Quantitative agentic evaluation with a liquid-handling-robot control task and wet-lab confirmation (o4-mini-high scripts assembled DNA correctly).
+  instruments: [Opentrons liquid handler]
+  execution_mode: hybrid
+  n_tasks: 3
+  headline: "Agents match or exceed expert baselines; o4-mini-high Opentrons scripts assembled DNA with expected sequences (search snippet)"
+  verified_from: search snippet only
+- name: "Agentic LLM Reasoning in a Self-Driving Laboratory for Air-Sensitive Lithium Halide Spinel Conductors (A-Lab GPSS)"
+  short_name: A-Lab-GPSS-agentic
+  year: 2026
+  arxiv: "2604.11957"
+  doi: null
+  url: https://arxiv.org/abs/2604.11957
+  code_url: null
+  one_line: Ceder group A-Lab glovebox platform with abnormality-detection (abductive) and pattern-finding (inductive) LLM agents in the closed loop; 352-sample campaign over 19 metals.
+  relevance: core
+  why: LLM agents steering a physical self-driving lab with a quantitative success-rate comparison against non-agentic baseline.
+  instruments: [glovebox powder synthesis robot, furnaces, XRD, impedance spectroscopy]
+  execution_mode: physical_instrument
+  n_tasks: 352
+  headline: "Discovery success rate 1.33% -> 5.33% over 352 samples with agentic reasoning (search snippet)"
+  verified_from: search snippet only
+- name: "AutoLabs: Cognitive Multi-Agent Systems with Self-Correction for Autonomous Chemical Experimentation"
+  short_name: AutoLabs
+  year: 2026
+  arxiv: "2509.25651"
+  doi: "10.1038/s41598-026-45593-z"
+  url: https://arxiv.org/abs/2509.25651
+  code_url: null
+  one_line: Self-correcting multi-agent system translating natural-language goals into hardware-ready high-throughput liquid-handler files; five benchmark experiments, ablation over 20 agent configurations; Sci. Rep. 2026.
+  relevance: core
+  why: Quantitative benchmark of LLM agent configurations generating executable liquid-handler protocols (nRMSE, F1 vs expert procedures).
+  instruments: [high-throughput liquid handler]
+  execution_mode: static_code_eval
+  n_tasks: 5
+  headline: "Reasoning capacity cuts nRMSE >85%; F1 > 0.89 vs expert procedures on multi-plate syntheses (search snippet)"
+  verified_from: search snippet only
+- name: "Augmenting large language models with chemistry tools (ChemCrow)"
+  short_name: ChemCrow
+  year: 2024
+  arxiv: "2304.05376"
+  doi: "10.1038/s42256-024-00832-8"
+  url: https://www.nature.com/articles/s42256-024-00832-8
+  code_url: https://github.com/ur-whitelab/chemcrow-public
+  one_line: GPT-4 agent with 18 tools incl. RoboRXN cloud lab; expert-evaluated on 14 chemistry tasks; autonomously synthesised insect repellent and three organocatalysts; Nat. Mach. Intell. 2024.
+  relevance: core
+  why: Early LLM agent with physical synthesis execution and a small quantitative expert evaluation.
+  instruments: [IBM RoboRXN robotic synthesis platform]
+  execution_mode: hybrid
+  n_tasks: 14
+  headline: "Outperformed plain GPT-4 in expert evaluation on 14 tasks (search snippet)"
+  verified_from: search snippet only
+- name: "PhysGym: Benchmarking LLMs in Interactive Physics Discovery with Controlled Priors"
+  short_name: PhysGym
+  year: 2025
+  arxiv: "2507.15550"
+  doi: null
+  url: https://github.com/principia-ai/PhysGym
+  code_url: https://github.com/principia-ai/PhysGym
+  one_line: 97 executable physics-simulation problems (from PHYBench) where agents run up to 100 experiments to infer laws under four prior-knowledge levels; NeurIPS 2025.
+  relevance: adjacent
+  why: Interactive simulated experimentation but abstract physics, not instrument/lab simulators.
+  instruments: []
+  execution_mode: simulator
+  n_tasks: 97
+  headline: "o4-mini 62.89% -> 31% success from prior level L1 to L4"
+  verified_from: https://github.com/principia-ai/PhysGym
+- name: "SciAgentGym: Benchmarking Multi-Step Scientific Tool-use in LLM Agents"
+  short_name: SciAgentGym
+  year: 2026
+  arxiv: "2602.12984"
+  doi: null
+  url: https://github.com/CMarsRover/SciAgentGYM
+  code_url: https://github.com/CMarsRover/SciAgentGYM
+  one_line: 259 tasks / 1,134 subquestions over 1,780+ computational scientific tools across physics, chemistry, materials, life science, astronomy.
+  relevance: adjacent
+  why: Computational tool-use only; README confirms no instrument-control or lab-automation tasks.
+  instruments: []
+  execution_mode: static_code_eval
+  n_tasks: 259
+  headline: null
+  verified_from: https://github.com/CMarsRover/SciAgentGYM
+- name: "CLAIRify: Errors are Useful Prompts - Instruction Guided Task Programming with Verifier-Assisted Iterative Prompting / Large language models for chemistry robotics"
+  short_name: CLAIRify
+  year: 2023
+  arxiv: "2303.14100"
+  doi: "10.1007/s10514-023-10136-2"
+  url: https://dl.acm.org/doi/abs/10.1007/s10514-023-10136-2
+  code_url: https://github.com/ac-rad/xdl-generation
+  one_line: Verifier-assisted iterative prompting so LLMs emit syntactically valid XDL robot chemistry plans; executed solubility and recrystallization experiments on a real robot; Autonomous Robots 2023.
+  relevance: core
+  why: LLM plan generation for physical robot chemistry with verification and real-robot execution (quantitative XDL validity rates in paper, not in snippets).
+  instruments: [robot arm, chemistry glassware, Chemputer-style XDL executor]
+  execution_mode: hybrid
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "Toward Full Autonomous Laboratory Instrumentation Control with Large Language Models"
+  short_name: Xie-CastellanosGomez-LLM-instrument
+  year: 2025
+  arxiv: "2604.03286"
+  doi: "10.1002/sstr.202500173"
+  url: https://onlinelibrary.wiley.com/doi/10.1002/sstr.202500173
+  code_url: null
+  one_line: Case study showing ChatGPT-assisted script creation for lab instrument control and an LLM agent independently operating laboratory instruments; Small Structures 2025.
+  relevance: adjacent
+  why: Demonstration/perspective on LLM instrument control without a benchmark-style quantitative evaluation (as far as snippets show).
+  instruments: [generic lab instruments (electrical characterisation setup)]
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "Agents for self-driving laboratories applied to quantum computing (k-agents) / Automating quantum computing laboratory experiments with an agent-based AI framework"
+  short_name: k-agents
+  year: 2025
+  arxiv: "2412.07978"
+  doi: "10.1016/j.patter.2025.101220"
+  url: https://www.cell.com/patterns/fulltext/S2666-3899(25)00220-X
+  code_url: null
+  one_line: LLM agents encapsulating lab knowledge as agent-based state machines that autonomously run single- and two-qubit gate calibrations and GHZ-state preparation/characterisation on a superconducting quantum processor; Patterns 2025.
+  relevance: core
+  why: LLM agents closed-loop controlling a physical quantum processor with multimodal result interpretation, hours-long autonomous runs at human-level performance.
+  instruments: [superconducting quantum processor, qubit control electronics]
+  execution_mode: physical_instrument
+  n_tasks: 3
+  headline: "Autonomous single-/two-qubit calibration and GHZ state generation at human-level performance (search snippet)"
+  verified_from: search snippet only
+- name: "Vibe Calibration: Autonomous Bring-up of a 112-Qubit Superconducting Quantum Processor by a Skill-Orchestrating Language Agent"
+  short_name: Vibe Calibration
+  year: 2026
+  arxiv: "2606.22376"
+  doi: null
+  url: https://arxiv.org/abs/2606.22376
+  code_url: null
+  one_line: Fine-tuned LLM agent orchestrating decision-tree Skills (measurement commands, acceptance criteria, audit records) to bring up a 112-qubit processor without human intervention.
+  relevance: core
+  why: Quantitative physical-instrument result (qubits calibrated, time, agreement with experts) for an LLM agent controlling a scientific apparatus.
+  instruments: [112-qubit superconducting quantum processor]
+  execution_mode: physical_instrument
+  n_tasks: 112
+  headline: "108/112 qubits (96.4%) calibrated in 4.7 h vs 18-24 h manual; 14/16 agreement with expert on cross-validated subset (search snippet)"
+  verified_from: search snippet only
+- name: "BioMARS: A Multi-Agent Robotic System for Autonomous Biological Experiments"
+  short_name: BioMARS
+  year: 2025
+  arxiv: "2507.01485"
+  doi: null
+  url: https://arxiv.org/abs/2507.01485
+  code_url: null
+  one_line: Biologist (RAG protocol synthesis), Technician (robot pseudo-code) and Inspector (VLM anomaly detection) agents driving modular robots through cell passaging and culture.
+  relevance: core
+  why: LLM/VLM agents physically executing cell-culture workflows with quantitative comparison to manual performance (viability, consistency, morphology).
+  instruments: [robotic arm, pipettes, biosafety cabinet, incubator, microscope camera]
+  execution_mode: physical_instrument
+  n_tasks: 2
+  headline: "Matches or exceeds manual cell passaging in viability/consistency (search snippet)"
+  verified_from: search snippet only
+- name: "BioProVLA-Agent: Protocol-Driven, Vision-Enhanced VLA-Enabled Embodied Multi-Agent System for Biological Laboratory Manipulation"
+  short_name: BioProVLA-Agent
+  year: 2026
+  arxiv: "2605.07306"
+  doi: null
+  url: https://arxiv.org/abs/2605.07306
+  code_url: null
+  one_line: LLM protocol agent + VLM-RAG verification agent + AugSmolVLA embodied agent evaluated on a hierarchical benchmark of 15 atomic tasks, 6 composite workflows and 3 bimanual tasks (centrifuge-tube loading, cap twisting, pouring).
+  relevance: core
+  why: Quantitative hierarchical lab-manipulation benchmark for an LLM/VLM/VLA agent stack on low-cost hardware.
+  instruments: [low-cost robot arms, centrifuge tubes, racks, liquid containers]
+  execution_mode: physical_instrument
+  n_tasks: 24
+  headline: "15 atomic + 6 composite + 3 bimanual tasks (numbers not in snippets)"
+  verified_from: search snippet only
+- name: "AgentChemist: A Multi-Agent Experimental Robotic Platform Integrating Chemical Perception and Precise Control"
+  short_name: AgentChemist
+  year: 2026
+  arxiv: "2603.23886"
+  doi: null
+  url: https://arxiv.org/abs/2603.23886
+  code_url: null
+  one_line: ECNU multi-agent system (planning, perception, control, logging) on a general-purpose mobile chassis robot with real-time reaction monitoring and report generation for long-tail chemistry tasks.
+  relevance: core
+  why: LLM multi-agent system physically running chemistry experiments on a mobile robot; quantitative evaluation details not visible in snippets.
+  instruments: [mobile manipulator robot, reaction vessels, chemical sensors/cameras]
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "Dual-Agent Framework for Cross-Model Verified Translation of Natural-Language Protocols into Robotic Laboratory Platform"
+  short_name: Dual-Agent-Protocol-Translation
+  year: 2026
+  arxiv: "2606.20120"
+  doi: null
+  url: https://arxiv.org/abs/2606.20120
+  code_url: null
+  one_line: Parser agent + deterministic rule-based mapping to device-level commands + heterogeneous-LLM validation agent with self-correction, for microplate-based protocols (well mapping, replicates, parallel dispensing) on a robotic lab platform.
+  relevance: core
+  why: LLM agents generating executable robotic-platform commands with verification; evaluation metrics not in snippets.
+  instruments: [microplate robotic laboratory platform, dispensers]
+  execution_mode: static_code_eval
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "RF Instrument Agent (RFIA): Empowering RF Instruments with Natural Language Understanding, Scheduling and Execution of Complex Tasks"
+  short_name: RFIA
+  year: 2026
+  arxiv: "2605.23636"
+  doi: null
+  url: https://arxiv.org/abs/2605.23636
+  code_url: null
+  one_line: Decoupled intent-planning-execution agent for RF instruments with a deterministic runtime; hardware-in-the-loop on a commercial VNA with a 16-intent benchmark (config, S-parameter acquisition, resonance search, multisegment acquisition).
+  relevance: core
+  why: LLM agent controlling a physical measurement instrument with an explicit intent benchmark and safety-policy evaluation across two LLMs.
+  instruments: [vector network analyzer]
+  execution_mode: physical_instrument
+  n_tasks: 16
+  headline: "All 16 benchmark intents handled with MiniMax-M2.7 and Qwen3.6-27B incl. one expected safety rejection (search snippet)"
+  verified_from: search snippet only
+- name: "PRISM: Protocol Refinement through Intelligent Simulation Modeling"
+  short_name: PRISM
+  year: 2026
+  arxiv: "2601.05356"
+  doi: "10.1039/D6DD00004E"
+  url: https://github.com/ramanathanlab/PRISM
+  code_url: https://github.com/ramanathanlab/PRISM
+  one_line: Argonne multi-agent LLM protocol planning + generation with mandatory NVIDIA Omniverse digital-twin simulation gate before execution on an OT-2 / PF400 / Azenta sealer lab; PCR validated physically, Cell Painting computationally; seven LLMs compared; Digital Discovery 2026.
+  relevance: core
+  why: Digital-twin-gated LLM protocol generation with cross-model comparison and real robotic execution.
+  instruments: [Opentrons OT-2, PF400 arm, Azenta plate sealer/peeler, qPCR]
+  execution_mode: hybrid
+  n_tasks: 2
+  headline: "Compares GPT-5, GPT-4o, Claude Opus/Sonnet, Gemini Pro/Flash/Flash-Lite by correction iterations needed (numbers not in README)"
+  verified_from: https://github.com/ramanathanlab/PRISM
+- name: "From Prompts to Protocols: An AI Agent for Laboratory Automation (EOS agent)"
+  short_name: EOS-AI-agent
+  year: 2026
+  arxiv: "2605.16552"
+  doi: null
+  url: https://arxiv.org/abs/2605.16552
+  code_url: null
+  one_line: UNC LLM agent integrated into the Experiment Orchestration System with agentic validation/error-correction loop and visual graph editor; evaluated on three simulated automated labs (chemistry, biology, materials).
+  relevance: core
+  why: Quantitative evaluation of LLM protocol generation for lab orchestration on simulated labs.
+  instruments: [simulated automated labs (chemistry, biology, materials)]
+  execution_mode: simulator
+  n_tasks: 3
+  headline: "97% first-attempt protocol generation success; order-of-magnitude fewer interface actions (search snippet)"
+  verified_from: search snippet only
+- name: "StarWhisper Telescope: An AI framework for automating end-to-end astronomical observations"
+  short_name: StarWhisper Telescope
+  year: 2024
+  arxiv: "2412.06412"
+  doi: null
+  url: https://arxiv.org/abs/2412.06412
+  code_url: null
+  one_line: LLM agents with function calls generate observation lists, control telescopes, run image pipelines and trigger follow-ups; deployed on Mini-SiTian and a 10-telescope Nearby Galaxy Supernovae Survey network.
+  relevance: core
+  why: LLM agent physically controlling scientific instruments (telescopes) with quantitative human-effort reduction.
+  instruments: [Mini-SiTian telescope array, amateur survey telescopes]
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: "~90% reduction in human intervention (search snippet)"
+  verified_from: search snippet only
+- name: "An AI-Native Biofoundry for Autonomous Enzyme Engineering: Integrating Active Learning with Automated Experimentation"
+  short_name: AI-Native Biofoundry
+  year: 2026
+  arxiv: null
+  doi: "10.64898/2026.02.01.703093"
+  url: https://www.biorxiv.org/content/10.64898/2026.02.01.703093v1
+  code_url: null
+  one_line: Agent-native control (LLM + MCP over a hardware abstraction layer) generating Pydantic-validated DAGs, simulated in a Unity 3D digital twin then run on an MGISP-Smart8 liquid handler + Cytomat incubator for polymerase evolution.
+  relevance: core
+  why: LLM agent driving physical biofoundry hardware via digital-twin pre-validation with an experimental outcome metric.
+  instruments: [MGISP-Smart8 liquid-handling workstation, Cytomat 2 incubator, sequencer]
+  execution_mode: hybrid
+  n_tasks: null
+  headline: "Variant with 37% lower sequencing error rate after three autonomous rounds (search snippet)"
+  verified_from: search snippet only
+- name: "Embodied Intelligence Unlocks Autonomous Microscopy (EIMS)"
+  short_name: EIMS
+  year: 2025
+  arxiv: null
+  doi: "10.1101/2025.08.13.670210"
+  url: https://github.com/ICS-MR/Embodied-Intelligence-Enables-Agentic-Exploration-in-Microscopy
+  code_url: https://github.com/ICS-MR/Embodied-Intelligence-Enables-Agentic-Exploration-in-Microscopy
+  one_line: Hierarchical LLM planner + low-level executors over pymmcore-plus (Micro-Manager) light microscopes with a model-grounding protocol; mock/demo/real modes; validated on a benchmark from tissue sections to live organoids.
+  relevance: core
+  why: LLM agent controlling a physical light microscope with a benchmark claimed to match or surpass human experts (numbers only in the preprint).
+  instruments: [light/fluorescence microscope via Micro-Manager (stage, objectives, channels, autofocus, Z-stacks)]
+  execution_mode: hybrid
+  n_tasks: null
+  headline: "Reported to match or surpass human experts on multi-step protocols incl. rare-event capture (search snippet); README has no numbers"
+  verified_from: https://github.com/ICS-MR/Embodied-Intelligence-Enables-Agentic-Exploration-in-Microscopy
+- name: "Sci-VLA / AtomBridge: Agentic VLA Inference Plugin for Long-Horizon Tasks in Scientific Experiments"
+  short_name: Sci-VLA
+  year: 2026
+  arxiv: "2602.09430"
+  doi: null
+  url: https://arxiv.org/abs/2602.09430
+  code_url: null
+  one_line: Inference-time agent that infers and codes transitional actions between atomic VLA skills so composite lab workflows succeed without retraining; verified on 3-/5-/8-step tasks in a digital-twin system.
+  relevance: core
+  why: Quantitative digital-twin evaluation of an agentic layer over lab VLA policies for long-horizon experiments.
+  instruments: [robotic lab digital twin]
+  execution_mode: digital_twin
+  n_tasks: 3
+  headline: "Evaluated on 3-, 5- and 8-step composite tasks (success numbers not in snippets)"
+  verified_from: search snippet only
+- name: "LabVLA: Grounding Vision-Language-Action Models in Scientific Laboratories"
+  short_name: LabVLA
+  year: 2026
+  arxiv: "2606.13578"
+  doi: null
+  url: https://github.com/zjunlp/LabVLA
+  code_url: https://github.com/zjunlp/LabVLA
+  one_line: ZJU RoboGenesis sim data engine + Qwen3-VL-4B-based VLA (FAST pretraining, flow-matching DiT action expert) evaluated on the LabUtopia benchmark in-distribution and OOD.
+  relevance: core
+  why: Quantitative lab-simulator benchmark results (LabUtopia) for a lab-specialised VLA policy.
+  instruments: [LabUtopia simulated chemistry-lab instruments]
+  execution_mode: simulator
+  n_tasks: null
+  headline: "Highest average success rate among baselines on LabUtopia (ID and OOD) (search snippet)"
+  verified_from: search snippet only
+- name: "AI-driven robotics for optics (OptoMate)"
+  short_name: OptoMate
+  year: 2026
+  arxiv: "2505.17985"
+  doi: "10.1126/sciadv.aee1381"
+  url: https://www.science.org/doi/10.1126/sciadv.aee1381
+  code_url: null
+  one_line: Fine-tuned LLM generates valid free-space optical setups from user goals; computer vision + precision robot assembles them with sub-mm accuracy and performs micrometre-scale alignment; Science Advances 2026.
+  relevance: core
+  why: LLM agent plus robot physically building and aligning optical experiments with quantitative accuracy metrics.
+  instruments: [free-space optics (lenses, mirrors, lasers), robotic arm, cameras]
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: "Sub-millimetre assembly and micrometre-scale fine alignment (search snippet)"
+  verified_from: search snippet only
+- name: "It's not the Language Model, it's the Tool: Deterministic Mediation for Scientific Workflows"
+  short_name: Deterministic-Mediation
+  year: 2026
+  arxiv: "2605.13245"
+  doi: null
+  url: https://arxiv.org/abs/2605.13245
+  code_url: null
+  one_line: Typed-mediation pattern where the LLM only selects deterministic per-instrument analysis tools (ported from researcher procedures); deployed on two instruments for ~6 months.
+  relevance: adjacent
+  why: Instrument-adjacent deployment but concerns reproducible data analysis, not instrument control, and reports user feedback rather than a benchmark.
+  instruments: [two unnamed characterisation instruments]
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: "Analysis time weeks -> minutes with identical outputs across runs (search snippet)"
+  verified_from: search snippet only
+- name: "LAP: An Agent-to-Instrument Protocol for Autonomous Science"
+  short_name: LAP
+  year: 2026
+  arxiv: "2606.03755"
+  doi: null
+  url: https://arxiv.org/abs/2606.03755
+  code_url: null
+  one_line: Protocol design (InstrumentCard JSON-LD, S0-S3 safety-fence handshake, MeasurementResult schema) for the agent-to-instrument edge missing from MCP/A2A.
+  relevance: adjacent
+  why: Infrastructure/protocol proposal with no agent benchmark.
+  instruments: [generic]
+  execution_mode: static_text
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "SCP: Accelerating Discovery with a Global Web of Autonomous Scientific Agents (Science Context Protocol)"
+  short_name: SCP
+  year: 2025
+  arxiv: "2512.24189"
+  doi: null
+  url: https://arxiv.org/abs/2512.24189
+  code_url: null
+  one_line: Shanghai AI Lab MCP extension with SCP Hub registry, five-phase experiment lifecycle and vendor-agnostic device-driver layer for physical instruments; deployed on Intern-Discovery with 1,600+ tools.
+  relevance: adjacent
+  why: Protocol/infrastructure, no instrument-agent benchmark reported.
+  instruments: [generic physical instruments via driver abstraction]
+  execution_mode: static_text
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "Multi-Agent Systems for Autonomous Laboratory Instrument Operation (Johnson, Carl Zeiss RMS)"
+  short_name: Johnson-2025-MAS-review
+  year: 2025
+  arxiv: null
+  doi: null
+  url: https://naterthought.com/papers/VGPT.pdf
+  code_url: null
+  one_line: Review of modular multi-agent LLM frameworks (planner / instrument controller / analyst roles) for microscopes, spectrometers, synchrotrons and SDLs; precursor to the Zeiss XRM benchmark work.
+  relevance: adjacent
+  why: Review without new benchmark.
+  instruments: [microscopes, spectrometers, synchrotrons]
+  execution_mode: static_text
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "From observation to understanding: A multi-agent framework for smart microscopy (Kesavan & Nordenfelt) + gently agentic harness"
+  short_name: gently
+  year: 2026
+  arxiv: "2505.20466"
+  doi: "10.1111/jmi.70063"
+  url: https://github.com/gently-project/gently
+  code_url: https://github.com/gently-project/gently
+  one_line: Position paper (J. Microscopy 2026) plus open-source Claude-driven agentic harness for a diSPIM light-sheet microscope (Bluesky/ophyd/pymmcore) classifying C. elegans embryo stages; repo has a benchmarks directory but no published agent success metrics.
+  relevance: adjacent
+  why: Framework and conceptual design; no quantitative agent benchmark located.
+  instruments: [diSPIM light-sheet microscope]
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: null
+  verified_from: https://github.com/gently-project/gently
+- name: "Agent-Lens: AI Agents for Smart Microscopy (AICell Lab)"
+  short_name: Agent-Lens
+  year: 2025
+  arxiv: null
+  doi: null
+  url: https://github.com/aicell-lab/agent-lens
+  code_url: https://github.com/aicell-lab/agent-lens
+  one_line: Hypha-based web platform where an agent turns natural-language intent into Squid microscope commands with robotic sample handling, SAM segmentation and CLIP/DINOv2 similarity search.
+  relevance: adjacent
+  why: Open-source control framework; no benchmark or quantitative evaluation found.
+  instruments: [Squid light microscopes, robotic sample loader]
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "OpenLabAI: natural-language MCP agents for lab robot control"
+  short_name: OpenLabAI
+  year: 2026
+  arxiv: null
+  doi: null
+  url: https://github.com/nygmeta/OpenLabAI
+  code_url: https://github.com/nygmeta/OpenLabAI
+  one_line: MIT-licensed MCP servers for Opentrons OT-2 (partially hardware-verified), Beckman Biomek FXP (hardware-verified), Hamilton STAR (sim), Cellario (mock) and nine simulated benchtop devices; ~110 test checks.
+  relevance: adjacent
+  why: README explicitly states no protocol-generation validity benchmark has been run.
+  instruments: [Opentrons OT-2, Beckman Biomek FXP, Hamilton STAR, Cellario, simulated plate reader/thermal cycler/centrifuge]
+  execution_mode: hybrid
+  n_tasks: null
+  headline: null
+  verified_from: https://github.com/nygmeta/OpenLabAI
+- name: "LLMicroscopilot: An LLM assistant for STM/STEM measurements (LLM Hackathon 2024)"
+  short_name: LLMicroscopilot
+  year: 2024
+  arxiv: "2411.15221"
+  doi: "10.5281/zenodo.14051590"
+  url: https://zenodo.org/records/14051590
+  code_url: null
+  one_line: Hackathon project (Schloz & Gonzalez) using an LLM agent with external tools to automate STEM parameter estimation and experiment execution.
+  relevance: adjacent
+  why: Prototype without quantitative evaluation.
+  instruments: [scanning transmission electron microscope]
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "ChemGraph: An Agentic Framework for Computational Chemistry Workflows"
+  short_name: ChemGraph
+  year: 2025
+  arxiv: "2506.06363"
+  doi: "10.1038/s42004-025-01776-9"
+  url: https://arxiv.org/abs/2506.06363
+  code_url: https://github.com/argonne-lcf/ChemGraph
+  one_line: Argonne LLM+GNN-potential workflow agent; 13 benchmark task types (360 instances) across GPT-4o, GPT-4o-mini, Claude-3.5-haiku, Qwen2.5-14B; Commun. Chem. 2026.
+  relevance: adjacent
+  why: Computational-chemistry agent benchmark, no instrument.
+  instruments: []
+  execution_mode: static_code_eval
+  n_tasks: 13
+  headline: "Multi-agent decomposition lets GPT-4o reach perfect accuracy on benchmark (search snippet)"
+  verified_from: search snippet only
+- name: "MatClaw: An Autonomous Code-First LLM Agent for End-to-End Materials Exploration"
+  short_name: MatClaw
+  year: 2026
+  arxiv: "2604.02688"
+  doi: null
+  url: https://github.com/cz2014/MatClaw
+  code_url: https://github.com/cz2014/MatClaw
+  one_line: Code-first agent (pymatgen/ASE/atomate2 on HPC) with four-layer memory and source-code RAG; three CuInP2S6 demonstrations.
+  relevance: skip
+  why: Purely computational materials workflows.
+  instruments: []
+  execution_mode: static_code_eval
+  n_tasks: 3
+  headline: "~99% per-step API-call accuracy with source-code RAG (search snippet)"
+  verified_from: search snippet only
+- name: "HoneyComb: A Flexible LLM-Based Agent System for Materials Science (and LLaMP)"
+  short_name: HoneyComb
+  year: 2024
+  arxiv: "2409.00135"
+  doi: null
+  url: https://arxiv.org/abs/2409.00135
+  code_url: null
+  one_line: MatSciKB + ToolHub agent evaluated on materials QA (MaScQA); LLaMP (arXiv 2401.17244) is a Materials Project RAG agent.
+  relevance: skip
+  why: Knowledge QA agents with no lab or instrument component.
+  instruments: []
+  execution_mode: static_text
+  n_tasks: null
+  headline: "+16.76% (HoneyBee) / +20.61% (GPT-4) accuracy on MaScQA (search snippet)"
+  verified_from: search snippet only
+- name: "A modular framework for collaborative human-AI, multi-modal and multi-beamline synchrotron experiments (NSLS-II)"
+  short_name: NSLS-II-multibeamline
+  year: 2025
+  arxiv: "2509.22959"
+  doi: null
+  url: https://arxiv.org/abs/2509.22959
+  code_url: null
+  one_line: Bluesky-integrated ensemble of (non-LLM) AI agents doing on-the-fly reduction, clustering, GP modelling and BO acquisition across PDF and BMM beamlines; Al-Li-Fe oxide digital twin shows AI mapping beats conventional and random sampling.
+  relevance: adjacent
+  why: Agentic beamline orchestration with a digital-twin evaluation, but agents are ML/BO rather than LLM/VLM.
+  instruments: [NSLS-II PDF and BMM beamlines (XRD, XAFS)]
+  execution_mode: hybrid
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "Validation of an LLM-based Multi-Agent Framework for Protein Engineering in Dry Lab and Wet Lab (TourSynbio-Agent)"
+  short_name: TourSynbio-Agent
+  year: 2024
+  arxiv: "2411.06029"
+  doi: null
+  url: https://arxiv.org/abs/2411.06029
+  code_url: null
+  one_line: Protein-specialised multimodal LLM agent validated in five case studies incl. wet-lab P450 and reductase engineering.
+  relevance: adjacent
+  why: Wet-lab outcome validation but humans execute experiments; no instrument control.
+  instruments: []
+  execution_mode: hybrid
+  n_tasks: 5
+  headline: "P450 selectivity +70%; reductase 3.7x catalytic efficiency (search snippet)"
+  verified_from: search snippet only
+- name: "Compressing the Validation Bottleneck: An Agentic Self-Driving Lab for Scientific Discovery"
+  short_name: Validation-Bottleneck-SDL
+  year: 2026
+  arxiv: "2607.04508"
+  doi: null
+  url: https://arxiv.org/abs/2607.04508
+  code_url: null
+  one_line: Prior-aware agentic DOE loop plus cost-aware surrogate agent choosing between low/high-cost measurements; biology and materials examples; ICML 2026 AI4Science workshop.
+  relevance: adjacent
+  why: Experiment-selection agent, no instrument control benchmark.
+  instruments: []
+  execution_mode: hybrid
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "Agentic AI for Self-Driving Laboratories in Soft Matter: Taxonomy, Benchmarks, and Open Challenges"
+  short_name: SoftMatter-SDL-survey
+  year: 2026
+  arxiv: "2601.17920"
+  doi: null
+  url: https://arxiv.org/abs/2601.17920
+  code_url: null
+  one_line: Survey proposing benchmark task templates and metrics (cost-aware performance, drift robustness, constraint violations, reproducibility) for agentic SDLs.
+  relevance: adjacent
+  why: Survey with benchmark proposals, no released benchmark or results.
+  instruments: []
+  execution_mode: static_text
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "Perspective on Utilizing Foundation Models for Laboratory Automation in Materials Research"
+  short_name: Hatakeyama-Sato-perspective
+  year: 2025
+  arxiv: "2506.12312"
+  doi: "10.1080/27660400.2025.2582379"
+  url: https://arxiv.org/abs/2506.12312
+  code_url: null
+  one_line: Perspective on cognitive vs physical roles of foundation models in lab automation.
+  relevance: skip
+  why: Perspective, no evaluation.
+  instruments: []
+  execution_mode: static_text
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "Embodied Science: Closing the Discovery Loop with Agentic Embodied AI"
+  short_name: Embodied-Science-survey
+  year: 2026
+  arxiv: "2603.19782"
+  doi: null
+  url: https://arxiv.org/abs/2603.19782
+  code_url: null
+  one_line: ZJU survey proposing a Perception-Language-Action-Discovery framework for embodied scientific agents.
+  relevance: adjacent
+  why: Survey useful for related-work coverage; no benchmark.
+  instruments: []
+  execution_mode: static_text
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "Thinking microscopes: agentic AI and the future of electron microscopy"
+  short_name: Thinking-microscopes
+  year: 2026
+  arxiv: null
+  doi: "10.1038/s41524-026-02077-y"
+  url: https://www.nature.com/articles/s41524-026-02077-y
+  code_url: null
+  one_line: npj Computational Materials perspective (Kalinin group) on agentic AI for electron microscopy.
+  relevance: adjacent
+  why: Perspective, no benchmark.
+  instruments: [STEM/TEM]
+  execution_mode: static_text
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "stemOrchestrator: Enabling Seamless Hardware Control and High-Throughput Workflows on Electron Microscopes"
+  short_name: stemOrchestrator
+  year: 2025
+  arxiv: null
+  doi: "10.31224/4645"
+  url: https://academic.oup.com/mam/article/31/Supplement_1/ozaf048.1066/8213047
+  code_url: null
+  one_line: Modular Python framework unifying multi-vendor STEM hardware for automated workflows (drift correction, logging); M&M 2025 / engrXiv.
+  relevance: adjacent
+  why: Control middleware without an LLM agent evaluation, but a likely substrate for STEM agent benchmarks.
+  instruments: [STEM]
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "MicroscopyLLM-Bench"
+  short_name: MicroscopyLLM-Bench
+  year: 2025
+  arxiv: null
+  doi: null
+  url: https://github.com/adibgpt/MicroscopyLLM-Bench
+  code_url: https://github.com/adibgpt/MicroscopyLLM-Bench
+  one_line: GitHub pipeline benchmarking VLMs on object detection/classification over open microscopy datasets.
+  relevance: skip
+  why: Image-analysis benchmark only, no instrument interaction.
+  instruments: []
+  execution_mode: static_text
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "LC Agent: AI-driven recommendation of liquid chromatography conditions"
+  short_name: LC Agent
+  year: 2026
+  arxiv: null
+  doi: null
+  url: https://pubmed.ncbi.nlm.nih.gov/42260980/
+  code_url: null
+  one_line: Multi-agent LLM system proposing LC conditions for reaction mixtures from literature and compound properties.
+  relevance: adjacent
+  why: Method recommendation, not instrument operation.
+  instruments: [HPLC (recommendation only)]
+  execution_mode: static_text
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "StructAgent: Orchestrating Cryo-EM Model Building and Refinement with a Multi-Agent LLM System"
+  short_name: StructAgent
+  year: 2026
+  arxiv: null
+  doi: "10.64898/2026.05.18.725842"
+  url: https://www.biorxiv.org/content/10.64898/2026.05.18.725842v1
+  code_url: null
+  one_line: Multi-agent LLM for cryo-EM model building/refinement software; no data-collection or microscope control found.
+  relevance: skip
+  why: Downstream software pipeline, not instrument control (no cryo-EM acquisition agent benchmark located).
+  instruments: []
+  execution_mode: static_code_eval
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "Autonomous Laboratory Agent via Customized Domain-Specific Language Model and Modular AI Interface (Diao et al.)"
+  short_name: Diao-2026-SPM-DSLM
+  year: 2026
+  arxiv: "2602.20669"
+  doi: null
+  url: https://arxiv.org/abs/2602.20669
+  code_url: null
+  one_line: Fine-tuned small LMs for real-time atomic-resolution SPM control; 99.3%/95.2% command accuracy vs o4-mini.
+  relevance: skip
+  why: Already covered by teammate (Diao 2024/2026 SPM agents); recorded to avoid re-extraction.
+  instruments: [scanning probe microscope]
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: "99.3% and 95.2% command accuracy (search snippet)"
+  verified_from: search snippet only
+- name: "LLM-Guided Open Hypothesis Learning from Autonomous Scanning Probe Microscopy Experiments"
+  short_name: LLM-OHL-SPM
+  year: 2026
+  arxiv: "2605.06839"
+  doi: null
+  url: https://arxiv.org/abs/2605.06839
+  code_url: null
+  one_line: Kalinin-group LLM-guided hypothesis learning on autonomous SPM.
+  relevance: skip
+  why: Likely within teammate coverage of Kalinin/Slautin 2026 SPM agents; flagged for de-duplication check.
+  instruments: [scanning probe microscope]
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "PREVENT: Proactive Risk Evaluation and Vigilant Execution of Tasks for Mobile Robotic Chemists using Multi-Modal Behavior Trees"
+  short_name: PREVENT
+  year: 2025
+  arxiv: "2510.21438"
+  doi: null
+  url: https://arxiv.org/abs/2510.21438
+  code_url: null
+  one_line: Liverpool (Cooper group) multimodal behavior-tree anomaly handling for mobile robotic chemists.
+  relevance: skip
+  why: No LLM/VLM agent component evident.
+  instruments: [mobile robotic chemist]
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "SAFE-CHEM: Uncertainty-Aware Policy Switching for Robust Robotic Chemistry"
+  short_name: SAFE-CHEM
+  year: 2026
+  arxiv: "2608.09303"
+  doi: null
+  url: https://arxiv.org/abs/2608.09303
+  code_url: null
+  one_line: Ensemble imitation policies with uncertainty-triggered rule-based fallback for robotic chemistry.
+  relevance: skip
+  why: Learning-based manipulation safety without LLM/VLM agent.
+  instruments: [robot arm, chemistry labware]
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "RoboLab: A High-Fidelity Simulation Benchmark for Analysis of Task Generalist Policies (NVIDIA)"
+  short_name: RoboLab-NV
+  year: 2026
+  arxiv: "2604.09860"
+  doi: null
+  url: https://github.com/NVLabs/RoboLab
+  code_url: https://github.com/NVLabs/RoboLab
+  one_line: Isaac Lab benchmark of 120 generic manipulation tasks; despite the name, not a laboratory benchmark.
+  relevance: skip
+  why: Household/generic manipulation, not scientific lab.
+  instruments: []
+  execution_mode: simulator
+  n_tasks: 120
+  headline: null
+  verified_from: search snippet only
+- name: "ChemGymRL: An Interactive Framework for Reinforcement Learning for Digital Chemistry"
+  short_name: ChemGymRL
+  year: 2023
+  arxiv: "2305.14177"
+  doi: null
+  url: https://arxiv.org/abs/2305.14177
+  code_url: https://github.com/chemgymrl/chemgymrl
+  one_line: RL gym with three simulated chemistry benches (extraction, distillation, reaction); no LLM-agent evaluation found ('ChemGym' LLM benchmark not located).
+  relevance: skip
+  why: RL-only digital chemistry environment predating LLM agents; candidate name 'ChemGym' does not correspond to an LLM benchmark.
+  instruments: [simulated extraction/distillation/reaction benches]
+  execution_mode: simulator
+  n_tasks: 3
+  headline: null
+  verified_from: search snippet only
+- name: "ChemOS 2.0: An orchestration architecture for chemical self-driving laboratories"
+  short_name: ChemOS 2.0
+  year: 2024
+  arxiv: null
+  doi: "10.1016/j.matt.2024.04.022"
+  url: https://www.sciencedirect.com/science/article/pii/S2590238524001954
+  code_url: null
+  one_line: Aspuru-Guzik group SDL orchestration layer; no LLM-agent evaluation.
+  relevance: skip
+  why: Orchestration software without LLM agent benchmark; Polybot/Chemspeed LLM-agent evaluations not found.
+  instruments: [Chemspeed and modular SDL hardware]
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "Periodic Labs"
+  short_name: Periodic Labs
+  year: 2025
+  arxiv: null
+  doi: null
+  url: https://www.implicator.ai/periodic-labs-raises-300-million-to-automate-science/
+  code_url: null
+  one_line: Startup ($300M seed, Sept 2025) combining AI agents with robotic labs for materials; no public benchmark or paper found.
+  relevance: skip
+  why: No published evaluation.
+  instruments: []
+  execution_mode: physical_instrument
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "FARS: A Fully Automated Research System Deployed at Scale"
+  short_name: FARS
+  year: 2026
+  arxiv: "2606.31651"
+  doi: null
+  url: https://arxiv.org/abs/2606.31651
+  code_url: null
+  one_line: AI-for-AI research system producing 166 ML papers in 417 h; no physical component.
+  relevance: skip
+  why: Purely computational ML research automation.
+  instruments: []
+  execution_mode: static_code_eval
+  n_tasks: 166
+  headline: null
+  verified_from: search snippet only
+- name: "Act As a Real Researcher (AARRI-Bench)"
+  short_name: AARRI-Bench
+  year: 2026
+  arxiv: "2606.07462"
+  doi: null
+  url: https://github.com/AARR-bench/AARRI-bench
+  code_url: https://github.com/AARR-bench/AARRI-bench
+  one_line: Research-intern benchmark for agentic harnesses; best config 68.3% success (Mini-SWE-Agent + Claude Opus 4.7).
+  relevance: skip
+  why: Computational research tasks, no lab/instrument component.
+  instruments: []
+  execution_mode: static_code_eval
+  n_tasks: null
+  headline: "68.3% best success (search snippet)"
+  verified_from: search snippet only
+- name: "Sakana AI Scientist / Google AI co-scientist / Beyond SMILES"
+  short_name: AI-Scientist-family
+  year: 2025
+  arxiv: "2502.14297"
+  doi: null
+  url: https://arxiv.org/abs/2502.14297
+  code_url: null
+  one_line: Autonomous research-paper agents and their critiques; wet-lab validation exists only via human-executed follow-ups (co-scientist), none control instruments; Beyond SMILES (2602.10163) was withdrawn by arXiv admins.
+  relevance: skip
+  why: No instrument or simulator execution component.
+  instruments: []
+  execution_mode: static_text
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only
+- name: "Candidate names not found as LLM-agent benchmarks"
+  short_name: not-found
+  year: 2026
+  arxiv: null
+  doi: null
+  url: null
+  code_url: null
+  one_line: "No evidence found for: MicroscopyBench, SEMBench, MicroscopyAgentBench, TEMAgent-benchmark (only TEM Agent framework), SciRobot, LabSim (only as LabUtopia component), InstrumentBench, SciInstruct-instrument, Bluesky plan-generation benchmark (beyond EnvTrace/VISION), SCPI/LabVIEW LLM benchmark (only MCP hobby servers), CLEM agent, cryo-EM acquisition agent, Raman/NMR/mass-spec control agents (only data benchmarks RamanBench/MassSpecGym), MBE/PLD LLM agents (only BO/CV SDLs), Chemspeed/Polybot LLM agents, Nion Swift/Gatan LLM (only via TEM Agent MCP)."
+  relevance: skip
+  why: Recorded so the survey can state these were searched.
+  instruments: []
+  execution_mode: static_text
+  n_tasks: null
+  headline: null
+  verified_from: search snippet only

@@ -13,9 +13,10 @@ what it was pointed at, and how the evidence was generated — rather than a sin
 | Path | Contents |
 |---|---|
 | `schema/` | The execution-level evidence schema: `benchmark_card.schema.json` (one record per benchmark), `execution_record.schema.json` (one row per agent run), `vocab.yaml` (every controlled vocabulary, with glosses), `SCHEMA.md` (field-by-field rationale) |
-| `data/benchmarks/` | One YAML card per benchmark, system, framework or survey (65 at first ingest) |
+| `data/benchmarks/` | One YAML card per benchmark, system, framework or survey (96 after the first ingest and discovery sweep; 31 are identity-level stubs marked `confidence: low`) |
 | `data/executions/` | The transfer dataset: per-run rows re-encoded from released benchmark logs (1,896 rows so far: AFMBench 1,200 trials, X-ray microscopy agent benchmarks 660 runs) |
-| `data/raw/` | Verbatim extraction batches and their provenance notes |
+| `data/raw/` | Verbatim extraction batches, released run logs, and their provenance notes |
+| `data/candidates.yaml` | Works examined in the discovery sweep and not given a card (adjacent or excluded), with the reason |
 | `aig/` | Python package: validation, feature encoding, Gower distances, axis-coverage / gap analysis, site export |
 | `site/` | The static explorer (no build step; GitHub Pages deploys it from `main`) |
 | `scripts/` | Ingestion of raw extractions and of released run logs |

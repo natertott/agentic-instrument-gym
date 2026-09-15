@@ -1,0 +1,92 @@
+id: hanbit
+record_type: benchmark
+name: Virtual commissioning of the Korea Light Source Hard X-ray Nanoprobe beamline with multilingual natural language
+  control (HANBIT)
+short_name: HANBIT
+year: 2026
+venue: null
+authors_short: null
+arxiv: null
+doi: null
+url: https://journals.iucr.org/s/issues/2026/05/00/ok5168/index.html
+code_url: null
+data_url: null
+license: null
+status: null
+summary: Browser-based virtual commissioning platform (ray-tracing engine + EPICS/Bluesky stack) for the KLS ID10
+  nanoprobe with a multilingual (KO/EN/JA) LLM agent interface; J. Synchrotron Rad. 2026. LLM agent controlling
+  a beamline digital twin with a quantitative test set and expert acceptance review.
+benchmark_features:
+  evaluation_target:
+  - instrument_control
+  execution_mode: digital_twin
+  instruments:
+  - name: hard X-ray nanoprobe beamline (virtual)
+    modality: synchrotron
+    real_or_simulated: digital_twin
+  - name: EPICS/Bluesky motors and detectors
+    modality: generic_lab
+    real_or_simulated: digital_twin
+  scientific_domains: []
+  n_tasks: 228
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: null
+  task_source: null
+  sampling_strategy: null
+  metric_types: []
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: null
+  has_abstention_eval: null
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results:
+  - 98.2% automated action-identification accuracy on 228 test cases vs 67.3% expert acceptance (30.9-pt gap)
+  open_source: null
+task_features:
+  workflow_depth: null
+  perceptual_demand: null
+  reasoning_demand: null
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: null
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: null
+  signal_quality_variation: null
+  novelty_control: null
+  novelty_levels_tested: []
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: null
+  deterministic_execution: null
+transfer_relevant_findings: []
+limitations: []
+related: []
+notes: 'STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are
+  recorded. Verified from: search snippet only. Needs full extraction.'
+provenance:
+  extracted_on: '2026-09-15'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://journals.iucr.org/s/issues/2026/05/00/ok5168/index.html
+  confidence: low
+  review_status: unreviewed
+  reviewer_notes: Discovery-sweep stub; full four-group extraction pending.

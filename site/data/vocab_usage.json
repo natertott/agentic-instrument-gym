@@ -1,12 +1,12 @@
 {
  "execution_mode": {
-  "physical_instrument": 14,
-  "digital_twin": 2,
-  "simulator": 8,
+  "physical_instrument": 28,
+  "digital_twin": 4,
+  "simulator": 14,
   "execution_trace": 1,
-  "static_code_eval": 7,
+  "static_code_eval": 9,
   "static_text": 16,
-  "hybrid": 9
+  "hybrid": 16
  },
  "task_source": {
   "expert_curated": 35,
@@ -88,14 +88,14 @@
   "some": 11
  },
  "evaluation_target": {
-  "instrument_control": 25,
+  "instrument_control": 48,
   "code_generation": 17,
   "computer_use": 2,
   "question_answering": 15,
   "perception": 15,
   "protocol_planning": 22,
   "data_analysis": 19,
-  "simulation_control": 9,
+  "simulation_control": 15,
   "safety": 9
  },
  "metric_type": {
@@ -132,14 +132,14 @@
   "held_out_combination": 0
  },
  "instrument_modality": {
-  "microscopy": 26,
+  "microscopy": 29,
   "spectroscopy": 2,
   "diffraction": 3,
-  "synchrotron": 7,
-  "liquid_handling": 1,
-  "robotics": 2,
-  "generic_lab": 4,
-  "computation": 0,
+  "synchrotron": 8,
+  "liquid_handling": 12,
+  "robotics": 16,
+  "generic_lab": 29,
+  "computation": 2,
   "none": 2
  }
 }

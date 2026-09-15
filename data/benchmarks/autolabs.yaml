@@ -1,0 +1,87 @@
+id: autolabs
+record_type: benchmark
+name: 'AutoLabs: Cognitive Multi-Agent Systems with Self-Correction for Autonomous Chemical Experimentation'
+short_name: AutoLabs
+year: 2026
+venue: null
+authors_short: null
+arxiv: '2509.25651'
+doi: 10.1038/s41598-026-45593-z
+url: https://arxiv.org/abs/2509.25651
+code_url: null
+data_url: null
+license: null
+status: null
+summary: Self-correcting multi-agent system translating natural-language goals into hardware-ready high-throughput
+  liquid-handler files; five benchmark experiments, ablation over 20 agent configurations; Sci. Rep. 2026. Quantitative
+  benchmark of LLM agent configurations generating executable liquid-handler protocols (nRMSE, F1 vs expert procedures).
+benchmark_features:
+  evaluation_target: []
+  execution_mode: static_code_eval
+  instruments:
+  - name: high-throughput liquid handler
+    modality: liquid_handling
+    real_or_simulated: null
+  scientific_domains: []
+  n_tasks: 5
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: null
+  task_source: null
+  sampling_strategy: null
+  metric_types: []
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: null
+  has_abstention_eval: null
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results:
+  - Reasoning capacity cuts nRMSE >85%; F1 > 0.89 vs expert procedures on multi-plate syntheses (search snippet)
+  open_source: null
+task_features:
+  workflow_depth: null
+  perceptual_demand: null
+  reasoning_demand: null
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: null
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: null
+  signal_quality_variation: null
+  novelty_control: null
+  novelty_levels_tested: []
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: null
+  deterministic_execution: null
+transfer_relevant_findings: []
+limitations: []
+related: []
+notes: 'STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are
+  recorded. Verified from: search snippet only. Needs full extraction.'
+provenance:
+  extracted_on: '2026-09-15'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2509.25651
+  confidence: low
+  review_status: unreviewed
+  reviewer_notes: Discovery-sweep stub; full four-group extraction pending.

@@ -1,0 +1,89 @@
+id: chemcrow
+record_type: benchmark
+name: Augmenting large language models with chemistry tools (ChemCrow)
+short_name: ChemCrow
+year: 2024
+venue: null
+authors_short: null
+arxiv: '2304.05376'
+doi: 10.1038/s42256-024-00832-8
+url: https://www.nature.com/articles/s42256-024-00832-8
+code_url: https://github.com/ur-whitelab/chemcrow-public
+data_url: null
+license: null
+status: null
+summary: GPT-4 agent with 18 tools incl. RoboRXN cloud lab; expert-evaluated on 14 chemistry tasks; autonomously
+  synthesised insect repellent and three organocatalysts; Nat. Mach. Intell. 2024. Early LLM agent with physical
+  synthesis execution and a small quantitative expert evaluation.
+benchmark_features:
+  evaluation_target:
+  - instrument_control
+  execution_mode: hybrid
+  instruments:
+  - name: IBM RoboRXN robotic synthesis platform
+    modality: robotics
+    real_or_simulated: null
+  scientific_domains: []
+  n_tasks: 14
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: null
+  task_source: null
+  sampling_strategy: null
+  metric_types: []
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: null
+  has_abstention_eval: null
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results:
+  - Outperformed plain GPT-4 in expert evaluation on 14 tasks (search snippet)
+  open_source: true
+task_features:
+  workflow_depth: null
+  perceptual_demand: null
+  reasoning_demand: null
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: null
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: null
+  signal_quality_variation: null
+  novelty_control: null
+  novelty_levels_tested: []
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: null
+  deterministic_execution: null
+transfer_relevant_findings: []
+limitations: []
+related: []
+notes: 'STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are
+  recorded. Verified from: search snippet only. Needs full extraction.'
+provenance:
+  extracted_on: '2026-09-15'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://www.nature.com/articles/s42256-024-00832-8
+  - https://github.com/ur-whitelab/chemcrow-public
+  confidence: low
+  review_status: unreviewed
+  reviewer_notes: Discovery-sweep stub; full four-group extraction pending.

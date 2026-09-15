@@ -1,0 +1,92 @@
+id: protopilot
+record_type: benchmark
+name: A Self-Evolving Agentic System for Automated Generation and Execution of Biological Protocols (ProtoPilot)
+short_name: ProtoPilot
+year: 2026
+venue: null
+authors_short: null
+arxiv: '2606.31763'
+doi: null
+url: https://arxiv.org/abs/2606.31763
+code_url: null
+data_url: null
+license: null
+status: null
+summary: Shanghai AI Lab / Genoria multi-agent system with runtime skill library generating protocols, SDK-compliant
+  liquid-handler code and wet-lab revisions; expert-grounded benchmark of 294 tasks from 98 gold protocols with
+  device validity gates and real runs. Protocol-to-robot-code benchmark with device-level validity gates, Opentrons
+  execution and wet-lab validation, multi-system comparison.
+benchmark_features:
+  evaluation_target:
+  - instrument_control
+  execution_mode: hybrid
+  instruments:
+  - name: Opentrons liquid handler
+    modality: liquid_handling
+    real_or_simulated: null
+  - name: other liquid-handling platforms
+    modality: liquid_handling
+    real_or_simulated: null
+  scientific_domains: []
+  n_tasks: 294
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: null
+  task_source: null
+  sampling_strategy: null
+  metric_types: []
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: null
+  has_abstention_eval: null
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results:
+  - Top@3 expert-preference 90.2%; protocol-to-code gate pass 96.6%; Opentrons pass 88.2% vs 32.4% for Opentrons-AI
+  open_source: null
+task_features:
+  workflow_depth: null
+  perceptual_demand: null
+  reasoning_demand: null
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: null
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: null
+  signal_quality_variation: null
+  novelty_control: null
+  novelty_levels_tested: []
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: null
+  deterministic_execution: null
+transfer_relevant_findings: []
+limitations: []
+related: []
+notes: 'STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are
+  recorded. Verified from: search snippet only. Needs full extraction.'
+provenance:
+  extracted_on: '2026-09-15'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2606.31763
+  confidence: low
+  review_status: unreviewed
+  reviewer_notes: Discovery-sweep stub; full four-group extraction pending.

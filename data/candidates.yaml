@@ -1,0 +1,425 @@
+description: 'Candidates examined in the 2026-09-14 discovery sweep and not (yet) given a card: adjacent = related
+  but not an agent-on-instrument evaluation; skip = examined and excluded.'
+candidates:
+- name: 'El Agente: An Autonomous Agent for Quantum Chemistry'
+  short_name: El Agente
+  year: 2025
+  arxiv: '2505.02484'
+  url: https://arxiv.org/abs/2505.02484
+  relevance: adjacent
+  why: Computational-chemistry (software) agent, no physical instrument; included as a quantitative scientific-agent
+    baseline.
+  verified_from: search snippet only
+- name: 'Pipette: An Embodied Simulation Platform, Benchmark, and Data-Efficient Augmentation Framework for Wet-Lab
+    Robotics'
+  short_name: Pipette
+  year: 2026
+  arxiv: '2606.12936'
+  url: https://arxiv.org/abs/2606.12936
+  relevance: skip
+  why: Already covered by a teammate (Pipette wet-lab sim); recorded here only for numbers seen in snippet.
+  verified_from: search snippet only
+- name: 'MATTERIX: toward a digital twin for robotics-assisted chemistry laboratory automation'
+  short_name: MATTERIX
+  year: 2026
+  arxiv: '2601.13232'
+  url: https://www.nature.com/articles/s43588-025-00924-4
+  relevance: adjacent
+  why: Digital twin infrastructure relevant to agent evaluation but no LLM-agent benchmark reported (~3% FPS overhead,
+    sim-to-real transfer are the headline metrics).
+  verified_from: search snippet only
+- name: Agentic self-driving microscopy benchmarks support qualification but do not necessarily generalize to unseen
+    tasks (ZEISS Versa XRM)
+  short_name: Zeiss-XRM-agent-benchmark
+  year: 2026
+  arxiv: '2608.05266'
+  url: https://arxiv.org/abs/2608.05266
+  relevance: skip
+  why: Duplicate of teammate-covered Johnson & Abshire; noted to resolve the uncertainty in the task brief.
+  verified_from: search snippet only
+- name: 'LABSHIELD: A Multimodal Benchmark for Safety-Critical Reasoning and Planning in Scientific Laboratories'
+  short_name: LABSHIELD
+  year: 2026
+  arxiv: '2603.11987'
+  url: https://arxiv.org/abs/2603.11987
+  relevance: adjacent
+  why: Multimodal safety-planning QA for SDL operators (perception/planning), not closed-loop instrument control.
+  verified_from: search snippet only
+- name: 'Chemist Eye: A Visual Language Model-Powered System for Safety Monitoring and Robot Decision-Making in
+    Self-Driving Laboratories'
+  short_name: Chemist Eye
+  year: 2026
+  arxiv: '2508.05148'
+  url: https://arxiv.org/abs/2508.05148
+  relevance: adjacent
+  why: VLM acts on SDL mobile robots (safety re-routing) with quantitative detection/decision accuracy, but does
+    not operate scientific instruments.
+  verified_from: search snippet only
+- name: 'Operationalizing Serendipity: Multi-Agent AI Workflows for Enhanced Materials Characterization with Theory-in-the-Loop
+    (SciLink)'
+  short_name: SciLink
+  year: 2025
+  arxiv: '2508.06569'
+  url: https://arxiv.org/abs/2508.06569
+  relevance: adjacent
+  why: Characterization-data analysis agents, no instrument actuation or benchmark numbers found.
+  verified_from: search snippet only
+- name: 'MDCrow: Automating Molecular Dynamics Workflows with Large Language Models'
+  short_name: MDCrow
+  year: 2025
+  arxiv: '2502.09565'
+  url: https://arxiv.org/abs/2502.09565
+  relevance: adjacent
+  why: Computational (simulation) workflow agent with quantitative task accuracy; no physical instrument.
+  verified_from: search snippet only
+- name: 'MDGym: Benchmarking AI Agents on Molecular Simulations'
+  short_name: MDGym
+  year: 2026
+  arxiv: '2605.08941'
+  url: https://arxiv.org/abs/2605.08941
+  relevance: adjacent
+  why: Simulation-code agent benchmark (no instruments) but a useful methodological comparator; related MDArena
+    (arXiv 2608.02642) and MDDataBench (github.com/matsunagalab/MDDataBench).
+  verified_from: search snippet only
+- name: 'BLADE: Benchmarking Language Model Agents for Data-Driven Science'
+  short_name: BLADE
+  year: 2024
+  arxiv: '2408.09667'
+  url: https://github.com/behavioral-data/BLADE
+  relevance: skip
+  why: Data-analysis agent benchmark with no instrument, simulator or lab component.
+  verified_from: search snippet only
+- name: 'BixBench: a Comprehensive Benchmark for LLM-based Agents in Computational Biology'
+  short_name: BixBench
+  year: 2025
+  arxiv: '2503.00096'
+  url: https://arxiv.org/abs/2503.00096
+  relevance: skip
+  why: Purely computational biology analysis; no lab hardware or simulator.
+  verified_from: search snippet only
+- name: Bridging electron microscopy and materials analysis with an autonomous agentic platform (EMSeek)
+  short_name: EMSeek
+  year: 2026
+  arxiv: null
+  url: https://github.com/PEESEgroup/EMSeek
+  relevance: adjacent
+  why: Post-acquisition EM analysis agents (no microscope control) with quantitative benchmarks.
+  verified_from: search snippet only
+- name: 'Robin: A multi-agent system for automating scientific discovery (FutureHouse)'
+  short_name: Robin
+  year: 2026
+  arxiv: '2505.13400'
+  url: https://github.com/Future-House/robin
+  relevance: adjacent
+  why: Wet-lab validation exists but humans, not the agent, operate instruments; no instrument-control benchmark.
+  verified_from: search snippet only
+- name: 'Aviary: training language agents on challenging scientific tasks'
+  short_name: Aviary
+  year: 2024
+  arxiv: '2412.21154'
+  url: https://github.com/Future-House/aviary
+  relevance: adjacent
+  why: Gym for scientific language agents but no lab-hardware or instrument simulator component.
+  verified_from: search snippet only
+- name: 'PhysGym: Benchmarking LLMs in Interactive Physics Discovery with Controlled Priors'
+  short_name: PhysGym
+  year: 2025
+  arxiv: '2507.15550'
+  url: https://github.com/principia-ai/PhysGym
+  relevance: adjacent
+  why: Interactive simulated experimentation but abstract physics, not instrument/lab simulators.
+  verified_from: https://github.com/principia-ai/PhysGym
+- name: 'SciAgentGym: Benchmarking Multi-Step Scientific Tool-use in LLM Agents'
+  short_name: SciAgentGym
+  year: 2026
+  arxiv: '2602.12984'
+  url: https://github.com/CMarsRover/SciAgentGYM
+  relevance: adjacent
+  why: Computational tool-use only; README confirms no instrument-control or lab-automation tasks.
+  verified_from: https://github.com/CMarsRover/SciAgentGYM
+- name: Toward Full Autonomous Laboratory Instrumentation Control with Large Language Models
+  short_name: Xie-CastellanosGomez-LLM-instrument
+  year: 2025
+  arxiv: '2604.03286'
+  url: https://onlinelibrary.wiley.com/doi/10.1002/sstr.202500173
+  relevance: adjacent
+  why: Demonstration/perspective on LLM instrument control without a benchmark-style quantitative evaluation (as
+    far as snippets show).
+  verified_from: search snippet only
+- name: 'It''s not the Language Model, it''s the Tool: Deterministic Mediation for Scientific Workflows'
+  short_name: Deterministic-Mediation
+  year: 2026
+  arxiv: '2605.13245'
+  url: https://arxiv.org/abs/2605.13245
+  relevance: adjacent
+  why: Instrument-adjacent deployment but concerns reproducible data analysis, not instrument control, and reports
+    user feedback rather than a benchmark.
+  verified_from: search snippet only
+- name: 'LAP: An Agent-to-Instrument Protocol for Autonomous Science'
+  short_name: LAP
+  year: 2026
+  arxiv: '2606.03755'
+  url: https://arxiv.org/abs/2606.03755
+  relevance: adjacent
+  why: Infrastructure/protocol proposal with no agent benchmark.
+  verified_from: search snippet only
+- name: 'SCP: Accelerating Discovery with a Global Web of Autonomous Scientific Agents (Science Context Protocol)'
+  short_name: SCP
+  year: 2025
+  arxiv: '2512.24189'
+  url: https://arxiv.org/abs/2512.24189
+  relevance: adjacent
+  why: Protocol/infrastructure, no instrument-agent benchmark reported.
+  verified_from: search snippet only
+- name: Multi-Agent Systems for Autonomous Laboratory Instrument Operation (Johnson, Carl Zeiss RMS)
+  short_name: Johnson-2025-MAS-review
+  year: 2025
+  arxiv: null
+  url: https://naterthought.com/papers/VGPT.pdf
+  relevance: adjacent
+  why: Review without new benchmark.
+  verified_from: search snippet only
+- name: 'From observation to understanding: A multi-agent framework for smart microscopy (Kesavan & Nordenfelt)
+    + gently agentic harness'
+  short_name: gently
+  year: 2026
+  arxiv: '2505.20466'
+  url: https://github.com/gently-project/gently
+  relevance: adjacent
+  why: Framework and conceptual design; no quantitative agent benchmark located.
+  verified_from: https://github.com/gently-project/gently
+- name: 'Agent-Lens: AI Agents for Smart Microscopy (AICell Lab)'
+  short_name: Agent-Lens
+  year: 2025
+  arxiv: null
+  url: https://github.com/aicell-lab/agent-lens
+  relevance: adjacent
+  why: Open-source control framework; no benchmark or quantitative evaluation found.
+  verified_from: search snippet only
+- name: 'OpenLabAI: natural-language MCP agents for lab robot control'
+  short_name: OpenLabAI
+  year: 2026
+  arxiv: null
+  url: https://github.com/nygmeta/OpenLabAI
+  relevance: adjacent
+  why: README explicitly states no protocol-generation validity benchmark has been run.
+  verified_from: https://github.com/nygmeta/OpenLabAI
+- name: 'LLMicroscopilot: An LLM assistant for STM/STEM measurements (LLM Hackathon 2024)'
+  short_name: LLMicroscopilot
+  year: 2024
+  arxiv: '2411.15221'
+  url: https://zenodo.org/records/14051590
+  relevance: adjacent
+  why: Prototype without quantitative evaluation.
+  verified_from: search snippet only
+- name: 'ChemGraph: An Agentic Framework for Computational Chemistry Workflows'
+  short_name: ChemGraph
+  year: 2025
+  arxiv: '2506.06363'
+  url: https://arxiv.org/abs/2506.06363
+  relevance: adjacent
+  why: Computational-chemistry agent benchmark, no instrument.
+  verified_from: search snippet only
+- name: 'MatClaw: An Autonomous Code-First LLM Agent for End-to-End Materials Exploration'
+  short_name: MatClaw
+  year: 2026
+  arxiv: '2604.02688'
+  url: https://github.com/cz2014/MatClaw
+  relevance: skip
+  why: Purely computational materials workflows.
+  verified_from: search snippet only
+- name: 'HoneyComb: A Flexible LLM-Based Agent System for Materials Science (and LLaMP)'
+  short_name: HoneyComb
+  year: 2024
+  arxiv: '2409.00135'
+  url: https://arxiv.org/abs/2409.00135
+  relevance: skip
+  why: Knowledge QA agents with no lab or instrument component.
+  verified_from: search snippet only
+- name: A modular framework for collaborative human-AI, multi-modal and multi-beamline synchrotron experiments (NSLS-II)
+  short_name: NSLS-II-multibeamline
+  year: 2025
+  arxiv: '2509.22959'
+  url: https://arxiv.org/abs/2509.22959
+  relevance: adjacent
+  why: Agentic beamline orchestration with a digital-twin evaluation, but agents are ML/BO rather than LLM/VLM.
+  verified_from: search snippet only
+- name: Validation of an LLM-based Multi-Agent Framework for Protein Engineering in Dry Lab and Wet Lab (TourSynbio-Agent)
+  short_name: TourSynbio-Agent
+  year: 2024
+  arxiv: '2411.06029'
+  url: https://arxiv.org/abs/2411.06029
+  relevance: adjacent
+  why: Wet-lab outcome validation but humans execute experiments; no instrument control.
+  verified_from: search snippet only
+- name: 'Compressing the Validation Bottleneck: An Agentic Self-Driving Lab for Scientific Discovery'
+  short_name: Validation-Bottleneck-SDL
+  year: 2026
+  arxiv: '2607.04508'
+  url: https://arxiv.org/abs/2607.04508
+  relevance: adjacent
+  why: Experiment-selection agent, no instrument control benchmark.
+  verified_from: search snippet only
+- name: 'Agentic AI for Self-Driving Laboratories in Soft Matter: Taxonomy, Benchmarks, and Open Challenges'
+  short_name: SoftMatter-SDL-survey
+  year: 2026
+  arxiv: '2601.17920'
+  url: https://arxiv.org/abs/2601.17920
+  relevance: adjacent
+  why: Survey with benchmark proposals, no released benchmark or results.
+  verified_from: search snippet only
+- name: Perspective on Utilizing Foundation Models for Laboratory Automation in Materials Research
+  short_name: Hatakeyama-Sato-perspective
+  year: 2025
+  arxiv: '2506.12312'
+  url: https://arxiv.org/abs/2506.12312
+  relevance: skip
+  why: Perspective, no evaluation.
+  verified_from: search snippet only
+- name: 'Embodied Science: Closing the Discovery Loop with Agentic Embodied AI'
+  short_name: Embodied-Science-survey
+  year: 2026
+  arxiv: '2603.19782'
+  url: https://arxiv.org/abs/2603.19782
+  relevance: adjacent
+  why: Survey useful for related-work coverage; no benchmark.
+  verified_from: search snippet only
+- name: 'Thinking microscopes: agentic AI and the future of electron microscopy'
+  short_name: Thinking-microscopes
+  year: 2026
+  arxiv: null
+  url: https://www.nature.com/articles/s41524-026-02077-y
+  relevance: adjacent
+  why: Perspective, no benchmark.
+  verified_from: search snippet only
+- name: 'stemOrchestrator: Enabling Seamless Hardware Control and High-Throughput Workflows on Electron Microscopes'
+  short_name: stemOrchestrator
+  year: 2025
+  arxiv: null
+  url: https://academic.oup.com/mam/article/31/Supplement_1/ozaf048.1066/8213047
+  relevance: adjacent
+  why: Control middleware without an LLM agent evaluation, but a likely substrate for STEM agent benchmarks.
+  verified_from: search snippet only
+- name: MicroscopyLLM-Bench
+  short_name: MicroscopyLLM-Bench
+  year: 2025
+  arxiv: null
+  url: https://github.com/adibgpt/MicroscopyLLM-Bench
+  relevance: skip
+  why: Image-analysis benchmark only, no instrument interaction.
+  verified_from: search snippet only
+- name: 'LC Agent: AI-driven recommendation of liquid chromatography conditions'
+  short_name: LC Agent
+  year: 2026
+  arxiv: null
+  url: https://pubmed.ncbi.nlm.nih.gov/42260980/
+  relevance: adjacent
+  why: Method recommendation, not instrument operation.
+  verified_from: search snippet only
+- name: 'StructAgent: Orchestrating Cryo-EM Model Building and Refinement with a Multi-Agent LLM System'
+  short_name: StructAgent
+  year: 2026
+  arxiv: null
+  url: https://www.biorxiv.org/content/10.64898/2026.05.18.725842v1
+  relevance: skip
+  why: Downstream software pipeline, not instrument control (no cryo-EM acquisition agent benchmark located).
+  verified_from: search snippet only
+- name: Autonomous Laboratory Agent via Customized Domain-Specific Language Model and Modular AI Interface (Diao
+    et al.)
+  short_name: Diao-2026-SPM-DSLM
+  year: 2026
+  arxiv: '2602.20669'
+  url: https://arxiv.org/abs/2602.20669
+  relevance: skip
+  why: Already covered by teammate (Diao 2024/2026 SPM agents); recorded to avoid re-extraction.
+  verified_from: search snippet only
+- name: LLM-Guided Open Hypothesis Learning from Autonomous Scanning Probe Microscopy Experiments
+  short_name: LLM-OHL-SPM
+  year: 2026
+  arxiv: '2605.06839'
+  url: https://arxiv.org/abs/2605.06839
+  relevance: skip
+  why: Likely within teammate coverage of Kalinin/Slautin 2026 SPM agents; flagged for de-duplication check.
+  verified_from: search snippet only
+- name: 'PREVENT: Proactive Risk Evaluation and Vigilant Execution of Tasks for Mobile Robotic Chemists using Multi-Modal
+    Behavior Trees'
+  short_name: PREVENT
+  year: 2025
+  arxiv: '2510.21438'
+  url: https://arxiv.org/abs/2510.21438
+  relevance: skip
+  why: No LLM/VLM agent component evident.
+  verified_from: search snippet only
+- name: 'SAFE-CHEM: Uncertainty-Aware Policy Switching for Robust Robotic Chemistry'
+  short_name: SAFE-CHEM
+  year: 2026
+  arxiv: '2608.09303'
+  url: https://arxiv.org/abs/2608.09303
+  relevance: skip
+  why: Learning-based manipulation safety without LLM/VLM agent.
+  verified_from: search snippet only
+- name: 'RoboLab: A High-Fidelity Simulation Benchmark for Analysis of Task Generalist Policies (NVIDIA)'
+  short_name: RoboLab-NV
+  year: 2026
+  arxiv: '2604.09860'
+  url: https://github.com/NVLabs/RoboLab
+  relevance: skip
+  why: Household/generic manipulation, not scientific lab.
+  verified_from: search snippet only
+- name: 'ChemGymRL: An Interactive Framework for Reinforcement Learning for Digital Chemistry'
+  short_name: ChemGymRL
+  year: 2023
+  arxiv: '2305.14177'
+  url: https://arxiv.org/abs/2305.14177
+  relevance: skip
+  why: RL-only digital chemistry environment predating LLM agents; candidate name 'ChemGym' does not correspond
+    to an LLM benchmark.
+  verified_from: search snippet only
+- name: 'ChemOS 2.0: An orchestration architecture for chemical self-driving laboratories'
+  short_name: ChemOS 2.0
+  year: 2024
+  arxiv: null
+  url: https://www.sciencedirect.com/science/article/pii/S2590238524001954
+  relevance: skip
+  why: Orchestration software without LLM agent benchmark; Polybot/Chemspeed LLM-agent evaluations not found.
+  verified_from: search snippet only
+- name: Periodic Labs
+  short_name: Periodic Labs
+  year: 2025
+  arxiv: null
+  url: https://www.implicator.ai/periodic-labs-raises-300-million-to-automate-science/
+  relevance: skip
+  why: No published evaluation.
+  verified_from: search snippet only
+- name: 'FARS: A Fully Automated Research System Deployed at Scale'
+  short_name: FARS
+  year: 2026
+  arxiv: '2606.31651'
+  url: https://arxiv.org/abs/2606.31651
+  relevance: skip
+  why: Purely computational ML research automation.
+  verified_from: search snippet only
+- name: Act As a Real Researcher (AARRI-Bench)
+  short_name: AARRI-Bench
+  year: 2026
+  arxiv: '2606.07462'
+  url: https://github.com/AARR-bench/AARRI-bench
+  relevance: skip
+  why: Computational research tasks, no lab/instrument component.
+  verified_from: search snippet only
+- name: Sakana AI Scientist / Google AI co-scientist / Beyond SMILES
+  short_name: AI-Scientist-family
+  year: 2025
+  arxiv: '2502.14297'
+  url: https://arxiv.org/abs/2502.14297
+  relevance: skip
+  why: No instrument or simulator execution component.
+  verified_from: search snippet only
+- name: Candidate names not found as LLM-agent benchmarks
+  short_name: not-found
+  year: 2026
+  arxiv: null
+  url: null
+  relevance: skip
+  why: Recorded so the survey can state these were searched.
+  verified_from: search snippet only

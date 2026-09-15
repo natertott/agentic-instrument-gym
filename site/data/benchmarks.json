@@ -1,7 +1,230 @@
 {
  "generated_on": "2026-09-15",
- "n_cards": 65,
+ "n_cards": 96,
  "cards": [
+  {
+   "id": "protopilot",
+   "record_type": "benchmark",
+   "name": "A Self-Evolving Agentic System for Automated Generation and Execution of Biological Protocols (ProtoPilot)",
+   "short_name": "ProtoPilot",
+   "year": 2026,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2606.31763",
+   "doi": null,
+   "url": "https://arxiv.org/abs/2606.31763",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "Shanghai AI Lab / Genoria multi-agent system with runtime skill library generating protocols, SDK-compliant liquid-handler code and wet-lab revisions; expert-grounded benchmark of 294 tasks from 98 gold protocols with device validity gates and real runs. Protocol-to-robot-code benchmark with device-level validity gates, Opentrons execution and wet-lab validation, multi-system comparison.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "hybrid",
+    "instruments": [
+     {
+      "name": "Opentrons liquid handler",
+      "modality": "liquid_handling",
+      "real_or_simulated": null
+     },
+     {
+      "name": "other liquid-handling platforms",
+      "modality": "liquid_handling",
+      "real_or_simulated": null
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": 294,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "Top@3 expert-preference 90.2%; protocol-to-code gate pass 96.6%; Opentrons pass 88.2% vs 32.4% for Opentrons-AI"
+    ],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://arxiv.org/abs/2606.31763"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "liquid_handling"
+    ],
+    "coverage": {
+     "benchmark": 0.21739130434782608,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
+    }
+   }
+  },
+  {
+   "id": "abc_bench",
+   "record_type": "benchmark",
+   "name": "ABC-Bench: An Agentic Bio-Capabilities Benchmark for Biosecurity",
+   "short_name": "ABC-Bench",
+   "year": 2026,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2606.11150",
+   "doi": null,
+   "url": "https://arxiv.org/abs/2606.11150",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "Agentic tasks incl. writing code to operate liquid-handling robots (Gibson assembly on Opentrons), DNA fragment design and synthesis-screening evasion; eight frontier models vs 175 h of expert human baselines; cited in model cards. Quantitative agentic evaluation with a liquid-handling-robot control task and wet-lab confirmation (o4-mini-high scripts assembled DNA correctly).",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "hybrid",
+    "instruments": [
+     {
+      "name": "Opentrons liquid handler",
+      "modality": "liquid_handling",
+      "real_or_simulated": null
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": 3,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "Agents match or exceed expert baselines; o4-mini-high Opentrons scripts assembled DNA with expected sequences (search snippet)"
+    ],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://arxiv.org/abs/2606.11150"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "liquid_handling"
+    ],
+    "coverage": {
+     "benchmark": 0.21739130434782608,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
+    }
+   }
+  },
   {
    "id": "agentabstain",
    "record_type": "benchmark",
@@ -168,6 +391,131 @@
      "task": 0.8888888888888888,
      "sample_environment": 0.75,
      "agent": 0.7777777777777778
+    }
+   }
+  },
+  {
+   "id": "a_lab_gpss_agentic",
+   "record_type": "benchmark",
+   "name": "Agentic LLM Reasoning in a Self-Driving Laboratory for Air-Sensitive Lithium Halide Spinel Conductors (A-Lab GPSS)",
+   "short_name": "A-Lab-GPSS-agentic",
+   "year": 2026,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2604.11957",
+   "doi": null,
+   "url": "https://arxiv.org/abs/2604.11957",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "Ceder group A-Lab glovebox platform with abnormality-detection (abductive) and pattern-finding (inductive) LLM agents in the closed loop; 352-sample campaign over 19 metals. LLM agents steering a physical self-driving lab with a quantitative success-rate comparison against non-agentic baseline.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "physical_instrument",
+    "instruments": [
+     {
+      "name": "glovebox powder synthesis robot",
+      "modality": "robotics",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "furnaces",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "XRD",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "impedance spectroscopy",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": 352,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "Discovery success rate 1.33% -> 5.33% over 352 samples with agentic reasoning (search snippet)"
+    ],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://arxiv.org/abs/2604.11957"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "robotics",
+     "generic_lab"
+    ],
+    "coverage": {
+     "benchmark": 0.21739130434782608,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
     }
    }
   },
@@ -529,6 +877,113 @@
      "task": 1.0,
      "sample_environment": 0.625,
      "agent": 0.7777777777777778
+    }
+   }
+  },
+  {
+   "id": "autolabs",
+   "record_type": "benchmark",
+   "name": "AutoLabs: Cognitive Multi-Agent Systems with Self-Correction for Autonomous Chemical Experimentation",
+   "short_name": "AutoLabs",
+   "year": 2026,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2509.25651",
+   "doi": "10.1038/s41598-026-45593-z",
+   "url": "https://arxiv.org/abs/2509.25651",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "Self-correcting multi-agent system translating natural-language goals into hardware-ready high-throughput liquid-handler files; five benchmark experiments, ablation over 20 agent configurations; Sci. Rep. 2026. Quantitative benchmark of LLM agent configurations generating executable liquid-handler protocols (nRMSE, F1 vs expert procedures).",
+   "benchmark_features": {
+    "evaluation_target": [],
+    "execution_mode": "static_code_eval",
+    "instruments": [
+     {
+      "name": "high-throughput liquid handler",
+      "modality": "liquid_handling",
+      "real_or_simulated": null
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": 5,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "Reasoning capacity cuts nRMSE >85%; F1 > 0.89 vs expert procedures on multi-plate syntheses (search snippet)"
+    ],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://arxiv.org/abs/2509.25651"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "liquid_handling"
+    ],
+    "coverage": {
+     "benchmark": 0.17391304347826086,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
     }
    }
   },
@@ -930,6 +1385,132 @@
    }
   },
   {
+   "id": "bioprovla_agent",
+   "record_type": "benchmark",
+   "name": "BioProVLA-Agent: Protocol-Driven, Vision-Enhanced VLA-Enabled Embodied Multi-Agent System for Biological Laboratory Manipulation",
+   "short_name": "BioProVLA-Agent",
+   "year": 2026,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2605.07306",
+   "doi": null,
+   "url": "https://arxiv.org/abs/2605.07306",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "LLM protocol agent + VLM-RAG verification agent + AugSmolVLA embodied agent evaluated on a hierarchical benchmark of 15 atomic tasks, 6 composite workflows and 3 bimanual tasks (centrifuge-tube loading, cap twisting, pouring). Quantitative hierarchical lab-manipulation benchmark for an LLM/VLM/VLA agent stack on low-cost hardware.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "physical_instrument",
+    "instruments": [
+     {
+      "name": "low-cost robot arms",
+      "modality": "robotics",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "centrifuge tubes",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "racks",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "liquid containers",
+      "modality": "liquid_handling",
+      "real_or_simulated": "real"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": 24,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "15 atomic + 6 composite + 3 bimanual tasks (numbers not in snippets)"
+    ],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://arxiv.org/abs/2605.07306"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "robotics",
+     "generic_lab",
+     "liquid_handling"
+    ],
+    "coverage": {
+     "benchmark": 0.21739130434782608,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
+    }
+   }
+  },
+  {
    "id": "emseek",
    "record_type": "benchmark",
    "name": "Bridging electron microscopy and materials analysis with an autonomous agentic platform (EMSeek)",
@@ -1084,6 +1665,126 @@
      "task": 0.8888888888888888,
      "sample_environment": 0.5,
      "agent": 0.8888888888888888
+    }
+   }
+  },
+  {
+   "id": "eos_ai_agent",
+   "record_type": "benchmark",
+   "name": "From Prompts to Protocols: An AI Agent for Laboratory Automation (EOS agent)",
+   "short_name": "EOS-AI-agent",
+   "year": 2026,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2605.16552",
+   "doi": null,
+   "url": "https://arxiv.org/abs/2605.16552",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "UNC LLM agent integrated into the Experiment Orchestration System with agentic validation/error-correction loop and visual graph editor; evaluated on three simulated automated labs (chemistry, biology, materials). Quantitative evaluation of LLM protocol generation for lab orchestration on simulated labs.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "simulation_control"
+    ],
+    "execution_mode": "simulator",
+    "instruments": [
+     {
+      "name": "simulated automated labs (chemistry",
+      "modality": "computation",
+      "real_or_simulated": "simulated"
+     },
+     {
+      "name": "biology",
+      "modality": "generic_lab",
+      "real_or_simulated": "simulated"
+     },
+     {
+      "name": "materials)",
+      "modality": "generic_lab",
+      "real_or_simulated": "simulated"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": 3,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "97% first-attempt protocol generation success; order-of-magnitude fewer interface actions (search snippet)"
+    ],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://arxiv.org/abs/2605.16552"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "computation",
+     "generic_lab"
+    ],
+    "coverage": {
+     "benchmark": 0.21739130434782608,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
     }
    }
   },
@@ -1457,6 +2158,257 @@
    }
   },
   {
+   "id": "labimus",
+   "record_type": "benchmark",
+   "name": "Labimus: A Simulation and Benchmark for Humanoid Dexterous Manipulation in Chemical Laboratory",
+   "short_name": "Labimus",
+   "year": 2026,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2606.31037",
+   "doi": null,
+   "url": "https://labimus.github.io/",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "Humanoid dexterous-manipulation benchmark in organic-chemistry lab with 30+ real-to-sim assets, particle powder physics, closed-loop instrument readouts (balance), 6 atomic ops + 7-step solid-weighing SOP and a precision-aware metric. Simulator with instrument readouts and precision-aware evaluation of lab manipulation policies.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "simulation_control"
+    ],
+    "execution_mode": "simulator",
+    "instruments": [
+     {
+      "name": "analytical balance",
+      "modality": "generic_lab",
+      "real_or_simulated": "simulated"
+     },
+     {
+      "name": "spatula",
+      "modality": "generic_lab",
+      "real_or_simulated": "simulated"
+     },
+     {
+      "name": "vials",
+      "modality": "generic_lab",
+      "real_or_simulated": "simulated"
+     },
+     {
+      "name": "organic-chemistry workstation",
+      "modality": "generic_lab",
+      "real_or_simulated": "simulated"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": 7,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "6 atomic operations + 7-step weighing workflow; gap between task completion and experimentally valid precision (search snippet)"
+    ],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://labimus.github.io/"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "generic_lab"
+    ],
+    "coverage": {
+     "benchmark": 0.21739130434782608,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
+    }
+   }
+  },
+  {
+   "id": "prism",
+   "record_type": "benchmark",
+   "name": "PRISM: Protocol Refinement through Intelligent Simulation Modeling",
+   "short_name": "PRISM",
+   "year": 2026,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2601.05356",
+   "doi": "10.1039/D6DD00004E",
+   "url": "https://github.com/ramanathanlab/PRISM",
+   "code_url": "https://github.com/ramanathanlab/PRISM",
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "Argonne multi-agent LLM protocol planning + generation with mandatory NVIDIA Omniverse digital-twin simulation gate before execution on an OT-2 / PF400 / Azenta sealer lab; PCR validated physically, Cell Painting computationally; seven LLMs compared; Digital Discovery 2026. Digital-twin-gated LLM protocol generation with cross-model comparison and real robotic execution.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "hybrid",
+    "instruments": [
+     {
+      "name": "Opentrons OT-2",
+      "modality": "liquid_handling",
+      "real_or_simulated": null
+     },
+     {
+      "name": "PF400 arm",
+      "modality": "robotics",
+      "real_or_simulated": null
+     },
+     {
+      "name": "Azenta plate sealer/peeler",
+      "modality": "liquid_handling",
+      "real_or_simulated": null
+     },
+     {
+      "name": "qPCR",
+      "modality": "generic_lab",
+      "real_or_simulated": null
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": 2,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "Compares GPT-5, GPT-4o, Claude Opus/Sonnet, Gemini Pro/Flash/Flash-Lite by correction iterations needed (numbers not in README)"
+    ],
+    "open_source": true
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: https://github.com/ramanathanlab/PRISM. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://github.com/ramanathanlab/PRISM",
+     "https://github.com/ramanathanlab/PRISM"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "liquid_handling",
+     "robotics",
+     "generic_lab"
+    ],
+    "coverage": {
+     "benchmark": 0.2608695652173913,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
+    }
+   }
+  },
+  {
    "id": "protoact",
    "record_type": "benchmark",
    "name": "ProtoAct: Turning Wet-Lab Protocols into Embodied Robotic Actions (introduces the BioP2E benchmark)",
@@ -1590,6 +2542,115 @@
      "task": 0.7777777777777778,
      "sample_environment": 0.375,
      "agent": 0.6666666666666666
+    }
+   }
+  },
+  {
+   "id": "rfia",
+   "record_type": "benchmark",
+   "name": "RF Instrument Agent (RFIA): Empowering RF Instruments with Natural Language Understanding, Scheduling and Execution of Complex Tasks",
+   "short_name": "RFIA",
+   "year": 2026,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2605.23636",
+   "doi": null,
+   "url": "https://arxiv.org/abs/2605.23636",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "Decoupled intent-planning-execution agent for RF instruments with a deterministic runtime; hardware-in-the-loop on a commercial VNA with a 16-intent benchmark (config, S-parameter acquisition, resonance search, multisegment acquisition). LLM agent controlling a physical measurement instrument with an explicit intent benchmark and safety-policy evaluation across two LLMs.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "physical_instrument",
+    "instruments": [
+     {
+      "name": "vector network analyzer",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": 16,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "All 16 benchmark intents handled with MiniMax-M2.7 and Qwen3.6-27B incl. one expected safety rejection (search snippet)"
+    ],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://arxiv.org/abs/2605.23636"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "generic_lab"
+    ],
+    "coverage": {
+     "benchmark": 0.21739130434782608,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
     }
    }
   },
@@ -1875,6 +2936,115 @@
    }
   },
   {
+   "id": "sci_vla",
+   "record_type": "benchmark",
+   "name": "Sci-VLA / AtomBridge: Agentic VLA Inference Plugin for Long-Horizon Tasks in Scientific Experiments",
+   "short_name": "Sci-VLA",
+   "year": 2026,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2602.09430",
+   "doi": null,
+   "url": "https://arxiv.org/abs/2602.09430",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "Inference-time agent that infers and codes transitional actions between atomic VLA skills so composite lab workflows succeed without retraining; verified on 3-/5-/8-step tasks in a digital-twin system. Quantitative digital-twin evaluation of an agentic layer over lab VLA policies for long-horizon experiments.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "digital_twin",
+    "instruments": [
+     {
+      "name": "robotic lab digital twin",
+      "modality": "robotics",
+      "real_or_simulated": "digital_twin"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": 3,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "Evaluated on 3-, 5- and 8-step composite tasks (success numbers not in snippets)"
+    ],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://arxiv.org/abs/2602.09430"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "robotics"
+    ],
+    "coverage": {
+     "benchmark": 0.21739130434782608,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
+    }
+   }
+  },
+  {
    "id": "sciagentbench",
    "record_type": "benchmark",
    "name": "SciAgentGym / SciAgentBench: Benchmarking Multi-Step Scientific Tool-use in LLM Agents",
@@ -1998,6 +3168,230 @@
      "task": 0.7777777777777778,
      "sample_environment": 0.25,
      "agent": 0.2222222222222222
+    }
+   }
+  },
+  {
+   "id": "vibe_calibration",
+   "record_type": "benchmark",
+   "name": "Vibe Calibration: Autonomous Bring-up of a 112-Qubit Superconducting Quantum Processor by a Skill-Orchestrating Language Agent",
+   "short_name": "Vibe Calibration",
+   "year": 2026,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2606.22376",
+   "doi": null,
+   "url": "https://arxiv.org/abs/2606.22376",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "Fine-tuned LLM agent orchestrating decision-tree Skills (measurement commands, acceptance criteria, audit records) to bring up a 112-qubit processor without human intervention. Quantitative physical-instrument result (qubits calibrated, time, agreement with experts) for an LLM agent controlling a scientific apparatus.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "physical_instrument",
+    "instruments": [
+     {
+      "name": "112-qubit superconducting quantum processor",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": 112,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "108/112 qubits (96.4%) calibrated in 4.7 h vs 18-24 h manual; 14/16 agreement with expert on cross-validated subset (search snippet)"
+    ],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://arxiv.org/abs/2606.22376"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "generic_lab"
+    ],
+    "coverage": {
+     "benchmark": 0.21739130434782608,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
+    }
+   }
+  },
+  {
+   "id": "hanbit",
+   "record_type": "benchmark",
+   "name": "Virtual commissioning of the Korea Light Source Hard X-ray Nanoprobe beamline with multilingual natural language control (HANBIT)",
+   "short_name": "HANBIT",
+   "year": 2026,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": null,
+   "doi": null,
+   "url": "https://journals.iucr.org/s/issues/2026/05/00/ok5168/index.html",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "Browser-based virtual commissioning platform (ray-tracing engine + EPICS/Bluesky stack) for the KLS ID10 nanoprobe with a multilingual (KO/EN/JA) LLM agent interface; J. Synchrotron Rad. 2026. LLM agent controlling a beamline digital twin with a quantitative test set and expert acceptance review.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "digital_twin",
+    "instruments": [
+     {
+      "name": "hard X-ray nanoprobe beamline (virtual)",
+      "modality": "synchrotron",
+      "real_or_simulated": "digital_twin"
+     },
+     {
+      "name": "EPICS/Bluesky motors and detectors",
+      "modality": "generic_lab",
+      "real_or_simulated": "digital_twin"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": 228,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "98.2% automated action-identification accuracy on 228 test cases vs 67.3% expert acceptance (30.9-pt gap)"
+    ],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://journals.iucr.org/s/issues/2026/05/00/ok5168/index.html"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "synchrotron",
+     "generic_lab"
+    ],
+    "coverage": {
+     "benchmark": 0.21739130434782608,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
     }
    }
   },
@@ -2199,6 +3593,246 @@
    }
   },
   {
+   "id": "k_agents",
+   "record_type": "benchmark",
+   "name": "Agents for self-driving laboratories applied to quantum computing (k-agents) / Automating quantum computing laboratory experiments with an agent-based AI framework",
+   "short_name": "k-agents",
+   "year": 2025,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2412.07978",
+   "doi": "10.1016/j.patter.2025.101220",
+   "url": "https://www.cell.com/patterns/fulltext/S2666-3899(25)00220-X",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "LLM agents encapsulating lab knowledge as agent-based state machines that autonomously run single- and two-qubit gate calibrations and GHZ-state preparation/characterisation on a superconducting quantum processor; Patterns 2025. LLM agents closed-loop controlling a physical quantum processor with multimodal result interpretation, hours-long autonomous runs at human-level performance.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "physical_instrument",
+    "instruments": [
+     {
+      "name": "superconducting quantum processor",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "qubit control electronics",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": 3,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "Autonomous single-/two-qubit calibration and GHZ state generation at human-level performance (search snippet)"
+    ],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://www.cell.com/patterns/fulltext/S2666-3899(25)00220-X"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "generic_lab"
+    ],
+    "coverage": {
+     "benchmark": 0.21739130434782608,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
+    }
+   }
+  },
+  {
+   "id": "autobio",
+   "record_type": "benchmark",
+   "name": "AutoBio: A Simulation and Benchmark for Robotic Automation in Digital Biology Laboratory",
+   "short_name": "AutoBio",
+   "year": 2025,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2505.14030",
+   "doi": null,
+   "url": "https://arxiv.org/abs/2505.14030",
+   "code_url": "https://github.com/autobio-bench/AutoBio",
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "MuJoCo-based simulator + benchmark of biology-lab manipulation tasks (pipetting, centrifuge tubes, thermal cycler lid) for language-conditioned VLA policies. Faithful simulator of lab instruments with standardized quantitative evaluation of language-guided robot policies (pi0, RDT) on protocol steps.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "simulation_control"
+    ],
+    "execution_mode": "simulator",
+    "instruments": [
+     {
+      "name": "pipette",
+      "modality": "liquid_handling",
+      "real_or_simulated": "simulated"
+     },
+     {
+      "name": "centrifuge",
+      "modality": "generic_lab",
+      "real_or_simulated": "simulated"
+     },
+     {
+      "name": "thermal cycler",
+      "modality": "generic_lab",
+      "real_or_simulated": "simulated"
+     },
+     {
+      "name": "thermal mixer",
+      "modality": "generic_lab",
+      "real_or_simulated": "simulated"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": 9,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "README lists 9 tasks across 3 difficulty levels; baselines pi0 and RDT show large gaps in precision manipulation (no numbers in README)"
+    ],
+    "open_source": true
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: https://github.com/autobio-bench/AutoBio. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://arxiv.org/abs/2505.14030",
+     "https://github.com/autobio-bench/AutoBio"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "liquid_handling",
+     "generic_lab"
+    ],
+    "coverage": {
+     "benchmark": 0.2608695652173913,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
+    }
+   }
+  },
+  {
    "id": "autosdt",
    "record_type": "benchmark",
    "name": "AutoSDT: Scaling Data-Driven Discovery Tasks Toward Open Co-Scientists",
@@ -2323,6 +3957,138 @@
      "task": 0.8888888888888888,
      "sample_environment": 0.5,
      "agent": 0.7777777777777778
+    }
+   }
+  },
+  {
+   "id": "biomars",
+   "record_type": "benchmark",
+   "name": "BioMARS: A Multi-Agent Robotic System for Autonomous Biological Experiments",
+   "short_name": "BioMARS",
+   "year": 2025,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2507.01485",
+   "doi": null,
+   "url": "https://arxiv.org/abs/2507.01485",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "Biologist (RAG protocol synthesis), Technician (robot pseudo-code) and Inspector (VLM anomaly detection) agents driving modular robots through cell passaging and culture. LLM/VLM agents physically executing cell-culture workflows with quantitative comparison to manual performance (viability, consistency, morphology).",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "physical_instrument",
+    "instruments": [
+     {
+      "name": "robotic arm",
+      "modality": "robotics",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "pipettes",
+      "modality": "liquid_handling",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "biosafety cabinet",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "incubator",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "microscope camera",
+      "modality": "microscopy",
+      "real_or_simulated": "real"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": 2,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "Matches or exceeds manual cell passaging in viability/consistency (search snippet)"
+    ],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://arxiv.org/abs/2507.01485"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "robotics",
+     "liquid_handling",
+     "generic_lab",
+     "microscopy"
+    ],
+    "coverage": {
+     "benchmark": 0.21739130434782608,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
     }
    }
   },
@@ -2679,6 +4445,141 @@
      "task": 1.0,
      "sample_environment": 0.875,
      "agent": 0.8888888888888888
+    }
+   }
+  },
+  {
+   "id": "labutopia",
+   "record_type": "benchmark",
+   "name": "LabUtopia: High-Fidelity Simulation and Hierarchical Benchmark for Scientific Embodied Agents",
+   "short_name": "LabUtopia",
+   "year": 2025,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2505.22634",
+   "doi": null,
+   "url": "https://arxiv.org/abs/2505.22634",
+   "code_url": "https://github.com/Rui-li023/LabUtopia",
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "Isaac Sim 5.1 lab simulator (LabSim) + procedural scene generator (LabScene) + 5-level hierarchical benchmark (LabBench) of 30 tasks, 200+ instrument assets; NeurIPS 2025. Simulator of chemistry-lab instruments with a graded benchmark from atomic actions to long-horizon mobile manipulation, evaluated with diffusion/ACT policies.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "simulation_control"
+    ],
+    "execution_mode": "simulator",
+    "instruments": [
+     {
+      "name": "beakers",
+      "modality": "generic_lab",
+      "real_or_simulated": "simulated"
+     },
+     {
+      "name": "centrifuge",
+      "modality": "generic_lab",
+      "real_or_simulated": "simulated"
+     },
+     {
+      "name": "heater/stirrer",
+      "modality": "generic_lab",
+      "real_or_simulated": "simulated"
+     },
+     {
+      "name": "drawers",
+      "modality": "generic_lab",
+      "real_or_simulated": "simulated"
+     },
+     {
+      "name": "doors",
+      "modality": "generic_lab",
+      "real_or_simulated": "simulated"
+     },
+     {
+      "name": "generic chemistry-lab instruments",
+      "modality": "generic_lab",
+      "real_or_simulated": "simulated"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": 30,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "30 tasks, >200 scene/instrument assets, 5 complexity levels (NeurIPS 2025)"
+    ],
+    "open_source": true
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: https://github.com/Rui-li023/LabUtopia. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://arxiv.org/abs/2505.22634",
+     "https://github.com/Rui-li023/LabUtopia"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "generic_lab"
+    ],
+    "coverage": {
+     "benchmark": 0.2608695652173913,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
     }
    }
   },
@@ -3734,6 +5635,116 @@
    }
   },
   {
+   "id": "chemcrow",
+   "record_type": "benchmark",
+   "name": "Augmenting large language models with chemistry tools (ChemCrow)",
+   "short_name": "ChemCrow",
+   "year": 2024,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2304.05376",
+   "doi": "10.1038/s42256-024-00832-8",
+   "url": "https://www.nature.com/articles/s42256-024-00832-8",
+   "code_url": "https://github.com/ur-whitelab/chemcrow-public",
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "GPT-4 agent with 18 tools incl. RoboRXN cloud lab; expert-evaluated on 14 chemistry tasks; autonomously synthesised insect repellent and three organocatalysts; Nat. Mach. Intell. 2024. Early LLM agent with physical synthesis execution and a small quantitative expert evaluation.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "hybrid",
+    "instruments": [
+     {
+      "name": "IBM RoboRXN robotic synthesis platform",
+      "modality": "robotics",
+      "real_or_simulated": null
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": 14,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "Outperformed plain GPT-4 in expert evaluation on 14 tasks (search snippet)"
+    ],
+    "open_source": true
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://www.nature.com/articles/s42256-024-00832-8",
+     "https://github.com/ur-whitelab/chemcrow-public"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "robotics"
+    ],
+    "coverage": {
+     "benchmark": 0.2608695652173913,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
+    }
+   }
+  },
+  {
    "id": "biolp_bench",
    "record_type": "benchmark",
    "name": "BioLP-bench: Measuring understanding of biological lab protocols by large language models",
@@ -4702,6 +6713,132 @@
    }
   },
   {
+   "id": "organa",
+   "record_type": "benchmark",
+   "name": "ORGANA: A Robotic Assistant for Automated Chemistry Experimentation and Characterization",
+   "short_name": "ORGANA",
+   "year": 2024,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2401.06949",
+   "doi": "10.1016/j.matt.2024.10.015",
+   "url": "https://www.cell.com/matter/fulltext/S2590-2385(24)00542-3",
+   "code_url": "https://github.com/ac-rad/organa",
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "LLM-driven assistive robot chemist (goal derivation, disambiguation, planning with visual feedback) executing solubility, pH, recrystallization and electrochemistry experiments; Matter 2024. LLM agent physically controlling robot + lab devices with quantitative user-study evaluation and a 19-step parallel electrochemistry plan.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "physical_instrument",
+    "instruments": [
+     {
+      "name": "pH meter",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "potentiostat/electrochemistry cell",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "robot arm",
+      "modality": "robotics",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "lab glassware",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": 4,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "Users saved 80.3% of their time; frustration and physical demand reduced >50% (search snippet)"
+    ],
+    "open_source": true
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://www.cell.com/matter/fulltext/S2590-2385(24)00542-3",
+     "https://github.com/ac-rad/organa"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "generic_lab",
+     "robotics"
+    ],
+    "coverage": {
+     "benchmark": 0.2608695652173913,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
+    }
+   }
+  },
+  {
    "id": "scisafeeval",
    "record_type": "benchmark",
    "name": "SciSafeEval: A Comprehensive Benchmark for Safety Alignment of Large Language Models in Scientific Tasks",
@@ -5165,6 +7302,127 @@
    }
   },
   {
+   "id": "coscientist",
+   "record_type": "benchmark",
+   "name": "Autonomous chemical research with large language models (Coscientist)",
+   "short_name": "Coscientist",
+   "year": 2023,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": null,
+   "doi": "10.1038/s41586-023-06792-0",
+   "url": "https://www.nature.com/articles/s41586-023-06792-0",
+   "code_url": "https://github.com/gomesgroup/coscientist",
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "GPT-4-driven agent with web/documentation search, code execution and Opentrons OT-2 / heater-shaker control; six demonstration tasks incl. Pd cross-coupling optimisation; Nature 2023. Foundational LLM-agent-on-liquid-handler paper with quantitative sub-evaluations (documentation-grounded API use, reaction optimisation vs baselines).",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "physical_instrument",
+    "instruments": [
+     {
+      "name": "Opentrons OT-2 liquid handler",
+      "modality": "liquid_handling",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "heater-shaker",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "UV-Vis plate reader",
+      "modality": "liquid_handling",
+      "real_or_simulated": "real"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": 6,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "Six tasks; successful Suzuki/Sonogashira optimisation on OT-2 (search snippet)"
+    ],
+    "open_source": true
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://www.nature.com/articles/s41586-023-06792-0",
+     "https://github.com/gomesgroup/coscientist"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "liquid_handling",
+     "generic_lab"
+    ],
+    "coverage": {
+     "benchmark": 0.2608695652173913,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
+    }
+   }
+  },
+  {
    "id": "bioplanner",
    "record_type": "benchmark",
    "name": "BioPlanner: Automatic Evaluation of LLMs on Protocol Planning in Biology",
@@ -5473,6 +7731,254 @@
    }
   },
   {
+   "id": "optomate",
+   "record_type": "system",
+   "name": "AI-driven robotics for optics (OptoMate)",
+   "short_name": "OptoMate",
+   "year": 2026,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2505.17985",
+   "doi": "10.1126/sciadv.aee1381",
+   "url": "https://www.science.org/doi/10.1126/sciadv.aee1381",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "Fine-tuned LLM generates valid free-space optical setups from user goals; computer vision + precision robot assembles them with sub-mm accuracy and performs micrometre-scale alignment; Science Advances 2026. LLM agent plus robot physically building and aligning optical experiments with quantitative accuracy metrics.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "physical_instrument",
+    "instruments": [
+     {
+      "name": "free-space optics (lenses",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "mirrors",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "lasers)",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "robotic arm",
+      "modality": "robotics",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "cameras",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": null,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "Sub-millimetre assembly and micrometre-scale fine alignment (search snippet)"
+    ],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://www.science.org/doi/10.1126/sciadv.aee1381"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "generic_lab",
+     "robotics"
+    ],
+    "coverage": {
+     "benchmark": 0.17391304347826086,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
+    }
+   }
+  },
+  {
+   "id": "agentchemist",
+   "record_type": "system",
+   "name": "AgentChemist: A Multi-Agent Experimental Robotic Platform Integrating Chemical Perception and Precise Control",
+   "short_name": "AgentChemist",
+   "year": 2026,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2603.23886",
+   "doi": null,
+   "url": "https://arxiv.org/abs/2603.23886",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "ECNU multi-agent system (planning, perception, control, logging) on a general-purpose mobile chassis robot with real-time reaction monitoring and report generation for long-tail chemistry tasks. LLM multi-agent system physically running chemistry experiments on a mobile robot; quantitative evaluation details not visible in snippets.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "physical_instrument",
+    "instruments": [
+     {
+      "name": "mobile manipulator robot",
+      "modality": "robotics",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "reaction vessels",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "chemical sensors/cameras",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": null,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://arxiv.org/abs/2603.23886"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "robotics",
+     "generic_lab"
+    ],
+    "coverage": {
+     "benchmark": 0.13043478260869565,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
+    }
+   }
+  },
+  {
    "id": "agentic_sdl_soft_matter_taxonomy",
    "record_type": "survey",
    "name": "Agentic AI for Self-Driving Laboratories in Soft Matter: Taxonomy, Benchmarks, and Open Challenges",
@@ -5719,6 +8225,126 @@
      "task": 0.8888888888888888,
      "sample_environment": 0.375,
      "agent": 0.3333333333333333
+    }
+   }
+  },
+  {
+   "id": "ai_native_biofoundry",
+   "record_type": "system",
+   "name": "An AI-Native Biofoundry for Autonomous Enzyme Engineering: Integrating Active Learning with Automated Experimentation",
+   "short_name": "AI-Native Biofoundry",
+   "year": 2026,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": null,
+   "doi": "10.64898/2026.02.01.703093",
+   "url": "https://www.biorxiv.org/content/10.64898/2026.02.01.703093v1",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "Agent-native control (LLM + MCP over a hardware abstraction layer) generating Pydantic-validated DAGs, simulated in a Unity 3D digital twin then run on an MGISP-Smart8 liquid handler + Cytomat incubator for polymerase evolution. LLM agent driving physical biofoundry hardware via digital-twin pre-validation with an experimental outcome metric.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "hybrid",
+    "instruments": [
+     {
+      "name": "MGISP-Smart8 liquid-handling workstation",
+      "modality": "liquid_handling",
+      "real_or_simulated": null
+     },
+     {
+      "name": "Cytomat 2 incubator",
+      "modality": "generic_lab",
+      "real_or_simulated": null
+     },
+     {
+      "name": "sequencer",
+      "modality": "generic_lab",
+      "real_or_simulated": null
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": null,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "Variant with 37% lower sequencing error rate after three autonomous rounds (search snippet)"
+    ],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://www.biorxiv.org/content/10.64898/2026.02.01.703093v1"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "liquid_handling",
+     "generic_lab"
+    ],
+    "coverage": {
+     "benchmark": 0.17391304347826086,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
     }
    }
   },
@@ -6233,6 +8859,117 @@
    }
   },
   {
+   "id": "dual_agent_protocol_translation",
+   "record_type": "system",
+   "name": "Dual-Agent Framework for Cross-Model Verified Translation of Natural-Language Protocols into Robotic Laboratory Platform",
+   "short_name": "Dual-Agent-Protocol-Translation",
+   "year": 2026,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2606.20120",
+   "doi": null,
+   "url": "https://arxiv.org/abs/2606.20120",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "Parser agent + deterministic rule-based mapping to device-level commands + heterogeneous-LLM validation agent with self-correction, for microplate-based protocols (well mapping, replicates, parallel dispensing) on a robotic lab platform. LLM agents generating executable robotic-platform commands with verification; evaluation metrics not in snippets.",
+   "benchmark_features": {
+    "evaluation_target": [],
+    "execution_mode": "static_code_eval",
+    "instruments": [
+     {
+      "name": "microplate robotic laboratory platform",
+      "modality": "liquid_handling",
+      "real_or_simulated": null
+     },
+     {
+      "name": "dispensers",
+      "modality": "generic_lab",
+      "real_or_simulated": null
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": null,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://arxiv.org/abs/2606.20120"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "liquid_handling",
+     "generic_lab"
+    ],
+    "coverage": {
+     "benchmark": 0.08695652173913043,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
+    }
+   }
+  },
+  {
    "id": "experiment_automation_agents",
    "record_type": "system",
    "name": "Experiment automation agents: automating materials characterization with vision language model agents",
@@ -6638,6 +9375,116 @@
      "task": 0.7777777777777778,
      "sample_environment": 0.375,
      "agent": 0.5555555555555556
+    }
+   }
+  },
+  {
+   "id": "labvla",
+   "record_type": "system",
+   "name": "LabVLA: Grounding Vision-Language-Action Models in Scientific Laboratories",
+   "short_name": "LabVLA",
+   "year": 2026,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2606.13578",
+   "doi": null,
+   "url": "https://github.com/zjunlp/LabVLA",
+   "code_url": "https://github.com/zjunlp/LabVLA",
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "ZJU RoboGenesis sim data engine + Qwen3-VL-4B-based VLA (FAST pretraining, flow-matching DiT action expert) evaluated on the LabUtopia benchmark in-distribution and OOD. Quantitative lab-simulator benchmark results (LabUtopia) for a lab-specialised VLA policy.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "simulation_control"
+    ],
+    "execution_mode": "simulator",
+    "instruments": [
+     {
+      "name": "LabUtopia simulated chemistry-lab instruments",
+      "modality": "computation",
+      "real_or_simulated": "simulated"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": null,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "Highest average success rate among baselines on LabUtopia (ID and OOD) (search snippet)"
+    ],
+    "open_source": true
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://github.com/zjunlp/LabVLA",
+     "https://github.com/zjunlp/LabVLA"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "computation"
+    ],
+    "coverage": {
+     "benchmark": 0.21739130434782608,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
     }
    }
   },
@@ -7510,6 +10357,124 @@
    }
   },
   {
+   "id": "chemagents",
+   "record_type": "system",
+   "name": "A Multiagent-Driven Robotic AI Chemist Enabling Autonomous Chemical Research On Demand (ChemAgents)",
+   "short_name": "ChemAgents",
+   "year": 2025,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": null,
+   "doi": "10.1021/jacs.4c17738",
+   "url": "https://pubs.acs.org/doi/10.1021/jacs.4c17738",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "On-board Llama-3.1-70B hierarchical multi-agent system (Task Manager + Literature Reader, Experiment Designer, Computation Performer, Robot Operator) driving a robotic chemistry lab; three task categories (make&measure, exploration&screening, literature+computation); JACS 2025. LLM multi-agent physically operating an automated lab with a graded task suite.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "physical_instrument",
+    "instruments": [
+     {
+      "name": "mobile robot chemist",
+      "modality": "robotics",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "synthesis stations",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "characterisation instruments",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": null,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://pubs.acs.org/doi/10.1021/jacs.4c17738"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "robotics",
+     "generic_lab"
+    ],
+    "coverage": {
+     "benchmark": 0.13043478260869565,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
+    }
+   }
+  },
+  {
    "id": "atomic_microscopy",
    "record_type": "system",
    "name": "ATOMIC \u2014 Zero-shot Autonomous Microscopy for Scalable and Intelligent Characterization of 2D Materials (also: Embodied Intelligence Unlocks Autonomous Microscopy, bioRxiv 2025)",
@@ -7912,6 +10877,264 @@
      "task": 0.6666666666666666,
      "sample_environment": 0.25,
      "agent": 0.3333333333333333
+    }
+   }
+  },
+  {
+   "id": "crest",
+   "record_type": "system",
+   "name": "CRESt: Copilot for Real-world Experimental Scientists (multimodal robotic platform for multi-element electrocatalyst discovery)",
+   "short_name": "CRESt",
+   "year": 2025,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": null,
+   "doi": "10.1038/s41586-025-09640-5",
+   "url": "https://www.nature.com/articles/s41586-025-09640-5",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "MIT (Ju Li) multimodal LLM copilot combining literature, compositions, microstructure images, knowledge-assisted Bayesian optimisation and robotic synthesis/testing for catalyst discovery; Nature 2025. LLM agent orchestrating robotic hardware in a closed loop with reported discovery outcomes, though evaluation is outcome-based (record catalyst) rather than a benchmark.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "physical_instrument",
+    "instruments": [
+     {
+      "name": "liquid-handling robot",
+      "modality": "liquid_handling",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "robotic arm",
+      "modality": "robotics",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "fuel-cell test station",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "SEM/microstructure imaging",
+      "modality": "microscopy",
+      "real_or_simulated": "real"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": null,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "Eight-element catalyst with 9.3x performance per dollar (search snippet)"
+    ],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://www.nature.com/articles/s41586-025-09640-5"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "liquid_handling",
+     "robotics",
+     "generic_lab",
+     "microscopy"
+    ],
+    "coverage": {
+     "benchmark": 0.17391304347826086,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
+    }
+   }
+  },
+  {
+   "id": "eims",
+   "record_type": "system",
+   "name": "Embodied Intelligence Unlocks Autonomous Microscopy (EIMS)",
+   "short_name": "EIMS",
+   "year": 2025,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": null,
+   "doi": "10.1101/2025.08.13.670210",
+   "url": "https://github.com/ICS-MR/Embodied-Intelligence-Enables-Agentic-Exploration-in-Microscopy",
+   "code_url": "https://github.com/ICS-MR/Embodied-Intelligence-Enables-Agentic-Exploration-in-Microscopy",
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "Hierarchical LLM planner + low-level executors over pymmcore-plus (Micro-Manager) light microscopes with a model-grounding protocol; mock/demo/real modes; validated on a benchmark from tissue sections to live organoids. LLM agent controlling a physical light microscope with a benchmark claimed to match or surpass human experts (numbers only in the preprint).",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "hybrid",
+    "instruments": [
+     {
+      "name": "light/fluorescence microscope via Micro-Manager (stage",
+      "modality": "microscopy",
+      "real_or_simulated": null
+     },
+     {
+      "name": "objectives",
+      "modality": "generic_lab",
+      "real_or_simulated": null
+     },
+     {
+      "name": "channels",
+      "modality": "generic_lab",
+      "real_or_simulated": null
+     },
+     {
+      "name": "autofocus",
+      "modality": "generic_lab",
+      "real_or_simulated": null
+     },
+     {
+      "name": "Z-stacks)",
+      "modality": "generic_lab",
+      "real_or_simulated": null
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": null,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "Reported to match or surpass human experts on multi-step protocols incl. rare-event capture (search snippet); README has no numbers"
+    ],
+    "open_source": true
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: https://github.com/ICS-MR/Embodied-Intelligence-Enables-Agentic-Exploration-in-Microscopy. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://github.com/ICS-MR/Embodied-Intelligence-Enables-Agentic-Exploration-in-Microscopy",
+     "https://github.com/ICS-MR/Embodied-Intelligence-Enables-Agentic-Exploration-in-Microscopy"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "microscopy",
+     "generic_lab"
+    ],
+    "coverage": {
+     "benchmark": 0.21739130434782608,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
     }
    }
   },
@@ -8468,6 +11691,126 @@
    }
   },
   {
+   "id": "robochemist",
+   "record_type": "system",
+   "name": "RoboChemist: Long-Horizon and Safety-Compliant Robotic Chemical Experimentation",
+   "short_name": "RoboChemist",
+   "year": 2025,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2509.08820",
+   "doi": null,
+   "url": "https://arxiv.org/abs/2509.08820",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "Dual-loop VLM (planner, visual prompt generator, compliance monitor) + VLA framework for long-horizon chemistry experiments with hazardous/deformable substances; CoRL 2025. VLM agent supervising physical robotic chemistry with quantitative success and compliance metrics vs VLA baselines.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "physical_instrument",
+    "instruments": [
+     {
+      "name": "robot arm",
+      "modality": "robotics",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "chemistry glassware",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "reagents",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": null,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "+23.57% average success rate and +0.298 compliance rate over SOTA VLA baselines (search snippet)"
+    ],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://arxiv.org/abs/2509.08820"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "robotics",
+     "generic_lab"
+    ],
+    "coverage": {
+     "benchmark": 0.17391304347826086,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
+    }
+   }
+  },
+  {
    "id": "safe_sdls",
    "record_type": "framework",
    "name": "Steering towards safe self-driving laboratories",
@@ -8878,6 +12221,130 @@
    }
   },
   {
+   "id": "chemistry3d",
+   "record_type": "system",
+   "name": "Chemistry3D: Robotic Interaction Benchmark for Chemistry Experiments",
+   "short_name": "Chemistry3D",
+   "year": 2024,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2406.08160",
+   "doi": null,
+   "url": "https://arxiv.org/abs/2406.08160",
+   "code_url": "https://github.com/huangyan28/Chemistry3D",
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "Isaac Sim/Omniverse toolkit simulating organic/inorganic chemistry experiments (pick/place/pour/stir/shake) with real-time temperature/colour/pH, RL tasks, transparent-object detection and an LLM multi-agent (mas.py) embodied-planning module. Chemistry-lab simulator with an LLM agent planning component and task suite; README exposes LLM agent hooks but no quantitative agent results.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "simulation_control"
+    ],
+    "execution_mode": "simulator",
+    "instruments": [
+     {
+      "name": "beakers",
+      "modality": "generic_lab",
+      "real_or_simulated": "simulated"
+     },
+     {
+      "name": "test tubes",
+      "modality": "generic_lab",
+      "real_or_simulated": "simulated"
+     },
+     {
+      "name": "chemistry glassware",
+      "modality": "generic_lab",
+      "real_or_simulated": "simulated"
+     },
+     {
+      "name": "robot arm",
+      "modality": "robotics",
+      "real_or_simulated": "simulated"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": null,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [],
+    "open_source": true
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: https://github.com/huangyan28/Chemistry3D. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://arxiv.org/abs/2406.08160",
+     "https://github.com/huangyan28/Chemistry3D"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "generic_lab",
+     "robotics"
+    ],
+    "coverage": {
+     "benchmark": 0.17391304347826086,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
+    }
+   }
+  },
+  {
    "id": "llmicroscopilot",
    "record_type": "system",
    "name": "LLMicroscopilot: An LLM assistant for scanning tunneling and transmission electron microscopy measurements",
@@ -9255,6 +12722,120 @@
    }
   },
   {
+   "id": "starwhisper_telescope",
+   "record_type": "system",
+   "name": "StarWhisper Telescope: An AI framework for automating end-to-end astronomical observations",
+   "short_name": "StarWhisper Telescope",
+   "year": 2024,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2412.06412",
+   "doi": null,
+   "url": "https://arxiv.org/abs/2412.06412",
+   "code_url": null,
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "LLM agents with function calls generate observation lists, control telescopes, run image pipelines and trigger follow-ups; deployed on Mini-SiTian and a 10-telescope Nearby Galaxy Supernovae Survey network. LLM agent physically controlling scientific instruments (telescopes) with quantitative human-effort reduction.",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "physical_instrument",
+    "instruments": [
+     {
+      "name": "Mini-SiTian telescope array",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     },
+     {
+      "name": "amateur survey telescopes",
+      "modality": "generic_lab",
+      "real_or_simulated": "real"
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": null,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [
+     "~90% reduction in human intervention (search snippet)"
+    ],
+    "open_source": null
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://arxiv.org/abs/2412.06412"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "generic_lab"
+    ],
+    "coverage": {
+     "benchmark": 0.17391304347826086,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
+    }
+   }
+  },
+  {
    "id": "llm_spm_2024",
    "record_type": "system",
    "name": "Synergizing human expertise and AI efficiency with language model for microscopy operation and automated experiment design",
@@ -9387,6 +12968,125 @@
      "task": 0.8888888888888888,
      "sample_environment": 0.375,
      "agent": 0.8888888888888888
+    }
+   }
+  },
+  {
+   "id": "clairify",
+   "record_type": "system",
+   "name": "CLAIRify: Errors are Useful Prompts - Instruction Guided Task Programming with Verifier-Assisted Iterative Prompting / Large language models for chemistry robotics",
+   "short_name": "CLAIRify",
+   "year": 2023,
+   "venue": null,
+   "authors_short": null,
+   "arxiv": "2303.14100",
+   "doi": "10.1007/s10514-023-10136-2",
+   "url": "https://dl.acm.org/doi/abs/10.1007/s10514-023-10136-2",
+   "code_url": "https://github.com/ac-rad/xdl-generation",
+   "data_url": null,
+   "license": null,
+   "status": null,
+   "summary": "Verifier-assisted iterative prompting so LLMs emit syntactically valid XDL robot chemistry plans; executed solubility and recrystallization experiments on a real robot; Autonomous Robots 2023. LLM plan generation for physical robot chemistry with verification and real-robot execution (quantitative XDL validity rates in paper, not in snippets).",
+   "benchmark_features": {
+    "evaluation_target": [
+     "instrument_control"
+    ],
+    "execution_mode": "hybrid",
+    "instruments": [
+     {
+      "name": "robot arm",
+      "modality": "robotics",
+      "real_or_simulated": null
+     },
+     {
+      "name": "chemistry glassware",
+      "modality": "generic_lab",
+      "real_or_simulated": null
+     },
+     {
+      "name": "Chemputer-style XDL executor",
+      "modality": "generic_lab",
+      "real_or_simulated": null
+     }
+    ],
+    "scientific_domains": [],
+    "n_tasks": null,
+    "n_task_families": null,
+    "n_instances_or_runs_reported": null,
+    "repetitions_per_task": null,
+    "target_population": null,
+    "task_source": null,
+    "sampling_strategy": null,
+    "metric_types": [],
+    "primary_metric": null,
+    "scoring_granularity": null,
+    "has_human_baseline": null,
+    "has_safety_eval": null,
+    "has_abstention_eval": null,
+    "holdout_or_split_design": null,
+    "leakage_or_contamination_risk": null,
+    "agents_evaluated": [],
+    "n_agent_configs": null,
+    "headline_results": [],
+    "open_source": true
+   },
+   "task_features": {
+    "workflow_depth": null,
+    "perceptual_demand": null,
+    "reasoning_demand": null,
+    "tool_interface": [],
+    "tool_composition": null,
+    "quantitative_tolerance": null,
+    "closed_loop_feedback": null,
+    "safety_criticality": null,
+    "task_taxonomy": []
+   },
+   "sample_environment_features": {
+    "sample_types": [],
+    "sample_real_or_simulated": null,
+    "signal_quality_variation": null,
+    "novelty_control": null,
+    "novelty_levels_tested": [],
+    "calibration_or_api_state_variation": null,
+    "injected_faults": null,
+    "environment_description": null
+   },
+   "agent_features_evaluated": {
+    "models": [],
+    "vision_used": null,
+    "rag_or_memory": null,
+    "planner": null,
+    "tools": [],
+    "verifier_or_self_debug": null,
+    "guards_or_safety_layer": null,
+    "multi_agent": null,
+    "deterministic_execution": null
+   },
+   "transfer_relevant_findings": [],
+   "limitations": [],
+   "related": [],
+   "notes": "STUB from the 2026-09-14 discovery sweep; only identity, execution mode, task count and one headline are recorded. Verified from: search snippet only. Needs full extraction.",
+   "provenance": {
+    "extracted_on": "2026-09-15",
+    "extraction_method": "llm_assisted",
+    "sources_consulted": [
+     "https://dl.acm.org/doi/abs/10.1007/s10514-023-10136-2",
+     "https://github.com/ac-rad/xdl-generation"
+    ],
+    "confidence": "low",
+    "review_status": "unreviewed",
+    "reviewer_notes": "Discovery-sweep stub; full four-group extraction pending."
+   },
+   "_derived": {
+    "modalities": [
+     "robotics",
+     "generic_lab"
+    ],
+    "coverage": {
+     "benchmark": 0.17391304347826086,
+     "task": 0.0,
+     "sample_environment": 0.0,
+     "agent": 0.0
     }
    }
   }
