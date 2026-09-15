@@ -2,7 +2,7 @@ id: llm_spm_2024
 record_type: system
 name: Synergizing human expertise and AI efficiency with language model for microscopy operation and automated experiment
   design
-short_name: null
+short_name: LLM SPM operation (2024)
 year: 2024
 venue: 'Machine Learning: Science and Technology (IOP), published 13 June 2024'
 authors_short: Liu et al. (Yongtao Liu, Marti Checa, Rama K. Vasudevan; ORNL)

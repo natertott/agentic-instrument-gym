@@ -1,7 +1,7 @@
 id: llm_hypothesis_spm_2026
 record_type: system
 name: LLM-Guided Open Hypothesis Learning from Autonomous Scanning Probe Microscopy Experiments
-short_name: null
+short_name: LLM hypothesis SPM
 year: 2026
 venue: arXiv preprint, May 2026
 authors_short: Slautin et al. (Boris Slautin and colleagues; co-author list not verified)
