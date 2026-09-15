@@ -1,0 +1,105 @@
+id: agentic_sdl_soft_matter_taxonomy
+record_type: survey
+name: 'Agentic AI for Self-Driving Laboratories in Soft Matter: Taxonomy, Benchmarks, and Open Challenges'
+short_name: Agentic SDL taxonomy (soft matter)
+year: 2026
+venue: arXiv Jan 2026 (cs.AI)
+authors_short: Chen et al. (Xuanzhou Chen, Audrey Wang, Stanley Yin, Hanyang Jiang, Dong Zhang)
+arxiv: '2601.17920'
+doi: null
+url: https://arxiv.org/abs/2601.17920
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: |
+  Survey/position paper framing SDL autonomy as an agent-environment interaction problem with explicit observations, actions, costs and constraints. Reviews BO/active learning, planning/RL and tool-using agents; emphasizes verifiable, provenance-aware policies; proposes a capability-driven taxonomy and synthesizes benchmark task templates and metrics prioritizing cost-aware performance, robustness to drift, constraint-violation behaviour and reproducibility; outlines open challenges (multi-modal representation, calibrated uncertainty, safe exploration, shared benchmark infrastructure).
+schema_axes_proposed:
+- Decision horizon (single-step/bandit to sequential MDP/POMDP)
+- Uncertainty modeling
+- Action parameterization
+- Constraint handling (pre-execution enforcement vs post-hoc detection)
+- Failure recovery
+- Human involvement
+- 'Metrics: cost-aware performance; robustness to drift/non-stationarity; constraint-violation behaviour; reproducibility
+  (reconstructing conditions from provenance logs)'
+- 'Environment properties: expensive actions; noisy and delayed feedback; strict feasibility/safety constraints;
+  non-stationarity'
+- Verifiable and provenance-aware policies
+benchmark_features:
+  agents_evaluated: []
+  evaluation_target: []
+  execution_mode: null
+  has_abstention_eval: null
+  has_human_baseline: null
+  has_safety_eval: null
+  headline_results: []
+  holdout_or_split_design: null
+  instruments: []
+  leakage_or_contamination_risk: null
+  metric_types: []
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: null
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - soft matter
+  - materials
+  scoring_granularity: null
+  target_population: null
+  task_source: null
+task_features:
+  closed_loop_feedback: null
+  perceptual_demand: null
+  quantitative_tolerance: null
+  reasoning_demand: null
+  safety_criticality: null
+  task_taxonomy: []
+  tool_composition: null
+  tool_interface: []
+  workflow_depth: null
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: null
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: null
+  sample_types: []
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models: []
+  multi_agent: null
+  planner: null
+  rag_or_memory: null
+  tools: []
+  verifier_or_self_debug: null
+  vision_used: null
+transfer_relevant_findings:
+- Explicitly proposes benchmark task templates and metric priorities for agentic SDLs -- closest thing found to
+  a 2026 position paper on benchmarking lab agents.
+- Constraint-violation behaviour and drift robustness are named as metrics, complementing AgentAbstain's abstention
+  axis.
+limitations:
+- Abstract-level verification only; template names (e.g. LCST targeting, multi-objective mechanics, aging studies)
+  are from a secondary digest.
+related:
+- benchmarking_sdls
+- sdl_performance_metrics
+- safe_sdl_framework
+notes: |
+  Abstract and authors verified verbatim from an arXiv mirror (LIHUA919/AI-Agents-Daily-Research jsonl). Taxonomy axis names are in the abstract; their level definitions and the specific task templates come from memgrafter/research-digests (secondary).
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2601.17920
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

@@ -1,0 +1,84 @@
+{
+  "overrides": {
+    "llm_temperature": 0.0,
+    "contextual_top_k": 0,
+    "episodic_top_k": 0,
+    "similarity_threshold": 0.95,
+    "llm_model": "claude-sonnet-4",
+    "chunk_size": 250,
+    "chunk_overlap": 100
+  },
+  "config_hash": "6dc1d2972c94c963",
+  "full_config": {
+    "directories": {
+      "base_dir": "D:\\Src_Repos\\september\\testing\\sweep_results\\sweep_20260629_125239_7eb32f\\config_6dc1d2972c94c963\\workspace",
+      "log_dir": "D:\\Src_Repos\\september\\logs",
+      "rag_db_dir": "D:\\Src_Repos\\september\\rag_databases",
+      "metrics_output_dir": "D:\\Src_Repos\\september\\metrics"
+    },
+    "model": {
+      "provider": "openai-standard",
+      "model": "claude-sonnet-4",
+      "temperature": 0.0
+    },
+    "rag": {
+      "embedding_model": "text-embedding-3-large",
+      "episodic_top_k": 0,
+      "contextual_top_k": 0,
+      "chunk_size": 250,
+      "chunk_overlap": 100,
+      "similarity_threshold": 0.95,
+      "cache_enabled": true
+    },
+    "message_management": {
+      "max_messages": 100,
+      "max_tokens": 20000,
+      "pruning_strategy": "smart",
+      "preserve_recent_messages": 10
+    },
+    "agent": {
+      "timeout": 300,
+      "max_retries": 5,
+      "recursion_limit": 250
+    },
+    "tools_enabled": {
+      "instrument": true,
+      "image": true,
+      "geometry": true,
+      "recipe": true,
+      "code_execution": true
+    },
+    "metrics": {
+      "enabled": true,
+      "token_counting_method": "tiktoken",
+      "retention_days": 30,
+      "cost_per_1k_input": 0.0025,
+      "cost_per_1k_output": 0.01
+    },
+    "testing": {
+      "is_test_config": true,
+      "mock_mode": false,
+      "timeout_seconds": 300,
+      "fail_fast": false
+    }
+  },
+  "hyperparameters": {
+    "llm_provider": "openai-standard",
+    "llm_model": "claude-sonnet-4",
+    "llm_temperature": 0.0,
+    "embedding_model": "text-embedding-3-large",
+    "episodic_top_k": 0,
+    "contextual_top_k": 0,
+    "chunk_size": 250,
+    "chunk_overlap": 100,
+    "similarity_threshold": 0.95,
+    "max_messages": 100,
+    "max_tokens": 20000,
+    "pruning_strategy": "smart",
+    "preserve_recent_messages": 10,
+    "max_workflows_to_keep": 2,
+    "recursion_limit": 250,
+    "agent_timeout": 300,
+    "max_retries": 5
+  }
+}

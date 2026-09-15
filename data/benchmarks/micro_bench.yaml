@@ -1,0 +1,128 @@
+id: micro_bench
+record_type: benchmark
+name: 'µ-Bench (Micro-Bench): A Vision-Language Benchmark for Microscopy Understanding'
+short_name: µ-Bench
+year: 2024
+venue: NeurIPS 2024 Datasets and Benchmarks Track
+authors_short: Lozano et al. (Stanford; Yeung-Levy lab)
+arxiv: '2407.01791'
+doi: null
+url: https://arxiv.org/abs/2407.01791
+code_url: https://github.com/yeung-lab/Micro-Bench
+data_url: https://huggingface.co/datasets/jnirschl/uBench
+license: MIT (code); dataset CC-BY where applicable (per project site)
+status: published
+summary: |
+  Expert-curated benchmark of 22 biomedical microscopy tasks: a Perception set of 17,235 images (17 fine-grained tasks: 13 classification, 4 segmentation/detection) and a Cognition set of 121 expert questions on 54 images, spanning light, fluorescence and electron microscopy (8 sub-modalities), subcellular to tissue scales, 24 public datasets. Generalist and specialist VLMs struggle even at modality identification; specialist fine-tuning causes catastrophic forgetting.
+benchmark_features:
+  agents_evaluated:
+  - CLIP
+  - OpenCLIP
+  - ALIGN
+  - CogVLM
+  - Qwen-VL
+  - BiomedCLIP
+  - PLIP
+  - QuiltNet
+  - 'CONCH (11 VLMs total: 3 generalist autoregressive'
+  - 3 generalist contrastive
+  - 4 specialist contrastive
+  - 1 biomedical contrastive)
+  evaluation_target:
+  - perception
+  - question_answering
+  execution_mode: static_text
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results:
+  - Models struggle on all categories; ~30% error even at distinguishing microscopy modality
+  - Specialist biomedical models often underperform generalists
+  - Weight interpolation (alpha 0.8) between fine-tuned and pre-trained weights mitigates forgetting
+  holdout_or_split_design: Test split 17,315 examples on HuggingFace
+  instruments:
+  - name: none (curated images)
+    modality: microscopy
+    real_or_simulated: none
+  leakage_or_contamination_risk: Built from public datasets — pretraining exposure possible
+  metric_types:
+  - success_rate
+  - other
+  n_agent_configs: 11
+  n_instances_or_runs_reported: 17235
+  n_task_families: 2
+  n_tasks: 22
+  open_source: true
+  primary_metric: closed-VQA accuracy with bootstrap CIs; GRIT metric for localization
+  repetitions_per_task: single pass with bootstrap CIs
+  sampling_strategy: Images from 24–25 permissively licensed public datasets with new expert annotations; cognition
+    questions written by experts
+  scientific_domains:
+  - biology
+  - pathology (12 subdomains)
+  scoring_granularity: binary
+  target_population: Perceptual and cognitive microscopy understanding across modalities, scales and organisms
+  task_source: mixed
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: mixed
+  quantitative_tolerance: n/a
+  reasoning_demand: mixed
+  safety_criticality: none
+  task_taxonomy:
+  - 'perception: 13 classification + 4 segmentation/detection tasks'
+  - 'cognition: open-ended and closed multiple-choice reasoning'
+  tool_composition: none
+  tool_interface:
+  - natural_language
+  workflow_depth: single_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Static image-text evaluation
+  injected_faults: false
+  novelty_control: none (public datasets)
+  sample_real_or_simulated: dataset
+  sample_types:
+  - light
+  - fluorescence and electron microscopy; 91 unique cells/tissues/structures; 24 staining techniques; normal and
+    abnormal states
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models:
+  - CLIP
+  - OpenCLIP
+  - ALIGN
+  - CogVLM
+  - Qwen-VL
+  - BiomedCLIP
+  - PLIP
+  - QuiltNet
+  - CONCH
+  multi_agent: false
+  planner: none
+  rag_or_memory: none
+  tools: []
+  verifier_or_self_debug: none
+  vision_used: true
+transfer_relevant_findings:
+- Domain-specialist fine-tuning narrowed rather than broadened competence (catastrophic forgetting) — caution for
+  microscopy-specific agent fine-tunes
+limitations:
+- Public-dataset provenance; English-only prompts; scale small vs general VLM benchmarks
+related:
+- microvqa
+- plantmicro
+notes: GitHub README says 22 tasks; the arXiv abstract snippet in search results says 24 (probably datasets vs tasks).
+  Exact per-model accuracies not retrievable through proxy.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2407.01791
+  - https://github.com/yeung-lab/Micro-Bench
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

@@ -1,0 +1,96 @@
+id: researchcodebench
+record_type: benchmark
+name: 'ResearchCodeBench: Benchmarking LLMs on Implementing Novel Machine Learning Research Code'
+short_name: ResearchCodeBench
+year: 2025
+venue: arXiv preprint (Jun 2025)
+authors_short: Tianyu Hua et al. (not verified)
+arxiv: '2506.02314'
+doi: null
+url: https://arxiv.org/abs/2506.02314
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: |
+  Brief follow-up entry. ResearchCodeBench contains 212 coding challenges drawn from 20 recent (2024-2025) ML papers: the model sees the paper, surrounding project code and a TODO-marked snippet to fill in, and is graded by executing tests. Across 30+ proprietary and open models the best (Gemini-2.5-Pro-Preview) solves 37.3%, followed by o3-high (32.3%) and o4-mini-high (30.8%).
+benchmark_features:
+  agents_evaluated:
+  - 30+ LLMs incl. Gemini-2.5-Pro-Preview, o3, o4-mini
+  evaluation_target:
+  - code_generation
+  execution_mode: static_code_eval
+  has_abstention_eval: false
+  has_human_baseline: false
+  has_safety_eval: false
+  headline_results:
+  - Gemini-2.5-Pro-Preview 37.3%, o3 (high) 32.3%, o4-mini (high) 30.8%; best models implement <40% correctly
+  holdout_or_split_design: null
+  instruments: []
+  leakage_or_contamination_risk: Recent papers chosen to limit contamination
+  metric_types:
+  - success_rate
+  - pass_at_k
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: 20
+  n_tasks: 212
+  open_source: null
+  primary_metric: Fraction of challenges passing tests
+  repetitions_per_task: null
+  sampling_strategy: 20 papers from top venues and arXiv, 2024-2025
+  scientific_domains:
+  - machine learning research (generative modelling, vision, theory, RL)
+  scoring_granularity: binary
+  target_population: Implementing novel research contributions from papers
+  task_source: literature_derived
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: none
+  quantitative_tolerance: Unit-test based
+  reasoning_demand: high
+  safety_criticality: none
+  task_taxonomy: []
+  tool_composition: Fill-in-the-blank code completion with paper context; no tool chaining
+  tool_interface:
+  - python_api
+  workflow_depth: single_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Static test harness per paper
+  injected_faults: false
+  novelty_control: null
+  sample_real_or_simulated: dataset
+  sample_types:
+  - ML research repositories
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models:
+  - Gemini-2.5-Pro-Preview
+  - o3
+  - o4-mini
+  - others
+  multi_agent: false
+  planner: none
+  rag_or_memory: none
+  tools: []
+  verifier_or_self_debug: none
+  vision_used: false
+transfer_relevant_findings: []
+limitations:
+- Search-snippet-only verification
+related:
+- scireplicate_bench
+- scienceagentbench
+notes: All facts from search snippets quoting the arXiv page; code URL and license not verified.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2506.02314
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

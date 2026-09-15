@@ -1,0 +1,167 @@
+# =============================================================================
+# VERSA Test Suite: 3D Printed Sample Workflow Tests
+# =============================================================================
+# Multi-step workflows involving multiple agents and tools
+# Specifically for testing performance on 3D printed artifact samples
+# Category: integration, workflow
+# =============================================================================
+
+tests:
+  - test_id: "tdp_001"
+    name: "setup_instrument_tdp"
+    description: "Set up the instrument for imaging."
+    category: "tdp"
+    tags: [ "workflow", "integration", "tdp" ]
+
+    user_prompt: |
+      Set the instrument up for general imaging. Acquire an image but do not create a plot.
+
+
+    expected:
+      expected_tools:
+        - move_axis_absolute
+        - single_acquisition
+        - turn_xray_on
+      min_tool_calls: 5
+      forbidden_tools:
+        - execute_python_code
+        - plot_tiff
+
+    performance:
+      max_duration_ms: 600000
+      max_llm_calls: 20
+      max_tool_calls: 15
+
+    timeout_seconds: 600
+
+  - test_id: "tdp_002"
+    name: "center_sample_tdp"
+    description: "Sample centering in FOV."
+    category: "tdp"
+    tags: [ "workflow", "integration", "tdp" ]
+    
+    user_prompt: |
+      Center the sample in the field of view. Write some python code that saves the final centered stage position in a file called centered_position.json.
+    
+
+    expected:
+      expected_tools:
+        - move_axis_absolute
+        - single_acquisition
+        - otsu_segment_properties
+        - recenter_xy_from_sidecar
+        - recenter_yz_from_sidecar
+      min_tool_calls: 8
+      expected_files:
+        - centered_position.json
+      verify_files_exist: True
+    
+    performance:
+      max_duration_ms: 300000
+      max_llm_calls: 30
+      max_tool_calls: 20
+    
+    timeout_seconds: 800
+
+  - test_id: "tdp_003"
+    name: "estimate_size_tdp"
+    description: "Estimate sample size."
+    category: "tdp"
+    tags: [ "workflow", "integration", "tdp" ]
+    
+    user_prompt: |
+      Estimate the sample size by taking two images at orthogonal Sample Theta positions. Segment those images with an upper otsu filter and find the bounding box of the sample
+      in the xy and yz directions. Save the length_x, length_y, and length_z (in mm) of the sample in sample_size.json.
+    
+    expected:
+      expected_tools:
+        - single_acquisition
+        - otsu_segment_properties
+      min_tool_calls: 7
+      expected_files:
+        - sample_size.json
+      verify_files_exist: True
+    
+    performance:
+      max_duration_ms: 300000
+      max_llm_calls: 30
+      max_tool_calls: 20
+    
+    timeout_seconds: 1000
+
+  - test_id: "tdp_004"
+    name: "calculate_magnification_tdp"
+    description: "Calculate magnification based on sample size."
+    category: "tdp"
+    tags: [ "workflow", "integration", "tdp" ]
+    
+    user_prompt: |
+      - Open the file sample_size.json and get the sample bounding box. Calculate a source/detector position that achieves a
+      100um pixel size. Write some python code that saves the source/detector position in magnification_settings.json.
+    
+
+    expected:
+      expected_tools:
+        - read_json_file
+        - calculate_geometry_for_pixel_size
+        - execute_python_code
+      min_tool_calls: 3
+      expected_files:
+        - magnification_settings.json
+      verify_files_exist: True
+    
+    performance:
+      max_duration_ms: 300000
+      max_llm_calls: 20
+      max_tool_calls: 10
+    
+    timeout_seconds: 600
+
+  - test_id: "tdp_005"
+    name: "create_run_recipe_tdp"
+    description: "Create a run recipe using the calculated centered position and magnification."
+    category: "tdp"
+    tags: [ "workflow", "integration", "tdp" ]
+    
+    user_prompt: |
+      Get the centered position values and source/detector position values from centered_position.json and magnification_settings.json, then 
+      create a recipe acquisition that uses these settings for imaging the sample. 
+      Save the new recipe under modified_recipe.rcp. Begin a recipe acquisition with this recipe file.
+    
+    expected:
+      expected_tools:
+        - recipe_modify_and_save
+        - recipe_open_and_run
+      min_tool_calls: 3
+      expected_files:
+        - modified_recipe.rcp
+      verify_files_exist: True
+    
+    performance:
+      max_duration_ms: 600000
+      max_llm_calls: 20
+      max_tool_calls: 9
+
+
+  - test_id: "tdp_end"
+    name: "end_testing_tdp"
+    description: "Turn the X-rays off. Move the stage to (0,-15000,0). Move the Source Z position to -100mm and the Detector Z position to 100mm."
+    category: "tdp"
+    tags: [ "workflow", "integration", "tdp" ]
+
+    user_prompt: |
+      Turn the X-rays off. Move the stage to (0,-15000,0). Move the Source Z position to -100mm and the Detector Z position to 100mm.
+    
+
+    expected:
+      expected_tools:
+        - move_axis_absolute
+        - turn_xray_off
+      min_tool_calls: 4
+
+    performance:
+      max_duration_ms: 180000
+      max_llm_calls: 20
+      max_tool_calls: 15
+
+    timeout_seconds: 600

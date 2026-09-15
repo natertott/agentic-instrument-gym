@@ -1,0 +1,127 @@
+id: microvqa
+record_type: benchmark
+name: 'MicroVQA: A Multimodal Reasoning Benchmark for Microscopy-Based Scientific Research'
+short_name: MicroVQA
+year: 2025
+venue: CVPR 2025 (pp. 19552–19564)
+authors_short: Burgess et al. (Stanford; Yeung-Levy lab)
+arxiv: '2503.13399'
+doi: null
+url: https://arxiv.org/abs/2503.13399
+code_url: https://github.com/jmhb0/microvqa
+data_url: https://huggingface.co/datasets/jmhb/microvqa
+license: null
+status: published
+summary: |
+  1,042 expert-written multiple-choice questions over 255 unique image sets (40.6% multi-image) from light, fluorescence and electron microscopy across 31 organisms and 33 research areas, testing three research-workflow capabilities: expert visual understanding, hypothesis generation and experiment proposal. A RefineBot pipeline removes language shortcuts; best MLLMs reach ~53%.
+benchmark_features:
+  agents_evaluated:
+  - o1
+  - Claude-3.5-Sonnet
+  - Gemini-1.5-Pro
+  - GPT-4o
+  - open-source MLLMs (e.g.
+  - Qwen2-VL
+  - LLaVA variants)
+  evaluation_target:
+  - question_answering
+  - perception
+  execution_mode: static_text
+  has_abstention_eval: false
+  has_human_baseline: true
+  has_safety_eval: false
+  headline_results:
+  - o1 52.8%, Claude-3.5-Sonnet 51.7%, Gemini-1.5-Pro 51.1% overall; random 22.0%; human (non-specialist expert)
+    50.3%
+  - 'Per-task ranges: visual understanding 37–55%, hypothesis generation 43–54%, experiment proposal 39–53%'
+  - 'RefineBot removed shortcuts: GPT-4o 79.7% -> 46.8%, Claude-3.5-Sonnet 82.2% -> 51.7%, Gemini-1.5-Pro 79.1%
+    -> 51.1%'
+  - 'Error analysis: perception errors ~50% of failures; remainder knowledge and overgeneralization'
+  holdout_or_split_design: Single test set; no train split
+  instruments:
+  - name: none (curated images)
+    modality: microscopy
+    real_or_simulated: none
+  leakage_or_contamination_risk: Some images from published papers; RefineBot targets language-prior shortcuts;
+    no-image ablation drops only 1.9–5.8%, showing residual text-only solvability
+  metric_types:
+  - success_rate
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: 3
+  n_tasks: 1042
+  open_source: true
+  primary_metric: MCQ accuracy
+  repetitions_per_task: single pass (CoT prompting); not specified
+  sampling_strategy: 12 biology experts wrote raw QA (30–40 min each) from their own or published images; converted
+    to MCQs and hardened by RefineBot (evaluator/reflector/rewriter loop)
+  scientific_domains:
+  - cell biology
+  - biomedical microscopy
+  scoring_granularity: binary
+  target_population: Reasoning steps a biologist performs in microscopy-based research
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: image_interpretation
+  quantitative_tolerance: n/a (MCQ)
+  reasoning_demand: high
+  safety_criticality: none
+  task_taxonomy:
+  - expert visual understanding
+  - hypothesis generation
+  - experiment proposal
+  tool_composition: none
+  tool_interface:
+  - natural_language
+  workflow_depth: single_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Static VQA; avg question 66 words, answer 15 words
+  injected_faults: false
+  novelty_control: Many images unpublished/expert-owned; not quantified
+  sample_real_or_simulated: dataset
+  sample_types:
+  - light microscopy
+  - fluorescence microscopy
+  - electron microscopy; tissue/cell/subcellular/atomic scales; 31 organisms (skewed to human and mouse)
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models:
+  - o1
+  - Claude-3.5-Sonnet
+  - Gemini-1.5-Pro
+  - GPT-4o
+  - open-source MLLMs
+  multi_agent: false
+  planner: none
+  rag_or_memory: none
+  tools: []
+  verifier_or_self_debug: none
+  vision_used: true
+transfer_relevant_findings:
+- Perception is the dominant failure mode for frontier MLLMs on research microscopy images — relevant to any agent
+  that must read micrographs
+- Language shortcuts inflated accuracy by ~30 points before RefineBot; benchmark scores on unhardened MCQs overstate
+  visual competence
+limitations:
+- 1,042 questions; three biology domains; organism skew
+- No Raman/other modalities; human baseline from non-specialist experts
+related:
+- micro_bench
+- spm_bench
+- mmsci
+notes: Numbers from a GitHub-mirrored paper review (deep-diver/ai-paper-reviewer) and memgrafter digest; number
+  of images (255 image sets) and model list partly verified. Dataset license not confirmed.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2503.13399
+  - https://github.com/jmhb0/microvqa
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

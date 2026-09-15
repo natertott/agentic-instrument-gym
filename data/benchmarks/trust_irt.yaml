@@ -1,0 +1,101 @@
+id: trust_irt
+record_type: framework
+name: Can We Trust Item Response Theory for AI Evaluation?
+short_name: Trust IRT for AI eval
+year: 2026
+venue: arXiv Jul 2026 (v2 by 20 Jul 2026)
+authors_short: Jiang et al. (Han Jiang, Sunbeom Kwon, Jinwen Luo, Ziang Xiao, Susu Zhang)
+arxiv: '2607.15190'
+doi: null
+url: https://arxiv.org/abs/2607.15190
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: |
+  Simulation study of whether IRT estimation tools built for human testing remain reliable in the AI-benchmark regime (few evaluated models, very many items, skewed/clustered/multimodal capability distributions). Using item parameters and ability distributions from six LLM benchmarks, three IRT models and four estimators (marginal maximum likelihood, MCMC, variational inference, neural pseudo-Siamese) across 18,000 conditions, it finds classical estimators can be infeasible at benchmark scale while scalable estimators yield unreliable item-level and ranking inferences with small or non-normal model sets, and identifies the sample sizes and diagnostics needed for trustworthy use.
+schema_axes_proposed:
+- Number of evaluated models (system sample size) as a validity condition for item-level statistics
+- Number of items relative to models (regime mismatch vs human testing)
+- Shape of the capability distribution (skewed / clustered / multimodal vs normal)
+- 'Estimator choice: MML; MCMC; variational inference; neural pseudo-Siamese (PSN-IRT)'
+- IRT model choice (three common models, e.g. 1PL/2PL/3PL -- exact set unverified)
+- 'Reliability targets: model rankings; predicted performance; item characteristics (difficulty, discrimination)'
+- Computational feasibility / scalability of estimation
+- Diagnostics and minimum sample sizes before trusting IRT-based benchmark claims
+benchmark_features:
+  agents_evaluated: []
+  evaluation_target: []
+  execution_mode: null
+  has_abstention_eval: null
+  has_human_baseline: null
+  has_safety_eval: null
+  headline_results:
+  - Classical IRT estimators can become computationally infeasible on large benchmarks
+  - Scalable estimators can produce unreliable item-level and ranking inferences when the model set is small or
+    non-normally distributed
+  holdout_or_split_design: null
+  instruments: []
+  leakage_or_contamination_risk: null
+  metric_types: []
+  n_agent_configs: null
+  n_instances_or_runs_reported: 18000
+  n_task_families: null
+  n_tasks: null
+  open_source: null
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - general LLM benchmarks
+  scoring_granularity: null
+  target_population: null
+  task_source: null
+task_features:
+  closed_loop_feedback: null
+  perceptual_demand: null
+  quantitative_tolerance: null
+  reasoning_demand: null
+  safety_criticality: null
+  task_taxonomy: []
+  tool_composition: null
+  tool_interface: []
+  workflow_depth: null
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: null
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: null
+  sample_types: []
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models: []
+  multi_agent: null
+  planner: null
+  rag_or_memory: null
+  tools: []
+  verifier_or_self_debug: null
+  vision_used: null
+transfer_relevant_findings:
+- Instrument-agent benchmarks typically evaluate a handful of agent configurations -- exactly the small, non-normal
+  system samples where IRT item statistics are unreliable; a schema should record n_agent_configs so readers can
+  judge whether item-level claims are trustworthy.
+- Warns against over-interpreting per-task difficulty/discrimination estimates from small studies.
+limitations:
+- Simulation-based; specific thresholds/diagnostics not accessible in this session.
+related:
+- lost_in_benchmarks_irt
+notes: |
+  arXiv blocked; abstract (v1 and v2 wording) verified verbatim from multiple arXiv mirrors in GitHub (CSQianDong/Awesome-arXiv-Daily-Reporter, 2shin0/arxiv-ai-mailing, santosomar RSS archive). Code URL and exact IRT model set not verified.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2607.15190
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

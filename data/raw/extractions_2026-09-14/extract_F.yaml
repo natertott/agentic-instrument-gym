@@ -1,0 +1,1380 @@
+# extract_F.yaml — Microscopy agents (EM / X-ray / optical) and microscopy perception benchmarks
+# Compiled 2026-09-14. Sources: arXiv abstracts mirrored on GitHub digest repos (arxiv.org, nature.com,
+# science.org, oup.com, biorxiv.org, zenodo.org, huggingface.co, openreview.net, PMC were all blocked by
+# the network proxy), GitHub READMEs, project websites' source, and the web-search result snippets.
+# Fields that could not be verified against a primary source are null and explained in `notes`.
+
+id: xrm_agent_benchmarks_johnson2026
+name: Agentic self-driving microscopy benchmarks support qualification but do not necessarily generalize to unseen tasks
+short_name: XRM-AgentBench
+year: 2026
+venue: arXiv preprint (cs.AI / cond-mat.mtrl-sci), 2026-08-05
+authors_short: Johnson & Abshire (Carl Zeiss Research Microscopy Solutions)
+arxiv: "2608.05266"
+doi: 10.48550/arXiv.2608.05266
+url: https://arxiv.org/abs/2608.05266
+code_url: https://github.com/natertott/agentic_microscopy_benchmarks_XRM
+data_url: https://github.com/natertott/agentic_microscopy_benchmarks_XRM (sweep_results.zip, YAML test-suite definitions, SupplementaryInformation.pdf)
+license: MIT (repository)
+status: preprint
+summary: >
+  A benchmark and trace-logging framework for an LLM-agent controller of ZEISS Versa X-ray microscopes
+  (simulator plus physical Versa 515/630/730 instruments via the ZEN NavX interface). 53 microscopy
+  benchmark tests were run across 105 agent configurations (one-, two- and three-agent graph
+  topologies, five LLMs, RAG/context parameters, operational constraints), yielding 1,949 test runs and
+  49,109 RAG retrievals. Direct comparison of configurations was informative, but surrogate models
+  trained on architecture + test results did not predict performance on held-out tasks.
+benchmark_features:
+  evaluation_target: [instrument_control, data_analysis, protocol_planning, safety]
+  execution_mode: hybrid
+  instruments:
+    - {name: ZEISS Versa 515/630/730 X-ray microscope (ZEN NavX 3.0 interface), modality: microscopy, real_or_simulated: real}
+    - {name: simulated microscope-control software for the same API, modality: microscopy, real_or_simulated: simulated}
+  scientific_domains: [X-ray microscopy / micro-CT, materials characterization, instrument automation]
+  n_tasks: 53
+  n_task_families: 7
+  n_instances_or_runs_reported: 1949
+  repetitions_per_task: "varies; historical/unbalanced sweep — not every configuration ran every test; repeated runs of same task+config acknowledged as not fully independent"
+  target_population: "End-to-end and component-level operation of a self-driving X-ray microscope by an LLM agent (setup, acquisition, segmentation, geometry, recipe generation, safe shutdown)"
+  task_source: expert_curated
+  sampling_strategy: "Author-designed test suite: 6-test end-to-end workflow, 12 integration workflows, 19 atomic instrument-control tests, 6 geometry/recipe tests, 8 regression/performance tests, 1 image-analysis test, 1 debugging test; plus 5 additional held-out quantitative validation tasks not in the 53"
+  metric_types: [success_rate, trace_alignment, cost, time, safety_violations, other]
+  primary_metric: "pass/fail per run combining scientific/numerical correctness with trace, file and operational checks; aggregate pass rate per configuration"
+  scoring_granularity: binary
+  has_human_baseline: false
+  has_safety_eval: true
+  has_abstention_eval: false
+  holdout_or_split_design: "Two surrogate-model validations: configuration-held-out (test identity as feature) vs task-held-out (test identity excluded); plus 5 prospective holdout tasks with numeric tolerances (e.g., stage X 650±100 µm, exposure 5±0.25 s, five pores >1 mm)"
+  leakage_or_contamination_risk: "Low for LLM pretraining (proprietary instrument API, private tests); but surrogate models could memorize test identity — authors show test identity is the strongest predictor of pass outcome"
+  agents_evaluated: [Claude Sonnet 3.7, Claude Sonnet 4, Claude Opus 4.5, GPT-4.1, GPT-5.1, one-agent, two-agent (supervisor+worker), three-agent (supervisor+instrument worker+image-analysis worker), RAG none/full/pruned]
+  n_agent_configs: 105
+  headline_results:
+    - "105 configurations, 1,949 runs, 49,109 RAG retrievals logged"
+    - "One-agent and two-agent systems covered a similar range of pass rates; one-agent used up to ~10,000 fewer tokens per test"
+    - "Three-agent topology gave inconsistent improvements and was excluded from the broader sweep"
+    - "One-agent pruned-RAG was Pareto-optimal in prospective 53-test comparison; one-agent no-RAG baseline performed approximately as well"
+    - "Surrogate ROC-AUC: configuration-held-out L2 logistic 0.54, random forest ~0.78; task-held-out L2 logistic 0.53, random forest 0.55 (near chance)"
+    - "Two-agent runs more often exceeded duration/LLM-call/tool-call limits; one-agent runs more often failed trace-based checks"
+  open_source: true
+task_features:
+  workflow_depth: mixed
+  perceptual_demand: mixed
+  reasoning_demand: mixed
+  tool_interface: [python_api, natural_language]
+  tool_composition: "Instrument-control tools (stage, source, detector, exposure, recipe), image-analysis/segmentation tools, file generation; multi-agent variants delegate instrument vs image-analysis tools"
+  quantitative_tolerance: "Explicit numeric tolerances on held-out tasks (e.g., stage positions ±100–500 µm, source/detector Z ±10 mm, sample dimensions 29 mm ±1–2 mm, exposure 5±0.25 s for ~5000 counts)"
+  closed_loop_feedback: true
+  safety_criticality: medium
+  task_taxonomy: [end-to-end workflow, integration workflows, atomic instrument-control tests, geometry and recipe tests, regression and performance tests, image-analysis test, debugging test]
+sample_environment_features:
+  sample_types: [physical test samples for X-ray micro-CT (e.g., porous sample with >1 mm pores; ~29 mm cuboid sample), simulated samples]
+  sample_real_or_simulated: real
+  signal_quality_variation: "Exposure optimization tasks target count levels; otherwise not systematically varied (per available text)"
+  novelty_control: "5 prospective holdout tasks outside the 53-test suite; task-held-out surrogate validation"
+  calibration_or_api_state_variation: "Runs span simulator and three microscope models; model/prompt/framework/software/hardware versions changed during the study (acknowledged confound)"
+  injected_faults: null
+  environment_description: "LangGraph-style agent graphs with recursion limit 20–200, temperature 0–1, duration/token/tool-call/safety limits; RAG with episodic top-k 0–5, contextual top-k 0–10, chunk 500–2000, overlap 50–500, similarity threshold 0.1–1.5, context 5k–50k tokens"
+agent_features_evaluated:
+  models: [Claude Sonnet 3.7, Claude Sonnet 4, Claude Opus 4.5, GPT-4.1, GPT-5.1]
+  vision_used: null
+  rag_or_memory: varied
+  planner: varied
+  tools: [microscope control API tools, image analysis tools, recipe/file generation]
+  verifier_or_self_debug: varied
+  guards_or_safety_layer: some
+  multi_agent: true
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Benchmarks supported qualification, regression testing, diagnosis and direct comparison, but not a task-independent global configuration model"
+  - "Task-held-out surrogate models were near chance (AUC 0.53–0.55) — configuration signal did not transfer across task identity"
+  - "Test identity > LLM choice > number of agents in feature importance for pass outcome"
+  - "More agents did not buy reliability; they shifted failure modes toward resource-limit exhaustion"
+limitations:
+  - "Historical, unbalanced configuration dataset rather than randomized factorial design"
+  - "Not every configuration run on every test; repeats not fully independent"
+  - "Versions of models, prompts, framework, software and hardware drifted during the study"
+  - "Single instrument family (ZEISS Versa XRM); agent code not released, only benchmark records and analysis scripts"
+  - "Claude Opus 4.5 affected by an implementation incompatibility in multi-agent graphs"
+related: [tem_agent_wall2025, eaa_du2026, afmbench_mandal2025, emseek_chen2026, xrm_llm_mm2025_johnson]
+notes: >
+  Details taken from a GitHub-mirrored full-text digest (Miyan0Shiho/arxiv-auto-collector) and the
+  abstract mirrored in the CSQianDong arXiv daily reporter, cross-checked with the user's proposal.txt
+  (53 tasks / 1,949 runs). Exact per-configuration pass rates and the definition of 'pass' per test
+  family were not readable; vision usage (whether images were passed to the LLM) unverified. Instrument
+  is an X-ray microscope, not SEM/TEM, but it is the closest full-scale microscopy agent benchmark found.
+---
+id: tem_agent_wall2025
+name: "TEM Agent: enhancing transmission electron microscopy (TEM) with modern AI tools"
+short_name: TEM Agent
+year: 2025
+venue: arXiv (Nov 2025); listed as npj Computational Materials 2026 in a third-party AI4Science reading list (unverified)
+authors_short: Wall et al. (Ercius group, NCEM / Lawrence Berkeley National Laboratory)
+arxiv: "2511.08819"
+doi: null
+url: https://arxiv.org/abs/2511.08819
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: >
+  A Model-Context-Protocol framework in which a commercial LLM (Claude Sonnet 4.5 per the arXiv HTML
+  snippet) controls several TEM subsystems, a data-management platform and HPC resources via four MCP
+  servers using text instructions. The paper demonstrates set-up and completion of intricate TEM
+  workflows without additional model training; no quantitative benchmark is reported in the abstract.
+benchmark_features:
+  evaluation_target: [instrument_control, data_analysis]
+  execution_mode: physical_instrument
+  instruments:
+    - {name: transmission electron microscope with multiple vendor/custom subsystems (NCEM), modality: microscopy, real_or_simulated: real}
+  scientific_domains: [electron microscopy, materials science]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Operation of a multi-vendor TEM ecosystem (microscope subsystems, data platform, HPC) through natural language"
+  task_source: expert_curated
+  sampling_strategy: "Demonstration workflows chosen by authors"
+  metric_types: [other]
+  primary_metric: null
+  scoring_granularity: binary
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "n/a (demonstration)"
+  agents_evaluated: [Claude Sonnet 4.5 (per arXiv HTML snippet)]
+  n_agent_configs: 1
+  headline_results: []
+  open_source: false
+task_features:
+  workflow_depth: multi_step
+  perceptual_demand: null
+  reasoning_demand: medium
+  tool_interface: [mcp, natural_language]
+  tool_composition: "Four MCP servers: microscope subsystems, data management platform, HPC, plus curated resources"
+  quantitative_tolerance: null
+  closed_loop_feedback: true
+  safety_criticality: medium
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: [TEM specimens (unspecified)]
+  sample_real_or_simulated: real
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Real TEM at a national user facility with vendor and custom control systems exposed through MCP"
+agent_features_evaluated:
+  models: [Claude Sonnet 4.5]
+  vision_used: null
+  rag_or_memory: some
+  planner: react
+  tools: [MCP microscope tools, data management, HPC job tools]
+  verifier_or_self_debug: none
+  guards_or_safety_layer: null
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Shows that a general LLM plus a small curated MCP tool set can drive a heterogeneous multi-vendor TEM stack without fine-tuning (qualitative)"
+limitations:
+  - "Demonstration only; no task counts, success rates or repeated trials in abstract"
+  - "Full text not accessible through proxy; LLM identity and MCP-server count come from a search-engine snippet of the arXiv HTML"
+related: [xrm_agent_benchmarks_johnson2026, emseek_chen2026, llmicroscopilot_schloz2024]
+notes: "demonstration. Abstract verified verbatim via GitHub-mirrored arXiv listing (lxl-sword/arxiv_paper_LLM_list; iopwsy/arXiv_cond-mat). Journal publication status unverified."
+---
+id: emseek_chen2026
+name: Bridging electron microscopy and materials analysis with an autonomous agentic platform (EMSeek)
+short_name: EMSeek
+year: 2026
+venue: Science Advances 12, eaed0583 (published 2026-04-01)
+authors_short: Chen, Yuan & You (Cornell University)
+arxiv: null
+doi: 10.1126/sciadv.aed0583
+url: https://www.science.org/doi/10.1126/sciadv.aed0583
+code_url: https://github.com/PEESEgroup/EMSeek
+data_url: null
+license: Apache-2.0 (code)
+status: published
+summary: >
+  A provenance-tracked multi-agent platform (Maestro planner delegating to specialised controllers,
+  with Guardian and Scribe agents attaching provenance and uncertainty summaries) that turns raw EM
+  images into materials insight: segmentation, crystal-structure determination, property prediction,
+  literature comparison and report generation. Evaluated on 20 material systems and five canonical
+  tasks; it analyses images rather than controlling the microscope.
+benchmark_features:
+  evaluation_target: [data_analysis, perception, question_answering]
+  execution_mode: static_code_eval
+  instruments:
+    - {name: none (offline EM/STEM images), modality: microscopy, real_or_simulated: none}
+  scientific_domains: [electron microscopy, materials science, catalysis, energy storage, semiconductors]
+  n_tasks: 5
+  n_task_families: 5
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "End-to-end EM image-to-insight analysis across diverse material systems"
+  task_source: mixed
+  sampling_strategy: "20 material systems x 5 canonical tasks (segmentation, structure modelling, property inference, literature reasoning, reporting); uses public datasets such as STEM2Mat and three out-of-distribution property benchmarks (names not verified)"
+  metric_types: [other, time]
+  primary_metric: "task-specific accuracy metrics (segmentation accuracy vs SAM; structural similarity on STEM2Mat; property-prediction error vs single-expert models); wall-clock time per image"
+  scoring_granularity: continuous
+  has_human_baseline: true
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: "Out-of-distribution property-prediction benchmarks with calibration on ~2% labelled data (secondary source)"
+  leakage_or_contamination_risk: "Uses published datasets; LLM planner may have seen literature used for reasoning; not discussed in accessible text"
+  agents_evaluated: [EMSeek multi-agent system (LLM via LiteLLM, configurable), Segment Anything (baseline), single-expert property models (baselines)]
+  n_agent_configs: 1
+  headline_results:
+    - "End-to-end analysis in 2–5 min per image, ~50x faster than expert workflows (phys.org / HyperAI summaries)"
+    - "~2x faster and higher accuracy than Segment Anything on segmentation (secondary)"
+    - "Structural similarity >90% on STEM2Mat (secondary)"
+    - "With ~2% labelled data for calibration, meets or exceeds strong single-expert models on three OOD property-prediction benchmarks (secondary)"
+  open_source: true
+task_features:
+  workflow_depth: long_horizon
+  perceptual_demand: image_interpretation
+  reasoning_demand: high
+  tool_interface: [python_api, natural_language]
+  tool_composition: "Segmentation models (PyTorch/segmentation-models-pytorch), structure tools (ASE, pymatgen, CIF library), property models (UMA, MACE, MatterSim), literature QA (paper-qa)"
+  quantitative_tolerance: null
+  closed_loop_feedback: false
+  safety_criticality: none
+  task_taxonomy: [perception/segmentation, structure modelling, property inference, literature reasoning, report generation]
+sample_environment_features:
+  sample_types: [HR-TEM/STEM images of catalysts, battery and semiconductor materials; 20 material systems]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: "OOD property benchmarks (secondary)"
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Offline agentic pipeline with shared memory and provenance tracking; no instrument in the loop"
+agent_features_evaluated:
+  models: [configurable LLM/MLLM via LiteLLM (defaults not verified)]
+  vision_used: true
+  rag_or_memory: some
+  planner: plan_and_execute
+  tools: [segmentation, CIF/structure library, ML interatomic potentials, paper-qa literature retrieval]
+  verifier_or_self_debug: verifier
+  guards_or_safety_layer: some
+  multi_agent: true
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Agentic decomposition of the EM analysis chain with small-data calibration generalised to OOD property tasks (per secondary summaries)"
+limitations:
+  - "No instrument control; analysis-only"
+  - "Quantitative results obtained only from press summaries (phys.org, HyperAI); science.org blocked — numbers should be re-verified against the paper"
+  - "Number of images/runs, repetitions, and per-task metrics not verified"
+related: [tem_agent_wall2025, microscopygpt_choudhary2025, xrm_agent_benchmarks_johnson2026]
+notes: "Abstract fragment confirmed via a Nature-paper-hub index mirror: 'Electron microscopy (EM) reveals atomic-scale structures that underpin catalysis, energy storage, and semiconductor reliability, yet current workflows remain fragmented across segmentat...'. All headline numbers are secondary-sourced."
+---
+id: llmicroscopilot_schloz2024
+name: "LLMicroscopilot: An LLM assistant for scanning tunneling and transmission electron microscopy measurements"
+short_name: LLMicroscopilot
+year: 2024
+venue: LLM Hackathon for Applications in Materials Science and Chemistry 2024 (project); Zenodo record 14051590; summarised in arXiv 2411.15221 (hackathon reflections)
+authors_short: Schloz & Cojal Gonzalez (Humboldt-Universität zu Berlin)
+arxiv: null
+doi: null
+url: https://zenodo.org/records/14051590
+code_url: https://gitlab.com/Schlozma/llm_autotem
+data_url: null
+license: MIT (GitLab repository)
+status: preprint
+summary: >
+  Hackathon prototype in which a general foundation LLM gains STEM-specific competence through tools
+  wrapping the abTEM multislice simulator API, performing experimental parameter estimation and
+  simulated experiment execution. Planned extensions include open-source microscope hardware control
+  and RAG database access. No quantitative evaluation.
+benchmark_features:
+  evaluation_target: [simulation_control, instrument_control]
+  execution_mode: simulator
+  instruments:
+    - {name: abTEM STEM simulation, modality: microscopy, real_or_simulated: simulated}
+  scientific_domains: [scanning transmission electron microscopy, scanning tunneling microscopy]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Parameter estimation and experiment execution for STEM via a simulator"
+  task_source: expert_curated
+  sampling_strategy: null
+  metric_types: [other]
+  primary_metric: null
+  scoring_granularity: binary
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "n/a"
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results: []
+  open_source: true
+task_features:
+  workflow_depth: single_step
+  perceptual_demand: none
+  reasoning_demand: medium
+  tool_interface: [python_api, natural_language]
+  tool_composition: "LLM tool-calling over abTEM API functions"
+  quantitative_tolerance: null
+  closed_loop_feedback: false
+  safety_criticality: none
+  task_taxonomy: [parameter estimation, experiment execution]
+sample_environment_features:
+  sample_types: [simulated atomic structures]
+  sample_real_or_simulated: simulated
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Simulation-only prototype (7 commits, 3 branches on GitLab, started 2024-05-09)"
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: none
+  planner: react
+  tools: [abTEM simulation API]
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings: []
+limitations:
+  - "Demonstration; no benchmark"
+related: [tem_agent_wall2025]
+notes: "demonstration. LLM identity not verified (Zenodo and GitLab README blocked). Description assembled from the arXiv 2411.15221 hackathon paper's search snippet and the llmhackathon GitHub profile."
+---
+id: em_copilot_fibsem_2025
+name: "LLM-Driven Automation in FIB-SEM: Enhancing Microscope Control with AutoScript and Vision-Based AI (EM CoPilot)"
+short_name: EM CoPilot
+year: 2025
+venue: "Microscopy and Microanalysis 31 (Suppl. 1), ozaf048.1088 (M&M 2025 proceedings); predecessor abstract 'Revolutionizing Electron Microscopy Through Intuitive Language-Driven Interfaces: The Emergence of the EM CoPilot' (2024)"
+authors_short: null
+arxiv: null
+doi: 10.1093/mam/ozaf048.1088
+url: https://academic.oup.com/mam/article/31/Supplement_1/ozaf048.1088/8212887
+code_url: null
+data_url: null
+license: null
+status: published
+summary: >
+  A multimodal-LLM interface to a commercial Thermo Fisher FIB-SEM that translates high-level user
+  operations into structured AutoScript API calls for site-specific cross-sectioning, surface/sub-surface
+  feature detection and targeted milling, with LLM-driven vision processing. Presented as reducing
+  manual intervention and user variability; no quantitative evaluation visible in the abstract.
+benchmark_features:
+  evaluation_target: [instrument_control, code_generation]
+  execution_mode: physical_instrument
+  instruments:
+    - {name: Thermo Fisher FIB-SEM via AutoScript API, modality: microscopy, real_or_simulated: real}
+  scientific_domains: [FIB-SEM, materials/semiconductor sample preparation]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Routine FIB-SEM operations (cross-sectioning, feature detection, milling) via natural language"
+  task_source: expert_curated
+  sampling_strategy: null
+  metric_types: [other]
+  primary_metric: null
+  scoring_granularity: binary
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "n/a"
+  agents_evaluated: [GPT-4 with vision encoder (per 2024 abstract snippet)]
+  n_agent_configs: null
+  headline_results: []
+  open_source: false
+task_features:
+  workflow_depth: multi_step
+  perceptual_demand: image_reading
+  reasoning_demand: medium
+  tool_interface: [python_api, natural_language]
+  tool_composition: "LLM -> AutoScript function calls; ViT/VLM for feature detection"
+  quantitative_tolerance: null
+  closed_loop_feedback: true
+  safety_criticality: high
+  task_taxonomy: [site-specific cross-sectioning, feature detection, targeted milling]
+sample_environment_features:
+  sample_types: [unspecified FIB-SEM specimens]
+  sample_real_or_simulated: real
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Commercial FIB-SEM with Python AutoScript API"
+agent_features_evaluated:
+  models: [GPT-4V (2024 abstract); 2025 model unverified]
+  vision_used: true
+  rag_or_memory: null
+  planner: null
+  tools: [AutoScript API]
+  verifier_or_self_debug: none
+  guards_or_safety_layer: null
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings: []
+limitations:
+  - "Conference abstract only; no numbers"
+  - "Author list could not be retrieved (OUP blocked)"
+related: [tem_agent_wall2025, thinking_microscopes_jamali2026]
+notes: "demonstration. Information from web-search snippets of the OUP abstract and the 2024 ResearchGate listing; DOI inferred from the OUP URL pattern and should be checked."
+---
+id: xrm_llm_mm2025_johnson
+name: Autonomous, Large Language Model Driven X-ray Microscope with Contextual Understanding of Domain Specific Experimental Workflows
+short_name: LLM-XRM (M&M 2025)
+year: 2025
+venue: Microscopy and Microanalysis 31 (Suppl. 1), ozaf048.1092 (M&M 2025 proceedings)
+authors_short: Johnson et al. (ZEISS) — inferred, see notes
+arxiv: null
+doi: 10.1093/mam/ozaf048.1092
+url: https://academic.oup.com/mam/article/31/Supplement_1/ozaf048.1092/8213302
+code_url: null
+data_url: null
+license: null
+status: published
+summary: >
+  Conference abstract describing an autonomous LLM agent that synthesises multiple data streams and
+  user instructions to operate a ZEISS Versa X-ray microscope with contextual understanding of
+  experimental workflows. Precursor to the 53-task/1,949-run benchmark study (xrm_agent_benchmarks_johnson2026).
+benchmark_features:
+  evaluation_target: [instrument_control]
+  execution_mode: physical_instrument
+  instruments:
+    - {name: ZEISS Versa X-ray microscope, modality: microscopy, real_or_simulated: real}
+  scientific_domains: [X-ray microscopy]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Autonomous XRM workflow execution from user instructions"
+  task_source: expert_curated
+  sampling_strategy: null
+  metric_types: [other]
+  primary_metric: null
+  scoring_granularity: binary
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "n/a"
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results: []
+  open_source: false
+task_features:
+  workflow_depth: multi_step
+  perceptual_demand: null
+  reasoning_demand: medium
+  tool_interface: [python_api, natural_language]
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: true
+  safety_criticality: medium
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: real
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: null
+  multi_agent: null
+  deterministic_execution: null
+transfer_relevant_findings: []
+limitations:
+  - "Abstract only"
+related: [xrm_agent_benchmarks_johnson2026]
+notes: "demonstration. Authorship inferred from the NIST AIMS 2025 workshop programme listing 'Nathan Johnson (ZEISS): An Autonomous, Large Language Model Driven X-ray Microscope'; the OUP page itself was blocked, so authors and DOI need confirmation."
+---
+id: thinking_microscopes_jamali2026
+name: "Thinking microscopes: agentic AI and the future of electron microscopy"
+short_name: Thinking Microscopes
+year: 2026
+venue: npj Computational Materials 12, 149 (2026)
+authors_short: Jamali, Aghazadeh & Kacher (Georgia Tech)
+arxiv: null
+doi: 10.1038/s41524-026-02077-y
+url: https://www.nature.com/articles/s41524-026-02077-y
+code_url: null
+data_url: null
+license: null
+status: published
+summary: >
+  Perspective article proposing electron microscopes with directly integrated agentic AI that draw on
+  prior knowledge, interpret outcomes, iteratively refine protocols and generate hypotheses, acting as
+  co-scientists. Advocates open data repositories and secure remote instrument access. No evaluation.
+benchmark_features:
+  evaluation_target: [instrument_control]
+  execution_mode: static_text
+  instruments:
+    - {name: electron microscopes (conceptual), modality: microscopy, real_or_simulated: none}
+  scientific_domains: [electron microscopy, materials science]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: null
+  task_source: null
+  sampling_strategy: null
+  metric_types: []
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "n/a"
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results: []
+  open_source: false
+task_features:
+  workflow_depth: null
+  perceptual_demand: null
+  reasoning_demand: null
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: null
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: none
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: null
+  multi_agent: null
+  deterministic_execution: null
+transfer_relevant_findings: []
+limitations:
+  - "Perspective; no experiments"
+related: [tem_agent_wall2025, emseek_chen2026]
+notes: "Not a benchmark; included as context. Content from phys.org and Georgia Tech news summaries (nature.com blocked)."
+---
+id: microscopygpt_choudhary2025
+name: "MicroscopyGPT: Generating Atomic-Structure Captions from Microscopy Images of 2D Materials with Vision-Language Transformers"
+short_name: MicroscopyGPT
+year: 2025
+venue: Journal of Physical Chemistry Letters (2025); ChemRxiv preprint
+authors_short: Choudhary et al. (NIST)
+arxiv: null
+doi: 10.1021/acs.jpclett.5c01257
+url: https://pubs.acs.org/doi/10.1021/acs.jpclett.5c01257
+code_url: https://github.com/atomgptlab/atomgpt
+data_url: null
+license: null
+status: published
+summary: >
+  A VLM (fine-tuned 11B LLaMA) that predicts full atomic configurations (lattice parameters, elements,
+  coordinates) from simulated STEM images of ~5,000 2D materials generated with AtomVision from
+  JARVIS-DFT and C2DB. It is a perception model, not an agent benchmark, but defines an image-to-structure
+  task relevant to EM perception.
+benchmark_features:
+  evaluation_target: [perception]
+  execution_mode: static_code_eval
+  instruments:
+    - {name: simulated STEM images (AtomVision), modality: microscopy, real_or_simulated: simulated}
+  scientific_domains: [2D materials, STEM]
+  n_tasks: 1
+  n_task_families: 1
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Atomic-structure reconstruction from STEM images of 2D materials"
+  task_source: synthetic_generated
+  sampling_strategy: "~5,000 2D materials from JARVIS-DFT and C2DB"
+  metric_types: [other]
+  primary_metric: null
+  scoring_granularity: continuous
+  has_human_baseline: false
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "Synthetic images from public databases"
+  agents_evaluated: [MicroscopyGPT (LLaMA-3.2-11B-Vision fine-tune)]
+  n_agent_configs: 1
+  headline_results: []
+  open_source: true
+task_features:
+  workflow_depth: single_step
+  perceptual_demand: image_interpretation
+  reasoning_demand: medium
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: false
+  safety_criticality: none
+  task_taxonomy: [image-to-structure captioning]
+sample_environment_features:
+  sample_types: [simulated STEM images of 2D materials]
+  sample_real_or_simulated: simulated
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: [LLaMA 11B vision fine-tune]
+  vision_used: true
+  rag_or_memory: none
+  planner: none
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings: []
+limitations:
+  - "Simulated images only; metrics not retrievable"
+related: [emseek_chen2026, spm_bench_xiao2026]
+notes: "Perception model rather than benchmark; short record. Metrics/numbers not verified (ACS/PMC blocked)."
+---
+id: eaa_du2026
+name: "Experiment Automation Agents: Automating materials characterization with vision language model agents"
+short_name: EAA
+year: 2026
+venue: arXiv (Feb 2026); npj Computational Materials 2026 (doi 10.1038/s41524-026-02213-8 per user's proposal reference list)
+authors_short: Du et al. (Cherukara group, Argonne National Laboratory)
+arxiv: "2602.15294"
+doi: 10.1038/s41524-026-02213-8
+url: https://arxiv.org/abs/2602.15294
+code_url: null
+data_url: null
+license: null
+status: published
+summary: >
+  A VLM-driven agentic system with tool-augmented action, optional long-term memory and two-way MCP
+  compatibility, demonstrated at an imaging beamline at the Advanced Photon Source: automated zone-plate
+  focusing, natural-language feature search and interactive data acquisition. X-ray microscopy rather
+  than EM/optical; demonstration without a benchmark table in the abstract.
+benchmark_features:
+  evaluation_target: [instrument_control, perception]
+  execution_mode: physical_instrument
+  instruments:
+    - {name: APS imaging beamline X-ray microscope (zone plate), modality: synchrotron, real_or_simulated: real}
+  scientific_domains: [synchrotron X-ray microscopy, materials characterization]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Beamline microscopy workflows: focusing, feature search, acquisition"
+  task_source: expert_curated
+  sampling_strategy: null
+  metric_types: [other]
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "n/a"
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results: []
+  open_source: null
+task_features:
+  workflow_depth: multi_step
+  perceptual_demand: image_interpretation
+  reasoning_demand: medium
+  tool_interface: [mcp, python_api, natural_language]
+  tool_composition: "Task-manager architecture; fully agent-driven or logic-defined routines with embedded LLM queries; MCP-served instrument tools"
+  quantitative_tolerance: null
+  closed_loop_feedback: true
+  safety_criticality: medium
+  task_taxonomy: [zone plate focusing, feature search, interactive acquisition]
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: real
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Live synchrotron imaging beamline"
+agent_features_evaluated:
+  models: []
+  vision_used: true
+  rag_or_memory: some
+  planner: varied
+  tools: [MCP instrument tools]
+  verifier_or_self_debug: none
+  guards_or_safety_layer: null
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings: []
+limitations:
+  - "Demonstration; no quantitative evaluation in abstract"
+related: [xrm_agent_benchmarks_johnson2026, tem_agent_wall2025]
+notes: "demonstration. Abstract verified from a GitHub-mirrored arXiv feed (LIHUA919/AI-Agents-Daily-Research). Included for the microscopy-agent axis even though the instrument is a synchrotron beamline."
+---
+id: microvqa_burgess2025
+name: "MicroVQA: A Multimodal Reasoning Benchmark for Microscopy-Based Scientific Research"
+short_name: MicroVQA
+year: 2025
+venue: CVPR 2025 (pp. 19552–19564)
+authors_short: Burgess et al. (Stanford; Yeung-Levy lab)
+arxiv: "2503.13399"
+doi: null
+url: https://arxiv.org/abs/2503.13399
+code_url: https://github.com/jmhb0/microvqa
+data_url: https://huggingface.co/datasets/jmhb/microvqa
+license: null
+status: published
+summary: >
+  1,042 expert-written multiple-choice questions over 255 unique image sets (40.6% multi-image) from
+  light, fluorescence and electron microscopy across 31 organisms and 33 research areas, testing three
+  research-workflow capabilities: expert visual understanding, hypothesis generation and experiment
+  proposal. A RefineBot pipeline removes language shortcuts; best MLLMs reach ~53%.
+benchmark_features:
+  evaluation_target: [question_answering, perception]
+  execution_mode: static_text
+  instruments:
+    - {name: none (curated images), modality: microscopy, real_or_simulated: none}
+  scientific_domains: [cell biology, biomedical microscopy]
+  n_tasks: 1042
+  n_task_families: 3
+  n_instances_or_runs_reported: null
+  repetitions_per_task: "single pass (CoT prompting); not specified"
+  target_population: "Reasoning steps a biologist performs in microscopy-based research"
+  task_source: expert_curated
+  sampling_strategy: "12 biology experts wrote raw QA (30–40 min each) from their own or published images; converted to MCQs and hardened by RefineBot (evaluator/reflector/rewriter loop)"
+  metric_types: [success_rate]
+  primary_metric: MCQ accuracy
+  scoring_granularity: binary
+  has_human_baseline: true
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: "Single test set; no train split"
+  leakage_or_contamination_risk: "Some images from published papers; RefineBot targets language-prior shortcuts; no-image ablation drops only 1.9–5.8%, showing residual text-only solvability"
+  agents_evaluated: [o1, Claude-3.5-Sonnet, Gemini-1.5-Pro, GPT-4o, open-source MLLMs (e.g., Qwen2-VL, LLaVA variants)]
+  n_agent_configs: null
+  headline_results:
+    - "o1 52.8%, Claude-3.5-Sonnet 51.7%, Gemini-1.5-Pro 51.1% overall; random 22.0%; human (non-specialist expert) 50.3%"
+    - "Per-task ranges: visual understanding 37–55%, hypothesis generation 43–54%, experiment proposal 39–53%"
+    - "RefineBot removed shortcuts: GPT-4o 79.7% -> 46.8%, Claude-3.5-Sonnet 82.2% -> 51.7%, Gemini-1.5-Pro 79.1% -> 51.1%"
+    - "Error analysis: perception errors ~50% of failures; remainder knowledge and overgeneralization"
+  open_source: true
+task_features:
+  workflow_depth: single_step
+  perceptual_demand: image_interpretation
+  reasoning_demand: high
+  tool_interface: [natural_language]
+  tool_composition: "none"
+  quantitative_tolerance: "n/a (MCQ)"
+  closed_loop_feedback: false
+  safety_criticality: none
+  task_taxonomy: [expert visual understanding, hypothesis generation, experiment proposal]
+sample_environment_features:
+  sample_types: [light microscopy, fluorescence microscopy, electron microscopy; tissue/cell/subcellular/atomic scales; 31 organisms (skewed to human and mouse)]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: "Many images unpublished/expert-owned; not quantified"
+  calibration_or_api_state_variation: null
+  injected_faults: false
+  environment_description: "Static VQA; avg question 66 words, answer 15 words"
+agent_features_evaluated:
+  models: [o1, Claude-3.5-Sonnet, Gemini-1.5-Pro, GPT-4o, open-source MLLMs]
+  vision_used: true
+  rag_or_memory: none
+  planner: none
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Perception is the dominant failure mode for frontier MLLMs on research microscopy images — relevant to any agent that must read micrographs"
+  - "Language shortcuts inflated accuracy by ~30 points before RefineBot; benchmark scores on unhardened MCQs overstate visual competence"
+limitations:
+  - "1,042 questions; three biology domains; organism skew"
+  - "No Raman/other modalities; human baseline from non-specialist experts"
+related: [microbench_lozano2024, spm_bench_xiao2026, mmsci_li2024]
+notes: "Numbers from a GitHub-mirrored paper review (deep-diver/ai-paper-reviewer) and memgrafter digest; number of images (255 image sets) and model list partly verified. Dataset license not confirmed."
+---
+id: microbench_lozano2024
+name: "µ-Bench (Micro-Bench): A Vision-Language Benchmark for Microscopy Understanding"
+short_name: µ-Bench
+year: 2024
+venue: NeurIPS 2024 Datasets and Benchmarks Track
+authors_short: Lozano et al. (Stanford; Yeung-Levy lab)
+arxiv: "2407.01791"
+doi: null
+url: https://arxiv.org/abs/2407.01791
+code_url: https://github.com/yeung-lab/Micro-Bench
+data_url: https://huggingface.co/datasets/jnirschl/uBench
+license: MIT (code); dataset CC-BY where applicable (per project site)
+status: published
+summary: >
+  Expert-curated benchmark of 22 biomedical microscopy tasks: a Perception set of 17,235 images
+  (17 fine-grained tasks: 13 classification, 4 segmentation/detection) and a Cognition set of 121
+  expert questions on 54 images, spanning light, fluorescence and electron microscopy (8 sub-modalities),
+  subcellular to tissue scales, 24 public datasets. Generalist and specialist VLMs struggle even at
+  modality identification; specialist fine-tuning causes catastrophic forgetting.
+benchmark_features:
+  evaluation_target: [perception, question_answering]
+  execution_mode: static_text
+  instruments:
+    - {name: none (curated images), modality: microscopy, real_or_simulated: none}
+  scientific_domains: [biology, pathology (12 subdomains)]
+  n_tasks: 22
+  n_task_families: 2
+  n_instances_or_runs_reported: 17235
+  repetitions_per_task: "single pass with bootstrap CIs"
+  target_population: "Perceptual and cognitive microscopy understanding across modalities, scales and organisms"
+  task_source: mixed
+  sampling_strategy: "Images from 24–25 permissively licensed public datasets with new expert annotations; cognition questions written by experts"
+  metric_types: [success_rate, other]
+  primary_metric: "closed-VQA accuracy with bootstrap CIs; GRIT metric for localization"
+  scoring_granularity: binary
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: "Test split 17,315 examples on HuggingFace"
+  leakage_or_contamination_risk: "Built from public datasets — pretraining exposure possible"
+  agents_evaluated: [CLIP, OpenCLIP, ALIGN, CogVLM, Qwen-VL, BiomedCLIP, PLIP, QuiltNet, CONCH (11 VLMs total: 3 generalist autoregressive, 3 generalist contrastive, 4 specialist contrastive, 1 biomedical contrastive)]
+  n_agent_configs: 11
+  headline_results:
+    - "Models struggle on all categories; ~30% error even at distinguishing microscopy modality"
+    - "Specialist biomedical models often underperform generalists"
+    - "Weight interpolation (alpha 0.8) between fine-tuned and pre-trained weights mitigates forgetting"
+  open_source: true
+task_features:
+  workflow_depth: single_step
+  perceptual_demand: mixed
+  reasoning_demand: mixed
+  tool_interface: [natural_language]
+  tool_composition: "none"
+  quantitative_tolerance: "n/a"
+  closed_loop_feedback: false
+  safety_criticality: none
+  task_taxonomy: [perception: 13 classification + 4 segmentation/detection tasks, cognition: open-ended and closed multiple-choice reasoning]
+sample_environment_features:
+  sample_types: [light, fluorescence and electron microscopy; 91 unique cells/tissues/structures; 24 staining techniques; normal and abnormal states]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: "none (public datasets)"
+  calibration_or_api_state_variation: null
+  injected_faults: false
+  environment_description: "Static image-text evaluation"
+agent_features_evaluated:
+  models: [CLIP, OpenCLIP, ALIGN, CogVLM, Qwen-VL, BiomedCLIP, PLIP, QuiltNet, CONCH]
+  vision_used: true
+  rag_or_memory: none
+  planner: none
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Domain-specialist fine-tuning narrowed rather than broadened competence (catastrophic forgetting) — caution for microscopy-specific agent fine-tunes"
+limitations:
+  - "Public-dataset provenance; English-only prompts; scale small vs general VLM benchmarks"
+related: [microvqa_burgess2025, plantmicro_wei2026]
+notes: "GitHub README says 22 tasks; the arXiv abstract snippet in search results says 24 (probably datasets vs tasks). Exact per-model accuracies not retrievable through proxy."
+---
+id: macbench_alampara2025
+name: "MaCBench — Probing the limitations of multimodal language models for chemistry and materials research"
+short_name: MaCBench
+year: 2025
+venue: Nature Computational Science (2025); arXiv 2411.16955 (Nov 2024)
+authors_short: Alampara et al. (Jablonka group, LAMaLab / FSU Jena)
+arxiv: "2411.16955"
+doi: 10.1038/s43588-025-00836-3
+url: https://www.nature.com/articles/s43588-025-00836-3
+code_url: https://github.com/lamalab-org/macbench
+data_url: https://huggingface.co/datasets/jablonkagroup/MaCBench (v1.0.0; ablations at jablonkagroup/MaCBench-Ablations; leaderboard jablonkagroup/MaCBench-Leaderboard)
+license: MIT (code); dataset license not confirmed
+status: published
+summary: >
+  ~1,150 manually curated multimodal questions (34 subsets; 1,153 samples in the Inspect port, 1,155
+  in the digest) spanning three pillars of the chemistry/materials workflow: data extraction (tables,
+  plots, hand-drawn molecules, organic chemistry), experiment execution (lab QA / lab-safety photos,
+  crystal structures) and data interpretation (AFM images, XRD, spectra, isotherms, electronic
+  structure). Frontier VLMs do well at equipment identification but fail at spatial reasoning and
+  multi-step cross-modal inference.
+benchmark_features:
+  evaluation_target: [question_answering, perception, safety]
+  execution_mode: static_text
+  instruments:
+    - {name: none (images of lab setups, AFM, XRD, spectra), modality: microscopy, real_or_simulated: none}
+  scientific_domains: [chemistry, materials science]
+  n_tasks: 1153
+  n_task_families: 34
+  n_instances_or_runs_reported: null
+  repetitions_per_task: 5
+  target_population: "Multimodal tasks across the chemistry/materials scientific lifecycle"
+  task_source: expert_curated
+  sampling_strategy: "Manually created by domain experts; GitHub PR review; custom validation UI with resolution checks; some images mined from patents or generated (XRD, AFM)"
+  metric_types: [success_rate, other]
+  primary_metric: "fraction correct (binary per question; Hamming loss 0 for MCQ; MAE within 1% (or 5%) tolerance for numeric)"
+  scoring_granularity: binary
+  has_human_baseline: false
+  has_safety_eval: true
+  has_abstention_eval: false
+  holdout_or_split_design: "Single evaluation set; separate ablation set with six dimensions (modality text vs vision, reasoning complexity, guidance, molecule representation, rendering, terminology)"
+  leakage_or_contamination_risk: "Authors assume corpus not used in training but note temporal validity concern; correlation between crystal-structure online prevalence and task performance suggests memorization effects"
+  agents_evaluated: [Claude 3.5 Sonnet, GPT-4o, Gemini Pro, Llama 3.2 90B Vision]
+  n_agent_configs: 4
+  headline_results:
+    - "Near-perfect performance on equipment identification and standardized data extraction; failures on stereochemistry, crystal systems, multi-step inference"
+    - "~35% performance increase when peak positions are given as text rather than shown visually"
+    - "Consistent degradation as reasoning steps increase"
+    - "Inspect-evals port: GPT-5.2 72.59%, GPT-5-nano 68.78% (1,153 samples), matching original implementation"
+  open_source: true
+task_features:
+  workflow_depth: single_step
+  perceptual_demand: image_interpretation
+  reasoning_demand: mixed
+  tool_interface: [natural_language]
+  tool_composition: "none"
+  quantitative_tolerance: "numeric answers scored correct if MAE within 1% (default) or 5% of target"
+  closed_loop_feedback: false
+  safety_criticality: low
+  task_taxonomy: [data extraction (hand-drawn molecules, organic chemistry: chirality/isomers/schemas, tables and plots), in silico and lab experiments (lab QA, crystal structure), data interpretation (AFM imaging, adsorption isotherms, electronic structure, spectra, XRD)]
+sample_environment_features:
+  sample_types: [lab photographs, plots, tables, molecule drawings, crystal renderings, AFM images, XRD patterns, spectra]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: "Originality required by curation guidelines"
+  calibration_or_api_state_variation: null
+  injected_faults: false
+  environment_description: "ChemBench evaluation engine; ~2 h serial evaluation; 2.5 GB dataset"
+agent_features_evaluated:
+  models: [Claude 3.5 Sonnet, GPT-4o, Gemini Pro, Llama 3.2 90B Vision]
+  vision_used: true
+  rag_or_memory: none
+  planner: none
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Same information as text vs image changes accuracy by tens of points — modality of instrument readouts matters for agent design"
+  - "Performance tracks internet prevalence of content, warning that benchmark success may reflect memorization rather than transferable skill"
+limitations:
+  - "No open-ended tasks; no partial credit; creator bias; some subfields underrepresented"
+  - "Microscopy content limited to AFM images (no SEM/TEM) — perception axis for EM only partially covered"
+related: [mmsci_li2024, spm_bench_xiao2026, afmbench_mandal2025]
+notes: "Question count differs between sources (1,153 Inspect port vs 1,155 digest vs 'over 1,100' README); 34 subsets confirmed by eval-card and Inspect README. Per-pillar accuracies for the four models not retrievable."
+---
+id: mmsci_li2024
+name: "MMSci: A Dataset for Graduate-Level Multi-Discipline Multimodal Scientific Understanding"
+short_name: MMSci
+year: 2024
+venue: arXiv (Jul 2024; revised Oct 2024); OpenReview submissions (ICLR 2025 track) — final venue not confirmed
+authors_short: Li et al. (UC Santa Barbara / POSTECH)
+arxiv: "2407.04903"
+doi: null
+url: https://arxiv.org/abs/2407.04903
+code_url: https://github.com/Leezekun/MMSci
+data_url: https://mmsci.s3.amazonaws.com/benchmark.zip (also rawdata.zip, pretraindata.zip)
+license: Apache-2.0 (code); CC BY 4.0 (data)
+status: preprint
+summary: >
+  131,393 open-access Nature Communications articles with 742,273 figures (514,054 sub-figures) across
+  72 disciplines in 5 major categories, including microscopy images, schematics and experimental data.
+  Benchmarks: scientific figure captioning (ungrounded / abstract-grounded / full-content-grounded) and
+  three multiple-choice VQA settings (~1,200 samples each: figure captions, sub-captions, all
+  sub-captions). Many open-source models are at chance; GPT-4o/GPT-4V also struggle.
+benchmark_features:
+  evaluation_target: [question_answering, perception]
+  execution_mode: static_text
+  instruments:
+    - {name: none (published figures), modality: microscopy, real_or_simulated: none}
+  scientific_domains: [72 disciplines incl. materials science, chemistry, physics, biology]
+  n_tasks: null
+  n_task_families: 2
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Graduate-level comprehension of scientific figures and captions across disciplines"
+  task_source: literature_derived
+  sampling_strategy: "Figures/captions from Nature Communications; test 1,418 articles and dev 1,414 articles; ~1,200 samples per VQA setting"
+  metric_types: [success_rate, llm_judge, other]
+  primary_metric: "MCQ accuracy (VQA); BLEU/ROUGE/METEOR/BERTScore/CIDEr/FActScore/G-Eval (captioning)"
+  scoring_granularity: mixed
+  has_human_baseline: true
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: "test/dev splits released; training (visual-instruction >1M conversations; 108,843 multi-turn) and interleaved pretraining data separate"
+  leakage_or_contamination_risk: "Open-access articles likely in LLM pretraining corpora"
+  agents_evaluated: [GPT-4V, GPT-4o, Kosmos-2, BLIP-2, Qwen-VL-Chat, LLaVA variants, LLaVA-Next-MMSci, Qwen2-VL-2B/7B fine-tunes (19 models per digest)]
+  n_agent_configs: 19
+  headline_results:
+    - "Many open-source models at chance on MCQ; GPT-4o highest METEOR/ROUGE in full-article-grounded captioning"
+    - "Human expert MCQ baseline 86.2% (digest); fine-tuned Qwen2-VL-7B reported to exceed GPT-4o and human experts on MCQ"
+    - "Fine-tuned Qwen2-VL-2B reaches GPT-4o-level MCQ accuracy; captioning remains hard"
+  open_source: true
+task_features:
+  workflow_depth: single_step
+  perceptual_demand: image_interpretation
+  reasoning_demand: high
+  tool_interface: [natural_language]
+  tool_composition: "none"
+  quantitative_tolerance: "n/a"
+  closed_loop_feedback: false
+  safety_criticality: none
+  task_taxonomy: [scientific figure captioning (ungrounded, abstract-grounded, content-grounded), VQA setting I (figure->caption), setting II (sub-figure->sub-caption), setting III (all sub-captions matching)]
+sample_environment_features:
+  sample_types: [schematics, simulated images, macroscopic/microscopic photos (incl. SEM/TEM micrographs), western blots, plots]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: "none"
+  calibration_or_api_state_variation: null
+  injected_faults: false
+  environment_description: "Static figure/caption evaluation"
+agent_features_evaluated:
+  models: [GPT-4V, GPT-4o, Qwen2-VL, LLaVA, Kosmos-2, BLIP-2, Qwen-VL-Chat]
+  vision_used: true
+  rag_or_memory: none
+  planner: none
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Caption-matching MCQ can be learned from in-domain fine-tuning to super-expert levels, while generative captioning stays hard — MCQ accuracy transfers poorly to open-ended understanding"
+limitations:
+  - "Publication bias (Nature Communications only); microscopy share not quantified"
+  - "Exact per-model MCQ accuracies could not be retrieved"
+related: [macbench_alampara2025, microvqa_burgess2025]
+notes: "Counts from a GitHub-mirrored paper summary (st143575 blog) and memgrafter digest; venue status unverified (OpenReview blocked)."
+---
+id: spm_bench_xiao2026
+name: "SPM-Bench: Benchmarking Large Language Models for Scanning Probe Microscopy"
+short_name: SPM-Bench
+year: 2026
+venue: arXiv (Feb 2026)
+authors_short: Xiao et al.
+arxiv: "2602.22971"
+doi: null
+url: https://arxiv.org/abs/2602.22971
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: >
+  A PhD-level multimodal benchmark of 2,703 image-QA pairs synthesised from 2023–2025 arXiv and journal
+  papers covering STM, AFM, SEM and TEM images, generated by a VLM-instructed pipeline with an
+  Anchor-Gated Sieve page filter and an advisory-model audit. Multi-select questions are scored with
+  exact match, standard partial credit and a hallucination-penalising SIP-F1; the best model
+  (qwen3.5-plus) reaches EM 0.832 / SIP-F1 0.881 and defect/topology reasoning is the weakest area.
+benchmark_features:
+  evaluation_target: [question_answering, perception]
+  execution_mode: static_text
+  instruments:
+    - {name: none (published SPM/EM micrographs), modality: microscopy, real_or_simulated: none}
+  scientific_domains: [scanning probe microscopy, electron microscopy, surface science, materials]
+  n_tasks: 2703
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Multi-scale spatial-frequency reasoning over SPM/EM images"
+  task_source: synthetic_generated
+  sampling_strategy: "Automated VLM-instructed generation from 2023–2025 papers; AGS filters >95% of non-figure pages; advisory model audits each pair"
+  metric_types: [success_rate, partial_credit, other]
+  primary_metric: "Exact match and SIP-F1 (lambda=0.6, Gamma=6)"
+  scoring_granularity: mixed
+  has_human_baseline: false
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "Temporal filtering to 2023–2025 papers; authors acknowledge persistent contamination risk"
+  agents_evaluated: [qwen3.5-plus, other SOTA LLM/VLMs (list not retrieved)]
+  n_agent_configs: null
+  headline_results:
+    - "qwen3.5-plus: EM 0.832, SIP-F1 0.881; overall EM spread 0.43–0.68 across other models"
+    - "Bimodal 'personalities': wise models (SPC–SIP gap <0.02) vs aggressive models (gap >0.04)"
+    - "Defect/topology questions score 10–15% lower"
+  open_source: null
+task_features:
+  workflow_depth: single_step
+  perceptual_demand: image_interpretation
+  reasoning_demand: high
+  tool_interface: [natural_language]
+  tool_composition: "none"
+  quantitative_tolerance: "n/a"
+  closed_loop_feedback: false
+  safety_criticality: none
+  task_taxonomy: [multi-select image QA incl. defect/topology domains]
+sample_environment_features:
+  sample_types: [STM, AFM, SEM, TEM images from literature]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: "Recent-paper restriction"
+  calibration_or_api_state_variation: null
+  injected_faults: false
+  environment_description: "Static image QA"
+agent_features_evaluated:
+  models: [qwen3.5-plus, others]
+  vision_used: true
+  rag_or_memory: none
+  planner: none
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Hallucination-penalising scoring separates models that abstain on uncertain options from those that over-select — an abstention-like signal for microscopy perception"
+limitations:
+  - "Synthetic (VLM-generated) questions; pipeline robustness not stress-tested; SIP-F1 parameters uncalibrated"
+  - "Per-modality counts, model list and code URL not retrievable"
+related: [microvqa_burgess2025, macbench_alampara2025, afmbench_mandal2025]
+notes: "Authors and abstract verified via GitHub-mirrored arXiv daily report; numbers from memgrafter digest. Only benchmark found that explicitly covers SEM and TEM perception for materials."
+---
+id: plantmicro_wei2026
+name: "Benchmarking Vision-Language Models for Microscopic Plant Image Understanding (PlantMicro)"
+short_name: PlantMicro
+year: 2026
+venue: arXiv (Jun 2026)
+authors_short: Wei et al. (University of Queensland)
+arxiv: "2606.22497"
+doi: null
+url: https://arxiv.org/abs/2606.22497
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: >
+  A VLM benchmark for microscopic plant images spanning light, fluorescence and electron microscopy,
+  filling a gap left by biomedical-centric microscopy benchmarks. Counts and results not retrievable.
+benchmark_features:
+  evaluation_target: [perception, question_answering]
+  execution_mode: static_text
+  instruments:
+    - {name: none, modality: microscopy, real_or_simulated: none}
+  scientific_domains: [plant science]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Microscopic plant image understanding"
+  task_source: mixed
+  sampling_strategy: null
+  metric_types: [success_rate]
+  primary_metric: null
+  scoring_granularity: binary
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results: []
+  open_source: null
+task_features:
+  workflow_depth: single_step
+  perceptual_demand: image_interpretation
+  reasoning_demand: medium
+  tool_interface: [natural_language]
+  tool_composition: "none"
+  quantitative_tolerance: null
+  closed_loop_feedback: false
+  safety_criticality: none
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: [plant tissue micrographs: light, fluorescence, electron]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: false
+  environment_description: null
+agent_features_evaluated:
+  models: []
+  vision_used: true
+  rag_or_memory: none
+  planner: none
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings: []
+limitations:
+  - "Only title/authors/one-line summary verified"
+related: [microbench_lozano2024, microvqa_burgess2025]
+notes: "Short record; all quantitative fields unverified."
+---
+id: atomic_yang2025
+name: "ATOMIC — Zero-shot Autonomous Microscopy for Scalable and Intelligent Characterization of 2D Materials (also: Embodied Intelligence Unlocks Autonomous Microscopy, bioRxiv 2025)"
+short_name: ATOMIC
+year: 2025
+venue: arXiv (Apr 2025); bioRxiv 10.1101/2025.08.13.670210 (Aug 2025, extended version)
+authors_short: Yang et al. (Duke; H. Wang & Z. Ren groups; MIT)
+arxiv: "2504.10281"
+doi: 10.1101/2025.08.13.670210
+url: https://arxiv.org/abs/2504.10281
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: >
+  End-to-end framework integrating foundation models (ChatGPT for a Physical Control module that adjusts
+  focus, exposure and stage movement in real time; Segment Anything for segmentation; clustering and
+  topological analysis) to autonomously scan optical microscopes and characterise 2D materials
+  zero-shot. Reports 99.7% segmentation accuracy for MoS2 monolayer identification, equal to human
+  experts, and robustness to defocus, colour-temperature and exposure changes.
+benchmark_features:
+  evaluation_target: [instrument_control, perception, data_analysis]
+  execution_mode: physical_instrument
+  instruments:
+    - {name: optical microscope with motorised stage/focus/exposure control, modality: microscopy, real_or_simulated: real}
+  scientific_domains: [2D materials, optical microscopy]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Autonomous scanning, monolayer identification and grain-boundary/defect detection of 2D materials"
+  task_source: expert_curated
+  sampling_strategy: "Author-selected samples: MoS2, graphene, WSe2, SnSe; varied imaging conditions"
+  metric_types: [success_rate, other]
+  primary_metric: "segmentation accuracy vs human expert labels"
+  scoring_granularity: continuous
+  has_human_baseline: true
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "Zero-shot (no training data) — low"
+  agents_evaluated: [ATOMIC (ChatGPT/GPT-based control + SAM)]
+  n_agent_configs: 1
+  headline_results:
+    - "99.7% segmentation accuracy for single-layer MoS2 identification, equivalent to human experts"
+    - "Works across graphene, MoS2, WSe2, SnSe; robust to defocus, colour temperature and exposure variation"
+  open_source: null
+task_features:
+  workflow_depth: multi_step
+  perceptual_demand: image_interpretation
+  reasoning_demand: medium
+  tool_interface: [python_api, natural_language]
+  tool_composition: "LLM physical-control module + vision foundation model + unsupervised clustering/topological analysis"
+  quantitative_tolerance: null
+  closed_loop_feedback: true
+  safety_criticality: low
+  task_taxonomy: [microscope control and scanning, segmentation, monolayer identification, grain-boundary defect detection]
+sample_environment_features:
+  sample_types: [exfoliated/CVD 2D materials on substrates: MoS2, graphene, WSe2, SnSe; brightfield optical]
+  sample_real_or_simulated: real
+  signal_quality_variation: "Explicitly tested defocus, colour-temperature and exposure variations"
+  novelty_control: "Zero-shot across four materials"
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Real optical microscope; bioRxiv version described as brightfield and fluorescence with multi-stage protocols and interactive dialogue (search snippet)"
+agent_features_evaluated:
+  models: [ChatGPT / GPT (version unverified)]
+  vision_used: true
+  rag_or_memory: none
+  planner: none
+  tools: [SAM, clustering, topological analysis, microscope control]
+  verifier_or_self_debug: none
+  guards_or_safety_layer: null
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Foundation-model perception plus LLM control generalised zero-shot across four 2D materials and imaging-condition perturbations — one of few optical-microscopy agents with explicit signal-quality variation"
+limitations:
+  - "Single lab/instrument; number of images and trials not reported in accessible text"
+  - "bioRxiv version's evaluation details not retrievable"
+related: [microbench_lozano2024, agentic_j_johanns2026]
+notes: "Authors and abstract excerpt verified via GitHub-mirrored arXiv feed (KJaebye daily reporter). The bioRxiv 'Embodied Intelligence Unlocks Autonomous Microscopy' link to ATOMIC is inferred from search snippets naming ATOMIC's Physical Control module; treat the two-ID mapping as probable, not confirmed."
+---
+id: agentic_j_johanns2026
+name: "Agentic-J: An AI Agent for Biological Microscopy Image Analysis"
+short_name: Agentic-J
+year: 2026
+venue: arXiv (Jun 2026)
+authors_short: Johanns et al. (Gunzer group, ISAS / University Duisburg-Essen)
+arxiv: "2606.02080"
+doi: null
+url: https://arxiv.org/abs/2606.02080
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: >
+  A containerised multi-agent assistant for ImageJ/Fiji that turns natural-language requests into
+  reproducible analysis workflows (nuclei segmentation, cell tracking, multi-condition quantification).
+  Image analysis only — no microscope control; evaluation details not retrievable.
+benchmark_features:
+  evaluation_target: [data_analysis, code_generation]
+  execution_mode: static_code_eval
+  instruments:
+    - {name: none (ImageJ/Fiji on stored images), modality: microscopy, real_or_simulated: none}
+  scientific_domains: [cell biology, bioimage analysis]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Common Fiji bioimage-analysis tasks from natural language"
+  task_source: expert_curated
+  sampling_strategy: null
+  metric_types: [other]
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results: []
+  open_source: null
+task_features:
+  workflow_depth: multi_step
+  perceptual_demand: image_reading
+  reasoning_demand: medium
+  tool_interface: [python_api, gui, natural_language]
+  tool_composition: "Multi-agent orchestration over ImageJ/Fiji macros/plugins in a container"
+  quantitative_tolerance: null
+  closed_loop_feedback: false
+  safety_criticality: none
+  task_taxonomy: [nuclei segmentation, cell tracking, multi-condition quantification]
+sample_environment_features:
+  sample_types: [fluorescence/brightfield microscopy image datasets]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Containerised ImageJ/Fiji"
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: [ImageJ/Fiji]
+  verifier_or_self_debug: none
+  guards_or_safety_layer: null
+  multi_agent: true
+  deterministic_execution: null
+transfer_relevant_findings: []
+limitations:
+  - "Abstract-level info only; no task counts or success rates retrieved"
+related: [atomic_yang2025, microbench_lozano2024]
+notes: "Short record. Partial author list from a GitHub-mirrored CV daily digest; related but out-of-scope analysis agents: Omega (napari LLM agent, Nature Methods 2024) and BioImage.IO Chatbot (Nature Methods 2024)."

@@ -1,0 +1,784 @@
+# extract_D.yaml — LLM agents controlling synchrotron beamlines / X-ray instruments
+# Sourcing note: arXiv, publisher sites (Nature, IOP, IUCr, AIP, APS), OSTI, Zenodo and all
+# paper mirrors were blocked by the network egress proxy in this session. Facts below come from
+# (a) WebSearch result snippets that quote arXiv/publisher pages, and (b) primary GitHub
+# repositories (READMEs, docs, datasets, test code) which were reachable. Anything not
+# confirmed by one of those is null with an explanation in `notes`.
+
+id: envtrace
+name: "EnvTrace: Simulation-Based Semantic Evaluation of LLM Code via Execution Trace Alignment -- Demonstrated at Synchrotron Beamlines"
+short_name: EnvTrace
+year: 2025
+venue: arXiv preprint (cs.SE / cs.AI); journal status not verified
+authors_short: van der Vleuten et al.
+arxiv: "2511.09964"
+doi: null
+url: https://arxiv.org/abs/2511.09964
+code_url: https://github.com/CFN-softbio/EnvTrace
+data_url: https://zenodo.org/records/17526264
+license: Apache-2.0 (EnvTrace package); dataset/Zenodo license not verified
+status: preprint
+summary: >
+  EnvTrace evaluates LLM-generated instrument-control code by executing both the generated code and a
+  ground-truth reference inside a sandboxed beamline "control-logic digital twin" (Bluesky/IPython driving
+  EPICS IOCs in Docker) and aligning the resulting execution traces (time-stamped EPICS PV state changes)
+  rather than comparing code text. Traces are scored on state (discrete sequence), temporal, continuous-profile
+  and structural equivalence, yielding a continuous "full score" and a strict binary "EnvTrace accuracy".
+  Over 30 LLMs were benchmarked on natural-language-to-beamline-code tasks from the VISION system at NSLS-II,
+  with top closed models approaching beamline-scientist (human) performance.
+benchmark_features:
+  evaluation_target: [code_generation, instrument_control, simulation_control]
+  execution_mode: execution_trace
+  instruments:
+    - {name: "NSLS-II 11-BM CMS beamline control-logic digital twin (Bluesky/ophyd + EPICS IOCs in Docker: sample motors, Linkam-style temperature stage, detector exposure)", modality: synchrotron, real_or_simulated: digital_twin}
+  scientific_domains: [synchrotron X-ray scattering (GISAXS/SAXS), beamline operations, soft-matter thin films]
+  n_tasks: 136
+  n_task_families: 2
+  n_instances_or_runs_reported: null
+  repetitions_per_task: "Repo tooling defaults to num_runs=3 per model (run_all_models_comparison.py); the number used in the paper's tables was not verified"
+  target_population: "Natural-language beamline-operation commands a user would issue to a voice/text assistant at an X-ray scattering beamline (motor moves, alignment, incident angle, exposures, temperature ramps, scans, loops)"
+  task_source: expert_curated
+  sampling_strategy: "Beamline-scientist-authored command/code pairs from the VISION Op-cog dataset; split into 'simple-flow' commands and 'complex-flow' (loops, conditionals, temperature ramps, multi-axis scans) plus generic Bluesky plans"
+  metric_types: [trace_alignment, success_rate, partial_credit, time, other]
+  primary_metric: "EnvTrace accuracy (binary: exact discrete-state match AND timing thresholds R^2>=0.9, slope in [0.8,1.2] AND continuous-profile thresholds) with a continuous 'full score' (0.8*discrete + 0.2*timing, or 0.6*discrete + 0.2*timing + 0.2*continuous when continuous channels exist)"
+  scoring_granularity: mixed
+  has_human_baseline: true
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: "No train/test split; a fixed evaluation set. Dataset revised after the paper (op_cog_dataset_after_envtrace_paper_fixes.json)."
+  leakage_or_contamination_risk: "Dataset and ground-truth code are public on GitHub (CFN-softbio/VISION) and Zenodo; prompts are short, domain-specific NL commands with facility-specific Python API (e.g., sam.xr(), sam.measure()), so verbatim pretraining contamination is unlikely but possible for post-2025 models."
+  agents_evaluated: [Claude 3.5 Sonnet, Claude Sonnet 4, Claude Sonnet 4 (thinking), Claude Opus 4, Claude Sonnet 4.5, GPT-4o, o3, GPT-5 (minimal/low/high reasoning), Gemini 2.5 Pro, Grok-4, Grok-4-fast, grok-code-fast-1, Devstral Medium, Qwen3, Qwen3-thinking, Qwen3-coder, Qwen2, Qwen2.5, Qwen2.5-coder, Mistral, Mistral-Nemo, Phi-3.5, Athene-v2, Llama 3.3, gpt-oss-120b]
+  n_agent_configs: 31
+  headline_results:
+    - "Over 30 LLMs evaluated; 'many top-tier models can approach human-level performance in rapid control-code generation' (abstract)"
+    - "Top-tier closed-source models (Anthropic Claude series, xAI Grok-4, OpenAI GPT-5, GPT-4o) performed best (search-snippet summary of paper); per-model numeric scores could not be retrieved"
+    - "Evaluation set described as 116 simple-flow commands + 20 complex-flow control examples plus generic Bluesky plans"
+  open_source: true
+task_features:
+  workflow_depth: mixed
+  perceptual_demand: none
+  reasoning_demand: mixed
+  tool_interface: [python_api, cli]
+  tool_composition: "Single code snippet generated per NL command, executed in an IPython/Bluesky session that drives EPICS PVs; complex tasks compose motor moves, exposures, temperature control and timing loops in one script"
+  quantitative_tolerance: "Timing: R^2>=0.9, slope 0.8-1.2, duration tolerance 25%, MAPE tolerance 100%; temperature profile: MAE<=5.0 C and final-temperature diff<=5.0 C for binary match; per-channel numeric comparators configurable; ignore_pvs lists per task"
+  closed_loop_feedback: false
+  safety_criticality: medium
+  task_taxonomy: [simple-flow commands, complex-flow control (loops, conditionals, temperature ramps, multi-axis scans), generic Bluesky plans]
+sample_environment_features:
+  sample_types: [thin film, perovskite, polymer, organic thin film (named only in prompts; no physical sample)]
+  sample_real_or_simulated: none
+  signal_quality_variation: null
+  novelty_control: "None described; fixed public dataset"
+  calibration_or_api_state_variation: "Motors reset to default positions (caput, .SET teleport) before each test; temperature PV monitored over time"
+  injected_faults: false
+  environment_description: "Sandboxed interactive IPython session (managed via pexpect) with Bluesky RunEngine and beamline profile collection, talking to simulated EPICS IOCs in Docker containers; an EPICS monitor logs every PV update (pvname, timestamp, value) to form the trace. 300 s snippet timeout."
+agent_features_evaluated:
+  models: [Claude 3.5 Sonnet, Claude Sonnet 4 / 4-thinking, Claude Opus 4, Claude Sonnet 4.5, GPT-4o, o3, GPT-5 variants, Gemini 2.5 Pro, Grok-4 / Grok-4-fast / grok-code-fast-1, Devstral Medium, Qwen3 / Qwen3-thinking / Qwen3-coder, Qwen2 / Qwen2.5 / Qwen2.5-coder, Mistral, Mistral-Nemo, Phi-3.5, Athene-v2, Llama 3.3, gpt-oss-120b]
+  vision_used: false
+  rag_or_memory: none
+  planner: none
+  tools: [Bluesky/ophyd beamline Python API (VISION Op-cog system prompt)]
+  verifier_or_self_debug: none
+  guards_or_safety_layer: some
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Trace alignment on a digital twin gives a semantic correctness signal that text metrics (exact match, CodeBLEU, Levenshtein) miss; the VISION test harness computes all of them side by side"
+  - "The same digital twin doubles as a pre-execution validator for live experiments (dry-run before hardware)"
+  - "Binary 'accuracy' is deliberately strict (exact sequence + timing); the continuous 'full score' gives partial credit, useful for ranking weaker/open models"
+  - "Metric weights and comparators are configurable per channel, so the method ports to other stateful control systems (robotics, industrial automation)"
+limitations:
+  - "Digital twin captures control logic (PV changes) only, not physics/detector data; scientific outcome quality is not scored"
+  - "Small task set (~136) from a single beamline API; ground truth may admit alternative valid implementations (mitigated by multiple expected_code entries and ignore_pvs)"
+  - "Per-model scores, run counts and the human-baseline protocol could not be verified from primary text in this session"
+related: [vision, lightfall, osprey_als_bl531]
+notes: >
+  Author list (van der Vleuten, Flores, Mathur, Rakitin, Hopkins, Yager, Tsai) and the '>30 LLMs' / '116 simple + 20 complex'
+  figures come from search snippets of the arXiv page/HTML; arXiv itself was egress-blocked, so numeric per-model
+  results, confidence intervals, the LLM-judge comparison (if any) and the exact human-baseline size are unverified.
+  The GitHub VISION repo contains op_cog_dataset.json (105 entries: 76 simple / 29 flagged complex),
+  op_cog_dataset_after_envtrace_paper_fixes.json (157 entries: 136 simple / 21 complex) and an archived original
+  (127 entries, 6 complex); none matches 116+20 exactly, so n_tasks=136 follows the paper snippet. Human baseline
+  inferred from datasets/op_cog_beamline_scientists/ (bs_1.toml, bs_2.toml, possibly more) and README_TESTING
+  'human-based scientist agents'. n_agent_configs=31 is the count of LLM configs enumerated in
+  backend/src/hal_beam_com/utils.py, consistent with 'over 30'. The EnvTrace README lists citation as 'to be updated'.
+---
+id: vision
+name: "VISION: A Modular AI Assistant for Natural Human-Instrument Interaction at Scientific User Facilities"
+short_name: VISION
+year: 2025
+venue: "Machine Learning: Science and Technology 6(2) 025051 (2025); arXiv Dec 2024"
+authors_short: Mathur et al.
+arxiv: "2412.18161"
+doi: 10.1088/2632-2153/add9e4
+url: https://arxiv.org/abs/2412.18161
+code_url: https://github.com/CFN-softbio/VISION
+data_url: https://github.com/CFN-softbio/VISION/tree/main/backend/tests/datasets
+license: null
+status: published
+summary: >
+  VISION (Virtual Scientific Companion) is a modular LLM-based assistant deployed at the NSLS-II 11-BM CMS X-ray
+  scattering beamline. It chains "cognitive blocks" (cogs) for transcription, intent classification, beamline-code
+  generation (Op), data analysis (Ana), refinement and scientific Q&A, executing generated Bluesky code on the beamline
+  workstation; it demonstrated the first voice-controlled experiment at an X-ray scattering beamline. It is a system
+  paper, but the repository ships per-cog test datasets (classifier, op, ana, voice) that later became the EnvTrace benchmark.
+benchmark_features:
+  evaluation_target: [instrument_control, code_generation, question_answering, data_analysis]
+  execution_mode: hybrid
+  instruments:
+    - {name: "NSLS-II 11-BM CMS (Complex Materials Scattering) beamline, Bluesky-controlled", modality: synchrotron, real_or_simulated: real}
+  scientific_domains: [synchrotron X-ray scattering, soft matter, beamline operations]
+  n_tasks: null
+  n_task_families: 4
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Natural-language (voice or text) requests from beamline users: operate the instrument, add custom functions, analyze data, ask domain questions"
+  task_source: expert_curated
+  sampling_strategy: "Beamline-scientist-written command/expected-output pairs per cog (classifier_cog_dataset.json, op_cog_dataset.json, ana_cog_dataset.json, voice_cog_dataset.json)"
+  metric_types: [success_rate, other, time]
+  primary_metric: "Per-cog accuracy (classifier: exact-match accuracy and weighted F1; Op: exact match / CodeBLEU / Levenshtein and later PV-trace match); latency per call"
+  scoring_granularity: mixed
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "Datasets public on GitHub; facility-specific API reduces pretraining overlap"
+  agents_evaluated: [Claude (default in public repo), GPT-4o, Ollama open models (e.g., qwen2, mistral)]
+  n_agent_configs: null
+  headline_results:
+    - "First voice-controlled experiment at an X-ray scattering beamline; LLM-based operation on the beamline workstation 'with low latency' (abstract)"
+    - "Quantitative per-cog accuracy/latency numbers from the paper could not be verified in this session"
+  open_source: true
+task_features:
+  workflow_depth: mixed
+  perceptual_demand: none
+  reasoning_demand: mixed
+  tool_interface: [natural_language, python_api]
+  tool_composition: "Voice -> Whisper transcription -> classifier cog routes to Op (code gen), Ana (analysis), Refine, GPCAM/XICAM or chatbot cog; generated Python executed via Bluesky on the workstation"
+  quantitative_tolerance: null
+  closed_loop_feedback: false
+  safety_criticality: medium
+  task_taxonomy: [beamline operation (Op), data analysis (Ana), custom function addition, domain-specific chatbot]
+sample_environment_features:
+  sample_types: [thin films and soft-matter samples at CMS (as referenced in prompts)]
+  sample_real_or_simulated: real
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Frontend GUI on beamline workstation; backend LLM processing on the 'HAL' server; Bluesky execution; optional beamline simulator (EPICS IOCs in Docker) for testing"
+agent_features_evaluated:
+  models: [Claude 3.5 Sonnet and later Claude models, GPT-4o, Whisper large-v2/v3 (ASR), Ollama models (mistral, qwen2, qwen2.5-coder, llama3.3, etc.)]
+  vision_used: false
+  rag_or_memory: some
+  planner: none
+  tools: [Bluesky beamline API, SciAnalysis-style analysis code, gpCAM, Xi-cam]
+  verifier_or_self_debug: verifier
+  guards_or_safety_layer: some
+  multi_agent: true
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Modular cog design lets models be swapped as they improve; classification-then-specialist routing keeps prompts small and latency low"
+  - "The system's test datasets seeded a later execution-trace benchmark (EnvTrace), showing how a deployed assistant can be turned into a benchmark"
+limitations:
+  - "System/demo paper; evaluation is per-component and not a standardized benchmark"
+  - "Single beamline and facility-specific API"
+related: [envtrace, lightfall]
+notes: >
+  Cog names (VOICE, CLASSIFIER, OP, ANA, REFINE, GPCAM, XICAM, VERIFIER) and model lists come from the public repo
+  (backend/src/hal_beam_com/utils.py). arXiv and IOP pages were blocked, so the paper's reported accuracy/latency figures,
+  number of test prompts, and whether a human baseline exists are unverified (null). License file not seen in repo listing.
+  Journal citation from repo README BibTeX. Authors: Shray Mathur, Noah van der Vleuten, Kevin G. Yager, Esther H. R. Tsai.
+---
+id: eaa_experiment_automation_agents
+name: "Experiment automation agents: automating materials characterization with vision language model agents"
+short_name: EAA
+year: 2026
+venue: "npj Computational Materials (2026); arXiv Feb 2026"
+authors_short: Du et al.
+arxiv: "2602.15294"
+doi: 10.1038/s41524-026-02213-8
+url: https://www.nature.com/articles/s41524-026-02213-8
+code_url: https://github.com/AdvancedPhotonSource/EAA
+data_url: null
+license: null
+status: published
+summary: >
+  EAA is a vision-language-model agent runtime for scientific instruments, built on LangGraph task managers with
+  tool calling, an image-follow-up mechanism so the model can see images returned by tools, optional Chroma-based
+  long-term memory, and two-way MCP compatibility (consume instrument MCP servers; serve EAA tools to Claude Code /
+  Gemini CLI). It was demonstrated at an Advanced Photon Source imaging beamline for automated zone-plate focusing,
+  natural-language feature/ROI search and interactive data acquisition, spanning fully agent-driven to logic-defined
+  workflows with embedded LLM queries.
+benchmark_features:
+  evaluation_target: [instrument_control, perception, protocol_planning]
+  execution_mode: hybrid
+  instruments:
+    - {name: "APS scanning X-ray microscope / imaging beamline (zone-plate optics)", modality: synchrotron, real_or_simulated: real}
+    - {name: "Simulated scanning microscope (image acquisition, parameter tuning, focusing tests in repo)", modality: microscopy, real_or_simulated: simulated}
+  scientific_domains: [X-ray microscopy / imaging, materials characterization, spectroscopy (XANES adaptive sampling in package)]
+  n_tasks: null
+  n_task_families: 3
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Routine but vision-dependent beamline procedures: focusing optics, locating features described in natural language, and user-guided acquisition"
+  task_source: expert_curated
+  sampling_strategy: "Demonstration tasks chosen by the authors at the beamline; not a sampled benchmark"
+  metric_types: [success_rate, other]
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "Not applicable (live-instrument demonstrations)"
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results:
+    - "Demonstrated at an APS imaging beamline: automated zone plate focusing, natural-language-described feature search, interactive data acquisition (abstract)"
+    - "Quantitative success rates / model comparisons could not be verified (Nature and arXiv blocked)"
+  open_source: true
+task_features:
+  workflow_depth: multi_step
+  perceptual_demand: image_interpretation
+  reasoning_demand: medium
+  tool_interface: [mcp, python_api, rest_api, natural_language]
+  tool_composition: "Task managers (ScanningMicroscopeFocusingTaskManager, MultiAgentROISearchTaskManager, feature tracking, optics tuning, MonitoringTaskManager; logic-defined AnalyticalScanningMicroscopeFocusingTaskManager) call acquisition, registration, line-scan and parameter-tuning tools; instrument control served as external MCP/HTTP servers (MCPRPCWrapper for logic workflows); serial tool execution; optional approval gate (require_approval=True)"
+  quantitative_tolerance: null
+  closed_loop_feedback: true
+  safety_criticality: medium
+  task_taxonomy: [zone plate focusing, natural-language feature search (ROI search), interactive data acquisition]
+sample_environment_features:
+  sample_types: [microscopy specimens at APS imaging beamline (unspecified)]
+  sample_real_or_simulated: real
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Live APS imaging beamline via MCP/HTTP instrument servers (ZeroMQ-separated gateway recommended); WebUI; SQLite checkpoints/transcripts; simulated microscope used in repo tests"
+agent_features_evaluated:
+  models: [OpenAI-compatible models (OpenAIConfig), Anthropic Claude (via cache_control detection / Argo / AskSage endpoints)]
+  vision_used: true
+  rag_or_memory: some
+  planner: varied
+  tools: [image acquisition, image registration, line-scan, parameter tuning, Python/bash sandboxed coding, file IO, image captioning, subagent spawning, MCP tools]
+  verifier_or_self_debug: varied
+  guards_or_safety_layer: some
+  multi_agent: true
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Image-follow-up (tools return img_path; model sees the PNG) is the key primitive for vision-in-the-loop instrument agents"
+  - "Two-way MCP lets the same instrument tools be driven by EAA, Claude Code or Gemini CLI, decoupling agent harness from instrument"
+  - "Hybrid design: deterministic logic-defined workflows with localized LLM queries where full autonomy is unnecessary"
+limitations:
+  - "Demonstration rather than benchmark; no public task set or leaderboard found"
+  - "Specific VLMs used, trial counts and success rates unverified in this session"
+related: [vriza_learn_on_the_job, envtrace]
+notes: >
+  Authors Ming Du and Mathew J. Cherukara (Argonne). arXiv submission date 17 Feb 2026 per snippet. Repo root has no
+  LICENSE file visible and pyproject has no license field, so license=null. Which APS beamline (e.g., 2-ID/26-ID/32-ID)
+  was not verifiable. LLM providers from docs/llm-config.md: OpenAIConfig, AskSageConfig, ArgoConfig. Memory: Chroma
+  vector store triggered by phrases like 'remember this'. Tests include test_simulated_image_acquisition.py,
+  test_simulated_parameter_tuning.py, test_analytical_focusing.py, test_bo.py, XANES adaptive sampling.
+---
+id: ai_xray_scientist_nmi2026
+name: "An agentic artificially intelligent X-ray scientist"
+short_name: AI X-ray Scientist
+year: 2026
+venue: "Nature Machine Intelligence 8, 1075-1086 (2026)"
+authors_short: Chen et al.
+arxiv: null
+doi: 10.1038/s42256-026-01261-5
+url: https://www.nature.com/articles/s42256-026-01261-5
+code_url: null
+data_url: null
+license: null
+status: published
+summary: >
+  An LLM-driven agent (SLAC/Stanford) autonomously performs single-crystal sample alignment at a synchrotron
+  beamline by planning actions, issuing instrument-control commands, interpreting experimental feedback and
+  iterating. The procedure was developed and tested on an in-house virtual six-circle diffractometer mirroring an
+  operational beamline (two detector motors, four sample motors) and then transferred to the real beamline
+  without modification.
+benchmark_features:
+  evaluation_target: [instrument_control, simulation_control]
+  execution_mode: hybrid
+  instruments:
+    - {name: "Virtual six-circle diffractometer (digital twin of an operational synchrotron beamline)", modality: diffraction, real_or_simulated: digital_twin}
+    - {name: "Real synchrotron X-ray scattering beamline (SLAC; SSRL beamline not verified)", modality: synchrotron, real_or_simulated: real}
+  scientific_domains: [X-ray diffraction / scattering, single-crystal alignment]
+  n_tasks: null
+  n_task_families: 1
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Sample-alignment procedures a beamline scientist performs before diffraction measurements"
+  task_source: expert_curated
+  sampling_strategy: null
+  metric_types: [success_rate, other]
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: "Sim-to-real: developed in the virtual diffractometer, then deployed on the real beamline"
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results:
+    - "Agent aligned single crystals autonomously at a real synchrotron beamline; procedure transferred from virtual to real setup without modification (press/journal summaries)"
+  open_source: null
+task_features:
+  workflow_depth: long_horizon
+  perceptual_demand: structured_readout
+  reasoning_demand: high
+  tool_interface: [python_api, natural_language]
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: true
+  safety_criticality: medium
+  task_taxonomy: [single-crystal sample alignment]
+sample_environment_features:
+  sample_types: [single crystals]
+  sample_real_or_simulated: real
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Virtual six-axis diffractometer (2 detector + 4 sample motors) modeled on a real facility; then the physical beamline"
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: react
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Digital-twin-first development with zero-shot transfer to hardware is a viable pattern for beamline agents"
+limitations:
+  - "Single task family; models, trial counts and success rates unverified here"
+related: [envtrace, eaa_experiment_automation_agents]
+notes: >
+  Only journal metadata (title, first author Zhantao Chen, volume/pages, DOI) and press descriptions (phys.org July 2026,
+  Pebblous blog) were retrievable via search snippets; Nature page blocked. arXiv id, code URL, LLM models and all
+  numbers are unverified.
+---
+id: osprey_als_bl531
+name: "Orchestrating agentic systems at ALS beamline 5.3.1 with Osprey and Bluesky"
+short_name: Osprey-BL531
+year: 2026
+venue: "Journal of Synchrotron Radiation 33(5) (2026)"
+authors_short: Chan et al.
+arxiv: null
+doi: null
+url: https://journals.iucr.org/s/issues/2026/05/00/soo5005/index.html
+code_url: https://github.com/Henry-KH-chan/osprey-bl531
+data_url: null
+license: "Berkeley Lab / BSD-3-Clause style (Osprey core is BSD-3-Clause with DOE notices)"
+status: published
+summary: >
+  Deploys the Osprey agentic framework (LBNL; capability-based orchestration with plan-first execution, bounded tool
+  access and mandatory human approval for hardware writes) at ALS beamline 5.3.1. Users state experiments in natural
+  language; the agent translates them into structured workflows over predefined beamline capabilities executed through
+  the Bluesky Queue Server, preserving deterministic execution and existing control-system constraints. Demonstration /
+  deployment paper.
+benchmark_features:
+  evaluation_target: [instrument_control, protocol_planning, safety]
+  execution_mode: physical_instrument
+  instruments:
+    - {name: "ALS beamline 5.3.1 (Bluesky Queue Server, EPICS)", modality: synchrotron, real_or_simulated: real}
+  scientific_domains: [synchrotron beamline operations]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Natural-language experiment requests from beamline users mapped to predefined capabilities"
+  task_source: expert_curated
+  sampling_strategy: null
+  metric_types: [other]
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: true
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results: []
+  open_source: true
+task_features:
+  workflow_depth: multi_step
+  perceptual_demand: structured_readout
+  reasoning_demand: medium
+  tool_interface: [natural_language, python_api, mcp]
+  tool_composition: "Osprey orchestrator decomposes requests into auditable steps over capabilities (EPICS/Bluesky connectors, skills, MCP tools); every hardware write passes an approval gate; execution via Bluesky Queue Server"
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: high
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: real
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Production ALS beamline 5.3.1 with Bluesky Queue Server"
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: plan_and_execute
+  tools: [Bluesky Queue Server plans, EPICS channel access, Osprey capabilities/skills]
+  verifier_or_self_debug: null
+  guards_or_safety_layer: some
+  multi_agent: false
+  deterministic_execution: true
+transfer_relevant_findings:
+  - "Constraining the agent to predefined, queue-server-executed capabilities keeps execution deterministic and auditable while retaining natural-language entry"
+limitations:
+  - "No quantitative benchmark found in accessible material; demonstration paper"
+related: [lightfall, hellert_als_agentic_accelerator, envtrace]
+notes: >
+  Authors: Ka Hung Chan, Yang Ha, Antoine Islegen-Wojdyla, Seij De Leon, Manuel Garces, Dylan McReynolds, Xiaoya Chong,
+  Raja Vyshnavi Sriramoju, Johannes Mahl, Damian Guenzing, Wiebke Koepp, Alexander Hexemer, Thorsten Hellert, Tanny Chavez.
+  IUCr page blocked; DOI, evaluation details and LLM models unverified. Osprey core: Hellert, Montenegro, Sulc,
+  'Osprey: Production-ready agentic AI for safety-critical control systems', APL Machine Learning (2026),
+  doi 10.1063/5.0306302, arXiv 2508.15066, repo https://github.com/als-apg/osprey (BSD-3-Clause).
+---
+id: hellert_als_agentic_accelerator
+name: "Agentic Artificial Intelligence for Multistage Physics Experiments at a Large-Scale User Facility Particle Accelerator"
+short_name: ALS agentic accelerator
+year: 2025
+venue: "Physical Review Research (2026; doi 10.1103/jtqy-9jz1); arXiv Sep 2025"
+authors_short: Hellert et al.
+arxiv: "2509.17255"
+doi: 10.1103/jtqy-9jz1
+url: https://arxiv.org/abs/2509.17255
+code_url: https://github.com/als-apg/osprey
+data_url: null
+license: BSD-3-Clause (Osprey)
+status: published
+summary: >
+  First LLM-driven agentic system to autonomously execute multi-stage physics experiments on a production synchrotron
+  light source (ALS accelerator). Natural-language prompts become structured plans combining archive data retrieval,
+  control-channel resolution, script generation, controlled machine interaction and analysis, under plan-first
+  orchestration, bounded tool access and operator-standard safety constraints. Not a beamline, but the same facility
+  class and framework (Osprey) later used at ALS beamline 5.3.1.
+benchmark_features:
+  evaluation_target: [instrument_control, protocol_planning, safety]
+  execution_mode: physical_instrument
+  instruments:
+    - {name: "ALS storage ring / accelerator control system (EPICS)", modality: generic_lab, real_or_simulated: real}
+  scientific_domains: [accelerator physics, synchrotron light source operations]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Multi-stage machine-physics experiments normally scripted by accelerator experts"
+  task_source: expert_curated
+  sampling_strategy: null
+  metric_types: [time, safety_violations]
+  primary_metric: "Preparation time vs manual expert scripting; safety-constraint adherence"
+  scoring_granularity: null
+  has_human_baseline: true
+  has_safety_eval: true
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results:
+    - "In a representative machine-physics task, preparation time reduced by two orders of magnitude relative to manual scripting even for a system expert, while operator-standard safety constraints were strictly upheld (abstract)"
+  open_source: true
+task_features:
+  workflow_depth: long_horizon
+  perceptual_demand: structured_readout
+  reasoning_demand: high
+  tool_interface: [natural_language, python_api, mcp]
+  tool_composition: "Plan-first orchestration; dynamic capability selection; archive retrieval, channel finding, script generation, machine interaction, analysis; reproducible artifacts"
+  quantitative_tolerance: null
+  closed_loop_feedback: true
+  safety_criticality: high
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: none
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Live ALS accelerator control system"
+agent_features_evaluated:
+  models: []
+  vision_used: false
+  rag_or_memory: some
+  planner: plan_and_execute
+  tools: [archive data retrieval, control-system channel resolution, script generation, controlled machine interaction, analysis]
+  verifier_or_self_debug: null
+  guards_or_safety_layer: some
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Plan-first orchestration with bounded tool access and human approval provides auditable, reproducible execution on safety-critical hardware"
+limitations:
+  - "Single representative task reported; no task suite or success-rate table found in accessible material"
+related: [osprey_als_bl531, lightfall]
+notes: >
+  Authors: Thorsten Hellert, Drew Bertwistle, Simon C. Leemann, Antonin Sulc, Marco Venturini (LBNL). Journal DOI from
+  APS link in search results; not fetched directly. Included because it is a synchrotron-facility LLM agent with an
+  evaluation claim; it targets the accelerator rather than a beamline.
+---
+id: lightfall
+name: "Lightfall: An API-first, LLM-addressable control platform for synchrotron beamlines"
+short_name: Lightfall
+year: 2026
+venue: arXiv preprint (June 2026)
+authors_short: null
+arxiv: "2606.06711"
+doi: null
+url: https://arxiv.org/abs/2606.06711
+code_url: https://github.com/als-controls/lightfall
+data_url: null
+license: BSD-3-Clause
+status: preprint
+summary: >
+  Lightfall is a facility-wide beamline control platform (PySide6 GUI, Bluesky/ophyd, Tiled, EPICS, NATS IPC) whose
+  API-first architecture exposes every panel, device and scan plan through one uniform addressable interface. An
+  embedded Claude-based agent drives experiments from single move-and-read to Gaussian-process-driven autonomous scans,
+  and beamline staff extend the application at runtime via "skills" plugins the agent authors and commits. In testing at
+  the ALS COSMIC-Scattering beamline; endstation plugins exist for ALS 7.0.1.1 and NSLS-II CMS 11-BM. Demo/platform paper.
+benchmark_features:
+  evaluation_target: [instrument_control, code_generation]
+  execution_mode: physical_instrument
+  instruments:
+    - {name: "ALS COSMIC-Scattering beamline (7.0.1.1) via Lightfall", modality: synchrotron, real_or_simulated: real}
+  scientific_domains: [soft X-ray scattering, beamline operations]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Scientist requests ranging from single device move/read to autonomous GP-driven scans, plus natural-language UI/panel modifications"
+  task_source: expert_curated
+  sampling_strategy: null
+  metric_types: [time, other]
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: [Claude (embedded agent; Claude Code via lightfall-mcp-bridge)]
+  n_agent_configs: null
+  headline_results:
+    - "Closed development loop: scientist authors a panel change in natural language, agent emits and applies it, commit lands in the beamline plugin repo; per-iteration cost fixed in scientist time rather than developer hours (abstract)"
+  open_source: true
+task_features:
+  workflow_depth: mixed
+  perceptual_demand: structured_readout
+  reasoning_demand: medium
+  tool_interface: [natural_language, python_api, mcp, gui]
+  tool_composition: "Uniform action API over panels/devices/scan plans; NATS-based IPC; lightfall-mcp-bridge exposes list_instances / list_actions / execute_action to Claude Code with dynamic action discovery"
+  quantitative_tolerance: null
+  closed_loop_feedback: true
+  safety_criticality: medium
+  task_taxonomy: [move-and-read, scan plans, GP-driven autonomous scans, skill/plugin authoring]
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: real
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Live beamline control application; also runnable with simulated ophyd devices (not verified)"
+agent_features_evaluated:
+  models: [Claude]
+  vision_used: null
+  rag_or_memory: null
+  planner: react
+  tools: [Lightfall action API, Bluesky plans, skills plugins]
+  verifier_or_self_debug: null
+  guards_or_safety_layer: some
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Making the whole control application addressable through one API (rather than wrapping selected tools) lets the agent discover capabilities dynamically without bridge updates"
+limitations:
+  - "No quantitative evaluation found; platform description"
+  - "Author list not retrievable in this session"
+related: [osprey_als_bl531, vision]
+notes: >
+  arXiv page blocked; author list unverified (repo is under the als-controls GitHub org, LBNL). Facility and abstract
+  claims come from search snippets. License from repo README.
+---
+id: vriza_learn_on_the_job
+name: "Operating advanced scientific instruments with AI agents that learn on the job"
+short_name: Learn-on-the-job agents
+year: 2025
+venue: "npj Computational Materials 12, 160 (2026); arXiv Sep 2025"
+authors_short: Vriza et al.
+arxiv: "2509.00098"
+doi: 10.1038/s41524-026-02005-0
+url: https://arxiv.org/abs/2509.00098
+code_url: null
+data_url: null
+license: null
+status: published
+summary: >
+  Human-in-the-loop LLM-agent pipeline (Argonne) for operating an X-ray nanoprobe beamline and an autonomous robotic
+  materials station. Multiple LLMs are evaluated as trainable assistants orchestrating multi-task, multimodal workflows:
+  from function execution via logical/algebraic inference to acquire a 2D scan, to image analysis that picks coordinates
+  to zoom and rescan, coordinating a vision agent that locates suitable nanoparticle candidates. Performance is reported
+  as percentages with standard deviations over four trials per condition, with and without human feedback.
+benchmark_features:
+  evaluation_target: [instrument_control, perception, protocol_planning]
+  execution_mode: hybrid
+  instruments:
+    - {name: "APS X-ray nanoprobe beamline", modality: synchrotron, real_or_simulated: real}
+    - {name: "Autonomous robotic materials design/characterization station (Polybot-class, Argonne)", modality: robotics, real_or_simulated: real}
+  scientific_domains: [X-ray nanoprobe imaging, nanoparticle characterization, autonomous materials labs]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: 4
+  target_population: "Multi-step instrument workflows combining function calls, arithmetic/logical inference and image-based decisions"
+  task_source: expert_curated
+  sampling_strategy: null
+  metric_types: [success_rate]
+  primary_metric: "Percentage task success (mean +/- SD over four trials per condition)"
+  scoring_granularity: binary
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results:
+    - "Human feedback improves text-based and sequential tasks but not visual reasoning (search-snippet summary)"
+  open_source: null
+task_features:
+  workflow_depth: multi_step
+  perceptual_demand: image_interpretation
+  reasoning_demand: mixed
+  tool_interface: [python_api, natural_language]
+  tool_composition: "Orchestrator LLM coordinates function-execution and a vision agent; optional iterative human feedback"
+  quantitative_tolerance: null
+  closed_loop_feedback: true
+  safety_criticality: medium
+  task_taxonomy: [function execution with logical/algebraic inference (2D scan), image analysis to select zoom coordinates and rescan, nanoparticle candidate identification]
+sample_environment_features:
+  sample_types: [nanoparticles]
+  sample_real_or_simulated: real
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Nanoprobe beamline scans and robotic station; details unverified"
+agent_features_evaluated:
+  models: []
+  vision_used: true
+  rag_or_memory: some
+  planner: varied
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: some
+  multi_agent: true
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Iterative human feedback ('learning on the job') helps sequential/text tasks but does not fix visual-reasoning failures of current models"
+limitations:
+  - "Model list, task count and numeric results unverified in this session"
+related: [eaa_experiment_automation_agents]
+notes: >
+  Authors: Aikaterini Vriza, Michael H. Prince, Tao Zhou, Henry Chan, Mathew J. Cherukara. All content from search
+  snippets of Nature/arXiv pages; not fetched directly.
+---
+id: autoxrd_xrdbench
+name: "AutoXRD: Autonomous LLM Agents and Comprehensive Evaluation for Powder Diffraction Analysis"
+short_name: AutoXRD / XRDBench
+year: 2026
+venue: arXiv preprint (Aug/Sep 2026)
+authors_short: null
+arxiv: "2609.00070"
+doi: null
+url: https://arxiv.org/abs/2609.00070
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: >
+  AutoXRD is an autonomous LLM-agent framework for powder X-ray diffraction analysis (stepwise refinement grounded
+  in observed evidence with deterministic crystallographic/physical checks). It introduces XRDBench with two tracks:
+  XRDBench-QA (100 bounded diagnostic reasoning tasks) and XRDBench-E2E (34 executable workflows). Ten LLMs were
+  evaluated across 1,340 runs. Data-analysis rather than instrument-control benchmark, but the closest X-ray
+  agent benchmark with a full leaderboard.
+benchmark_features:
+  evaluation_target: [data_analysis, code_generation]
+  execution_mode: hybrid
+  instruments:
+    - {name: "Powder X-ray diffractometer data (analysis only)", modality: diffraction, real_or_simulated: none}
+  scientific_domains: [powder X-ray diffraction, crystallography, materials characterization]
+  n_tasks: 134
+  n_task_families: 2
+  n_instances_or_runs_reported: 1340
+  repetitions_per_task: null
+  target_population: "End-to-end powder-XRD analysis decisions: phase identification, indexing, Rietveld refinement, refinement-action selection, result acceptance"
+  task_source: expert_curated
+  sampling_strategy: null
+  metric_types: [rubric, partial_credit, cost]
+  primary_metric: "Score out of 100 (overall, QA track, E2E track)"
+  scoring_granularity: continuous
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: [GPT-5.6 Sol, GPT-5.6 Terra, GPT-5.6 Luna, plus 7 other LLMs (names unverified)]
+  n_agent_configs: 10
+  headline_results:
+    - "Ten LLMs, 1,340 runs; mean 57.8/100; best overall GPT-5.6 Sol 81.1"
+    - "Scores drop from 61.9 on XRDBench-QA to 53.7 on XRDBench-E2E"
+    - "GPT-5.6 Terra highest E2E point estimate 81.0; GPT-5.6 Luna best score-cost trade-off"
+    - "Strongest on refinement-history assessment and result acceptance; weakest on refinement-action selection, phase quantification, indexing, Rietveld refinement"
+  open_source: null
+task_features:
+  workflow_depth: mixed
+  perceptual_demand: structured_readout
+  reasoning_demand: high
+  tool_interface: [python_api]
+  tool_composition: "Agent invokes crystallographic analysis/refinement tools with deterministic acceptance checks"
+  quantitative_tolerance: null
+  closed_loop_feedback: true
+  safety_criticality: none
+  task_taxonomy: [XRDBench-QA bounded diagnostic tasks, XRDBench-E2E executable workflows]
+sample_environment_features:
+  sample_types: [powder diffraction patterns (crystalline materials)]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Offline XRD analysis environment; no instrument"
+agent_features_evaluated:
+  models: [GPT-5.6 Sol, GPT-5.6 Terra, GPT-5.6 Luna, 7 others unverified]
+  vision_used: null
+  rag_or_memory: null
+  planner: react
+  tools: [crystallographic refinement/indexing tools]
+  verifier_or_self_debug: verifier
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Large QA-to-E2E gap (61.9 -> 53.7) shows executable multi-step workflows are harder than bounded reasoning even for the same models"
+limitations:
+  - "Not instrument control; authors, code and full model list unverified"
+related: [envtrace]
+notes: >
+  All numbers from search snippets of the arXiv abstract/HTML (submitted 30 Aug 2026). arXiv blocked; authors, code and
+  license unverified. Included because the assignment asked for X-ray-instrument LLM-agent benchmarks 2024-2026.

@@ -1,0 +1,118 @@
+id: biolp_bench
+record_type: benchmark
+name: 'BioLP-bench: Measuring understanding of biological lab protocols by large language models'
+short_name: BioLP-bench
+year: 2024
+venue: bioRxiv preprint (v1 2024-08; v4 latest)
+authors_short: Ivanov (single author per repo contact; not verified)
+arxiv: null
+doi: 10.1101/2024.08.21.608694
+url: https://www.biorxiv.org/content/10.1101/2024.08.21.608694v4
+code_url: https://github.com/baceolus/BioLP-bench
+data_url: https://github.com/baceolus/BioLP-bench
+license: null
+status: preprint
+summary: |
+  BioLP-bench tests whether a model can find the single protocol-breaking mistake deliberately inserted into a biology lab protocol (alongside many harmless perturbations). Implemented on the UK AISI Inspect framework with model-graded scoring, it found frontier 2024 models far below humans: GPT-4o 17%, Mistral Large 16%, most others ~7%, vs a 79% human baseline.
+benchmark_features:
+  agents_evaluated:
+  - GPT-4o
+  - GPT-4o mini
+  - Mistral Large
+  - Mistral Nemo
+  - Claude 3 Haiku
+  - Claude 3.5 Sonnet
+  - Gemini 1.5 Flash
+  - Gemini 1.5 Pro
+  evaluation_target:
+  - protocol_planning
+  - question_answering
+  execution_mode: static_text
+  has_abstention_eval: false
+  has_human_baseline: true
+  has_safety_eval: false
+  headline_results:
+  - Human baseline 79% accuracy
+  - GPT-4o 17%, Mistral Large 16%; GPT-4o mini, Claude 3 Haiku, Claude 3.5 Sonnet, Mistral Nemo, Gemini 1.5 Flash/Pro
+    ~7%
+  - Manual review of GPT-4o grading found no false positives/negatives
+  holdout_or_split_design: null
+  instruments: []
+  leakage_or_contamination_risk: Base protocols are common/public; the injected mistakes are novel.
+  metric_types:
+  - success_rate
+  - llm_judge
+  n_agent_configs: 8
+  n_instances_or_runs_reported: null
+  n_task_families: 1
+  n_tasks: null
+  open_source: true
+  primary_metric: Accuracy of identifying the fatal mistake (model-graded by GPT-4o-class grader)
+  repetitions_per_task: null
+  sampling_strategy: 'Author-modified versions of common protocols: multiple non-fatal edits plus one fatal mistake
+    per test case (e.g., dilution arithmetic, physical-parameter errors such as glycerol stocks at -20 C).'
+  scientific_domains:
+  - biology wet-lab protocols
+  scoring_granularity: binary
+  target_population: Expert-level understanding of why lab protocols work, as needed to catch fatal errors
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: none
+  quantitative_tolerance: Includes arithmetic/dilution errors requiring quantitative checking.
+  reasoning_demand: high
+  safety_criticality: low
+  task_taxonomy:
+  - fatal-mistake identification in protocols (mathematical errors, physical-parameter errors, other)
+  tool_composition: None.
+  tool_interface:
+  - natural_language
+  workflow_depth: single_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Inspect-framework eval; supports OpenAI, Anthropic, Google, Mistral, HF APIs.
+  injected_faults: true
+  novelty_control: Novel injected mistakes
+  sample_real_or_simulated: dataset
+  sample_types:
+  - protocol text
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models:
+  - GPT-4o
+  - Mistral Large
+  - Claude 3.5 Sonnet
+  - Gemini 1.5 Pro
+  - others
+  multi_agent: false
+  planner: none
+  rag_or_memory: none
+  tools: []
+  verifier_or_self_debug: none
+  vision_used: false
+transfer_relevant_findings:
+- Fault-injection into otherwise valid procedures is a cheap, contamination-resistant way to probe causal understanding;
+  2024 frontier models were near floor.
+limitations:
+- Small single-author benchmark; number of protocols/test cases and later-model results not verified (bioRxiv blocked).
+- A search excerpt also mentions '38.4%' for human experts on a random subset — inconsistent with the 79% figure;
+  both unverified.
+related:
+- bioprobench
+- lab_bench
+- benchbench_protocol
+notes: Numbers from search excerpts of bioRxiv v3/v4 and a 2025 follow-up paper; README (verified) confirms Inspect
+  framework and model-graded scoring but gives no counts or license. Later versions of the paper reportedly updated
+  model results.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://www.biorxiv.org/content/10.1101/2024.08.21.608694v4
+  - https://github.com/baceolus/BioLP-bench
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

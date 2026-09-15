@@ -1,0 +1,120 @@
+id: atomic_microscopy
+record_type: system
+name: 'ATOMIC — Zero-shot Autonomous Microscopy for Scalable and Intelligent Characterization of 2D Materials (also:
+  Embodied Intelligence Unlocks Autonomous Microscopy, bioRxiv 2025)'
+short_name: ATOMIC
+year: 2025
+venue: arXiv (Apr 2025); bioRxiv 10.1101/2025.08.13.670210 (Aug 2025, extended version)
+authors_short: Yang et al. (Duke; H. Wang & Z. Ren groups; MIT)
+arxiv: '2504.10281'
+doi: 10.1101/2025.08.13.670210
+url: https://arxiv.org/abs/2504.10281
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: |
+  End-to-end framework integrating foundation models (ChatGPT for a Physical Control module that adjusts focus, exposure and stage movement in real time; Segment Anything for segmentation; clustering and topological analysis) to autonomously scan optical microscopes and characterise 2D materials zero-shot. Reports 99.7% segmentation accuracy for MoS2 monolayer identification, equal to human experts, and robustness to defocus, colour-temperature and exposure changes.
+benchmark_features:
+  agents_evaluated:
+  - ATOMIC (ChatGPT/GPT-based control + SAM)
+  evaluation_target:
+  - instrument_control
+  - perception
+  - data_analysis
+  execution_mode: physical_instrument
+  has_abstention_eval: false
+  has_human_baseline: true
+  has_safety_eval: false
+  headline_results:
+  - 99.7% segmentation accuracy for single-layer MoS2 identification, equivalent to human experts
+  - Works across graphene, MoS2, WSe2, SnSe; robust to defocus, colour temperature and exposure variation
+  holdout_or_split_design: null
+  instruments:
+  - name: optical microscope with motorised stage/focus/exposure control
+    modality: microscopy
+    real_or_simulated: real
+  leakage_or_contamination_risk: Zero-shot (no training data) — low
+  metric_types:
+  - success_rate
+  - other
+  n_agent_configs: 1
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: null
+  primary_metric: segmentation accuracy vs human expert labels
+  repetitions_per_task: null
+  sampling_strategy: 'Author-selected samples: MoS2, graphene, WSe2, SnSe; varied imaging conditions'
+  scientific_domains:
+  - 2D materials
+  - optical microscopy
+  scoring_granularity: continuous
+  target_population: Autonomous scanning, monolayer identification and grain-boundary/defect detection of 2D materials
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: image_interpretation
+  quantitative_tolerance: null
+  reasoning_demand: medium
+  safety_criticality: low
+  task_taxonomy:
+  - microscope control and scanning
+  - segmentation
+  - monolayer identification
+  - grain-boundary defect detection
+  tool_composition: LLM physical-control module + vision foundation model + unsupervised clustering/topological
+    analysis
+  tool_interface:
+  - python_api
+  - natural_language
+  workflow_depth: multi_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Real optical microscope; bioRxiv version described as brightfield and fluorescence with
+    multi-stage protocols and interactive dialogue (search snippet)
+  injected_faults: null
+  novelty_control: Zero-shot across four materials
+  sample_real_or_simulated: real
+  sample_types:
+  - 'exfoliated/CVD 2D materials on substrates: MoS2'
+  - graphene
+  - WSe2
+  - SnSe; brightfield optical
+  signal_quality_variation: Explicitly tested defocus, colour-temperature and exposure variations
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models:
+  - ChatGPT / GPT (version unverified)
+  multi_agent: false
+  planner: none
+  rag_or_memory: none
+  tools:
+  - SAM
+  - clustering
+  - topological analysis
+  - microscope control
+  verifier_or_self_debug: none
+  vision_used: true
+transfer_relevant_findings:
+- Foundation-model perception plus LLM control generalised zero-shot across four 2D materials and imaging-condition
+  perturbations — one of few optical-microscopy agents with explicit signal-quality variation
+limitations:
+- Single lab/instrument; number of images and trials not reported in accessible text
+- bioRxiv version's evaluation details not retrievable
+related:
+- micro_bench
+- agentic_j
+notes: Authors and abstract excerpt verified via GitHub-mirrored arXiv feed (KJaebye daily reporter). The bioRxiv
+  'Embodied Intelligence Unlocks Autonomous Microscopy' link to ATOMIC is inferred from search snippets naming ATOMIC's
+  Physical Control module; treat the two-ID mapping as probable, not confirmed.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2504.10281
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

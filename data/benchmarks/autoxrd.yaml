@@ -1,0 +1,116 @@
+id: autoxrd
+record_type: benchmark
+name: 'AutoXRD: Autonomous LLM Agents and Comprehensive Evaluation for Powder Diffraction Analysis'
+short_name: AutoXRD / XRDBench
+year: 2026
+venue: arXiv preprint (Aug/Sep 2026)
+authors_short: null
+arxiv: '2609.00070'
+doi: null
+url: https://arxiv.org/abs/2609.00070
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: |
+  AutoXRD is an autonomous LLM-agent framework for powder X-ray diffraction analysis (stepwise refinement grounded in observed evidence with deterministic crystallographic/physical checks). It introduces XRDBench with two tracks: XRDBench-QA (100 bounded diagnostic reasoning tasks) and XRDBench-E2E (34 executable workflows). Ten LLMs were evaluated across 1,340 runs. Data-analysis rather than instrument-control benchmark, but the closest X-ray agent benchmark with a full leaderboard.
+benchmark_features:
+  agents_evaluated:
+  - GPT-5.6 Sol
+  - GPT-5.6 Terra
+  - GPT-5.6 Luna
+  - plus 7 other LLMs (names unverified)
+  evaluation_target:
+  - data_analysis
+  - code_generation
+  execution_mode: hybrid
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results:
+  - Ten LLMs, 1,340 runs; mean 57.8/100; best overall GPT-5.6 Sol 81.1
+  - Scores drop from 61.9 on XRDBench-QA to 53.7 on XRDBench-E2E
+  - GPT-5.6 Terra highest E2E point estimate 81.0; GPT-5.6 Luna best score-cost trade-off
+  - Strongest on refinement-history assessment and result acceptance; weakest on refinement-action selection, phase
+    quantification, indexing, Rietveld refinement
+  holdout_or_split_design: null
+  instruments:
+  - name: Powder X-ray diffractometer data (analysis only)
+    modality: diffraction
+    real_or_simulated: none
+  leakage_or_contamination_risk: null
+  metric_types:
+  - rubric
+  - partial_credit
+  - cost
+  n_agent_configs: 10
+  n_instances_or_runs_reported: 1340
+  n_task_families: 2
+  n_tasks: 134
+  open_source: null
+  primary_metric: Score out of 100 (overall, QA track, E2E track)
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - powder X-ray diffraction
+  - crystallography
+  - materials characterization
+  scoring_granularity: continuous
+  target_population: 'End-to-end powder-XRD analysis decisions: phase identification, indexing, Rietveld refinement,
+    refinement-action selection, result acceptance'
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: structured_readout
+  quantitative_tolerance: null
+  reasoning_demand: high
+  safety_criticality: none
+  task_taxonomy:
+  - XRDBench-QA bounded diagnostic tasks
+  - XRDBench-E2E executable workflows
+  tool_composition: Agent invokes crystallographic analysis/refinement tools with deterministic acceptance checks
+  tool_interface:
+  - python_api
+  workflow_depth: mixed
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Offline XRD analysis environment; no instrument
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: dataset
+  sample_types:
+  - powder diffraction patterns (crystalline materials)
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models:
+  - GPT-5.6 Sol
+  - GPT-5.6 Terra
+  - GPT-5.6 Luna
+  - 7 others unverified
+  multi_agent: false
+  planner: react
+  rag_or_memory: null
+  tools:
+  - crystallographic refinement/indexing tools
+  verifier_or_self_debug: external_verifier
+  vision_used: null
+transfer_relevant_findings:
+- Large QA-to-E2E gap (61.9 -> 53.7) shows executable multi-step workflows are harder than bounded reasoning even
+  for the same models
+limitations:
+- Not instrument control; authors, code and full model list unverified
+related:
+- envtrace
+notes: |
+  All numbers from search snippets of the arXiv abstract/HTML (submitted 30 Aug 2026). arXiv blocked; authors, code and license unverified. Included because the assignment asked for X-ray-instrument LLM-agent benchmarks 2024-2026.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2609.00070
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

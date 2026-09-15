@@ -1,0 +1,114 @@
+id: sdl_performance_metrics
+record_type: framework
+name: Performance metrics to unleash the power of self-driving labs in chemistry and materials science
+short_name: SDL performance metrics (Volk & Abolhasani)
+year: 2024
+venue: Nature Communications 15:1378
+authors_short: Volk & Abolhasani
+arxiv: null
+doi: 10.1038/s41467-024-45569-5
+url: https://www.nature.com/articles/s41467-024-45569-5
+code_url: null
+data_url: null
+license: null
+status: published
+summary: |
+  Perspective arguing that SDL studies cannot be compared from publications alone because reported quantities (e.g. optimization rate) are not comparable across experimental spaces. Proposes a shared definition of an SDL ("automated experimental workflows (physical world) with algorithm-selected experimental parameters (digital world)") and seven performance metrics that every SDL paper should report, then reviews the literature under that lens (only 23% of surveyed studies included real-world benchmarking; 62% of ML studies showed model validation; 71% reported no precision data).
+schema_axes_proposed:
+- 'Degree of autonomy (levels: piecewise; semi-closed-loop; closed-loop; self-motivated)'
+- Operational lifetime (demonstrated unassisted; demonstrated assisted; theoretical unassisted; theoretical assisted;
+  plus labor requirements/scalability)
+- Throughput (theoretical throughput vs demonstrated throughput; covers material preparation rate and analysis speed)
+- Experimental precision (standard deviation of replicates of a single condition, collected in an unbiased/interleaved
+  manner)
+- 'Material usage (safety, monetary cost, environmental impact: total active hazardous quantity; total material
+  per experiment; high-value material per experiment; environmentally hazardous material per experiment incl. waste
+  streams)'
+- Accessible parameter space (demonstrated vs theoretical ranges; min/max bounds per parameter; parameterization
+  in the optimizer; qualitative constraints on usable parameters)
+- Optimization efficiency (optimized feature achieved and number of experiments required; benchmark vs state-of-the-art
+  literature and vs random sampling; regression validation with train/test split; explainable-AI parameter influence,
+  e.g. Shapley plots)
+benchmark_features:
+  agents_evaluated: []
+  evaluation_target: []
+  execution_mode: null
+  has_abstention_eval: null
+  has_human_baseline: null
+  has_safety_eval: null
+  headline_results: []
+  holdout_or_split_design: null
+  instruments: []
+  leakage_or_contamination_risk: null
+  metric_types: []
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: null
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - chemistry
+  - materials science
+  scoring_granularity: null
+  target_population: null
+  task_source: null
+task_features:
+  closed_loop_feedback: null
+  perceptual_demand: null
+  quantitative_tolerance: null
+  reasoning_demand: null
+  safety_criticality: null
+  task_taxonomy: []
+  tool_composition: null
+  tool_interface: []
+  workflow_depth: null
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: null
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: null
+  sample_types: []
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models: []
+  multi_agent: null
+  planner: null
+  rag_or_memory: null
+  tools: []
+  verifier_or_self_debug: null
+  vision_used: null
+transfer_relevant_findings:
+- Autonomy should be reported as a discrete level defined by where humans touch the loop (data transfer, measurement
+  collection, system reset, experiment selection), not as a binary 'autonomous' claim -- directly reusable as an
+  agent-benchmark axis.
+- Report theoretical AND demonstrated values (throughput, lifetime, parameter space); the gap between them is itself
+  informative.
+- Precision must be measured with unbiased replicates (alternate the test condition with random conditions) -- analogous
+  to repeated-run variance for stochastic agents.
+- Optimization claims need a random-sampling control and out-of-sample regression validation; 'reaching an optimum'
+  alone is not evidence of algorithm quality.
+- Material/hazard accounting per experiment is a cost axis absent from most agent benchmarks.
+limitations:
+- Perspective/heuristic; metrics are defined qualitatively, no reference implementation or scoring rubric.
+- Chemistry/materials focus; does not address LLM-agent-specific axes (tool use, abstention, provenance).
+related:
+- benchmarking_sdls
+- sdl_review_2026
+- safe_sdls
+notes: |
+  nature.com blocked; the metric list and verbatim definitions were extracted from a mirrored full-text JSON of the paper (GitHub repo NoahW99/genai-research-assistant, data/json_papers/...) and cross-checked against a phys.org press summary listing the seven metrics. Figure 1 "Key metrics for quantifying performance in SDLs", Figure 2 "Degrees of autonomy in SDLs", Table 1 overview of suggested metrics. License not stated in the mirrored text; Nat Commun articles are normally CC BY 4.0 but this was NOT verified. One third-party bib cites page 1612; the article number 1378 (as given in the assignment and other bibs) is used.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://www.nature.com/articles/s41467-024-45569-5
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

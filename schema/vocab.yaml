@@ -1,0 +1,226 @@
+# Controlled vocabularies for the benchmark evidence schema.
+# Every enum used by benchmark_card.schema.json and execution_record.schema.json
+# is defined here once, with a one-line gloss, so the site, the validator and the
+# feature encoder share a single source of truth.
+#
+# Conventions
+#   - ordinal vocabularies list values from LOW to HIGH; the encoder maps them to 0..n-1
+#   - nominal vocabularies are one-hot encoded
+#   - "mixed" means the benchmark spans several values; "unknown" means not reported
+
+record_type:
+  kind: nominal
+  values:
+    benchmark: A task set with a defined scoring rule and reported results.
+    system: An agent or platform paper whose evaluation is a demonstration, not a reusable benchmark.
+    framework: A metrics / methodology paper that proposes evaluation axes but no task set.
+    survey: A review or survey.
+
+evaluation_target:
+  kind: nominal
+  multi: true
+  values:
+    instrument_control: The agent issues commands that change instrument state (real or simulated).
+    code_generation: The agent writes code that is executed or statically scored.
+    computer_use: The agent operates a GUI (screen + mouse/keyboard) rather than an API.
+    question_answering: Text or multimodal QA with no action on an environment.
+    perception: Image / signal interpretation is the primary skill scored.
+    protocol_planning: Producing or ordering an experimental protocol.
+    data_analysis: Analysing experimental data (scripts, notebooks) without acquiring it.
+    simulation_control: Driving a physics or lab simulator as the environment.
+    safety: Recognising or refusing unsafe actions is a scored dimension.
+
+execution_mode:
+  kind: nominal
+  values:
+    physical_instrument: Agent actions run on real hardware and are scored on physical outcomes.
+    digital_twin: Agent actions run on a faithful, stateful simulator of a specific instrument.
+    simulator: Agent actions run on an abstract or game-like simulator of a lab or world.
+    execution_trace: Generated code is executed in a sandbox and scored on the trace of calls / state.
+    static_code_eval: Generated code is scored by tests or rubric without instrument state.
+    static_text: Answers are scored as text (QA, planning) with no execution.
+    hybrid: Mixes two or more of the above.
+
+instrument_modality:
+  kind: nominal
+  multi: true
+  values:
+    microscopy: SEM, TEM, STEM, AFM/STM/SPM, optical, X-ray microscopy.
+    spectroscopy: Raman, IR, NMR, XPS, UV-Vis, mass spectrometry, EDS.
+    diffraction: XRD, electron diffraction, scattering (SAXS/WAXS).
+    synchrotron: Beamline end-stations (may combine imaging / scattering / spectroscopy).
+    liquid_handling: Pipetting robots, dispensers.
+    robotics: Mobile or arm robots, sample handling, synthesis platforms.
+    generic_lab: Multiple or unspecified bench instruments.
+    computation: Software-only environments (simulators, notebooks).
+    none: No instrument.
+
+real_or_simulated:
+  kind: nominal
+  values:
+    real: Physical hardware.
+    digital_twin: Faithful simulator of a specific instrument or facility.
+    simulated: Abstract simulator.
+    dataset: Pre-recorded data; nothing is acquired.
+    none: Not applicable.
+
+task_source:
+  kind: nominal
+  values:
+    expert_curated: Tasks written or selected by domain experts.
+    literature_derived: Tasks adapted from published papers or protocols.
+    synthetic_generated: Tasks generated programmatically or by an LLM.
+    factorial_design: Tasks constructed by crossing controlled factors.
+    crowd: Crowd-sourced.
+    mixed: Several of the above.
+
+metric_type:
+  kind: nominal
+  multi: true
+  values:
+    success_rate: Fraction of tasks / episodes judged successful.
+    pass_at_k: Success within k attempts.
+    partial_credit: Step- or checkpoint-level credit.
+    trace_alignment: Similarity between produced and reference execution traces.
+    llm_judge: Scored by an LLM against a rubric or reference.
+    rubric: Scored by humans against a rubric.
+    human_eval: Free-form human evaluation.
+    cost: Tokens or dollars.
+    time: Wall-clock or step count.
+    safety_violations: Count or rate of prohibited actions.
+    calibration: Confidence calibration of the agent.
+    accuracy: Classification / QA accuracy.
+    other: See notes.
+
+scoring_granularity:
+  kind: ordinal
+  values:
+    binary: Pass / fail only.
+    partial: Discrete partial credit.
+    continuous: Continuous score (e.g. error vs tolerance).
+    mixed: Differs by task.
+
+workflow_depth:
+  kind: ordinal
+  values:
+    single_step: One command or one answer.
+    multi_step: A handful of dependent actions (roughly 2-10).
+    long_horizon: Many dependent actions with intermediate state (roughly >10).
+    mixed: Spans the range.
+
+perceptual_demand:
+  kind: ordinal
+  values:
+    none: No sensory input beyond the prompt.
+    structured_readout: Numeric or textual instrument readouts.
+    image_reading: Extract simple facts from images (is there a particle? is it in focus?).
+    image_interpretation: Domain interpretation of images / spectra (defect class, phase, morphology).
+    mixed: Spans the range.
+
+reasoning_demand:
+  kind: ordinal
+  values:
+    low: Lookup or direct mapping from instruction to action.
+    medium: Requires planning over a few steps or applying a known procedure.
+    high: Requires scientific reasoning, hypothesis, or non-obvious decomposition.
+    mixed: Spans the range.
+
+tool_interface:
+  kind: nominal
+  multi: true
+  values:
+    python_api: Python functions or SDK.
+    cli: Shell commands.
+    gui: Screen-based computer use.
+    rest_api: HTTP APIs.
+    mcp: Model Context Protocol tool servers.
+    natural_language: Agent talks to a human or another agent only.
+    physical: Direct robotic manipulation.
+
+safety_criticality:
+  kind: ordinal
+  values:
+    none: No action can damage anything.
+    low: Recoverable mistakes (bad image, wasted time).
+    medium: Costly but recoverable (sample loss, recalibration).
+    high: Irreversible or hazardous (detector damage, crash, chemical hazard).
+
+sample_real_or_simulated:
+  kind: nominal
+  values:
+    real: Physical specimens.
+    simulated: Synthetic specimens inside a simulator.
+    dataset: Pre-recorded images / data.
+    none: No sample concept.
+
+novelty_level:
+  kind: ordinal
+  values:
+    seen_in_development: Task / sample used while building the agent.
+    held_out_instance: New instance of a seen task family and sample class.
+    held_out_task: Task identity not seen in development, drawn from a seen task family.
+    held_out_task_family: Task family not seen in development.
+    held_out_sample_class: Sample or material class not seen in development.
+    held_out_environment: New instrument state, calibration, or facility.
+    held_out_combination: New combination of seen task components.
+
+rag_or_memory:
+  kind: nominal
+  values:
+    none: No retrieval or memory beyond the context window.
+    static_docs: Retrieval over documentation / manuals.
+    episodic: Memory of prior runs.
+    both: Documentation retrieval and episodic memory.
+    varied: Ablated across configs.
+    unknown: Not reported.
+
+planner:
+  kind: nominal
+  values:
+    none: Direct single-shot generation.
+    react: Interleaved reasoning and acting.
+    plan_and_execute: Explicit plan generated then executed.
+    tree_search: Search over action sequences.
+    varied: Ablated across configs.
+    unknown: Not reported.
+
+verifier:
+  kind: nominal
+  values:
+    none: No checking.
+    self_debug: Agent retries on errors / self-critique.
+    external_verifier: Separate checker (model, rule, or physical measurement).
+    human: Human in the loop verifies.
+    varied: Ablated across configs.
+    unknown: Not reported.
+
+guards:
+  kind: nominal
+  values:
+    none: No safety layer.
+    allowlist: Tool or parameter allowlists / hard limits.
+    human_in_loop: Human approval for risky actions.
+    both: Allowlist and human approval.
+    varied: Ablated across configs.
+    unknown: Not reported.
+
+failure_mode:
+  kind: nominal
+  values:
+    perception: Misread an image or signal.
+    planning: Wrong or incomplete decomposition.
+    tool_error: Wrong tool, wrong arguments, or API misuse.
+    execution_error: Runtime / environment error not recovered.
+    timeout: Step or time budget exhausted.
+    unsafe_action: Prohibited or damaging action attempted.
+    wrong_quantity: Quantitative answer outside tolerance.
+    hallucinated_completion: Claimed success without doing the work.
+    refusal_or_abstain: Declined to act (may be correct).
+    other: See notes.
+
+status:
+  kind: nominal
+  values:
+    published: Peer-reviewed venue.
+    preprint: Preprint only.
+    withdrawn: Withdrawn.

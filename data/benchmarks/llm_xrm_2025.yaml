@@ -1,0 +1,100 @@
+id: llm_xrm_2025
+record_type: system
+name: An Autonomous, Large Language Model Driven X-ray Microscope with Contextual Understanding of Domain Specific
+  Experimental Workflows
+short_name: LLM-XRM (M&M 2025)
+year: 2025
+venue: Microscopy and Microanalysis, Vol. 31, Supplement 1 (M&M 2025 proceedings abstract), article ozaf048.1092,
+  July 2025
+authors_short: Johnson (Nathan S. Johnson; ZEISS)
+arxiv: null
+doi: 10.1093/mam/ozaf048.1092 (inferred from the OUP article identifier in the URL; not verified)
+url: https://academic.oup.com/mam/article/31/Supplement_1/ozaf048.1092/8213302
+code_url: null
+data_url: null
+license: null
+status: published
+summary: |
+  Conference proceedings abstract describing the architecture of an LLM-agent system that controls a ZEISS Versa X-ray microscope and performs image analysis with contextual (RAG-style) understanding of domain-specific experimental workflows. This is the precursor system to the 2026 benchmark paper; no benchmark-style quantitative evaluation could be verified from accessible sources.
+benchmark_features:
+  agents_evaluated: []
+  evaluation_target:
+  - instrument_control
+  - data_analysis
+  execution_mode: physical_instrument
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results: []
+  holdout_or_split_design: null
+  instruments:
+  - name: ZEISS Versa X-ray microscope
+    modality: microscopy
+    real_or_simulated: real
+  leakage_or_contamination_risk: n/a (system description)
+  metric_types:
+  - other
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: false
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - X-ray microscopy
+  - materials characterization
+  scoring_granularity: binary
+  target_population: Demonstration of an LLM-driven XRM controller; not a benchmark.
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: structured_readout
+  quantitative_tolerance: null
+  reasoning_demand: medium
+  safety_criticality: medium
+  task_taxonomy: []
+  tool_composition: null
+  tool_interface:
+  - python_api
+  - natural_language
+  workflow_depth: multi_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: ZEISS Versa XRM controlled by an LLM agent system (details not accessible).
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: real
+  sample_types: []
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models: []
+  multi_agent: false
+  planner: null
+  rag_or_memory: some
+  tools: []
+  verifier_or_self_debug: none
+  vision_used: null
+transfer_relevant_findings:
+- Establishes the single-platform agentic XRM system whose benchmark evaluation later showed weak task-level generalization.
+limitations:
+- Abstract-length proceedings entry; full text was not accessible (academic.oup.com blocked).
+- Abstract only
+related:
+- xrm_agent_benchmarks
+notes: |-
+  Only the title, author, venue/volume and a one-sentence description ('describes the architecture of an LLM agent system used for controlling the Versa X-ray Microscope and performing image analysis') were visible in search snippets. Co-authors, DOI and any numbers are unverified. Other prior work by N. S. Johnson found: (i) M&M 2026 talk by co-author Ian Abshire, 'Closing the Loop in Microscopy Automation: Multi-Agent LLMs for Real-Time Image Acquisition, Image Processing and Experimental Steering Across Scientific Domains' (mm2026.eventscribe.net, room S201 D; no abstract accessible); (ii) the author's own statement (research proposal in the working scratchpad) that he began building autonomous X-ray characterization at SSRL in 2023 - no SSRL-era LLM-agent publication by Johnson could be located; the SSRL LLM beamline-alignment work found in search ('An agentic artificially intelligent X-ray scientist', Nature Machine Intelligence, July 2026, BL17-2) does not list Johnson in the snippets seen; (iii) non-agent papers: Johnson et al., Materials 17(16):4038 (2024) active learning for compositionally complex alloys; Johnson, Kafka, Moser, Materials Characterization 238:116524 (2026) sparse-projection in situ X-ray tomography with deep learning.
+
+  [extract_F.yaml] demonstration. Authorship inferred from the NIST AIMS 2025 workshop programme listing 'Nathan Johnson (ZEISS): An Autonomous, Large Language Model Driven X-ray Microscope'; the OUP page itself was blocked, so authors and DOI need confirmation.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://academic.oup.com/mam/article/31/Supplement_1/ozaf048.1092/8213302
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: Merged from extract_E.yaml, extract_F.yaml.

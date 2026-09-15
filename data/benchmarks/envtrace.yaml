@@ -1,0 +1,191 @@
+id: envtrace
+record_type: benchmark
+name: 'EnvTrace: Simulation-Based Semantic Evaluation of LLM Code via Execution Trace Alignment -- Demonstrated
+  at Synchrotron Beamlines'
+short_name: EnvTrace
+year: 2025
+venue: arXiv preprint (cs.SE / cs.AI); journal status not verified
+authors_short: van der Vleuten et al.
+arxiv: '2511.09964'
+doi: null
+url: https://arxiv.org/abs/2511.09964
+code_url: https://github.com/CFN-softbio/EnvTrace
+data_url: https://zenodo.org/records/17526264
+license: Apache-2.0 (EnvTrace package); dataset/Zenodo license not verified
+status: preprint
+summary: |
+  EnvTrace evaluates LLM-generated instrument-control code by executing both the generated code and a ground-truth reference inside a sandboxed beamline "control-logic digital twin" (Bluesky/IPython driving EPICS IOCs in Docker) and aligning the resulting execution traces (time-stamped EPICS PV state changes) rather than comparing code text. Traces are scored on state (discrete sequence), temporal, continuous-profile and structural equivalence, yielding a continuous "full score" and a strict binary "EnvTrace accuracy". Over 30 LLMs were benchmarked on natural-language-to-beamline-code tasks from the VISION system at NSLS-II, with top closed models approaching beamline-scientist (human) performance.
+benchmark_features:
+  agents_evaluated:
+  - Claude 3.5 Sonnet
+  - Claude Sonnet 4
+  - Claude Sonnet 4 (thinking)
+  - Claude Opus 4
+  - Claude Sonnet 4.5
+  - GPT-4o
+  - o3
+  - GPT-5 (minimal/low/high reasoning)
+  - Gemini 2.5 Pro
+  - Grok-4
+  - Grok-4-fast
+  - grok-code-fast-1
+  - Devstral Medium
+  - Qwen3
+  - Qwen3-thinking
+  - Qwen3-coder
+  - Qwen2
+  - Qwen2.5
+  - Qwen2.5-coder
+  - Mistral
+  - Mistral-Nemo
+  - Phi-3.5
+  - Athene-v2
+  - Llama 3.3
+  - gpt-oss-120b
+  evaluation_target:
+  - code_generation
+  - instrument_control
+  - simulation_control
+  execution_mode: execution_trace
+  has_abstention_eval: false
+  has_human_baseline: true
+  has_safety_eval: false
+  headline_results:
+  - Over 30 LLMs evaluated; 'many top-tier models can approach human-level performance in rapid control-code generation'
+    (abstract)
+  - Top-tier closed-source models (Anthropic Claude series, xAI Grok-4, OpenAI GPT-5, GPT-4o) performed best (search-snippet
+    summary of paper); per-model numeric scores could not be retrieved
+  - Evaluation set described as 116 simple-flow commands + 20 complex-flow control examples plus generic Bluesky
+    plans
+  holdout_or_split_design: No train/test split; a fixed evaluation set. Dataset revised after the paper (op_cog_dataset_after_envtrace_paper_fixes.json).
+  instruments:
+  - name: 'NSLS-II 11-BM CMS beamline control-logic digital twin (Bluesky/ophyd + EPICS IOCs in Docker: sample motors,
+      Linkam-style temperature stage, detector exposure)'
+    modality: synchrotron
+    real_or_simulated: digital_twin
+  leakage_or_contamination_risk: Dataset and ground-truth code are public on GitHub (CFN-softbio/VISION) and Zenodo;
+    prompts are short, domain-specific NL commands with facility-specific Python API (e.g., sam.xr(), sam.measure()),
+    so verbatim pretraining contamination is unlikely but possible for post-2025 models.
+  metric_types:
+  - trace_alignment
+  - success_rate
+  - partial_credit
+  - time
+  - other
+  n_agent_configs: 31
+  n_instances_or_runs_reported: null
+  n_task_families: 2
+  n_tasks: 136
+  open_source: true
+  primary_metric: 'EnvTrace accuracy (binary: exact discrete-state match AND timing thresholds R^2>=0.9, slope in
+    [0.8,1.2] AND continuous-profile thresholds) with a continuous ''full score'' (0.8*discrete + 0.2*timing, or
+    0.6*discrete + 0.2*timing + 0.2*continuous when continuous channels exist)'
+  repetitions_per_task: 3
+  sampling_strategy: Beamline-scientist-authored command/code pairs from the VISION Op-cog dataset; split into 'simple-flow'
+    commands and 'complex-flow' (loops, conditionals, temperature ramps, multi-axis scans) plus generic Bluesky
+    plans
+  scientific_domains:
+  - synchrotron X-ray scattering (GISAXS/SAXS)
+  - beamline operations
+  - soft-matter thin films
+  scoring_granularity: mixed
+  target_population: Natural-language beamline-operation commands a user would issue to a voice/text assistant at
+    an X-ray scattering beamline (motor moves, alignment, incident angle, exposures, temperature ramps, scans, loops)
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: none
+  quantitative_tolerance: 'Timing: R^2>=0.9, slope 0.8-1.2, duration tolerance 25%, MAPE tolerance 100%; temperature
+    profile: MAE<=5.0 C and final-temperature diff<=5.0 C for binary match; per-channel numeric comparators configurable;
+    ignore_pvs lists per task'
+  reasoning_demand: mixed
+  safety_criticality: medium
+  task_taxonomy:
+  - simple-flow commands
+  - complex-flow control (loops
+  - conditionals
+  - temperature ramps
+  - multi-axis scans)
+  - generic Bluesky plans
+  tool_composition: Single code snippet generated per NL command, executed in an IPython/Bluesky session that drives
+    EPICS PVs; complex tasks compose motor moves, exposures, temperature control and timing loops in one script
+  tool_interface:
+  - python_api
+  - cli
+  workflow_depth: mixed
+sample_environment_features:
+  calibration_or_api_state_variation: Motors reset to default positions (caput, .SET teleport) before each test;
+    temperature PV monitored over time
+  environment_description: Sandboxed interactive IPython session (managed via pexpect) with Bluesky RunEngine and
+    beamline profile collection, talking to simulated EPICS IOCs in Docker containers; an EPICS monitor logs every
+    PV update (pvname, timestamp, value) to form the trace. 300 s snippet timeout.
+  injected_faults: false
+  novelty_control: None described; fixed public dataset
+  sample_real_or_simulated: none
+  sample_types:
+  - thin film
+  - perovskite
+  - polymer
+  - organic thin film (named only in prompts; no physical sample)
+  signal_quality_variation: null
+  novelty_levels_tested:
+  - held_out_instance
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: some
+  models:
+  - Claude 3.5 Sonnet
+  - Claude Sonnet 4 / 4-thinking
+  - Claude Opus 4
+  - Claude Sonnet 4.5
+  - GPT-4o
+  - o3
+  - GPT-5 variants
+  - Gemini 2.5 Pro
+  - Grok-4 / Grok-4-fast / grok-code-fast-1
+  - Devstral Medium
+  - Qwen3 / Qwen3-thinking / Qwen3-coder
+  - Qwen2 / Qwen2.5 / Qwen2.5-coder
+  - Mistral
+  - Mistral-Nemo
+  - Phi-3.5
+  - Athene-v2
+  - Llama 3.3
+  - gpt-oss-120b
+  multi_agent: false
+  planner: none
+  rag_or_memory: none
+  tools:
+  - Bluesky/ophyd beamline Python API (VISION Op-cog system prompt)
+  verifier_or_self_debug: none
+  vision_used: false
+transfer_relevant_findings:
+- Trace alignment on a digital twin gives a semantic correctness signal that text metrics (exact match, CodeBLEU,
+  Levenshtein) miss; the VISION test harness computes all of them side by side
+- The same digital twin doubles as a pre-execution validator for live experiments (dry-run before hardware)
+- Binary 'accuracy' is deliberately strict (exact sequence + timing); the continuous 'full score' gives partial
+  credit, useful for ranking weaker/open models
+- Metric weights and comparators are configurable per channel, so the method ports to other stateful control systems
+  (robotics, industrial automation)
+limitations:
+- Digital twin captures control logic (PV changes) only, not physics/detector data; scientific outcome quality is
+  not scored
+- Small task set (~136) from a single beamline API; ground truth may admit alternative valid implementations (mitigated
+  by multiple expected_code entries and ignore_pvs)
+- Per-model scores, run counts and the human-baseline protocol could not be verified from primary text in this session
+related:
+- vision
+- lightfall
+- osprey_als_bl531
+notes: |
+  Author list (van der Vleuten, Flores, Mathur, Rakitin, Hopkins, Yager, Tsai) and the '>30 LLMs' / '116 simple + 20 complex' figures come from search snippets of the arXiv page/HTML; arXiv itself was egress-blocked, so numeric per-model results, confidence intervals, the LLM-judge comparison (if any) and the exact human-baseline size are unverified. The GitHub VISION repo contains op_cog_dataset.json (105 entries: 76 simple / 29 flagged complex), op_cog_dataset_after_envtrace_paper_fixes.json (157 entries: 136 simple / 21 complex) and an archived original (127 entries, 6 complex); none matches 116+20 exactly, so n_tasks=136 follows the paper snippet. Human baseline inferred from datasets/op_cog_beamline_scientists/ (bs_1.toml, bs_2.toml, possibly more) and README_TESTING 'human-based scientist agents'. n_agent_configs=31 is the count of LLM configs enumerated in backend/src/hal_beam_com/utils.py, consistent with 'over 30'. The EnvTrace README lists citation as 'to be updated'.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted_reviewed
+  sources_consulted:
+  - https://arxiv.org/abs/2511.09964
+  - https://github.com/CFN-softbio/EnvTrace
+  confidence: medium
+  review_status: reviewed
+  reviewer_notes: Reviewed 2026-09-15 against the repository (metric definitions, simulator, model list, human-baseline
+    files). Task count 136 is from a search snippet; repository datasets hold 105-157 entries.

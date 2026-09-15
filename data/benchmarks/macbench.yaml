@@ -1,0 +1,138 @@
+id: macbench
+record_type: benchmark
+name: MaCBench — Probing the limitations of multimodal language models for chemistry and materials research
+short_name: MaCBench
+year: 2025
+venue: Nature Computational Science (2025); arXiv 2411.16955 (Nov 2024)
+authors_short: Alampara et al. (Jablonka group, LAMaLab / FSU Jena)
+arxiv: '2411.16955'
+doi: 10.1038/s43588-025-00836-3
+url: https://www.nature.com/articles/s43588-025-00836-3
+code_url: https://github.com/lamalab-org/macbench
+data_url: https://huggingface.co/datasets/jablonkagroup/MaCBench (v1.0.0; ablations at jablonkagroup/MaCBench-Ablations;
+  leaderboard jablonkagroup/MaCBench-Leaderboard)
+license: MIT (code); dataset license not confirmed
+status: published
+summary: |
+  ~1,150 manually curated multimodal questions (34 subsets; 1,153 samples in the Inspect port, 1,155 in the digest) spanning three pillars of the chemistry/materials workflow: data extraction (tables, plots, hand-drawn molecules, organic chemistry), experiment execution (lab QA / lab-safety photos, crystal structures) and data interpretation (AFM images, XRD, spectra, isotherms, electronic structure). Frontier VLMs do well at equipment identification but fail at spatial reasoning and multi-step cross-modal inference.
+benchmark_features:
+  agents_evaluated:
+  - Claude 3.5 Sonnet
+  - GPT-4o
+  - Gemini Pro
+  - Llama 3.2 90B Vision
+  evaluation_target:
+  - question_answering
+  - perception
+  - safety
+  execution_mode: static_text
+  has_abstention_eval: false
+  has_human_baseline: false
+  has_safety_eval: true
+  headline_results:
+  - Near-perfect performance on equipment identification and standardized data extraction; failures on stereochemistry,
+    crystal systems, multi-step inference
+  - ~35% performance increase when peak positions are given as text rather than shown visually
+  - Consistent degradation as reasoning steps increase
+  - 'Inspect-evals port: GPT-5.2 72.59%, GPT-5-nano 68.78% (1,153 samples), matching original implementation'
+  holdout_or_split_design: Single evaluation set; separate ablation set with six dimensions (modality text vs vision,
+    reasoning complexity, guidance, molecule representation, rendering, terminology)
+  instruments:
+  - name: none (images of lab setups
+    modality: microscopy
+    real_or_simulated: none
+  leakage_or_contamination_risk: Authors assume corpus not used in training but note temporal validity concern;
+    correlation between crystal-structure online prevalence and task performance suggests memorization effects
+  metric_types:
+  - success_rate
+  - other
+  n_agent_configs: 4
+  n_instances_or_runs_reported: null
+  n_task_families: 34
+  n_tasks: 1153
+  open_source: true
+  primary_metric: fraction correct (binary per question; Hamming loss 0 for MCQ; MAE within 1% (or 5%) tolerance
+    for numeric)
+  repetitions_per_task: 5
+  sampling_strategy: Manually created by domain experts; GitHub PR review; custom validation UI with resolution
+    checks; some images mined from patents or generated (XRD, AFM)
+  scientific_domains:
+  - chemistry
+  - materials science
+  scoring_granularity: binary
+  target_population: Multimodal tasks across the chemistry/materials scientific lifecycle
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: image_interpretation
+  quantitative_tolerance: numeric answers scored correct if MAE within 1% (default) or 5% of target
+  reasoning_demand: mixed
+  safety_criticality: low
+  task_taxonomy:
+  - data extraction (hand-drawn molecules
+  - 'organic chemistry: chirality/isomers/schemas'
+  - tables and plots)
+  - in silico and lab experiments (lab QA
+  - crystal structure)
+  - data interpretation (AFM imaging
+  - adsorption isotherms
+  - electronic structure
+  - spectra
+  - XRD)
+  tool_composition: none
+  tool_interface:
+  - natural_language
+  workflow_depth: single_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: ChemBench evaluation engine; ~2 h serial evaluation; 2.5 GB dataset
+  injected_faults: false
+  novelty_control: Originality required by curation guidelines
+  sample_real_or_simulated: dataset
+  sample_types:
+  - lab photographs
+  - plots
+  - tables
+  - molecule drawings
+  - crystal renderings
+  - AFM images
+  - XRD patterns
+  - spectra
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models:
+  - Claude 3.5 Sonnet
+  - GPT-4o
+  - Gemini Pro
+  - Llama 3.2 90B Vision
+  multi_agent: false
+  planner: none
+  rag_or_memory: none
+  tools: []
+  verifier_or_self_debug: none
+  vision_used: true
+transfer_relevant_findings:
+- Same information as text vs image changes accuracy by tens of points — modality of instrument readouts matters
+  for agent design
+- Performance tracks internet prevalence of content, warning that benchmark success may reflect memorization rather
+  than transferable skill
+limitations:
+- No open-ended tasks; no partial credit; creator bias; some subfields underrepresented
+- Microscopy content limited to AFM images (no SEM/TEM) — perception axis for EM only partially covered
+related:
+- mmsci
+- spm_bench
+notes: Question count differs between sources (1,153 Inspect port vs 1,155 digest vs 'over 1,100' README); 34 subsets
+  confirmed by eval-card and Inspect README. Per-pillar accuracies for the four models not retrievable.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://www.nature.com/articles/s43588-025-00836-3
+  - https://github.com/lamalab-org/macbench
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

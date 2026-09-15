@@ -1,0 +1,105 @@
+id: lost_in_benchmarks_irt
+record_type: framework
+name: Lost in Benchmarks? Rethinking Large Language Model Benchmarking with Item Response Theory
+short_name: PSN-IRT / Lost in Benchmarks
+year: 2026
+venue: AAAI 2026 (Oral); arXiv May 2025
+authors_short: Zhou et al. (Hongli Zhou, Hui Huang, Ziqing Zhao, Lvyuan Han, Huicheng Wang, Kehai Chen, Muyun Yang,
+  Wei Bao, Jian Dong, Bing Xu, Conghui Zhu, Hailong Cao, Tiejun Zhao)
+arxiv: '2505.15055'
+doi: null
+url: https://arxiv.org/abs/2505.15055
+code_url: https://github.com/Joe-Hall-Lee/PSN-IRT
+data_url: null
+license: null
+status: published
+summary: |
+  Psychometric audit of LLM benchmarks motivated by leaderboard inconsistencies and poor separability among top models. Proposes PSN-IRT (Pseudo-Siamese Network for Item Response Theory), a 4-parameter IRT model trained end-to-end that jointly estimates model ability and per-item discrimination, difficulty, guessing rate and feasibility. Applied to 11 benchmarks (41,871 items, 12 LLMs via OpenCompass) it reveals varied measurement-quality shortcomings and shows that PSN-IRT-selected smaller item subsets align better with human preference.
+schema_axes_proposed:
+- 'Item discrimination (a): how well an item separates strong from weak models'
+- 'Item difficulty (b): ability threshold for a correct answer'
+- 'Guessing rate (c): probability of correct answer without competence (flags contamination/leakage)'
+- 'Feasibility upper bound (d): max attainable success even for the best models'
+- Model ability estimate (theta) as the latent quantity benchmarks should recover
+- 'Benchmark-level diagnostics: saturation / low discrimination, insufficient difficulty ceiling, leakage, cross-leaderboard
+  ranking inconsistency, redundancy (item subsets can reproduce full rankings)'
+- Human-preference alignment as external validity check for a benchmark
+benchmark_features:
+  agents_evaluated: []
+  evaluation_target: []
+  execution_mode: null
+  has_abstention_eval: null
+  has_human_baseline: null
+  has_safety_eval: null
+  headline_results:
+  - Significant and varied measurement-quality shortcomings across 11 mainstream benchmarks
+  - PSN-IRT-selected smaller benchmarks keep stronger alignment with human preference; third-party note reports
+    Kendall tau = 1.00 vs full-benchmark ranking and 79.98% vs 72.11% response-prediction accuracy over classical
+    IRT (unverified)
+  holdout_or_split_design: null
+  instruments: []
+  leakage_or_contamination_risk: null
+  metric_types: []
+  n_agent_configs: 12
+  n_instances_or_runs_reported: 41871
+  n_task_families: null
+  n_tasks: null
+  open_source: true
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - general LLM benchmarks (e.g. MMLU, GSM8K, MATH, HumanEval+)
+  scoring_granularity: null
+  target_population: null
+  task_source: null
+task_features:
+  closed_loop_feedback: null
+  perceptual_demand: null
+  quantitative_tolerance: null
+  reasoning_demand: null
+  safety_criticality: null
+  task_taxonomy: []
+  tool_composition: null
+  tool_interface: []
+  workflow_depth: null
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: null
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: null
+  sample_types: []
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models: []
+  multi_agent: null
+  planner: null
+  rag_or_memory: null
+  tools: []
+  verifier_or_self_debug: null
+  vision_used: null
+transfer_relevant_findings:
+- A benchmark schema should carry per-item difficulty and discrimination (or at least report their distribution)
+  so that a 53-task instrument suite can be judged for saturation and redundancy.
+- High guessing rate is a contamination signal usable for physical-task benchmarks whose prompts leak online.
+- Fewer, well-discriminating items can preserve ranking -- relevant when physical experiments are expensive.
+limitations:
+- Requires a response matrix over many models; with few evaluated agents item parameters are unstable (see jiang_2026_trust_irt).
+related:
+- trust_irt
+- xrm_agent_benchmarks
+notes: |
+  arXiv/AAAI OJS blocked. Abstract verified verbatim from arXiv-daily mirrors; scale (11 benchmarks, 41,871 items, 12 LLMs, OpenCompass source) and the four item parameters from the official README (Joe-Hall-Lee/PSN-IRT). AAAI proceedings entry: ojs.aaai.org article 40814. Kendall-tau and accuracy figures come from a third-party paper note (zhaoyang97/Paper-Notes).
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2505.15055
+  - https://github.com/Joe-Hall-Lee/PSN-IRT
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

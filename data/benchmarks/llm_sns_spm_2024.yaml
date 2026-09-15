@@ -1,0 +1,101 @@
+id: llm_sns_spm_2024
+record_type: system
+name: 'Leveraging Large Language Models and Social Media for Automation in Scanning Probe Microscopy (journal title:
+  Leveraging large language model and social network service for automation in scanning probe microscopy)'
+short_name: null
+year: 2024
+venue: arXiv (May 2024); Measurement Science and Technology (IOP), March 2025
+authors_short: Diao et al. (author list not verified this session; Osaka University group)
+arxiv: '2405.15490'
+doi: 10.1088/1361-6501/adbf3a
+url: https://arxiv.org/abs/2405.15490
+code_url: null
+data_url: null
+license: null
+status: published
+summary: |
+  Builds an automated SPM measurement system in which an LLM interprets user commands received through a social-networking front end (a Slack app accepting text or audio in multiple languages) and a back-end embedded system executes the corresponding SPM operations, enabling real-time, language-agnostic remote control. Presented as a system demonstration toward self-driving labs rather than a quantitative benchmark.
+benchmark_features:
+  agents_evaluated:
+  - LLM command interpreter (model name not verified; described as an 'advanced large language model')
+  evaluation_target:
+  - instrument_control
+  execution_mode: physical_instrument
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results: []
+  holdout_or_split_design: null
+  instruments:
+  - name: scanning probe microscope (type/vendor not verified)
+    modality: microscopy
+    real_or_simulated: real
+  leakage_or_contamination_risk: Not applicable (no benchmark).
+  metric_types:
+  - other
+  n_agent_configs: 1
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: false
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: Illustrative command examples.
+  scientific_domains:
+  - scanning probe microscopy
+  - laboratory automation
+  scoring_granularity: mixed
+  target_population: Remote natural-language (text/voice, multilingual) command of an SPM by non-expert users.
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: none
+  quantitative_tolerance: null
+  reasoning_demand: low
+  safety_criticality: low
+  task_taxonomy: []
+  tool_composition: Slack front end -> LLM command parsing -> embedded back end -> SPM operations.
+  tool_interface:
+  - natural_language
+  - rest_api
+  workflow_depth: single_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Real SPM controlled via an embedded back end receiving parsed commands from a Slack-based
+    LLM front end.
+  injected_faults: null
+  novelty_control: None.
+  sample_real_or_simulated: real
+  sample_types: []
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models: []
+  multi_agent: false
+  planner: none
+  rag_or_memory: null
+  tools:
+  - Slack web app
+  - SPM back-end command executor
+  verifier_or_self_debug: none
+  vision_used: null
+transfer_relevant_findings:
+- Shows language-agnostic, multimodal (text/audio) command ingestion is feasible for SPM; no robustness or accuracy
+  statistics reported in the abstract.
+limitations:
+- Demonstration, not benchmark; no quantitative evaluation surfaced.
+related:
+- afmbench
+- domain_slm_spm_2026
+notes: |
+  Demonstration, not benchmark. Only the abstract (via search snippets) was accessible; author names, LLM identity, SPM model and any success statistics could not be verified. The AFMBench paper cites this work.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2405.15490
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

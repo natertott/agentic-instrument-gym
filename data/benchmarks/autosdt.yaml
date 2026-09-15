@@ -1,0 +1,106 @@
+id: autosdt
+record_type: benchmark
+name: 'AutoSDT: Scaling Data-Driven Discovery Tasks Toward Open Co-Scientists'
+short_name: AutoSDT
+year: 2025
+venue: EMNLP 2025 (main); arXiv Jun 2025
+authors_short: Yifei Li et al. (OSU NLP Group)
+arxiv: '2506.08140'
+doi: null
+url: https://arxiv.org/abs/2506.08140
+code_url: https://github.com/OSU-NLP-Group/AutoSDT
+data_url: https://huggingface.co/datasets/osunlp/AutoSDT-5K
+license: null
+status: published
+summary: |
+  Brief follow-up entry (training-data companion to ScienceAgentBench rather than a new benchmark). AutoSDT is an automatic Search-Select-Adapt pipeline that mines GitHub for ecologically valid data-driven discovery programs and synthesizes task instructions and solutions, yielding AutoSDT-5K (5,404 tasks in the same four SAB disciplines). Expert review of 256 tasks found 93% ecologically valid and 92.2% functionally correct. Fine-tuning Qwen2.5-Coder-32B-Instruct on it (AutoSDT-Coder-32B) reaches 7.8% SR on ScienceAgentBench, matching GPT-4o (2024-05-13) and doubling the base model, and lifts DiscoveryBench HMS to 8.1.
+benchmark_features:
+  agents_evaluated:
+  - AutoSDT-Coder (Qwen2.5-Coder-Instruct 7B/14B/32B fine-tunes)
+  - GPT-4o reference
+  evaluation_target:
+  - code_generation
+  - data_analysis
+  execution_mode: static_code_eval
+  has_abstention_eval: false
+  has_human_baseline: false
+  has_safety_eval: false
+  headline_results:
+  - 'AutoSDT-Coder-32B: 7.8% SR on ScienceAgentBench (= GPT-4o 2024-05-13), 2x base model; DiscoveryBench HMS 8.1
+    (+17.4% relative)'
+  holdout_or_split_design: Training set only; evaluated on SAB and DiscoveryBench
+  instruments: []
+  leakage_or_contamination_risk: Mined from public GitHub; overlap with SAB source repositories must be controlled
+    (paper details not verified)
+  metric_types:
+  - success_rate
+  - other
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: 4
+  n_tasks: 5404
+  open_source: true
+  primary_metric: Downstream SAB success rate and DiscoveryBench HMS of fine-tuned models
+  repetitions_per_task: null
+  sampling_strategy: LLM-driven keyword search of repositories, program selection/verification, dependency localization
+    and code adaptation; expert audit of a 256-task subset
+  scientific_domains:
+  - bioinformatics
+  - computational chemistry
+  - geographical information science
+  - psychology & cognitive neuroscience
+  scoring_granularity: mixed
+  target_population: Training distribution for SAB-style co-scientist coding tasks
+  task_source: synthetic_generated
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: mixed
+  quantitative_tolerance: Inherits SAB/DiscoveryBench evaluation
+  reasoning_demand: high
+  safety_criticality: none
+  task_taxonomy: []
+  tool_composition: Same self-contained Python program format as SAB
+  tool_interface:
+  - python_api
+  workflow_depth: multi_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Standalone executable programs with located dependency folders
+  injected_faults: false
+  novelty_control: null
+  sample_real_or_simulated: dataset
+  sample_types:
+  - real scientific datasets bundled from source repositories
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models:
+  - Qwen2.5-Coder-Instruct (7B/14B/32B)
+  - GPT-4o
+  multi_agent: false
+  planner: none
+  rag_or_memory: none
+  tools: []
+  verifier_or_self_debug: none
+  vision_used: false
+transfer_relevant_findings:
+- In-distribution synthetic tasks transfer to SAB and DiscoveryBench, closing much of the open-weight vs GPT-4o
+  gap
+limitations:
+- Dataset, not a benchmark; 7.8% absolute SR remains low
+related:
+- scienceagentbench
+- discoverybench
+notes: 'Repo-verified: pipeline steps, 5,404 tasks, 7.8% claim, HF dataset link. Search-snippet: EMNLP 2025, 93%/92.2%
+  expert audit figures, HMS 8.1.'
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2506.08140
+  - https://github.com/OSU-NLP-Group/AutoSDT
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

@@ -1,0 +1,104 @@
+id: sdl_review_2026
+record_type: survey
+name: The past, present and future of self-driving laboratories
+short_name: SDL past/present/future (Canty & Abolhasani)
+year: 2026
+venue: Nature Reviews Chemistry 10:523-537 (published 31 Jul 2026)
+authors_short: Canty & Abolhasani
+arxiv: null
+doi: 10.1038/s41570-026-00847-2
+url: https://www.nature.com/articles/s41570-026-00847-2
+code_url: null
+data_url: null
+license: null
+status: published
+summary: |
+  Review tracing a decade of SDLs from narrowly focused automation tools to multipurpose discovery platforms in which algorithms propose, execute and interpret experiments with limited human intervention. Frames the next phase around three interdependent requirements -- scalability, generalizability and provenance-complete experimentation -- as prerequisites for SDLs that reliably scale throughput and transfer workflows and learned models across laboratories toward 'collective scientific superintelligence'.
+schema_axes_proposed:
+- Scalability (reliably scaling throughput; physical/agent extensibility; remote and distributed operation)
+- Generalizability (transfer of workflows and learned models across laboratories; device and protocol abstraction)
+- Provenance-complete experimentation (comprehensive structured (meta)data; interoperable data and metadata standards;
+  ontology integration)
+- Modular hardware
+- Trustworthy AI agents that reason under uncertainty within rigorous safety and ethical bounds
+- Cross-lab transferability / SDLs as shared scientific infrastructure (vs 'faster silos')
+benchmark_features:
+  agents_evaluated: []
+  evaluation_target: []
+  execution_mode: null
+  has_abstention_eval: null
+  has_human_baseline: null
+  has_safety_eval: null
+  headline_results: []
+  holdout_or_split_design: null
+  instruments: []
+  leakage_or_contamination_risk: null
+  metric_types: []
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: null
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - chemistry
+  - materials science
+  scoring_granularity: null
+  target_population: null
+  task_source: null
+task_features:
+  closed_loop_feedback: null
+  perceptual_demand: null
+  quantitative_tolerance: null
+  reasoning_demand: null
+  safety_criticality: null
+  task_taxonomy: []
+  tool_composition: null
+  tool_interface: []
+  workflow_depth: null
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: null
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: null
+  sample_types: []
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models: []
+  multi_agent: null
+  planner: null
+  rag_or_memory: null
+  tools: []
+  verifier_or_self_debug: null
+  vision_used: null
+transfer_relevant_findings:
+- Generalizability is framed as cross-laboratory transfer of workflows AND learned models -- an agent benchmark
+  should test transfer across instruments/labs, not just across tasks on one rig.
+- Provenance completeness (structured metadata sufficient to reconstruct an experiment) is elevated to a first-class
+  requirement, implying benchmarks should score trace/log completeness.
+- Trustworthy reasoning under uncertainty within safety/ethical bounds is named as a requirement for AI agents in
+  SDLs.
+limitations:
+- Review; no quantitative metric definitions verified.
+- Only abstract-level content was accessible; detailed requirement definitions (Table 1, eras) rest on secondary
+  sources.
+related:
+- sdl_performance_metrics
+- safe_sdls
+- agent_generalizability_survey
+notes: |
+  nature.com blocked. Abstract-level facts (three requirements, 'collective scientific superintelligence', volume/pages) come from the WebSearch snippet of the Nature page plus a GitHub news digest (Supwils/swil-news). A third-party visualization repo (yetiswang/sdl-map) reports the review's framing as eras 2014-2019 / 2020-2023 / 2024-present and axes G=generalizability, S=scalability, D=comprehensive structured (meta)data with a Table 1 of milestone platforms (ARES OS, Chemputer, Mobile Robot Chemist, Coscientist, MINERVA) -- secondary, unverified. Exact wording of 'trustworthy reasoning' requirement not verified.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://www.nature.com/articles/s41570-026-00847-2
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

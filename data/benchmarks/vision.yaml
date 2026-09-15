@@ -1,0 +1,136 @@
+id: vision
+record_type: system
+name: 'VISION: A Modular AI Assistant for Natural Human-Instrument Interaction at Scientific User Facilities'
+short_name: VISION
+year: 2025
+venue: 'Machine Learning: Science and Technology 6(2) 025051 (2025); arXiv Dec 2024'
+authors_short: Mathur et al.
+arxiv: '2412.18161'
+doi: 10.1088/2632-2153/add9e4
+url: https://arxiv.org/abs/2412.18161
+code_url: https://github.com/CFN-softbio/VISION
+data_url: https://github.com/CFN-softbio/VISION/tree/main/backend/tests/datasets
+license: null
+status: published
+summary: |
+  VISION (Virtual Scientific Companion) is a modular LLM-based assistant deployed at the NSLS-II 11-BM CMS X-ray scattering beamline. It chains "cognitive blocks" (cogs) for transcription, intent classification, beamline-code generation (Op), data analysis (Ana), refinement and scientific Q&A, executing generated Bluesky code on the beamline workstation; it demonstrated the first voice-controlled experiment at an X-ray scattering beamline. It is a system paper, but the repository ships per-cog test datasets (classifier, op, ana, voice) that later became the EnvTrace benchmark.
+benchmark_features:
+  agents_evaluated:
+  - Claude (default in public repo)
+  - GPT-4o
+  - Ollama open models (e.g.
+  - qwen2
+  - mistral)
+  evaluation_target:
+  - instrument_control
+  - code_generation
+  - question_answering
+  - data_analysis
+  execution_mode: hybrid
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results:
+  - First voice-controlled experiment at an X-ray scattering beamline; LLM-based operation on the beamline workstation
+    'with low latency' (abstract)
+  - Quantitative per-cog accuracy/latency numbers from the paper could not be verified in this session
+  holdout_or_split_design: null
+  instruments:
+  - name: NSLS-II 11-BM CMS (Complex Materials Scattering) beamline, Bluesky-controlled
+    modality: synchrotron
+    real_or_simulated: real
+  leakage_or_contamination_risk: Datasets public on GitHub; facility-specific API reduces pretraining overlap
+  metric_types:
+  - success_rate
+  - other
+  - time
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: 4
+  n_tasks: null
+  open_source: true
+  primary_metric: 'Per-cog accuracy (classifier: exact-match accuracy and weighted F1; Op: exact match / CodeBLEU
+    / Levenshtein and later PV-trace match); latency per call'
+  repetitions_per_task: null
+  sampling_strategy: Beamline-scientist-written command/expected-output pairs per cog (classifier_cog_dataset.json,
+    op_cog_dataset.json, ana_cog_dataset.json, voice_cog_dataset.json)
+  scientific_domains:
+  - synchrotron X-ray scattering
+  - soft matter
+  - beamline operations
+  scoring_granularity: mixed
+  target_population: 'Natural-language (voice or text) requests from beamline users: operate the instrument, add
+    custom functions, analyze data, ask domain questions'
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: none
+  quantitative_tolerance: null
+  reasoning_demand: mixed
+  safety_criticality: medium
+  task_taxonomy:
+  - beamline operation (Op)
+  - data analysis (Ana)
+  - custom function addition
+  - domain-specific chatbot
+  tool_composition: Voice -> Whisper transcription -> classifier cog routes to Op (code gen), Ana (analysis), Refine,
+    GPCAM/XICAM or chatbot cog; generated Python executed via Bluesky on the workstation
+  tool_interface:
+  - natural_language
+  - python_api
+  workflow_depth: mixed
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Frontend GUI on beamline workstation; backend LLM processing on the 'HAL' server; Bluesky
+    execution; optional beamline simulator (EPICS IOCs in Docker) for testing
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: real
+  sample_types:
+  - thin films and soft-matter samples at CMS (as referenced in prompts)
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: some
+  models:
+  - Claude 3.5 Sonnet and later Claude models
+  - GPT-4o
+  - Whisper large-v2/v3 (ASR)
+  - Ollama models (mistral
+  - qwen2
+  - qwen2.5-coder
+  - llama3.3
+  - etc.)
+  multi_agent: true
+  planner: none
+  rag_or_memory: some
+  tools:
+  - Bluesky beamline API
+  - SciAnalysis-style analysis code
+  - gpCAM
+  - Xi-cam
+  verifier_or_self_debug: external_verifier
+  vision_used: false
+transfer_relevant_findings:
+- Modular cog design lets models be swapped as they improve; classification-then-specialist routing keeps prompts
+  small and latency low
+- The system's test datasets seeded a later execution-trace benchmark (EnvTrace), showing how a deployed assistant
+  can be turned into a benchmark
+limitations:
+- System/demo paper; evaluation is per-component and not a standardized benchmark
+- Single beamline and facility-specific API
+related:
+- envtrace
+- lightfall
+notes: |
+  Cog names (VOICE, CLASSIFIER, OP, ANA, REFINE, GPCAM, XICAM, VERIFIER) and model lists come from the public repo (backend/src/hal_beam_com/utils.py). arXiv and IOP pages were blocked, so the paper's reported accuracy/latency figures, number of test prompts, and whether a human baseline exists are unverified (null). License file not seen in repo listing. Journal citation from repo README BibTeX. Authors: Shray Mathur, Noah van der Vleuten, Kevin G. Yager, Esther H. R. Tsai.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2412.18161
+  - https://github.com/CFN-softbio/VISION
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

@@ -1,0 +1,115 @@
+id: benchmarking_sdls
+record_type: framework
+name: Benchmarking self-driving labs
+short_name: AF/EF SDL benchmarking
+year: 2026
+venue: Digital Discovery 5:14-27 (2026); arXiv preprint Aug 2025
+authors_short: Adesiji et al. (Adesiji, Wang, Kuo, Brown)
+arxiv: '2508.06642'
+doi: 10.1039/D5DD00337G
+url: https://arxiv.org/abs/2508.06642
+code_url: https://github.com/kabrownlab/benchmarking
+data_url: https://github.com/kabrownlab/benchmarking
+license: MIT (code repo)
+status: published
+summary: |
+  Review that quantifies how much SDLs accelerate learning by reducing the number of experiments needed for a goal. Formalizes two metrics -- acceleration factor (AF: how much faster an algorithm reaches a goal than a reference strategy) and enhancement factor (EF: how much better the result is at a fixed budget) -- surveys reported values (AF median 6, tending to increase with dimensionality; EF varies by >2 orders of magnitude but consistently peaks at 10-20 experiments per dimension), and runs simulated Bayesian-optimization campaigns showing EF depends on the statistical properties of the parameter space while AF depends on its complexity.
+schema_axes_proposed:
+- 'Acceleration factor (AF): ratio of experiments required by a reference strategy (e.g. random/grid) vs the SDL
+  algorithm to reach a goal'
+- 'Enhancement factor (EF): improvement in best-found objective relative to the reference strategy at equal experiment
+  count'
+- Reference strategy / baseline must be declared (random sampling as default control)
+- Dimensionality of the parameter space (AF rises with dimension -- 'blessing of dimensionality')
+- Experiments-per-dimension budget (EF peaks at 10-20 experiments per dimension)
+- 'Statistical properties of the objective landscape: contrast (peak-to-median ratio), smoothness/Lipschitz constant,
+  noise level (repo''s simulated study varies these)'
+- 'Repetition protocol for stochastic optimizers (repo: 100 runs x 100 steps per test function; reports peak EF
+  and step-to-peak)'
+benchmark_features:
+  agents_evaluated:
+  - Bayesian optimization (BoTorch/GPyTorch)
+  - random search
+  evaluation_target: []
+  execution_mode: simulator
+  has_abstention_eval: false
+  has_human_baseline: false
+  has_safety_eval: false
+  headline_results:
+  - Literature AF median = 6; AF tends to increase with dimensionality
+  - Reported EF values span >2 orders of magnitude, peaking at 10-20 experiments per dimension
+  - 'Simulations: EF depends on statistical properties of the space (contrast, smoothness, noise); AF depends on
+    its complexity'
+  holdout_or_split_design: null
+  instruments: []
+  leakage_or_contamination_risk: null
+  metric_types: []
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: 3
+  n_tasks: null
+  open_source: true
+  primary_metric: acceleration factor (AF)
+  repetitions_per_task: 100 runs per function, 100 steps per run (code repo)
+  sampling_strategy: null
+  scientific_domains:
+  - materials science
+  - chemistry
+  scoring_granularity: null
+  target_population: SDL optimization campaigns
+  task_source: null
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: null
+  quantitative_tolerance: null
+  reasoning_demand: null
+  safety_criticality: null
+  task_taxonomy: []
+  tool_composition: null
+  tool_interface: []
+  workflow_depth: null
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Synthetic 2D Gaussian objective functions with tunable contrast, Lipschitz constant and
+    noise.
+  injected_faults: false
+  novelty_control: null
+  sample_real_or_simulated: simulated
+  sample_types: []
+  signal_quality_variation: Gaussian noise perturbations (sigma = 0.05, 0.10)
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models: []
+  multi_agent: false
+  planner: null
+  rag_or_memory: null
+  tools: []
+  verifier_or_self_debug: null
+  vision_used: null
+transfer_relevant_findings:
+- Any acceleration claim must name its reference strategy; AF/EF give a common language for comparing agents that
+  choose experiments.
+- Landscape statistics (contrast, smoothness, noise) confound comparisons -- benchmark schemas should record them
+  as environment features.
+- Because gains scale with dimension and budget, report experiments-per-dimension alongside raw counts.
+limitations:
+- Metrics measure the decision algorithm's sample efficiency, not hardware reliability, safety, or provenance.
+- Simulation study is 2D and synthetic; literature AF/EF values come from heterogeneous baselines.
+- Third-party note claims most surveyed SDL studies ignore manufacturability/cost/durability constraints (secondary,
+  unverified).
+related:
+- sdl_performance_metrics
+- agentic_sdl_soft_matter_taxonomy
+notes: |
+  RSC and arXiv pages blocked. Abstract verified verbatim from an arXiv RSS mirror in GitHub (ehijano/rss_fetch). Journal citation and DOI verified only via third-party citations (e.g. Caesiumatic/CombHTS, Kopachelli/arxiv-frontier). The code repo (kabrownlab/benchmarking, 'Data and code related to benchmarking self-driving labs') README does not name the paper explicitly; its contents (EF curves, contrast/Lipschitz/noise series) match the abstract. Formal AF/EF equations and any explicit reporting checklist could not be read; 'recommendations' above are limited to what the abstract and repo support.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2508.06642
+  - https://github.com/kabrownlab/benchmarking
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

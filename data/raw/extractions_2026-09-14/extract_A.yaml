@@ -1,0 +1,915 @@
+# extract_A.yaml -- benchmark records (batch A)
+# Provenance note (applies to every record): in this session arxiv.org, openreview.net, huggingface.co,
+# aclanthology.org, alphaxiv, semanticscholar and all publisher sites were blocked by the egress proxy.
+# Facts were verified against (i) GitHub repositories fetched directly (README, LICENSE, docs, configs, task
+# files, project-site sources) -- these are marked "repo-verified" -- and (ii) WebSearch result snippets that
+# quote the arXiv abstract/HTML pages -- marked "search-snippet". Anything that could not be confirmed from
+# either source is null with a note.
+
+id: scienceagentbench
+name: "ScienceAgentBench: Toward Rigorous Assessment of Language Agents for Data-Driven Scientific Discovery"
+short_name: SAB
+year: 2024
+venue: "ICLR 2025 (poster); arXiv preprint first posted Oct 2024 (v3 is the ICLR camera-ready)"
+authors_short: "Ziru Chen et al. (Ziru Chen*, Shijie Chen*, ..., Yu Su, Huan Sun; OSU / UW-Madison)"
+arxiv: "2410.05080"
+doi: null
+url: "https://arxiv.org/abs/2410.05080"
+code_url: "https://github.com/OSU-NLP-Group/ScienceAgentBench"
+data_url: "https://huggingface.co/datasets/osunlp/ScienceAgentBench (annotation sheet / agent inputs only); full benchmark (datasets, gold programs, eval programs, rubrics) is a password-protected zip linked from the README (password 'scienceagentbench'); 'benchmark_verified.zip' since 2026-04-30"
+license: "Code: MIT. Tasks: most under CC BY 4.0; tasks adapted from rasterio (instances 32, 46, 53, 54, 84) and matminer (instance 3) keep their original licenses (repo-verified)"
+status: published
+summary: >
+  ScienceAgentBench evaluates LLM-based language agents on 102 individual tasks from real data-driven
+  scientific discovery workflows, extracted from 44 peer-reviewed publications in bioinformatics, computational
+  chemistry, geographical information science, and psychology & cognitive neuroscience, and validated by nine
+  subject-matter experts. Every task is a code-generation problem: given a natural-language instruction, a
+  dataset (directory listing + preview) and optional expert-provided knowledge, the agent must write a
+  self-contained Python program whose execution output is checked by task-specific evaluation scripts, with
+  GPT-4o used to judge figure outputs against rubrics. The best agent (Claude-3.5-Sonnet with self-debug)
+  solved only 32.4% of tasks independently and 34.3% with expert knowledge; o1-preview reached 42.2% at
+  roughly ten times the cost.
+benchmark_features:
+  evaluation_target: [code_generation, data_analysis]
+  execution_mode: static_code_eval
+  instruments: []
+  scientific_domains: ["Bioinformatics", "Computational Chemistry", "Geographical Information Science", "Psychology & Cognitive Neuroscience"]
+  n_tasks: 102
+  n_task_families: 4
+  n_instances_or_runs_reported: null
+  repetitions_per_task: "3 runs per task per agent configuration; calculate_metrics.py selects the best trajectory out of three runs before computing metrics (repo-verified; the paper reports best-of-3)"
+  target_population: "Essential, individually verifiable tasks (data processing, analysis, modeling, visualization) in real data-driven discovery workflows -- i.e. what a scientist 'co-pilot' would be asked to code -- rather than end-to-end discovery"
+  task_source: literature_derived
+  sampling_strategy: "Tasks adapted from open-source code released with 44 peer-reviewed publications across four disciplines; annotators (many with domain background) converted programs into self-contained tasks, then multiple rounds of manual validation by annotators and nine subject-matter experts (senior PhD students and professors). Distribution per discipline not verifiable here (arXiv blocked)."
+  metric_types: [success_rate, rubric, llm_judge, cost, other]
+  primary_metric: "Success Rate (SR): fraction of tasks whose generated program executes and whose output satisfies the task-specific success criteria (best of 3 runs)"
+  scoring_granularity: mixed
+  has_human_baseline: false
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: "Single evaluation set of 102 tasks; no training split. Since 2026-04-30 the HF dataset carries a 'verified' split (repo-verified) whose exact content could not be inspected here."
+  leakage_or_contamination_risk: "Tasks derive from public repositories, so memorization is a real concern. Two mitigations (search-snippet quoting paper): (1) five data points are randomly removed from each test set so programs relying on memorized automatic data loaders produce misaligned results; (2) for model-development tasks, datasets are re-split and test labels replaced by dummy values (e.g. -1) so agents cannot shortcut by reading ground-truth labels. Full benchmark is distributed as a password-protected archive and redistribution is prohibited to limit crawling. BenchGuard (arXiv 2604.24955) later reported author-confirmed benchmark defects, and the authors released a 'verified' version on 2026-04-30 to mitigate false negatives (repo-verified)."
+  agents_evaluated: ["Direct prompting", "Self-debug", "OpenHands CodeAct", "each run with: Claude-3.5-Sonnet, GPT-4o, Llama-3.1-Instruct-405B, Mistral-Large-2 (2407), and one more open-weight LLM (paper says five LLMs; fifth not verifiable here)", "OpenAI o1-preview (self-debug, added in v2/v3)"]
+  n_agent_configs: null
+  headline_results:
+    - "Best agent (Claude-3.5-Sonnet, self-debug) solved 32.4% of tasks independently and 34.3% with expert-provided knowledge (best of 3 runs)"
+    - "OpenAI o1-preview with self-debug solved 42.2% but at roughly 10x the API cost"
+    - "Direct prompting is poor (16.7% SR for Claude-3.5-Sonnet); self-debug roughly doubles SR"
+    - "Self-debug outperformed OpenHands CodeAct for 4 of the 5 LLMs"
+    - "Over 75% of successfully solved tasks had shorter-than-average gold programs (avg 58.6 lines); longer programs mostly failed (search-snippet)"
+    - "Later external result: OpenAI o3 (medium) 33.3% on SAB self-debug at $11.69 total cost (HAL leaderboard via search-snippet; unverified primary)"
+  open_source: true
+task_features:
+  workflow_depth: multi_step
+  perceptual_demand: mixed
+  reasoning_demand: high
+  tool_interface: [python_api, cli]
+  tool_composition: "Agent must chain domain libraries (e.g. DeepChem, RDKit, GeoPandas, rasterio, BioPsyKit, MNE, scikit-learn, PyTorch) inside one Python file; self-debug agents may execute code and read tracebacks; OpenHands CodeAct uses a sandboxed bash/Python runtime"
+  quantitative_tolerance: "Task-specific evaluation programs compare outputs (CSV predictions, numeric results, saved models, figures) against gold outputs; numeric tasks use task-defined criteria (e.g. metric thresholds relative to gold program); figures are judged by GPT-4o against fine-grained rubrics (five stages: Data Loading, Data Processing, Modeling/Visualization, Output Formatting, Output Saving). Exact tolerance values per task are in eval_programs (not inspected)."
+  closed_loop_feedback: false
+  safety_criticality: none
+  task_taxonomy: ["Sub-task types (paper Fig. 1): data loading/processing, feature analysis, modeling (training/prediction), molecular visualization, geospatial mapping, time-series analysis, statistical analysis, visualization", "Disciplines: Bioinformatics; Computational Chemistry; Geographical Information Science; Psychology & Cognitive Neuroscience"]
+sample_environment_features:
+  sample_types: ["cell microscopy images (e.g. BBBC002 Drosophila KC167 TIFFs)", "molecular datasets (SDF, SMILES; ClinTox, Tetrahymena toxicity)", "geospatial rasters and shapefiles (GeoTIFF elevation, building footprints, animal GPS tracks)", "physiological time series (EEG Muse CSV, respiration signals)", "genomic/sequence and tabular scientific data"]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: "Real published datasets with their native heterogeneity; no controlled noise injection"
+  novelty_control: "Datasets are perturbed (5 test rows removed; re-split with dummy test labels) so memorized loaders/labels fail; otherwise tasks are public-paper-derived"
+  calibration_or_api_state_variation: null
+  injected_faults: false
+  environment_description: "Local Python execution; each task has its own dependency set. Since Jan 2025 a SWE-bench-style dockerized harness builds per-task containers and evaluates all 102 tasks in 20-30 min with 8 threads; the authors report 100% (102/102) agreement with the original conda-based evaluation (repo-verified)."
+agent_features_evaluated:
+  models: ["Claude-3.5-Sonnet", "GPT-4o", "Llama-3.1-Instruct-405B", "Mistral-Large-2 (2407)", "OpenAI o1-preview", "(fifth base LLM unverified)"]
+  vision_used: false
+  rag_or_memory: none
+  planner: varied
+  tools: ["Python interpreter (self-debug loop)", "OpenHands sandbox (bash + IPython + file editing)"]
+  verifier_or_self_debug: varied
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: false
+transfer_relevant_findings:
+  - "Expert-provided knowledge helps only modestly (32.4% -> 34.3% for the best agent) and can hurt some agents that misuse the hints (paper analysis; search-snippet)"
+  - "Large variance across runs motivates best-of-3 reporting; the README explicitly supports changing the number of runs"
+  - "Agentic scaffolding matters more than base model: self-debug beats a heavier OpenHands CodeAct scaffold for 4/5 LLMs while being far cheaper"
+  - "Failures concentrate in data loading/processing of heterogeneous scientific formats and in incorrect use of specialized libraries (GeoPandas, BioPsyKit); bioinformatics and computational chemistry tasks hardest"
+  - "Contamination mitigations (row removal, dummy labels) are needed because agents were observed to take shortcuts such as reading test labels"
+  - "Follow-up AutoSDT (EMNLP 2025) shows fine-tuning Qwen2.5-Coder-32B on 5,404 auto-collected tasks lifts SAB SR to 7.8%, matching GPT-4o (2024-05-13) -- open-weight gap is closable with in-distribution data"
+limitations:
+  - "Only 102 tasks; single evaluation split; per-discipline counts are small so discipline-level comparisons are noisy"
+  - "No human baseline; success criteria and rubrics are author-defined and GPT-4o acts as figure judge"
+  - "Benchmark defects (false negatives) were later confirmed (BenchGuard) leading to a 'verified' re-release in April 2026; pre-2026 numbers may under-count successes"
+  - "No instrument control, no closed-loop interaction with an environment; purely code generation over static datasets"
+  - "Full data distributed via a password-protected SharePoint archive rather than an open mirror"
+related: [discoverybench, scienceboard, autosdt, sciagentbench, sciraplicate_bench, researchcodebench, discoveryworld]
+notes: >
+  Verified from GitHub (README, LICENSE, docs/20250110_docker, project-site source in gh-pages): task count, source
+  count, expert count, disciplines, metrics names, frameworks, three-run best-of selection, licensing, docker
+  harness, update timeline (2024-10-24 o1 results added; 2024-10-31 OpenHands integration; 2025-01-10 docker;
+  2026-04-30 verified release). Headline percentages (32.4/34.3/42.2/16.7), contamination strategies, rubric
+  stages and per-framework comparisons come from search snippets quoting the arXiv abstract/HTML and could not be
+  re-read on arxiv.org. Not verifiable here: exact per-discipline task counts, the fifth base LLM name, n_agent_configs,
+  human-rubric agreement statistics, and the HF split structure of the verified release. DOI: none (ICLR/OpenReview
+  id 6z4YKr0GK6).
+---
+id: discoveryworld
+name: "DiscoveryWorld: A Virtual Environment for Developing and Evaluating Automated Scientific Discovery Agents"
+short_name: DiscoveryWorld
+year: 2024
+venue: "NeurIPS 2024 Datasets and Benchmarks Track (Spotlight)"
+authors_short: "Peter Jansen et al. (Allen Institute for AI / University of Arizona)"
+arxiv: "2406.06769"
+doi: null
+url: "https://arxiv.org/abs/2406.06769"
+code_url: "https://github.com/allenai/discoveryworld"
+data_url: "Agent and human run logs/videos on Google Drive, linked from https://github.com/allenai/discoveryworld/tree/main/data"
+license: "Apache-2.0 for code (repo LICENSE.txt); CuteRPG art assets by PixyMoon carry separate licensing"
+status: published
+summary: >
+  DiscoveryWorld is a turn-based 2D simulated environment (text/JSON observations with an optional 16x24-tile
+  image) in which an agent must run complete cycles of scientific discovery -- form hypotheses, use virtual
+  instruments to collect measurements, analyse data, and act on conclusions. It contains 120 benchmark tasks
+  (8 discovery themes x 3 difficulty levels x 5 parametric seeds) plus 10 'small skills' unit tests, scored by
+  binary task completion, a normalized procedural-progress scorecard, and LLM-judged recovery of explanatory
+  knowledge. GPT-4o-based ReAct, Plan+Execute and Hypothesizer agents complete far fewer tasks than 11 human
+  scientists (e.g. ReAct 38% of easy and 18% of challenge tasks vs. a 66% average human completion rate).
+benchmark_features:
+  evaluation_target: [simulation_control, instrument_control, protocol_planning, data_analysis]
+  execution_mode: simulator
+  instruments:
+    - {name: "Spectrometer", modality: spectroscopy, real_or_simulated: simulated}
+    - {name: "Microscope", modality: microscopy, real_or_simulated: simulated}
+    - {name: "Thermometer", modality: generic_lab, real_or_simulated: simulated}
+    - {name: "Densitometer", modality: generic_lab, real_or_simulated: simulated}
+    - {name: "pH meter", modality: generic_lab, real_or_simulated: simulated}
+    - {name: "NPK / soil nutrient meter", modality: generic_lab, real_or_simulated: simulated}
+    - {name: "Radiation meter", modality: generic_lab, real_or_simulated: simulated}
+    - {name: "Proteomics (protein) meter", modality: generic_lab, real_or_simulated: simulated}
+    - {name: "Radiocarbon meter / radioisotope meter", modality: generic_lab, real_or_simulated: simulated}
+    - {name: "Sampler, petri dish, counting computer, chemical dispenser, load cell, pendulum, rocket + launch monitor", modality: generic_lab, real_or_simulated: simulated}
+  scientific_domains: ["proteomics", "combinatorial chemistry", "archaeology / radioisotope dating", "plant biology (soil nutrients)", "reactor physics / materials", "linguistics (translation)", "epidemiology / medicine (Space Sick)", "rocket science / physics"]
+  n_tasks: 120
+  n_task_families: 8
+  n_instances_or_runs_reported: null
+  repetitions_per_task: "Official benchmarking runs each of the 24 theme x difficulty templates for seeds 0-4 (5 parametric variations) once per agent; Easy and unit tests capped at 100 steps, Normal/Challenge at 1000 steps (repo-verified, agents/README)"
+  target_population: "General scientific-discovery skills (hypothesis formation, experiment design, measurement, analysis) across diverse fictional-but-plausible topics, intended to test generality rather than task-specific solutions"
+  task_source: expert_curated
+  sampling_strategy: "Hand-designed by the authors: 8 discovery themes each with Easy/Normal/Challenge variants (24 templates); parametric generation (random seeds 0-4 vetted) varies object names, values and layouts. Paper suggests tasks 1-6 (Proteomics, Chemistry) for training, 7-12 (Archaeology, Reactor Lab) for dev, 13-24 (Plant Nutrients, Space Sick, Rocket Science, Translation) for test; unit tests all available for training (search-snippet)"
+  metric_types: [success_rate, partial_credit, llm_judge, rubric, human_eval, cost]
+  primary_metric: "Task completion (binary completedSuccessfully), reported alongside procedural progress (scoreNormalized 0-1) and discovery-knowledge accuracy (critical yes/no questions judged with GPT-4o)"
+  scoring_granularity: mixed
+  has_human_baseline: true
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: "Recommended theme-level split (train: Proteomics, Combinatorial Chemistry; dev: Archaeology, Reactor Lab; test: Plant Nutrients, Space Sick, Rocket Science, Lost in Translation); seeds >4 generate extra unvetted variations"
+  leakage_or_contamination_risk: "Fictional scenarios with parametric variation limit memorization; the paper and README note the paper contains task 'spoilers'. GPT-4o is both the agent backbone and the knowledge judge."
+  agents_evaluated: ["Random baseline", "ReAct (GPT-4o)", "Plan+Execute (GPT-4o)", "Hypothesizer (GPT-4o; explicit working memory of hypotheses and measurements, knowledge consolidation every 10 steps)"]
+  n_agent_configs: 4
+  headline_results:
+    - "Most performant agent (ReAct) completed only 38% of Easy tasks and 18% of Challenge tasks"
+    - "Hypothesizer, best at knowledge discovery, recovered 34% of gold explanatory knowledge on Easy tasks and 8% on Challenge tasks"
+    - "11 human scientists: 66% average task completion, 55% average knowledge score; 11 of 16 human-played tasks had completion rates above 60%"
+  open_source: true
+task_features:
+  workflow_depth: long_horizon
+  perceptual_demand: mixed
+  reasoning_demand: high
+  tool_interface: [python_api, natural_language]
+  tool_composition: "17 JSON action types (PICKUP, DROP, PUT, OPEN, CLOSE, ACTIVATE, DEACTIVATE, TALK, EAT, READ, USE, MOVE_DIRECTION, ROTATE_DIRECTION, TELEPORT_TO_LOCATION, TELEPORT_TO_OBJECT, DISCOVERY_FEED_GET_UPDATES, DISCOVERY_FEED_GET_POST_BY_ID) taking object UUIDs; instruments are used via USE(instrument, target); devices such as soil computers or crystal reactors are operated through dialog trees (repo-verified)"
+  quantitative_tolerance: "Instrument readouts are numeric; task success is determined by scenario-specific scorecards (e.g. correct flag placement, correct nutrient chosen), not by numeric tolerance on agent-reported values. Knowledge is scored via binary critical questions."
+  closed_loop_feedback: true
+  safety_criticality: none
+  task_taxonomy: ["Discovery themes: Proteomics; Combinatorial Chemistry; Archaeology Dating; Plant Nutrients; Reactor Lab; Lost in Translation; Space Sick; It's (not) Rocket Science!", "Unit tests (Small Skills): Dialog; Pick and Place; Pick and Give; Instrument Measurement; Doors; Doors with Keys; Navigation in a House; Search; Discovery Feed; Moving Agents", "Difficulties: Easy, Normal, Challenge"]
+sample_environment_features:
+  sample_types: ["simulated soil, plants, rocks, artifacts, chemicals, animals/NPCs, reactor crystals, rocket components on a 32x32 tile grid"]
+  sample_real_or_simulated: simulated
+  signal_quality_variation: "Parametric seeds vary hidden ground-truth values (e.g. which species is the outlier, correct nutrient); no explicit sensor noise model documented"
+  novelty_control: "Fictional worlds; 5 vetted seeds per template; theme-level train/dev/test recommendation"
+  calibration_or_api_state_variation: null
+  injected_faults: false
+  environment_description: "Gym-like Python API (loadScenario / getAgentObservation / performAgentAction / tick). Observations are JSON dicts (nearby & accessible objects with UUIDs, inventory, location, dialog state, DiscoveryFeed posts, last action result, task description) plus optional base64 images with/without grid. Scorecards expose completion, normalized progress, sub-goal list and critical questions (hidden from the agent). A GUI (scripts/userstudy.py) supports human play; full world-state logs and videos are exported."
+agent_features_evaluated:
+  models: ["gpt-4o (2024-05-13)"]
+  vision_used: mixed
+  rag_or_memory: varied
+  planner: varied
+  tools: ["environment actions only; Hypothesizer keeps a scientific working memory and consolidates it every 10 steps"]
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Large human-agent gap on the same tasks (66% vs <=38% completion) despite tasks being 'difficult but solvable' for domain experts"
+  - "Procedural progress scores are much higher than completion, i.e. agents perform many correct steps but fail to close the discovery loop"
+  - "Knowledge discovery lags task completion: agents can sometimes finish a task by brute force without articulating the explanatory mechanism (humans also did this, lowering their knowledge score to 55%)"
+  - "Iterative plan decomposition (Plan+Execute) and explicit hypothesis memory (Hypothesizer) change the failure profile but do not close the gap"
+  - "Repo errata: scorers for Lost in Translation and Rocket Science had bugs during the human study and were corrected post hoc; earlier knowledge scoring used a different scorecard key, so re-scoring released logs requires care"
+limitations:
+  - "Single backbone (GPT-4o) for all baseline agents; costs capped per run"
+  - "Only 5 seeds per template; some seeds >4 may generate unsolvable scenarios"
+  - "Knowledge scoring depends on GPT-4o as judge over agent notes/thought strings"
+  - "Simulated instruments return clean values; no noise, drift or calibration modelling"
+  - "Human study covered 16 of the tasks (Normal/Challenge, seed 1) with 11 participants"
+related: [scienceworld, discoverybench, scigym, scienceagentbench]
+notes: >
+  Repo-verified: venue, license, 8 themes + 10 unit tests, 3 difficulties, seeds 0-4, step caps (100/1000),
+  action list, observation format, three scorecard metrics, baseline agent names, data release and errata,
+  instrument classes (ScienceTools.py, ReactorLab.py, Archaeology.py). Search-snippet: 120 tasks / 24 templates,
+  human study size (11 scientists) and 66%/55% figures, ReAct 38%/18%, Hypothesizer 34%/8%, suggested split.
+  Not verifiable: DOI, n_instances_or_runs_reported, per-run cost figures, exact vision usage per agent in the paper.
+  OpenReview id cDYqckEt6d.
+---
+id: scienceworld
+name: "ScienceWorld: Is your Agent Smarter than a 5th Grader?"
+short_name: ScienceWorld
+year: 2022
+venue: "EMNLP 2022 (main conference), pp. 11279-11298; arXiv v1 Mar 2022, v2 Nov 2022"
+authors_short: "Ruoyao Wang et al. (Wang, Jansen, Côté, Ammanabrolu)"
+arxiv: "2203.07540"
+doi: "10.18653/v1/2022.emnlp-main.775"
+url: "https://aclanthology.org/2022.emnlp-main.775/"
+code_url: "https://github.com/allenai/ScienceWorld (PyPI: scienceworld; HF Space demo MarcCote/ScienceWorld)"
+data_url: "Environment generates tasks procedurally; no static dataset (playthrough transcripts at https://sciworld.apps.allenai.org/explore)"
+license: "Apache-2.0 (repo LICENSE)"
+status: published
+summary: >
+  ScienceWorld is a text-based interactive environment (Scala simulator with a Python py4j API) in which agents
+  carry out elementary-school science tasks -- boiling or melting substances, measuring melting points, building
+  circuits, testing conductivity, growing plants, mixing chemicals, classifying organisms, and running Mendelian
+  genetics experiments -- inside a simulated house with thermodynamic, electrical, chemical and biological
+  simulation engines. It defines 30 tasks across 10 curriculum topics with 7,207 parametric variations and scores
+  agents by a 0-1 progress score over gold sub-goals. Reinforcement-learning text agents (DRRN, KG-A2C, CALM) and
+  T5-based behaviour-cloning/decision-transformer agents all perform poorly; DRRN, the best, averaged only 0.17.
+benchmark_features:
+  evaluation_target: [simulation_control, protocol_planning, instrument_control]
+  execution_mode: simulator
+  instruments:
+    - {name: "Thermometer", modality: generic_lab, real_or_simulated: simulated}
+    - {name: "Stove, oven, freezer, blast furnace, Bunsen burner (heating/cooling devices)", modality: generic_lab, real_or_simulated: simulated}
+    - {name: "Electrical circuit components (batteries, wires, bulbs, switches, generators)", modality: generic_lab, real_or_simulated: simulated}
+    - {name: "Inclined planes, containers, seeds/flower pots, chemical mixtures", modality: generic_lab, real_or_simulated: simulated}
+  scientific_domains: ["elementary physical science (changes of state, thermometry, electricity, friction)", "life science (classification, plant growth, life spans, life stages, Mendelian genetics)", "chemistry (mixing, paint colours)"]
+  n_tasks: 30
+  n_task_families: 10
+  n_instances_or_runs_reported: null
+  repetitions_per_task: "Variations per task range from 10 to 1,386 (total 7,207, summed from the repo task table); paper evaluates agents over held-out variations (exact per-task evaluation counts not verifiable here)"
+  target_population: "Grounded scientific reasoning at the level of a standardized elementary (grade-5) science curriculum -- can an agent that knows the facts actually perform the experiment?"
+  task_source: expert_curated
+  sampling_strategy: "Author-designed tasks mirroring curriculum topics; each task parametrically varied (substances, objects, room layouts, target values) giving 7,207 variations; variations are partitioned into train/dev/test splits (proportions not verifiable here)"
+  metric_types: [partial_credit, success_rate]
+  primary_metric: "Task progress score (0-1, normalized over gold sub-goals) averaged over test variations; 1.0 = task completed"
+  scoring_granularity: partial
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: "Parametric variations of each task split into train / dev / test sets so evaluation uses unseen variations of seen task types"
+  leakage_or_contamination_risk: "Low for LLM pretraining at time of release (2022); later LLM-agent papers (e.g. SwiftSage, ReAct-style) use ScienceWorld heavily, so its gold trajectories and task descriptions are now widely available online"
+  agents_evaluated: ["DRRN", "KG-A2C", "CALM", "Behavior Cloning T5 (BC-T5)", "Text Decision Transformer T5 (TDT-T5)"]
+  n_agent_configs: 5
+  headline_results:
+    - "Best model (DRRN, 1.5M parameters) averaged a score of 0.17 across the 30 tasks"
+    - "Online RL agents (DRRN, KG-A2C) outperformed 11B-parameter T5 agents trained offline (CALM, BC-T5, TDT-T5), an inverse-scaling-style finding"
+  open_source: true
+task_features:
+  workflow_depth: long_horizon
+  perceptual_demand: structured_readout
+  reasoning_demand: high
+  tool_interface: [natural_language, python_api]
+  tool_composition: "Agent issues text commands from ~25 action templates combined with objects (up to ~200k valid action-object pairs per step per secondary source); tasks require chaining navigation, container/device manipulation, instrument reading and waiting for simulated processes"
+  quantitative_tolerance: "Numeric state (e.g. temperature, melting point, angle) is tracked by the simulator; sub-goals check states such as 'substance is boiling' or 'thermometer used on X' rather than agent-reported values with tolerances; measurement tasks require reporting the correct value/class"
+  closed_loop_feedback: true
+  safety_criticality: none
+  task_taxonomy: ["1 Matter (boil, melt, freeze, change-the-state-of-matter-of)", "2 Measurement (use-thermometer, measure-melting-point-known/unknown-substance)", "3 Electricity (power-component, power-component-renewable-vs-nonrenewable-energy, test-conductivity, test-conductivity-of-unknown-substances)", "4 Classification (find-living-thing, find-non-living-thing, find-plant, find-animal)", "5 Biology (grow-plant, grow-fruit)", "6 Chemistry (chemistry-mix, chemistry-mix-paint-secondary-color, chemistry-mix-paint-tertiary-color)", "7 Biology (lifespan-longest-lived, lifespan-shortest-lived, lifespan-longest-lived-then-shortest-lived)", "8 Biology (identify-life-stages-1, identify-life-stages-2)", "9 Forces (inclined-plane-determine-angle, inclined-plane-friction-named/unnamed-surfaces)", "10 Biology (mendelian-genetics-known-plant, mendelian-genetics-unknown-plant)"]
+sample_environment_features:
+  sample_types: ["simulated household/lab objects: substances (water, ice, metals, unknown substances), electrical components, plants and seeds, animals, paints, inclined-plane surfaces"]
+  sample_real_or_simulated: simulated
+  signal_quality_variation: "Deterministic simulation; unknown-substance variants hide identities so agents must measure. Version 1.3.0 (repo) made object enumeration deterministic, fixing stochastic simulation outcomes"
+  novelty_control: "Held-out parametric variations; 'unknown substance' and 'unnamed surface' task variants test generalization beyond memorized names"
+  calibration_or_api_state_variation: "Simplification presets (teleportAction, openDoors, selfWateringFlowerPots, noElectricalAction, openContainers) change environment affordances; README warns the 'easy' preset differs from the paper's Appendix B.5"
+  injected_faults: false
+  environment_description: "Ten interconnected locations (kitchen, workshop, greenhouse, etc.) with ~200 object types; simulation engines for thermodynamics, electrical circuits, chemistry and biological processes (plant growth, life cycles, genetics); text observations, valid-action enumeration and gold action sequences exposed through the Python API"
+agent_features_evaluated:
+  models: ["DRRN (RL)", "KG-A2C (RL)", "CALM (GPT-2 action generator + RL)", "T5-11B behaviour cloning", "T5-11B text decision transformer"]
+  vision_used: false
+  rag_or_memory: none
+  planner: none
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: true
+transfer_relevant_findings:
+  - "Model size did not translate into interactive competence: 11B T5 agents underperformed a 1.5M-parameter RL agent"
+  - "Parametric variation with held-out test variations is used explicitly to defeat memorization of layouts and object names"
+  - "Environment simplifications materially change difficulty; results are not comparable across presets"
+  - "Determinism fix in v1.3.0 can change physics trajectories and gold paths, so numbers across simulator versions may differ"
+limitations:
+  - "Text-only, elementary-level science; instruments are abstractions (e.g. a thermometer reading) rather than realistic devices"
+  - "Original baselines predate LLM agents; no human baseline reported despite the title's framing (could not verify)"
+  - "Progress scoring depends on hand-written sub-goal lists per task"
+related: [discoveryworld, scigym]
+notes: >
+  Repo-verified: title, venue, DOI, pages, license, 30-task table with variation counts (sum 7,207), simplification
+  presets, baseline agent repos, v1.3.0 determinism change. Search-snippet: 10 topic names, DRRN 0.17 average,
+  agent list, ~25 action templates / 10 locations / ~200 object types (from a secondary summary, unverified).
+  Not verifiable here: train/dev/test proportions of variations, per-task scores, human baseline (has_human_baseline
+  left null), DOI already given from ACL anthology citation in repo.
+---
+id: discoverybench
+name: "DiscoveryBench: Towards Data-Driven Discovery with Large Language Models"
+short_name: DiscoveryBench
+year: 2024
+venue: "ICLR 2025 (conference paper); arXiv preprint Jul 2024"
+authors_short: "Bodhisattwa Prasad Majumder et al. (Allen Institute for AI)"
+arxiv: "2407.01725"
+doi: null
+url: "https://arxiv.org/abs/2407.01725"
+code_url: "https://github.com/allenai/discoverybench"
+data_url: "https://huggingface.co/datasets/allenai/discoverybench (also in repo under discoverybench/real and discoverybench/synth)"
+license: "ODC Attribution License (ODC-By) per repo LICENSE"
+status: published
+summary: >
+  DiscoveryBench formalizes data-driven hypothesis search and verification: each task gives an agent one or more
+  datasets with metadata and a natural-language discovery goal, and the agent must analyse the data and state a
+  hypothesis (context, variables, relationship) that is compared to the gold hypothesis derived from a published
+  paper. It has 264 real tasks (DB-REAL; 25 train / 239 test) manually derived from workflows in over 20 papers
+  across six domains (sociology, biology, humanities, economics, engineering, meta-science) plus 903 synthetic
+  tasks (DB-SYNTH) for controlled complexity studies. Evaluation uses an LLM-judged Hypothesis Matching Score;
+  the best system (Reflexion with oracle feedback on GPT-4o) scores about 25%.
+benchmark_features:
+  evaluation_target: [data_analysis, code_generation, question_answering]
+  execution_mode: hybrid
+  instruments: []
+  scientific_domains: ["sociology", "biology", "humanities (incl. archaeology)", "economics", "engineering (requirements engineering for ML systems)", "meta-science (meta-regression)"]
+  n_tasks: 264
+  n_task_families: 6
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Real-world data-driven discovery tasks faced by researchers: from raw dataset(s) and a goal to a verified hypothesis, including data cleaning, statistical modelling and semantic interpretation"
+  task_source: mixed
+  sampling_strategy: "DB-REAL: authors manually extracted discovery goals, gold hypotheses and workflows from published papers with public data (e.g. NLS incarceration/SES/BMI, World Bank education-GDP, archaeology, invasive-plant introduction pathways, meta-regression, requirements engineering); 114 tasks require multiple datasets (up to 6). DB-SYNTH: LLM-generated hypotheses/datasets/workflows with systematic variation of complexity (repo has synth train/dev/test folders such as ancient-languages_0_3, astronomy_1_2 encoding complexity levels)"
+  metric_types: [llm_judge, partial_credit, other]
+  primary_metric: "Hypothesis Matching Score (HMS): LLM-judged alignment between predicted and gold hypotheses over context, variables and relationships, weighted by context F1"
+  scoring_granularity: continuous
+  has_human_baseline: false
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: "DB-REAL: 25 train / 239 test tasks; DB-SYNTH: train/dev/test folders (repo). Metadata files bundle several queries per dataset (repo: 144 real-test metadata files hold the 239 test queries)"
+  leakage_or_contamination_risk: "Gold hypotheses come from published papers, so LLMs may recall findings without analysing data; the paper includes a 'NoDataGuess' baseline that answers without opening the data to screen for such leakage"
+  agents_evaluated: ["CodeGen", "ReAct", "DataVoyager", "Reflexion (Oracle)", "NoDataGuess", "with GPT-4o, GPT-4-0125-preview, Llama-3-70B (repo also supports gpt-4-turbo, claude-3-opus, gemini-pro)"]
+  n_agent_configs: null
+  headline_results:
+    - "Best system scores only 25% HMS overall"
+    - "Reflexion (Oracle) + GPT-4o: 24.5% HMS on DB-REAL and 15.7% on DB-SYNTH; CodeGen, ReAct and DataVoyager between 5.7% and 16.3%"
+    - "Per-domain (DB-REAL): biology 0%, engineering 7%, sociology 23%, economics 25%"
+    - "Follow-up AutoSDT-Coder-32B raises HMS to 8.1 (17.4% relative gain) for an open-weight model"
+  open_source: true
+task_features:
+  workflow_depth: multi_step
+  perceptual_demand: structured_readout
+  reasoning_demand: high
+  tool_interface: [python_api, natural_language]
+  tool_composition: "Agents iteratively write and execute Python analysis code (pandas/statsmodels-style) over CSVs, then verbalize a hypothesis; optional flags add domain knowledge or workflow tags to the prompt (repo: --add_domain_knowledge, --add_workflow_tags)"
+  quantitative_tolerance: "No numeric tolerance; hypotheses are compared semantically (context/variables/relationship) by an LLM judge, so quantitative effect sizes are only assessed insofar as the judge deems the relationship equivalent"
+  closed_loop_feedback: false
+  safety_criticality: none
+  task_taxonomy: ["DB-REAL vs DB-SYNTH", "workflow tags per task (e.g. time series analysis, data cleaning, data visualization, regression, meta-analysis)", "six domains: sociology, biology, humanities, economics, engineering, meta-science"]
+sample_environment_features:
+  sample_types: ["tabular CSV datasets from published studies (survey panels, economic indicators, archaeological artefact counts, pollen time series, meta-analysis tables) and LLM-synthesized tables"]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: "Real datasets include raw and pre-processed variants (e.g. nls_raw vs nls_incarceration, meta_regression_raw vs meta_regression) so data-cleaning burden varies"
+  novelty_control: "Train/test split on tasks; synthetic tasks provide unseen domains and controlled complexity"
+  calibration_or_api_state_variation: null
+  injected_faults: false
+  environment_description: "Local Python execution with datasets on disk; metadata JSON supplies dataset descriptions, column descriptions, domain knowledge and queries; evaluation script compares predicted vs gold hypothesis (and optionally workflows)"
+agent_features_evaluated:
+  models: ["GPT-4o", "GPT-4-0125-preview", "Llama-3-70B"]
+  vision_used: false
+  rag_or_memory: varied
+  planner: varied
+  tools: ["Python code interpreter", "DataVoyager multi-agent planner/programmer", "Reflexion self-reflection with oracle evaluator feedback"]
+  verifier_or_self_debug: varied
+  guards_or_safety_layer: none
+  multi_agent: true
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Performance collapses on domains needing advanced statistics (biology 0%, engineering 7%) versus regression-style social-science analyses"
+  - "Oracle-feedback Reflexion nearly doubles other scaffolds, indicating verification signals matter more than base model"
+  - "Synthetic tasks are harder than real ones for the same agent (15.7% vs 24.5%), and difficulty scales with workflow complexity"
+  - "NoDataGuess control needed because published findings can be recalled without data"
+limitations:
+  - "LLM-judged metric; no execution-based ground truth for hypotheses"
+  - "Small train split (25); no human baseline"
+  - "Gold hypotheses reflect one paper's analysis choices; alternative valid analyses may be penalized"
+related: [scienceagentbench, discoveryworld, autosdt]
+notes: >
+  Repo-verified: license (ODC-By), agent types (coder/react) and supported models, CLI flags, metadata schema,
+  domain folder names and file counts (real test 144 metadata files, real train 14, synth test 200 metadata
+  files), HF link. Search-snippet: 264/903 counts, 25/239 split, 114 multi-dataset tasks, six domain names,
+  HMS definition, agent names, 24.5%/15.7% and per-domain numbers, ICLR 2025 venue (proceedings.iclr.cc file
+  listed). Not verifiable: repetitions, n_agent_configs, exact paper count ('over 20'), DOI.
+---
+id: scigym
+name: "SciGym: Measuring Scientific Capabilities of Language Models with a Systems Biology Dry Lab"
+short_name: SciGym
+year: 2025
+venue: "NeurIPS 2025 Datasets and Benchmarks Track (poster); arXiv v1 2 Jul 2025, v2 14 Jul 2025"
+authors_short: "Haonan Duan et al. (Duan*, Lu*, Harrigan, Desai, Lu, Koziarski, Cotta, Maddison; U. Toronto / SickKids / Vector)"
+arxiv: "2507.02083"
+doi: null
+url: "https://arxiv.org/abs/2507.02083"
+code_url: "https://github.com/h4duan/SciGym (project page: https://h4duan.github.io/scigym-benchmark/)"
+data_url: "HuggingFace (downloaded via data/download.py --split small|large); 350 SBML systems total"
+license: null
+status: published
+summary: >
+  SciGym is an agentic 'dry lab' benchmark: curated SBML models of biological systems from BioModels serve as
+  hidden ground-truth simulators, the agent receives a partial model with reactions removed, and it must
+  iteratively request perturbation experiments (observe; change initial concentrations), analyse the returned
+  time series in Python, and finally submit a complete SBML model. Submissions are scored by reaction-recovery
+  precision/recall/F1 (with and without modifiers) and by simulation trajectory error (SMAPE) under both observed
+  and unseen perturbations. Six frontier LLMs were evaluated on the 137-system 'small' split (<10 reactions);
+  Gemini-2.5-Pro was best, and all models degrade sharply as system complexity grows.
+benchmark_features:
+  evaluation_target: [simulation_control, protocol_planning, data_analysis, code_generation]
+  execution_mode: simulator
+  instruments:
+    - {name: "SBML ODE simulator (libRoadRunner / tellurium / COPASI) acting as the experimental apparatus", modality: none, real_or_simulated: simulated}
+  scientific_domains: ["systems biology: metabolic pathways, gene regulatory networks, cell signalling, epidemiological models"]
+  n_tasks: 137
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: "Not verifiable; default config uses temperature 1.0, max_iterations 5 and eval_debug_rounds 5 (repo configs/default.yml); paper's iteration budget not confirmed"
+  target_population: "End-to-end experimental science on realistically complex mechanistic systems: hypothesis formation, experiment design, data analysis and model proposal, without wet-lab cost"
+  task_source: literature_derived
+  sampling_strategy: "350 manually curated SBML models from BioModels, preprocessed by anonymizing identifiers and shuffling components to prevent memorization; 'small' split = 137 models with fewer than 10 reactions (evaluated), 'large' = remaining 213 models with up to 400 reactions (released, not evaluated)"
+  metric_types: [partial_credit, other]
+  primary_metric: "Reaction Matching Score (F1 over recovered reactions, with and without modifiers) together with Simulation Trajectory Error (SMAPE between predicted and true time series, including under held-out perturbations)"
+  scoring_granularity: continuous
+  has_human_baseline: false
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: "small (137, evaluated) vs large (213, unevaluated) splits; within a task, evaluation simulates the submitted model under perturbations not seen during the episode (evaluate_smape_noise in repo)"
+  leakage_or_contamination_risk: "BioModels is public, so identifiers are anonymized and components shuffled; the harness also has a test_memorize flag to probe one-shot recall of the model"
+  agents_evaluated: ["ReAct-style Thoughts-Actions-Observations agent with: Gemini-2.5-Pro-Preview-03-25, Gemini-2.5-Flash-Preview-04-17, Claude-3.7-Sonnet-20250219, Claude-3.5-Haiku-20241022, GPT-4.1-2025-04-14, GPT-4.1-mini-2025-04-14"]
+  n_agent_configs: 6
+  headline_results:
+    - "Gemini-2.5-Pro best: STE 0.3212, RMS-with-modifiers F1 0.1817, RMS-without-modifiers F1 0.3383 (project page Table 1)"
+    - "Claude-3.7-Sonnet: STE 0.3615, F1 0.1688 / 0.3047; GPT-4.1: STE 0.4611, F1 0.1740 / 0.3038"
+    - "Mini variants worse: Gemini-2.5-Flash STE 0.4181 (F1 0.1217/0.2005), GPT-4.1-mini STE 0.6007 (0.1320/0.2322), Claude-3.5-Haiku STE 0.6281 (0.0530/0.0987)"
+    - "Simulation error rises from ~0.1 to ~0.55 for top models as reactions grow from 2 to 10"
+    - "Best model's F1 is ~5x higher for reactant-product links than for modifier links"
+  open_source: true
+task_features:
+  workflow_depth: long_horizon
+  perceptual_demand: structured_readout
+  reasoning_demand: high
+  tool_interface: [python_api, natural_language]
+  tool_composition: "Three action types: request experiment (observe / change_initial_concentration JSON), write Python (numpy, pandas, math, scipy, sklearn, libsbml + provided simulate(sbml_string) and shared_variables store), submit SBML model; typically chained over several iterations"
+  quantitative_tolerance: "Continuous: SMAPE between trajectories; reaction matching is exact on reactant/product(/modifier) sets; graph-edit-distance, species-interaction F1 and kinetic-law similarity also implemented in evaluator"
+  closed_loop_feedback: true
+  safety_criticality: none
+  task_taxonomy: ["SciGym-small (<10 reactions) vs SciGym-large (up to 400 reactions)", "biology areas: metabolic, gene-regulatory, signalling, epidemiological models"]
+sample_environment_features:
+  sample_types: ["ODE models of biochemical reaction networks (SBML) with species concentrations as observables"]
+  sample_real_or_simulated: simulated
+  signal_quality_variation: "Simulated deterministic time series; evaluator applies perturbation 'noise' levels to initial conditions to test generalization"
+  novelty_control: "Anonymized/shuffled models; held-out perturbations at evaluation; large split kept unevaluated as future headroom"
+  calibration_or_api_state_variation: "Boundary/constant species cannot be perturbed; experiment budget controlled by max_iterations"
+  injected_faults: false
+  environment_description: "Controller loop: agent emits an action; experiments are executed by modifying the reference SBML and simulating; code runs in a sandbox with truncation of large prints; submitted SBML is validated with up to eval_debug_rounds resubmissions on errors; final scoring via SciGym evaluator"
+agent_features_evaluated:
+  models: ["Gemini-2.5-Pro", "Gemini-2.5-Flash", "Claude-3.7-Sonnet", "Claude-3.5-Haiku", "GPT-4.1", "GPT-4.1-mini"]
+  vision_used: false
+  rag_or_memory: some
+  planner: react
+  tools: ["perturbation experiments", "Python sandbox with simulate()", "SBML submission"]
+  verifier_or_self_debug: self_debug
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Proposed mechanisms overfit to the specific experiments run and fail to generalize to unseen initial conditions -- direct evidence that agents fit data rather than mechanisms"
+  - "Steep degradation with system size (2 -> 10 reactions) even for frontier models; large split (up to 400 reactions) left unevaluated"
+  - "Subtle (modifier) relationships are systematically missed relative to mass-action reactant/product links"
+  - "'Pro' models beat 'mini' models consistently across families, suggesting capability rather than family drives performance"
+limitations:
+  - "Perturbation space is narrow (initial-concentration changes only in the released prompt)"
+  - "No human baseline; no cost/time reporting verified"
+  - "Only 137 of 350 systems evaluated; no repository license file"
+related: [discoveryworld, scienceworld, discoverybench]
+notes: >
+  Repo-verified: split sizes (137/213), supported model IDs, default config (temperature 1.0, max_iterations 5,
+  eval_debug_rounds 5, test_memorize), action prompts, allowed libraries, evaluator metric functions, dependency
+  stack (tellurium, libroadrunner, copasi), project-page results table and abstract (h4duan/scigym-benchmark
+  index.html). Search-snippet: NeurIPS 2025 D&B venue (OpenReview Cmx6b7w2nk), six-model list with dates,
+  BioModels curation. Not verifiable: license, paper iteration budget/cost, n_task_families, exact 'Network
+  Topology Score' definition (mentioned in a snippet; evaluator has species-interaction F1), DOI.
+---
+id: scienceboard
+name: "ScienceBoard: Evaluating Multimodal Autonomous Agents in Realistic Scientific Workflows"
+short_name: ScienceBoard
+year: 2025
+venue: "ICLR 2026 (accepted 2026-01-26); earlier oral at the Workshop on Computer Use Agents (WCUA) @ ICML 2025; arXiv v1 27 May 2025, v3 latest"
+authors_short: "Qiushi Sun et al. (Sun, Liu, Ma, Ding, Xu, Yin, Zhao, Wu, Cheng, Liu, ... ; OS-Copilot / Shanghai AI Lab / HKU)"
+arxiv: "2505.19897"
+doi: null
+url: "https://arxiv.org/abs/2505.19897"
+code_url: "https://github.com/OS-Copilot/ScienceBoard"
+data_url: "Task JSONs in repo (tasks/VM); VM snapshot https://huggingface.co/OS-Copilot/ScienceBoard-Env; agent trajectories https://huggingface.co/datasets/OS-Copilot/ScienceBoard-Traj"
+license: "MIT (repo LICENSE)"
+status: published
+summary: >
+  ScienceBoard is a computer-use benchmark in which multimodal agents operate real scientific desktop software
+  inside an Ubuntu virtual machine (built on the OSWorld infrastructure) to complete 169 human-curated tasks in
+  six applications: UCSF ChimeraX (biochemistry), KAlgebra (algebra), Lean 4 (theorem proving), GRASS GIS
+  (geoinformatics), Celestia (astronomy) and TeXstudio (scientific writing). Agents observe screenshots and/or
+  accessibility trees and act through GUI (pyautogui) and CLI actions; success is verified by querying the
+  applications' internal state through instrumented plugins/REST servers. State-of-the-art agents (GPT-4o,
+  Claude 3.7, UI-TARS, etc.) reached only about 15% overall success at release, versus 60.27% for humans;
+  later GPT-5 reached 24.20% under the best observation setting.
+benchmark_features:
+  evaluation_target: [computer_use, instrument_control, protocol_planning, perception]
+  execution_mode: simulator
+  instruments:
+    - {name: "UCSF ChimeraX (molecular visualization/structure analysis) via chimerax-states plugin", modality: none, real_or_simulated: digital_twin}
+    - {name: "GRASS GIS (geospatial analysis GUI/CLI)", modality: none, real_or_simulated: digital_twin}
+    - {name: "Celestia (astronomy simulator)", modality: none, real_or_simulated: digital_twin}
+    - {name: "KAlgebra (symbolic math/plotting)", modality: none, real_or_simulated: digital_twin}
+    - {name: "Lean 4 (theorem prover, also 'Raw' REPL mode)", modality: none, real_or_simulated: digital_twin}
+    - {name: "TeXstudio (LaTeX editor)", modality: none, real_or_simulated: digital_twin}
+  scientific_domains: ["biochemistry / structural biology", "algebra", "formal theorem proving", "geographic information systems", "astronomy", "scientific documentation"]
+  n_tasks: 169
+  n_task_families: 6
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Realistic multi-application scientific workflows a computer-use agent would need to execute for scientists, spanning GUI, CLI and code interaction"
+  task_source: expert_curated
+  sampling_strategy: "Tasks designed by annotators with disciplinary backgrounds after studying software tutorials/manuals; standardized instructions, initialization and evaluation functions, with two-person cross-validation (search-snippet). Repo distribution: GRASS GIS 34, Celestia 33, KAlgebra 31, ChimeraX 29, Lean 26, TeXstudio 16 (tasks/VM; repo-verified, matches paper percentages 20.2/19.6/18.5/17.3/15.5/8.9)"
+  metric_types: [success_rate]
+  primary_metric: "Task success rate: execution-based checks on application internal state (e.g. loaded model name, layer list) or file outputs after the episode"
+  scoring_granularity: binary
+  has_human_baseline: true
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: "Single evaluation set; additional 'Raw' Lean (26) and 'Dual' ChimeraX (29) task variants in repo for non-VM / dual-agent settings"
+  leakage_or_contamination_risk: "Tasks and checkers are public on GitHub; VM snapshot public. Software manuals are in pretraining data, but task-specific state checks limit trivial memorization."
+  agents_evaluated: ["GPT-4o", "Claude-3.7-Sonnet", "Gemini (2.x)", "Qwen2.5-VL", "InternVL (incl. InternVL-3)", "QVQ", "OS-Atlas", "GUI-Actor", "UI-TARS-72B-DPO and UI-TARS-1.5-7B", "GPT-5 (added in v3)", "CODA (authors' dual-brain planner+executor agent, Aug 2025, reported SOTA)"]
+  n_agent_configs: null
+  headline_results:
+    - "State-of-the-art agents (GPT-4o, Claude 3.7, UI-TARS) achieve only ~15% overall success rate at initial release"
+    - "Human experts: 60.27% success rate"
+    - "GPT-5 under the most favourable screenshot + a11y-tree setting: 24.20% overall (arXiv v3, search-snippet)"
+    - "Screenshot + a11y tree is the most effective observation; Set-of-Marks sometimes hurts on scientific software"
+  open_source: true
+task_features:
+  workflow_depth: multi_step
+  perceptual_demand: image_interpretation
+  reasoning_demand: high
+  tool_interface: [gui, cli, python_api, rest_api]
+  tool_composition: "Agents combine GUI actions (pyautogui clicks/typing, optionally relative coordinates), terminal/CLI commands and in-app command languages (ChimeraX commands, GRASS commands, Lean code); tasks have a per-task 'steps' budget field in JSON (e.g. 5 for simple tasks). Multi-agent 'Community' abstraction supports planner/executor combinations."
+  quantitative_tolerance: "Checkers compare application state to expected values (string/structure equality via lambda predicates in task JSON); numeric tolerances, where present, are task-specific and not surveyed here"
+  closed_loop_feedback: true
+  safety_criticality: low
+  task_taxonomy: ["By application/domain: ChimeraX (biochemistry), KAlgebra (algebra), Lean 4 (theorem proving), GRASS GIS (GIS), Celestia (astronomy), TeXstudio (documentation)", "By setting: VM (GUI), Raw (direct app/REPL), Dual (two-agent)"]
+sample_environment_features:
+  sample_types: ["PDB structures fetched in ChimeraX", "GIS mapsets (e.g. natural_earth countries)", "celestial bodies/events in Celestia", "algebraic expressions/plots", "Lean theorems", "LaTeX documents"]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: "No held-out split; tasks curated to require multi-step, software-specific procedures"
+  calibration_or_api_state_variation: "Each task has an initialize block (reset config/history files, launch app with REST remote-control port, wait times); VM snapshot 'sci_bench' restored between tasks"
+  injected_faults: false
+  environment_description: "OSWorld-derived harness controlling an Ubuntu VM in VMware Workstation Pro; observation types: screenshot, a11y tree, screenshot+a11y, Set-of-Marks; applications recompiled or plugged to expose internal state over RESTful APIs for initialization and evaluation; recommended host: 32 GB RAM, >100 GB disk"
+agent_features_evaluated:
+  models: ["GPT-4o", "Claude-3.7-Sonnet", "Gemini", "Qwen2.5-VL", "InternVL", "QVQ", "OS-Atlas", "GUI-Actor", "UI-TARS-72B-DPO", "UI-TARS-1.5-7B", "GPT-5", "CODA"]
+  vision_used: mixed
+  rag_or_memory: none
+  planner: varied
+  tools: ["pyautogui GUI control", "terminal", "in-app command consoles", "Lean REPL"]
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: true
+  deterministic_execution: false
+transfer_relevant_findings:
+  - "Observation modality strongly affects success; SoM prompting that helps on general GUI benchmarks can hurt on dense scientific UIs"
+  - "GUI-specialist action models (UI-TARS, OS-Atlas) do not close the gap: domain/software knowledge and planning dominate"
+  - "Large human-agent gap (60.27% vs ~15-24%) persists across model generations"
+  - "Dual-brain planner/executor (CODA) improves over single agents, suggesting decomposition of scientific reasoning and grounding"
+limitations:
+  - "Binary success only; no partial credit or cost reporting verified"
+  - "Requires proprietary VMware and a large VM image; evaluation is slow and hardware-heavy"
+  - "Six applications; tasks per app are small (16-34)"
+  - "Human performance details (number of participants, protocol) not verifiable here"
+related: [scienceagentbench, discoveryworld]
+notes: >
+  Repo-verified: MIT license, ICLR 2026 acceptance date, WCUA@ICML oral, VM snapshot and trajectory releases,
+  OSWorld/VMware basis, instrumented app forks (chimerax-states, kalgebra, Celestia, grass-gui), model env-vars,
+  per-app task JSON counts (169 in tasks/VM), task JSON schema (steps, initialize, evaluate with state/info
+  predicates), Community multi-agent abstraction. Search-snippet: 169 tasks, six domains, four observation
+  settings, ~15% SOTA, 60.27% human, GPT-5 24.20%, annotation process. The qiushisun.github.io project page
+  source in the ScienceBoard-Home repo currently renders an OS-Genesis template (no leaderboard table
+  recoverable). Not verifiable: DOI, repetitions, n_agent_configs, per-model table.
+---
+id: sciagentbench
+name: "SciAgentGym / SciAgentBench: Benchmarking Multi-Step Scientific Tool-use in LLM Agents"
+short_name: SciAgentBench
+year: 2026
+venue: "arXiv preprint (Feb 2026); Fudan NLP Lab"
+authors_short: "Yujiong Shen et al."
+arxiv: "2602.12984"
+doi: null
+url: "https://arxiv.org/abs/2602.12984"
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: >
+  Brief follow-up entry (not a ScienceAgentBench version, despite the similar name). SciAgentGym is an
+  interactive environment with 1,780 domain-specific tools across four natural-science disciplines, and
+  SciAgentBench is a tiered evaluation suite of 259 tasks (1,134 sub-questions) in physics (109), chemistry
+  (81), materials science (37) and life sciences (32), graded L1-L3 by step count. GPT-5's success falls from
+  60.6% to 30.9% as horizons lengthen; the authors' SciForge data synthesis trains an 8B model (SciAgent-8B)
+  that outperforms a 235B model.
+benchmark_features:
+  evaluation_target: [data_analysis, code_generation, question_answering]
+  execution_mode: hybrid
+  instruments: []
+  scientific_domains: ["physics", "chemistry", "materials science", "life sciences"]
+  n_tasks: 259
+  n_task_families: 4
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Long-horizon multi-step scientific tool use"
+  task_source: mixed
+  sampling_strategy: "Tiered by number of required steps (L1-L3); details not verified"
+  metric_types: [success_rate]
+  primary_metric: "Task success rate"
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: ["GPT-5", "Qwen3-235B-class model", "SciAgent-8B"]
+  n_agent_configs: null
+  headline_results: ["GPT-5 success drops from 60.6% (short) to 30.9% (long horizon); ~70% drop from 3-step to 8+-step tasks"]
+  open_source: null
+task_features:
+  workflow_depth: mixed
+  perceptual_demand: null
+  reasoning_demand: high
+  tool_interface: [python_api]
+  tool_composition: "1,780 tools; multi-step chaining is the object of study"
+  quantitative_tolerance: null
+  closed_loop_feedback: true
+  safety_criticality: none
+  task_taxonomy: ["L1 / L2 / L3 by step count"]
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: none
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Tool-use gym; details not verified"
+agent_features_evaluated:
+  models: ["GPT-5", "SciAgent-8B"]
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings: ["Sharp horizon-length degradation for frontier models"]
+limitations: ["Only search-snippet level verification in this session"]
+related: [scienceagentbench]
+notes: "All facts from search snippets quoting the arXiv abstract; repository, license and metric details not verified."
+---
+id: sciraplicate_bench
+name: "SciReplicate-Bench: Benchmarking LLMs in Agent-driven Algorithmic Reproduction from Research Papers"
+short_name: SciReplicate-Bench
+year: 2025
+venue: "COLM 2025 (repo-verified); arXiv Apr 2025"
+authors_short: "Yanzheng Xiang et al. (King's College London)"
+arxiv: "2504.00255"
+doi: null
+url: "https://arxiv.org/abs/2504.00255"
+code_url: "https://github.com/xyzCS/SciReplicate-Bench"
+data_url: "Data.json in repo; Benchmark code repositories and 36 conda environments via SharePoint links in README"
+license: null
+status: published
+summary: >
+  Brief follow-up entry. SciReplicate-Bench asks agents to implement algorithms described in recent NLP papers
+  inside the papers' real code repositories: 100 tasks from 36 papers published in 2024, each with a prepared
+  conda environment and test cases. The authors' Sci-Reproducer dual-agent framework (Paper Agent + Code Agent
+  with repository and web-search tools) achieves at most 39% execution accuracy; missing or inconsistent
+  algorithm descriptions are the main barrier.
+benchmark_features:
+  evaluation_target: [code_generation]
+  execution_mode: static_code_eval
+  instruments: []
+  scientific_domains: ["natural language processing / machine learning"]
+  n_tasks: 100
+  n_task_families: 36
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Reproducing algorithmic contributions of research papers from their descriptions"
+  task_source: literature_derived
+  sampling_strategy: "36 NLP papers (2024) with public code; 100 annotated functions/tasks"
+  metric_types: [success_rate, other]
+  primary_metric: "Execution accuracy (test cases pass); also CodeBLEU and reasoning-graph accuracy (repo Evaluation.py, Reason_Process_ACC.py)"
+  scoring_granularity: mixed
+  has_human_baseline: false
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "Papers from 2024 to reduce pretraining overlap"
+  agents_evaluated: ["Sci-Reproducer with GPT-4o-mini and other LLMs"]
+  n_agent_configs: null
+  headline_results: ["Best LLM with Sci-Reproducer reaches only 39% execution accuracy"]
+  open_source: true
+task_features:
+  workflow_depth: multi_step
+  perceptual_demand: none
+  reasoning_demand: high
+  tool_interface: [python_api, cli]
+  tool_composition: "Paper Agent (literature tools, web search) + Code Agent (repository navigation, execution); requires a single A100 80GB to run all repos"
+  quantitative_tolerance: "Unit-test based"
+  closed_loop_feedback: false
+  safety_criticality: none
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: ["research code repositories"]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: false
+  environment_description: "36 pre-built conda environments, one per paper"
+agent_features_evaluated:
+  models: ["GPT-4o-mini (repo example)", "others not verified"]
+  vision_used: false
+  rag_or_memory: some
+  planner: varied
+  tools: ["web search (Google CSE)", "repo code search"]
+  verifier_or_self_debug: varied
+  guards_or_safety_layer: none
+  multi_agent: true
+  deterministic_execution: null
+transfer_relevant_findings: ["Underspecified algorithm descriptions, not coding skill, dominate failures"]
+limitations: ["NLP-only; heavy GPU requirement; brief verification here"]
+related: [researchcodebench, scienceagentbench]
+notes: "Repo-verified: COLM 2025, structure, 36 environments, metrics files. Search-snippet: 100 tasks / 36 papers, 39% best."
+---
+id: researchcodebench
+name: "ResearchCodeBench: Benchmarking LLMs on Implementing Novel Machine Learning Research Code"
+short_name: ResearchCodeBench
+year: 2025
+venue: "arXiv preprint (Jun 2025)"
+authors_short: "Tianyu Hua et al. (not verified)"
+arxiv: "2506.02314"
+doi: null
+url: "https://arxiv.org/abs/2506.02314"
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: >
+  Brief follow-up entry. ResearchCodeBench contains 212 coding challenges drawn from 20 recent (2024-2025) ML
+  papers: the model sees the paper, surrounding project code and a TODO-marked snippet to fill in, and is
+  graded by executing tests. Across 30+ proprietary and open models the best (Gemini-2.5-Pro-Preview) solves
+  37.3%, followed by o3-high (32.3%) and o4-mini-high (30.8%).
+benchmark_features:
+  evaluation_target: [code_generation]
+  execution_mode: static_code_eval
+  instruments: []
+  scientific_domains: ["machine learning research (generative modelling, vision, theory, RL)"]
+  n_tasks: 212
+  n_task_families: 20
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Implementing novel research contributions from papers"
+  task_source: literature_derived
+  sampling_strategy: "20 papers from top venues and arXiv, 2024-2025"
+  metric_types: [success_rate, pass_at_k]
+  primary_metric: "Fraction of challenges passing tests"
+  scoring_granularity: binary
+  has_human_baseline: false
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "Recent papers chosen to limit contamination"
+  agents_evaluated: ["30+ LLMs incl. Gemini-2.5-Pro-Preview, o3, o4-mini"]
+  n_agent_configs: null
+  headline_results: ["Gemini-2.5-Pro-Preview 37.3%, o3 (high) 32.3%, o4-mini (high) 30.8%; best models implement <40% correctly"]
+  open_source: null
+task_features:
+  workflow_depth: single_step
+  perceptual_demand: none
+  reasoning_demand: high
+  tool_interface: [python_api]
+  tool_composition: "Fill-in-the-blank code completion with paper context; no tool chaining"
+  quantitative_tolerance: "Unit-test based"
+  closed_loop_feedback: false
+  safety_criticality: none
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: ["ML research repositories"]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: false
+  environment_description: "Static test harness per paper"
+agent_features_evaluated:
+  models: ["Gemini-2.5-Pro-Preview", "o3", "o4-mini", "others"]
+  vision_used: false
+  rag_or_memory: none
+  planner: none
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings: []
+limitations: ["Search-snippet-only verification"]
+related: [sciraplicate_bench, scienceagentbench]
+notes: "All facts from search snippets quoting the arXiv page; code URL and license not verified."
+---
+id: autosdt
+name: "AutoSDT: Scaling Data-Driven Discovery Tasks Toward Open Co-Scientists"
+short_name: AutoSDT
+year: 2025
+venue: "EMNLP 2025 (main); arXiv Jun 2025"
+authors_short: "Yifei Li et al. (OSU NLP Group)"
+arxiv: "2506.08140"
+doi: null
+url: "https://arxiv.org/abs/2506.08140"
+code_url: "https://github.com/OSU-NLP-Group/AutoSDT"
+data_url: "https://huggingface.co/datasets/osunlp/AutoSDT-5K"
+license: null
+status: published
+summary: >
+  Brief follow-up entry (training-data companion to ScienceAgentBench rather than a new benchmark). AutoSDT is
+  an automatic Search-Select-Adapt pipeline that mines GitHub for ecologically valid data-driven discovery
+  programs and synthesizes task instructions and solutions, yielding AutoSDT-5K (5,404 tasks in the same four
+  SAB disciplines). Expert review of 256 tasks found 93% ecologically valid and 92.2% functionally correct.
+  Fine-tuning Qwen2.5-Coder-32B-Instruct on it (AutoSDT-Coder-32B) reaches 7.8% SR on ScienceAgentBench,
+  matching GPT-4o (2024-05-13) and doubling the base model, and lifts DiscoveryBench HMS to 8.1.
+benchmark_features:
+  evaluation_target: [code_generation, data_analysis]
+  execution_mode: static_code_eval
+  instruments: []
+  scientific_domains: ["bioinformatics", "computational chemistry", "geographical information science", "psychology & cognitive neuroscience"]
+  n_tasks: 5404
+  n_task_families: 4
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Training distribution for SAB-style co-scientist coding tasks"
+  task_source: synthetic_generated
+  sampling_strategy: "LLM-driven keyword search of repositories, program selection/verification, dependency localization and code adaptation; expert audit of a 256-task subset"
+  metric_types: [success_rate, other]
+  primary_metric: "Downstream SAB success rate and DiscoveryBench HMS of fine-tuned models"
+  scoring_granularity: mixed
+  has_human_baseline: false
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: "Training set only; evaluated on SAB and DiscoveryBench"
+  leakage_or_contamination_risk: "Mined from public GitHub; overlap with SAB source repositories must be controlled (paper details not verified)"
+  agents_evaluated: ["AutoSDT-Coder (Qwen2.5-Coder-Instruct 7B/14B/32B fine-tunes)", "GPT-4o reference"]
+  n_agent_configs: null
+  headline_results: ["AutoSDT-Coder-32B: 7.8% SR on ScienceAgentBench (= GPT-4o 2024-05-13), 2x base model; DiscoveryBench HMS 8.1 (+17.4% relative)"]
+  open_source: true
+task_features:
+  workflow_depth: multi_step
+  perceptual_demand: mixed
+  reasoning_demand: high
+  tool_interface: [python_api]
+  tool_composition: "Same self-contained Python program format as SAB"
+  quantitative_tolerance: "Inherits SAB/DiscoveryBench evaluation"
+  closed_loop_feedback: false
+  safety_criticality: none
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: ["real scientific datasets bundled from source repositories"]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: false
+  environment_description: "Standalone executable programs with located dependency folders"
+agent_features_evaluated:
+  models: ["Qwen2.5-Coder-Instruct (7B/14B/32B)", "GPT-4o"]
+  vision_used: false
+  rag_or_memory: none
+  planner: none
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings: ["In-distribution synthetic tasks transfer to SAB and DiscoveryBench, closing much of the open-weight vs GPT-4o gap"]
+limitations: ["Dataset, not a benchmark; 7.8% absolute SR remains low"]
+related: [scienceagentbench, discoverybench]
+notes: "Repo-verified: pipeline steps, 5,404 tasks, 7.8% claim, HF dataset link. Search-snippet: EMNLP 2025, 93%/92.2% expert audit figures, HMS 8.1."

@@ -1,0 +1,104 @@
+id: em_copilot_fibsem
+record_type: system
+name: 'LLM-Driven Automation in FIB-SEM: Enhancing Microscope Control with AutoScript and Vision-Based AI (EM CoPilot)'
+short_name: EM CoPilot
+year: 2025
+venue: 'Microscopy and Microanalysis 31 (Suppl. 1), ozaf048.1088 (M&M 2025 proceedings); predecessor abstract ''Revolutionizing
+  Electron Microscopy Through Intuitive Language-Driven Interfaces: The Emergence of the EM CoPilot'' (2024)'
+authors_short: null
+arxiv: null
+doi: 10.1093/mam/ozaf048.1088
+url: https://academic.oup.com/mam/article/31/Supplement_1/ozaf048.1088/8212887
+code_url: null
+data_url: null
+license: null
+status: published
+summary: |
+  A multimodal-LLM interface to a commercial Thermo Fisher FIB-SEM that translates high-level user operations into structured AutoScript API calls for site-specific cross-sectioning, surface/sub-surface feature detection and targeted milling, with LLM-driven vision processing. Presented as reducing manual intervention and user variability; no quantitative evaluation visible in the abstract.
+benchmark_features:
+  agents_evaluated:
+  - GPT-4 with vision encoder (per 2024 abstract snippet)
+  evaluation_target:
+  - instrument_control
+  - code_generation
+  execution_mode: physical_instrument
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results: []
+  holdout_or_split_design: null
+  instruments:
+  - name: Thermo Fisher FIB-SEM via AutoScript API
+    modality: microscopy
+    real_or_simulated: real
+  leakage_or_contamination_risk: n/a
+  metric_types:
+  - other
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: false
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - FIB-SEM
+  - materials/semiconductor sample preparation
+  scoring_granularity: binary
+  target_population: Routine FIB-SEM operations (cross-sectioning, feature detection, milling) via natural language
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: image_reading
+  quantitative_tolerance: null
+  reasoning_demand: medium
+  safety_criticality: high
+  task_taxonomy:
+  - site-specific cross-sectioning
+  - feature detection
+  - targeted milling
+  tool_composition: LLM -> AutoScript function calls; ViT/VLM for feature detection
+  tool_interface:
+  - python_api
+  - natural_language
+  workflow_depth: multi_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Commercial FIB-SEM with Python AutoScript API
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: real
+  sample_types:
+  - unspecified FIB-SEM specimens
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models:
+  - GPT-4V (2024 abstract); 2025 model unverified
+  multi_agent: false
+  planner: null
+  rag_or_memory: null
+  tools:
+  - AutoScript API
+  verifier_or_self_debug: none
+  vision_used: true
+transfer_relevant_findings: []
+limitations:
+- Conference abstract only; no numbers
+- Author list could not be retrieved (OUP blocked)
+related:
+- tem_agent
+- thinking_microscopes
+notes: demonstration. Information from web-search snippets of the OUP abstract and the 2024 ResearchGate listing;
+  DOI inferred from the OUP URL pattern and should be checked.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://academic.oup.com/mam/article/31/Supplement_1/ozaf048.1088/8212887
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

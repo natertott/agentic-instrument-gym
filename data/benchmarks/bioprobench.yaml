@@ -1,0 +1,140 @@
+id: bioprobench
+record_type: benchmark
+name: 'BioProBench: A Corpus and Benchmark for Biological Protocol Reasoning in Autonomous Science (earlier title:
+  Comprehensive Dataset and Benchmark in Biological Protocol Understanding and Reasoning)'
+short_name: BioProBench
+year: 2025
+venue: ICML 2026 (per official repo citation); arXiv 2025-05-11
+authors_short: Yuyang Liu et al.
+arxiv: '2505.07889'
+doi: null
+url: https://arxiv.org/abs/2505.07889
+code_url: https://github.com/YuyangSunshine/bioprobench
+data_url: https://huggingface.co/BioProBench
+license: CC BY-NC 4.0
+status: published
+summary: |
+  BioProBench is a large-scale multi-task benchmark for procedural reasoning over biological wet-lab protocols, built from BioProCorpus (22,413 human-written protocols from 5 repositories across 16 subdomains) into 523,784 instances across five tasks: Protocol QA, Step Ordering, Error Correction, Protocol Generation and Protocol Reasoning. Frontier LLMs score ~70-74% on QA but fall to ~50% exact-match on ordering and <15 BLEU on generation, with weak quantitative precision and safety awareness.
+benchmark_features:
+  agents_evaluated:
+  - Gemini-2.5-pro-exp
+  - DeepSeek-R1
+  - DeepSeek-V3
+  - domain-specific small biology LLMs
+  - 'ICML update: gpt-5.4-2026-03-05, gemini-3-flash-preview-nothinking, claude-sonnet-4-5-20250929'
+  - others (12 total per README; 10 per v1 abstract)
+  evaluation_target:
+  - protocol_planning
+  - question_answering
+  - safety
+  execution_mode: static_text
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: true
+  headline_results:
+  - Top models ~74% PQA accuracy; Gemini-2.5-pro-exp 70.27% PQA accuracy and 65% F1 on ERR
+  - 'ORD: best exact match 51.80%, Kendall''s tau 0.81 for top model'
+  - 'GEN: BLEU < 15 for all models'
+  - Open models DeepSeek-R1/V3 approach closed-source levels on some tasks; small domain-specific models underperform
+  holdout_or_split_design: Train/dev/test splits released as a training resource plus benchmark; exact sizes not
+    verified
+  instruments: []
+  leakage_or_contamination_risk: Source protocols are public web documents (protocols.io etc.), so protocol text
+    is likely in pre-training data; constructed tasks (ordering, error injection) mitigate direct memorization.
+  metric_types:
+  - success_rate
+  - partial_credit
+  - calibration
+  - other
+  n_agent_configs: 12
+  n_instances_or_runs_reported: null
+  n_task_families: 5
+  n_tasks: 523784
+  open_source: true
+  primary_metric: 'Task-specific: accuracy (PQA), exact match + Kendall''s tau (ORD), F1 (ERR), BLEU + step recall/precision
+    (GEN), accuracy/Brier (REA)'
+  repetitions_per_task: null
+  sampling_strategy: Protocols collected from 5 authoritative protocol repositories; task instances systematically
+    (largely automatically) constructed from them with quality filtering; benchmark test subsets drawn from the
+    instance pool (split sizes not verified).
+  scientific_domains:
+  - molecular biology
+  - cell biology
+  - biochemistry
+  - 16 biological subdomains (not enumerated in verified sources)
+  scoring_granularity: mixed
+  target_population: Procedural understanding and generation of real wet-lab biology protocols as needed by autonomous-science
+    agents
+  task_source: literature_derived
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: none
+  quantitative_tolerance: Paper emphasises failures in quantitative precision (volumes, concentrations, times);
+    scoring details unverified.
+  reasoning_demand: high
+  safety_criticality: medium
+  task_taxonomy:
+  - PQA (Protocol Question Answering)
+  - ORD (Step Ordering)
+  - ERR (Error Correction)
+  - GEN (Protocol Generation)
+  - REA (Protocol Reasoning)
+  tool_composition: Pure text; no tools or execution.
+  tool_interface:
+  - natural_language
+  workflow_depth: multi_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Static corpus + instance files on Hugging Face; evaluation scripts on GitHub. Error-correction
+    instances contain injected protocol errors.
+  injected_faults: true
+  novelty_control: null
+  sample_real_or_simulated: dataset
+  sample_types:
+  - protocol text
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models:
+  - Gemini-2.5-pro-exp
+  - DeepSeek-R1
+  - DeepSeek-V3
+  - GPT-5.4
+  - Gemini-3-flash
+  - Claude Sonnet 4.5
+  - others
+  multi_agent: false
+  planner: none
+  rag_or_memory: none
+  tools: []
+  verifier_or_self_debug: none
+  vision_used: false
+transfer_relevant_findings:
+- Surface comprehension (QA) is nearly solved while ordering/generation — the parts an executing agent actually
+  needs — remain at ~50% EM / <15 BLEU.
+- High Kendall's tau with low exact match implies models grasp local pairwise step order but not global procedure
+  structure — analogous to LabOSBench's subtask-vs-workflow gap.
+- Explicit finding of poor quantitative precision and safety awareness in protocol text.
+limitations:
+- Text-only; no execution or instrument feedback.
+- Automatically constructed instances at 500k scale; per-task test sizes and human validation rate not verified
+  here.
+related:
+- bioplanner
+- biolp_bench
+- benchbench_protocol
+- lab_bench
+- protoact
+notes: |
+  Verified from GitHub README (YuyangSunshine/bioprobench and /bioprotocolbench): corpus/instance counts, 5 tasks, metrics, CC BY-NC 4.0, ICML 2026 citation, 12 models. Numeric results (70.27%, 65% F1, 51.80% EM, tau 0.81, BLEU<15, ~74%) come from search excerpts of the arXiv HTML / OpenReview PDF (both blocked for direct fetch). Title changed between v1 ('Comprehensive Dataset and Benchmark...') and later versions. A companion agent paper (BioProAgent) is listed in the repo. DOI for ICML proceedings not yet available.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2505.07889
+  - https://github.com/YuyangSunshine/bioprobench
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

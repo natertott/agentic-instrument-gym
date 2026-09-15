@@ -1,0 +1,107 @@
+id: protoact
+record_type: benchmark
+name: 'ProtoAct: Turning Wet-Lab Protocols into Embodied Robotic Actions (introduces the BioP2E benchmark)'
+short_name: ProtoAct / BioP2E
+year: 2026
+venue: arXiv preprint (cs.RO)
+authors_short: null
+arxiv: '2608.01690'
+doi: null
+url: https://arxiv.org/abs/2608.01690
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: |
+  ProtoAct is a protocol-grounding framework (ProtoRAG retrieval, RefineChecker consistency checking, ActSchema schema-constrained JSON action functions) that converts free-form biology protocols into executable robot subtasks. It introduces BioP2E, in which 22 cell-culture protocols were manually annotated into 258 monitoring conditions, 910 executable subtasks and 962 grounded action calls, and evaluates seven LLM backbones.
+benchmark_features:
+  agents_evaluated:
+  - seven LLM backbones (names not verified)
+  evaluation_target:
+  - protocol_planning
+  - code_generation
+  execution_mode: hybrid
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results:
+  - 'BioP2E: 22 protocols -> 258 monitoring conditions, 910 subtasks, 962 action calls; ablations show retrieval,
+    posterior checking and schema constraints contribute complementarily'
+  holdout_or_split_design: null
+  instruments:
+  - name: lab robot executing generated action calls (sim and real; details unverified)
+    modality: robotics
+    real_or_simulated: digital_twin
+  leakage_or_contamination_risk: null
+  metric_types:
+  - success_rate
+  - other
+  n_agent_configs: 7
+  n_instances_or_runs_reported: 962
+  n_task_families: 1
+  n_tasks: 22
+  open_source: null
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: 22 cell-culture protocols manually annotated by the authors.
+  scientific_domains:
+  - cell culture
+  scoring_granularity: mixed
+  target_population: Translation of wet-lab protocols into embodied robotic execution
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: null
+  perceptual_demand: none
+  quantitative_tolerance: null
+  reasoning_demand: high
+  safety_criticality: medium
+  task_taxonomy:
+  - monitoring conditions
+  - executable subtasks
+  - grounded action calls
+  tool_composition: Schema-constrained JSON action functions for robots.
+  tool_interface:
+  - python_api
+  - natural_language
+  workflow_depth: long_horizon
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Text-to-action grounding; downstream execution in simulated and real robotic tasks (details
+    unverified).
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: dataset
+  sample_types:
+  - cell-culture protocols
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: some
+  models: []
+  multi_agent: false
+  planner: plan_and_execute
+  rag_or_memory: some
+  tools:
+  - ProtoRAG
+  - RefineChecker
+  - ActSchema
+  verifier_or_self_debug: external_verifier
+  vision_used: null
+transfer_relevant_findings:
+- Schema-constrained action grounding plus a posterior consistency checker is the recurring recipe for reliable
+  protocol-to-action translation.
+limitations:
+- Brief record from search excerpt only; authors, metrics and release unverified.
+related:
+- bioprobench
+- pipette_wetlab_sim
+notes: arXiv blocked; all facts from a search excerpt of the abstract.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2608.01690
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

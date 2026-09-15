@@ -1,0 +1,22 @@
+# =============================================================================
+# VERSA Test Suite: 3D Printed Sample Workflow Tests
+# =============================================================================
+# Multi-step workflows involving multiple agents and tools
+# Specifically for testing performance on 3D printed artifact samples
+# Category: integration, workflow
+# =============================================================================
+
+tests:
+  - test_id: "debug_001"
+    name: "debug"
+    description: "Hello world test for debugging"
+    category: "debug"
+    tags: [ "debug" ]
+
+    user_prompt: |
+      Do nothing. Do not call any tools. Route to FINISH.
+
+
+    expected:
+      max_llm_calls: 2
+      max_tool_calls: 1

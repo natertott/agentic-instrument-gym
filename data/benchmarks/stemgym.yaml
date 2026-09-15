@@ -1,0 +1,109 @@
+id: stemgym
+record_type: benchmark
+name: 'STEMGym: Benchmarking Sequential Decision-Making under Dose Budgets in Autonomous Electron Microscopy'
+short_name: STEMGym
+year: 2026
+venue: arXiv preprint, 2026-06-28 (v1)
+authors_short: Polat et al. (Can Polat, Erchin Serpedin, Mustafa Kurban, Hasan Kurban)
+arxiv: '2606.29592'
+doi: null
+url: https://arxiv.org/abs/2606.29592
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: |
+  An open-source Gymnasium benchmark of 15 physics-simulated STEM 'worlds' (5 materials x 3 difficulty levels) with four characterization tasks, scoring agents by the area under a dose-efficiency curve (DEC-AUC). Across 33 agent configurations the perception ('analyst') pipeline, not the navigation policy, dominated dose efficiency; production vision-language models underperformed task-specific CNNs by ~13x on crystallographic defect analysis.
+benchmark_features:
+  agents_evaluated:
+  - raster / Bayesian / adaptive finite-state-machine navigators
+  - CNN analysts
+  - production-tier vision-language models (names not verified)
+  evaluation_target:
+  - simulation_control
+  - perception
+  - instrument_control
+  execution_mode: digital_twin
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results:
+  - CNN analyst + naive raster scanning raised DEC-AUC 5.5x over a CNN-free raster baseline (0.287 vs 0.052); Bayesian
+    or adaptive-FSM navigation gave no statistically significant further gain.
+  - Production VLMs underperformed task-specific CNNs by ~13x on crystallographic defect analysis.
+  holdout_or_split_design: null
+  instruments:
+  - name: Simulated scanning transmission electron microscope (physics-based image simulation)
+    modality: microscopy
+    real_or_simulated: simulated
+  leakage_or_contamination_risk: Synthetic simulated worlds; not discussed in accessible text.
+  metric_types:
+  - other
+  n_agent_configs: 33
+  n_instances_or_runs_reported: null
+  n_task_families: 15
+  n_tasks: 4
+  open_source: true
+  primary_metric: DEC-AUC (area under the dose-efficiency curve)
+  repetitions_per_task: null
+  sampling_strategy: 'Factorial: 5 materials x 3 difficulty levels = 15 worlds; 4 characterization tasks; 33 agent
+    configurations decoupling perception (analyst), navigation and planning.'
+  scientific_domains:
+  - electron microscopy
+  - materials science / crystallography
+  scoring_granularity: continuous
+  target_population: Sequential acquisition decisions (where/how much to scan) under an electron-dose budget in
+    autonomous STEM.
+  task_source: synthetic_generated
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: image_interpretation
+  quantitative_tolerance: null
+  reasoning_demand: medium
+  safety_criticality: low
+  task_taxonomy:
+  - four characterisation tasks incl. crystallographic defect analysis (full list not verified)
+  tool_composition: Gymnasium environment API (observation = simulated STEM frames; action = scan positions/parameters).
+  tool_interface:
+  - python_api
+  workflow_depth: long_horizon
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Physics-simulated STEM worlds packaged as Gymnasium environments.
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: simulated
+  sample_types:
+  - five simulated crystalline materials (names not verified)
+  signal_quality_variation: Three difficulty levels; dose budget controls noise.
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models: []
+  multi_agent: false
+  planner: varied
+  rag_or_memory: none
+  tools: []
+  verifier_or_self_debug: none
+  vision_used: mixed
+transfer_relevant_findings:
+- Decoupling perception from navigation/planning shows that where a benchmark score comes from (perception vs control)
+  determines what it predicts - relevant to attributing transfer failures.
+limitations:
+- Not an LLM-agent benchmark per se (VLMs are one analyst option); simulation only; code URL and per-model numbers
+  not verifiable here.
+related:
+- xrm_agent_benchmarks
+- labosbench
+notes: |
+  Details come from search snippets of the arXiv abstract and two GitHub digest mirrors (author list confirmed). Code repository URL, license, task names and VLM identities are unverified.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted_reviewed
+  sources_consulted:
+  - https://arxiv.org/abs/2606.29592
+  confidence: low
+  review_status: reviewed
+  reviewer_notes: 'Reviewed 2026-09-15: task and family counts as extracted look inverted (4 vs 15) and could not
+    be verified against a primary source; treat as provisional.'

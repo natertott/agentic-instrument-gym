@@ -1,0 +1,134 @@
+id: mmsci
+record_type: benchmark
+name: 'MMSci: A Dataset for Graduate-Level Multi-Discipline Multimodal Scientific Understanding'
+short_name: MMSci
+year: 2024
+venue: arXiv (Jul 2024; revised Oct 2024); OpenReview submissions (ICLR 2025 track) — final venue not confirmed
+authors_short: Li et al. (UC Santa Barbara / POSTECH)
+arxiv: '2407.04903'
+doi: null
+url: https://arxiv.org/abs/2407.04903
+code_url: https://github.com/Leezekun/MMSci
+data_url: https://mmsci.s3.amazonaws.com/benchmark.zip (also rawdata.zip, pretraindata.zip)
+license: Apache-2.0 (code); CC BY 4.0 (data)
+status: preprint
+summary: |
+  131,393 open-access Nature Communications articles with 742,273 figures (514,054 sub-figures) across 72 disciplines in 5 major categories, including microscopy images, schematics and experimental data. Benchmarks: scientific figure captioning (ungrounded / abstract-grounded / full-content-grounded) and three multiple-choice VQA settings (~1,200 samples each: figure captions, sub-captions, all sub-captions). Many open-source models are at chance; GPT-4o/GPT-4V also struggle.
+benchmark_features:
+  agents_evaluated:
+  - GPT-4V
+  - GPT-4o
+  - Kosmos-2
+  - BLIP-2
+  - Qwen-VL-Chat
+  - LLaVA variants
+  - LLaVA-Next-MMSci
+  - Qwen2-VL-2B/7B fine-tunes (19 models per digest)
+  evaluation_target:
+  - question_answering
+  - perception
+  execution_mode: static_text
+  has_abstention_eval: false
+  has_human_baseline: true
+  has_safety_eval: false
+  headline_results:
+  - Many open-source models at chance on MCQ; GPT-4o highest METEOR/ROUGE in full-article-grounded captioning
+  - Human expert MCQ baseline 86.2% (digest); fine-tuned Qwen2-VL-7B reported to exceed GPT-4o and human experts
+    on MCQ
+  - Fine-tuned Qwen2-VL-2B reaches GPT-4o-level MCQ accuracy; captioning remains hard
+  holdout_or_split_design: test/dev splits released; training (visual-instruction >1M conversations; 108,843 multi-turn)
+    and interleaved pretraining data separate
+  instruments:
+  - name: none (published figures)
+    modality: microscopy
+    real_or_simulated: none
+  leakage_or_contamination_risk: Open-access articles likely in LLM pretraining corpora
+  metric_types:
+  - success_rate
+  - llm_judge
+  - other
+  n_agent_configs: 19
+  n_instances_or_runs_reported: null
+  n_task_families: 2
+  n_tasks: null
+  open_source: true
+  primary_metric: MCQ accuracy (VQA); BLEU/ROUGE/METEOR/BERTScore/CIDEr/FActScore/G-Eval (captioning)
+  repetitions_per_task: null
+  sampling_strategy: Figures/captions from Nature Communications; test 1,418 articles and dev 1,414 articles; ~1,200
+    samples per VQA setting
+  scientific_domains:
+  - 72 disciplines incl. materials science
+  - chemistry
+  - physics
+  - biology
+  scoring_granularity: mixed
+  target_population: Graduate-level comprehension of scientific figures and captions across disciplines
+  task_source: literature_derived
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: image_interpretation
+  quantitative_tolerance: n/a
+  reasoning_demand: high
+  safety_criticality: none
+  task_taxonomy:
+  - scientific figure captioning (ungrounded
+  - abstract-grounded
+  - content-grounded)
+  - VQA setting I (figure->caption)
+  - setting II (sub-figure->sub-caption)
+  - setting III (all sub-captions matching)
+  tool_composition: none
+  tool_interface:
+  - natural_language
+  workflow_depth: single_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Static figure/caption evaluation
+  injected_faults: false
+  novelty_control: none
+  sample_real_or_simulated: dataset
+  sample_types:
+  - schematics
+  - simulated images
+  - macroscopic/microscopic photos (incl. SEM/TEM micrographs)
+  - western blots
+  - plots
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models:
+  - GPT-4V
+  - GPT-4o
+  - Qwen2-VL
+  - LLaVA
+  - Kosmos-2
+  - BLIP-2
+  - Qwen-VL-Chat
+  multi_agent: false
+  planner: none
+  rag_or_memory: none
+  tools: []
+  verifier_or_self_debug: none
+  vision_used: true
+transfer_relevant_findings:
+- Caption-matching MCQ can be learned from in-domain fine-tuning to super-expert levels, while generative captioning
+  stays hard — MCQ accuracy transfers poorly to open-ended understanding
+limitations:
+- Publication bias (Nature Communications only); microscopy share not quantified
+- Exact per-model MCQ accuracies could not be retrieved
+related:
+- macbench
+- microvqa
+notes: Counts from a GitHub-mirrored paper summary (st143575 blog) and memgrafter digest; venue status unverified
+  (OpenReview blocked).
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2407.04903
+  - https://github.com/Leezekun/MMSci
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

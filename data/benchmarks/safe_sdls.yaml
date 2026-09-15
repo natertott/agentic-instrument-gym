@@ -1,0 +1,97 @@
+id: safe_sdls
+record_type: framework
+name: Steering towards safe self-driving laboratories
+short_name: Safe SDLs (Leong et al.)
+year: 2025
+venue: Nature Reviews Chemistry 9(10):707-722 (published 18 Aug 2025); ChemRxiv preprint Dec 2024
+authors_short: Leong et al. (Leong, Griesbach, Zhang, Darvish, Zhao, Mandal, Zou, Hao, Bernales, Aspuru-Guzik)
+arxiv: null
+doi: 10.1038/s41570-025-00747-x
+url: https://www.nature.com/articles/s41570-025-00747-x
+code_url: null
+data_url: null
+license: null
+status: published
+summary: |
+  Perspective on safety in self-driving laboratories. Juxtaposes the development trajectory of SDLs with other autonomous technologies (notably autonomous vehicles) and focuses on safeguards against accidents ranging from near-misses to catastrophic failures.
+schema_axes_proposed:
+- Accident-severity spectrum from near-miss to catastrophic failure (verified from abstract)
+- Development-trajectory comparison with other autonomous technologies, e.g. autonomous vehicles (verified from
+  abstract)
+- 'UNVERIFIED: the paper''s detailed safety taxonomy / layered safety framework could not be read in this session'
+benchmark_features:
+  agents_evaluated: []
+  evaluation_target: []
+  execution_mode: null
+  has_abstention_eval: null
+  has_human_baseline: null
+  has_safety_eval: null
+  headline_results: []
+  holdout_or_split_design: null
+  instruments: []
+  leakage_or_contamination_risk: null
+  metric_types: []
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: null
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - chemistry
+  - materials science
+  scoring_granularity: null
+  target_population: null
+  task_source: null
+task_features:
+  closed_loop_feedback: null
+  perceptual_demand: null
+  quantitative_tolerance: null
+  reasoning_demand: null
+  safety_criticality: null
+  task_taxonomy: []
+  tool_composition: null
+  tool_interface: []
+  workflow_depth: null
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: null
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: null
+  sample_types: []
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models: []
+  multi_agent: null
+  planner: null
+  rag_or_memory: null
+  tools: []
+  verifier_or_self_debug: null
+  vision_used: null
+transfer_relevant_findings:
+- Frames SDL safety by analogy to autonomous-vehicle safety maturation, suggesting graded autonomy levels and incident-severity
+  classes as benchmark axes (framing only; details unverified).
+- Cited by later work (e.g. Safe-SDL arXiv 2602.15061, GPMs-book) as the reference for 'safety and governance concerns'
+  in closing the loop in real labs.
+limitations:
+- 'Body text inaccessible in this session: the safety taxonomy/layers requested by the assignment are NOT extracted.'
+related:
+- sdl_review_2026
+- safe_sdl_framework
+- labsafety_bench
+notes: |
+  nature.com, PubMed, ChemRxiv (engage id 6764449b6dde43c908a1d8c6), ResearchGate and Semantic Scholar all blocked; GitHub code search found only citations/bib entries and a truncated abstract ("...the rise of self-driving laboratories (SDLs), which leverage robo[tics]..."). Abstract gist (safeguards against accidents from near-misses to catastrophic failures; juxtaposition with other autonomous technologies) comes from the PubMed snippet returned by WebSearch. The safety taxonomy/layers must be filled in from the primary source in a session with publisher access.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://www.nature.com/articles/s41570-025-00747-x
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

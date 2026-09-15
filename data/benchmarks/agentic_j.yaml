@@ -1,0 +1,101 @@
+id: agentic_j
+record_type: system
+name: 'Agentic-J: An AI Agent for Biological Microscopy Image Analysis'
+short_name: Agentic-J
+year: 2026
+venue: arXiv (Jun 2026)
+authors_short: Johanns et al. (Gunzer group, ISAS / University Duisburg-Essen)
+arxiv: '2606.02080'
+doi: null
+url: https://arxiv.org/abs/2606.02080
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: |
+  A containerised multi-agent assistant for ImageJ/Fiji that turns natural-language requests into reproducible analysis workflows (nuclei segmentation, cell tracking, multi-condition quantification). Image analysis only — no microscope control; evaluation details not retrievable.
+benchmark_features:
+  agents_evaluated: []
+  evaluation_target:
+  - data_analysis
+  - code_generation
+  execution_mode: static_code_eval
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results: []
+  holdout_or_split_design: null
+  instruments:
+  - name: none (ImageJ/Fiji on stored images)
+    modality: microscopy
+    real_or_simulated: none
+  leakage_or_contamination_risk: null
+  metric_types:
+  - other
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: null
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - cell biology
+  - bioimage analysis
+  scoring_granularity: null
+  target_population: Common Fiji bioimage-analysis tasks from natural language
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: image_reading
+  quantitative_tolerance: null
+  reasoning_demand: medium
+  safety_criticality: none
+  task_taxonomy:
+  - nuclei segmentation
+  - cell tracking
+  - multi-condition quantification
+  tool_composition: Multi-agent orchestration over ImageJ/Fiji macros/plugins in a container
+  tool_interface:
+  - python_api
+  - gui
+  - natural_language
+  workflow_depth: multi_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Containerised ImageJ/Fiji
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: dataset
+  sample_types:
+  - fluorescence/brightfield microscopy image datasets
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models: []
+  multi_agent: true
+  planner: null
+  rag_or_memory: null
+  tools:
+  - ImageJ/Fiji
+  verifier_or_self_debug: none
+  vision_used: null
+transfer_relevant_findings: []
+limitations:
+- Abstract-level info only; no task counts or success rates retrieved
+related:
+- atomic_microscopy
+- micro_bench
+notes: 'Short record. Partial author list from a GitHub-mirrored CV daily digest; related but out-of-scope analysis
+  agents: Omega (napari LLM agent, Nature Methods 2024) and BioImage.IO Chatbot (Nature Methods 2024).'
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2606.02080
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

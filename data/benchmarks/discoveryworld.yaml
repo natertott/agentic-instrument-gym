@@ -1,0 +1,192 @@
+id: discoveryworld
+record_type: benchmark
+name: 'DiscoveryWorld: A Virtual Environment for Developing and Evaluating Automated Scientific Discovery Agents'
+short_name: DiscoveryWorld
+year: 2024
+venue: NeurIPS 2024 Datasets and Benchmarks Track (Spotlight)
+authors_short: Peter Jansen et al. (Allen Institute for AI / University of Arizona)
+arxiv: '2406.06769'
+doi: null
+url: https://arxiv.org/abs/2406.06769
+code_url: https://github.com/allenai/discoveryworld
+data_url: Agent and human run logs/videos on Google Drive, linked from https://github.com/allenai/discoveryworld/tree/main/data
+license: Apache-2.0 for code (repo LICENSE.txt); CuteRPG art assets by PixyMoon carry separate licensing
+status: published
+summary: |
+  DiscoveryWorld is a turn-based 2D simulated environment (text/JSON observations with an optional 16x24-tile image) in which an agent must run complete cycles of scientific discovery -- form hypotheses, use virtual instruments to collect measurements, analyse data, and act on conclusions. It contains 120 benchmark tasks (8 discovery themes x 3 difficulty levels x 5 parametric seeds) plus 10 'small skills' unit tests, scored by binary task completion, a normalized procedural-progress scorecard, and LLM-judged recovery of explanatory knowledge. GPT-4o-based ReAct, Plan+Execute and Hypothesizer agents complete far fewer tasks than 11 human scientists (e.g. ReAct 38% of easy and 18% of challenge tasks vs. a 66% average human completion rate).
+benchmark_features:
+  agents_evaluated:
+  - Random baseline
+  - ReAct (GPT-4o)
+  - Plan+Execute (GPT-4o)
+  - Hypothesizer (GPT-4o; explicit working memory of hypotheses and measurements, knowledge consolidation every
+    10 steps)
+  evaluation_target:
+  - simulation_control
+  - instrument_control
+  - protocol_planning
+  - data_analysis
+  execution_mode: simulator
+  has_abstention_eval: false
+  has_human_baseline: true
+  has_safety_eval: false
+  headline_results:
+  - Most performant agent (ReAct) completed only 38% of Easy tasks and 18% of Challenge tasks
+  - Hypothesizer, best at knowledge discovery, recovered 34% of gold explanatory knowledge on Easy tasks and 8%
+    on Challenge tasks
+  - '11 human scientists: 66% average task completion, 55% average knowledge score; 11 of 16 human-played tasks
+    had completion rates above 60%'
+  holdout_or_split_design: 'Recommended theme-level split (train: Proteomics, Combinatorial Chemistry; dev: Archaeology,
+    Reactor Lab; test: Plant Nutrients, Space Sick, Rocket Science, Lost in Translation); seeds >4 generate extra
+    unvetted variations'
+  instruments:
+  - name: Spectrometer
+    modality: spectroscopy
+    real_or_simulated: simulated
+  - name: Microscope
+    modality: microscopy
+    real_or_simulated: simulated
+  - name: Thermometer
+    modality: generic_lab
+    real_or_simulated: simulated
+  - name: Densitometer
+    modality: generic_lab
+    real_or_simulated: simulated
+  - name: pH meter
+    modality: generic_lab
+    real_or_simulated: simulated
+  - name: NPK / soil nutrient meter
+    modality: generic_lab
+    real_or_simulated: simulated
+  - name: Radiation meter
+    modality: generic_lab
+    real_or_simulated: simulated
+  - name: Proteomics (protein) meter
+    modality: generic_lab
+    real_or_simulated: simulated
+  - name: Radiocarbon meter / radioisotope meter
+    modality: generic_lab
+    real_or_simulated: simulated
+  - name: Sampler, petri dish, counting computer, chemical dispenser, load cell, pendulum, rocket + launch monitor
+    modality: generic_lab
+    real_or_simulated: simulated
+  leakage_or_contamination_risk: Fictional scenarios with parametric variation limit memorization; the paper and
+    README note the paper contains task 'spoilers'. GPT-4o is both the agent backbone and the knowledge judge.
+  metric_types:
+  - success_rate
+  - partial_credit
+  - llm_judge
+  - rubric
+  - human_eval
+  - cost
+  n_agent_configs: 4
+  n_instances_or_runs_reported: null
+  n_task_families: 8
+  n_tasks: 120
+  open_source: true
+  primary_metric: Task completion (binary completedSuccessfully), reported alongside procedural progress (scoreNormalized
+    0-1) and discovery-knowledge accuracy (critical yes/no questions judged with GPT-4o)
+  repetitions_per_task: Official benchmarking runs each of the 24 theme x difficulty templates for seeds 0-4 (5
+    parametric variations) once per agent; Easy and unit tests capped at 100 steps, Normal/Challenge at 1000 steps
+    (repo-verified, agents/README)
+  sampling_strategy: 'Hand-designed by the authors: 8 discovery themes each with Easy/Normal/Challenge variants
+    (24 templates); parametric generation (random seeds 0-4 vetted) varies object names, values and layouts. Paper
+    suggests tasks 1-6 (Proteomics, Chemistry) for training, 7-12 (Archaeology, Reactor Lab) for dev, 13-24 (Plant
+    Nutrients, Space Sick, Rocket Science, Translation) for test; unit tests all available for training (search-snippet)'
+  scientific_domains:
+  - proteomics
+  - combinatorial chemistry
+  - archaeology / radioisotope dating
+  - plant biology (soil nutrients)
+  - reactor physics / materials
+  - linguistics (translation)
+  - epidemiology / medicine (Space Sick)
+  - rocket science / physics
+  scoring_granularity: mixed
+  target_population: General scientific-discovery skills (hypothesis formation, experiment design, measurement,
+    analysis) across diverse fictional-but-plausible topics, intended to test generality rather than task-specific
+    solutions
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: mixed
+  quantitative_tolerance: Instrument readouts are numeric; task success is determined by scenario-specific scorecards
+    (e.g. correct flag placement, correct nutrient chosen), not by numeric tolerance on agent-reported values. Knowledge
+    is scored via binary critical questions.
+  reasoning_demand: high
+  safety_criticality: none
+  task_taxonomy:
+  - 'Discovery themes: Proteomics; Combinatorial Chemistry; Archaeology Dating; Plant Nutrients; Reactor Lab; Lost
+    in Translation; Space Sick; It''s (not) Rocket Science!'
+  - 'Unit tests (Small Skills): Dialog; Pick and Place; Pick and Give; Instrument Measurement; Doors; Doors with
+    Keys; Navigation in a House; Search; Discovery Feed; Moving Agents'
+  - 'Difficulties: Easy, Normal, Challenge'
+  tool_composition: 17 JSON action types (PICKUP, DROP, PUT, OPEN, CLOSE, ACTIVATE, DEACTIVATE, TALK, EAT, READ,
+    USE, MOVE_DIRECTION, ROTATE_DIRECTION, TELEPORT_TO_LOCATION, TELEPORT_TO_OBJECT, DISCOVERY_FEED_GET_UPDATES,
+    DISCOVERY_FEED_GET_POST_BY_ID) taking object UUIDs; instruments are used via USE(instrument, target); devices
+    such as soil computers or crystal reactors are operated through dialog trees (repo-verified)
+  tool_interface:
+  - python_api
+  - natural_language
+  workflow_depth: long_horizon
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Gym-like Python API (loadScenario / getAgentObservation / performAgentAction / tick).
+    Observations are JSON dicts (nearby & accessible objects with UUIDs, inventory, location, dialog state, DiscoveryFeed
+    posts, last action result, task description) plus optional base64 images with/without grid. Scorecards expose
+    completion, normalized progress, sub-goal list and critical questions (hidden from the agent). A GUI (scripts/userstudy.py)
+    supports human play; full world-state logs and videos are exported.
+  injected_faults: false
+  novelty_control: Fictional worlds; 5 vetted seeds per template; theme-level train/dev/test recommendation
+  sample_real_or_simulated: simulated
+  sample_types:
+  - simulated soil, plants, rocks, artifacts, chemicals, animals/NPCs, reactor crystals, rocket components on a
+    32x32 tile grid
+  signal_quality_variation: Parametric seeds vary hidden ground-truth values (e.g. which species is the outlier,
+    correct nutrient); no explicit sensor noise model documented
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models:
+  - gpt-4o (2024-05-13)
+  multi_agent: false
+  planner: varied
+  rag_or_memory: varied
+  tools:
+  - environment actions only; Hypothesizer keeps a scientific working memory and consolidates it every 10 steps
+  verifier_or_self_debug: none
+  vision_used: mixed
+transfer_relevant_findings:
+- Large human-agent gap on the same tasks (66% vs <=38% completion) despite tasks being 'difficult but solvable'
+  for domain experts
+- Procedural progress scores are much higher than completion, i.e. agents perform many correct steps but fail to
+  close the discovery loop
+- 'Knowledge discovery lags task completion: agents can sometimes finish a task by brute force without articulating
+  the explanatory mechanism (humans also did this, lowering their knowledge score to 55%)'
+- Iterative plan decomposition (Plan+Execute) and explicit hypothesis memory (Hypothesizer) change the failure profile
+  but do not close the gap
+- 'Repo errata: scorers for Lost in Translation and Rocket Science had bugs during the human study and were corrected
+  post hoc; earlier knowledge scoring used a different scorecard key, so re-scoring released logs requires care'
+limitations:
+- Single backbone (GPT-4o) for all baseline agents; costs capped per run
+- Only 5 seeds per template; some seeds >4 may generate unsolvable scenarios
+- Knowledge scoring depends on GPT-4o as judge over agent notes/thought strings
+- Simulated instruments return clean values; no noise, drift or calibration modelling
+- Human study covered 16 of the tasks (Normal/Challenge, seed 1) with 11 participants
+related:
+- scienceworld
+- discoverybench
+- scigym
+- scienceagentbench
+notes: |
+  Repo-verified: venue, license, 8 themes + 10 unit tests, 3 difficulties, seeds 0-4, step caps (100/1000), action list, observation format, three scorecard metrics, baseline agent names, data release and errata, instrument classes (ScienceTools.py, ReactorLab.py, Archaeology.py). Search-snippet: 120 tasks / 24 templates, human study size (11 scientists) and 66%/55% figures, ReAct 38%/18%, Hypothesizer 34%/8%, suggested split. Not verifiable: DOI, n_instances_or_runs_reported, per-run cost figures, exact vision usage per agent in the paper. OpenReview id cDYqckEt6d.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2406.06769
+  - https://github.com/allenai/discoveryworld
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

@@ -1,0 +1,102 @@
+id: llm_hypothesis_spm_2026
+record_type: system
+name: LLM-Guided Open Hypothesis Learning from Autonomous Scanning Probe Microscopy Experiments
+short_name: null
+year: 2026
+venue: arXiv preprint, May 2026
+authors_short: Slautin et al. (Boris Slautin and colleagues; co-author list not verified)
+arxiv: '2605.06839'
+doi: null
+url: https://arxiv.org/abs/2605.06839
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: |
+  An open hypothesis-learning framework for autonomous SPM in which symbolic regression proposes candidate analytical relationships from sparse measurements and an LLM-based evaluator ranks them by physical plausibility, closing the loop with new measurements. Demonstrated on autonomous piezoresponse force microscopy of ferroelectric domain switching in a PZT thin film starting from five seed measurements. The LLM reasons about SPM data/hypotheses rather than directly operating the instrument.
+benchmark_features:
+  agents_evaluated:
+  - symbolic regression + LLM physical-plausibility evaluator (LLM identity not verified)
+  evaluation_target:
+  - data_analysis
+  - protocol_planning
+  execution_mode: physical_instrument
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results: []
+  holdout_or_split_design: null
+  instruments:
+  - name: piezoresponse force microscope (AFM-based PFM; vendor not verified)
+    modality: microscopy
+    real_or_simulated: real
+  leakage_or_contamination_risk: LLM evaluator may recall known ferroelectric switching laws from training data,
+    favouring textbook forms.
+  metric_types:
+  - other
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: null
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: Single material system (PZT thin film); active-learning acquisition from 5 seed measurements.
+  scientific_domains:
+  - ferroelectrics
+  - piezoresponse force microscopy
+  - domain switching physics
+  scoring_granularity: continuous
+  target_population: Autonomous discovery of physical laws from SPM measurements (open hypothesis learning).
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: structured_readout
+  quantitative_tolerance: null
+  reasoning_demand: high
+  safety_criticality: low
+  task_taxonomy: []
+  tool_composition: Symbolic regression candidate generator -> LLM ranking -> autonomous PFM measurement loop.
+  tool_interface:
+  - python_api
+  workflow_depth: long_horizon
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Autonomous PFM domain-switching experiments; workflow lineage from the Kalinin/Vasudevan
+    hypothesis-learning SPM line of work.
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: real
+  sample_types:
+  - PZT (lead zirconate titanate) ferroelectric thin film
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models: []
+  multi_agent: false
+  planner: plan_and_execute
+  rag_or_memory: null
+  tools:
+  - symbolic regression
+  - PFM measurement API
+  verifier_or_self_debug: external_verifier
+  vision_used: false
+transfer_relevant_findings:
+- Uses the LLM as a plausibility judge over machine-generated hypotheses rather than as an operator -- a pattern
+  that sidesteps the code-generation and tool-coordination failures dominant in AFMBench.
+limitations:
+- Single sample/material; not a benchmark; LLM's contribution not quantified in accessible text.
+related:
+- afmbench
+notes: |
+  Demonstration, not benchmark. Only the abstract (search snippet) was accessible. LLM model, co-authors, metrics and code availability unverified.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2605.06839
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

@@ -1,0 +1,102 @@
+id: agent_generalizability_survey
+record_type: survey
+name: 'Generalizability of Large Language Model-Based Agents: A Comprehensive Survey'
+short_name: Agent generalizability survey
+year: 2026
+venue: ACM Computing Surveys 58(10) (2026); arXiv Sep 2025
+authors_short: Zhang et al. (Minxing Zhang, Yi Yang, Roy Xie, Bhuwan Dhingra, Shuyan Zhou, Jian Pei)
+arxiv: '2509.16330'
+doi: 10.1145/3794858
+url: https://arxiv.org/abs/2509.16330
+code_url: null
+data_url: null
+license: null
+status: published
+summary: |
+  First comprehensive review of generalizability in LLM-based agents, defined as the ability to maintain consistent performance across varied instructions, tasks, environments and domains, especially beyond the agent's fine-tuning data. Situates generalizability within a hierarchical domain-task ontology, reviews datasets, evaluation dimensions and metrics (and their limitations), categorizes improvement methods (backbone LLM / agent components / their interactions), distinguishes generalizable frameworks from generalizable agents, and calls for standardized frameworks and variance- and cost-based metrics.
+schema_axes_proposed:
+- 'Generalization levels: instruction-level; task-level; environment-level; domain-level (hierarchical domain-task
+  ontology; domains mapped to NAICS codes per secondary digest)'
+- In-distribution vs beyond-fine-tuning-data performance
+- 'Variance-based metric (sigma): performance disparity across task categories within a domain (secondary digest)'
+- 'Cost-based metric: ''generalizability cost'' comparing specialist vs generalist agents (secondary digest)'
+- Generalizable framework (prompting/RAG, no weight updates) vs generalizable agent (fine-tuned) distinction
+- 'Method locus: backbone LLM / agent components (perception, memory) / component interactions (tool selection,
+  retrieval, re-planning)'
+- 'Recommendation: standardized evaluation frameworks; dynamic curricula in low-latency sandboxes'
+benchmark_features:
+  agents_evaluated: []
+  evaluation_target: []
+  execution_mode: null
+  has_abstention_eval: null
+  has_human_baseline: null
+  has_safety_eval: null
+  headline_results: []
+  holdout_or_split_design: null
+  instruments: []
+  leakage_or_contamination_risk: null
+  metric_types: []
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: null
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - general (web navigation, household robotics, etc.)
+  scoring_granularity: null
+  target_population: null
+  task_source: null
+task_features:
+  closed_loop_feedback: null
+  perceptual_demand: null
+  quantitative_tolerance: null
+  reasoning_demand: null
+  safety_criticality: null
+  task_taxonomy: []
+  tool_composition: null
+  tool_interface: []
+  workflow_depth: null
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: null
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: null
+  sample_types: []
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models: []
+  multi_agent: null
+  planner: null
+  rag_or_memory: null
+  tools: []
+  verifier_or_self_debug: null
+  vision_used: null
+transfer_relevant_findings:
+- Provides the four-level vocabulary (instruction/task/environment/domain) for labelling what an instrument-control
+  benchmark's held-out split actually tests.
+- Argues aggregate accuracy hides generalization gaps; recommends variance across task categories and cost of generality
+  as reported metrics.
+- Framework-level generality (e.g. ReAct) does not imply agent-level generality -- benchmark records should distinguish
+  the two.
+limitations:
+- Survey; no empirical validation. Detailed ontology/metric definitions rest on a secondary digest.
+related:
+- xrm_agent_benchmarks
+- sdl_review_2026
+notes: |
+  arXiv/ACM blocked. Abstract verified verbatim from arXiv-daily mirrors (CSQianDong, HuggingAGI). Section headings from a third-party style report: 1 Introduction; 2 LLM-based Agents and Ecosystems; 3 Measuring LLM-based Agent Generalizability; 4 Improving LLM-Based Agent Generalizability via the Backbone LLM (list truncated). The four-level taxonomy names are supported by the abstract ('instructions, tasks, environments, and domains'); NAICS mapping, sigma and generalizability-cost metric names come from memgrafter/research-digests (secondary). CSUR volume/issue (58(10)) taken from the assignment; the DOI 10.1145/3794858 was confirmed to resolve to this title via a search result.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2509.16330
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

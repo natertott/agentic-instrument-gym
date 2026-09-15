@@ -1,0 +1,110 @@
+id: als_agentic_accelerator
+record_type: system
+name: Agentic Artificial Intelligence for Multistage Physics Experiments at a Large-Scale User Facility Particle
+  Accelerator
+short_name: ALS agentic accelerator
+year: 2025
+venue: Physical Review Research (2026; doi 10.1103/jtqy-9jz1); arXiv Sep 2025
+authors_short: Hellert et al.
+arxiv: '2509.17255'
+doi: 10.1103/jtqy-9jz1
+url: https://arxiv.org/abs/2509.17255
+code_url: https://github.com/als-apg/osprey
+data_url: null
+license: BSD-3-Clause (Osprey)
+status: published
+summary: |
+  First LLM-driven agentic system to autonomously execute multi-stage physics experiments on a production synchrotron light source (ALS accelerator). Natural-language prompts become structured plans combining archive data retrieval, control-channel resolution, script generation, controlled machine interaction and analysis, under plan-first orchestration, bounded tool access and operator-standard safety constraints. Not a beamline, but the same facility class and framework (Osprey) later used at ALS beamline 5.3.1.
+benchmark_features:
+  agents_evaluated: []
+  evaluation_target:
+  - instrument_control
+  - protocol_planning
+  - safety
+  execution_mode: physical_instrument
+  has_abstention_eval: false
+  has_human_baseline: true
+  has_safety_eval: true
+  headline_results:
+  - In a representative machine-physics task, preparation time reduced by two orders of magnitude relative to manual
+    scripting even for a system expert, while operator-standard safety constraints were strictly upheld (abstract)
+  holdout_or_split_design: null
+  instruments:
+  - name: ALS storage ring / accelerator control system (EPICS)
+    modality: generic_lab
+    real_or_simulated: real
+  leakage_or_contamination_risk: null
+  metric_types:
+  - time
+  - safety_violations
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: true
+  primary_metric: Preparation time vs manual expert scripting; safety-constraint adherence
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - accelerator physics
+  - synchrotron light source operations
+  scoring_granularity: null
+  target_population: Multi-stage machine-physics experiments normally scripted by accelerator experts
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: structured_readout
+  quantitative_tolerance: null
+  reasoning_demand: high
+  safety_criticality: high
+  task_taxonomy: []
+  tool_composition: Plan-first orchestration; dynamic capability selection; archive retrieval, channel finding,
+    script generation, machine interaction, analysis; reproducible artifacts
+  tool_interface:
+  - natural_language
+  - python_api
+  - mcp
+  workflow_depth: long_horizon
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Live ALS accelerator control system
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: none
+  sample_types: []
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: some
+  models: []
+  multi_agent: false
+  planner: plan_and_execute
+  rag_or_memory: some
+  tools:
+  - archive data retrieval
+  - control-system channel resolution
+  - script generation
+  - controlled machine interaction
+  - analysis
+  verifier_or_self_debug: null
+  vision_used: false
+transfer_relevant_findings:
+- Plan-first orchestration with bounded tool access and human approval provides auditable, reproducible execution
+  on safety-critical hardware
+limitations:
+- Single representative task reported; no task suite or success-rate table found in accessible material
+related:
+- osprey_als_bl531
+- lightfall
+notes: |
+  Authors: Thorsten Hellert, Drew Bertwistle, Simon C. Leemann, Antonin Sulc, Marco Venturini (LBNL). Journal DOI from APS link in search results; not fetched directly. Included because it is a synchrotron-facility LLM agent with an evaluation claim; it targets the accelerator rather than a beamline.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2509.17255
+  - https://github.com/als-apg/osprey
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

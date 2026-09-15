@@ -1,0 +1,111 @@
+id: bioplanner
+record_type: benchmark
+name: 'BioPlanner: Automatic Evaluation of LLMs on Protocol Planning in Biology'
+short_name: BioPlanner
+year: 2023
+venue: EMNLP 2023 (main), pp. 2676-2694, Singapore
+authors_short: Odhran O'Donoghue et al.
+arxiv: '2310.10632'
+doi: null
+url: https://aclanthology.org/2023.emnlp-main.162/
+code_url: https://github.com/bioplanner/bioplanner
+data_url: https://github.com/bioplanner/bioplanner
+license: null
+status: published
+summary: |
+  BioPlanner introduces BioProt, a dataset of biology protocols (sourced from protocols.io) paired with pseudocode representations, and an automatic evaluation in which an LLM must reconstruct a protocol's pseudocode from a high-level description and a list of admissible pseudofunctions. GPT-4 predicted the next protocol step with 70.6% accuracy vs 65% for GPT-3.5, and a generated protocol was executed successfully in a wet lab as external validation.
+benchmark_features:
+  agents_evaluated:
+  - GPT-3.5
+  - GPT-4
+  evaluation_target:
+  - protocol_planning
+  execution_mode: static_text
+  has_abstention_eval: false
+  has_human_baseline: false
+  has_safety_eval: false
+  headline_results:
+  - GPT-4 next-step prediction accuracy 70.6% vs GPT-3.5 65%
+  - A novel protocol generated from retrieved pseudocode was run successfully in a biological laboratory
+  holdout_or_split_design: null
+  instruments: []
+  leakage_or_contamination_risk: protocols.io protocols are public and likely in GPT training data; pseudocode abstraction
+    partly mitigates.
+  metric_types:
+  - success_rate
+  - partial_credit
+  - other
+  n_agent_configs: 2
+  n_instances_or_runs_reported: null
+  n_task_families: 3
+  n_tasks: null
+  open_source: true
+  primary_metric: Next-step prediction accuracy; protocol-generation similarity metrics against ground-truth pseudocode
+  repetitions_per_task: null
+  sampling_strategy: Publicly available protocols from protocols.io (pool of >9,000) converted to pseudocode by
+    an LLM and used as ground truth; pseudocode for evaluation subset human-verified (per paper; details unverified).
+  scientific_domains:
+  - biology wet-lab protocols (protocols.io)
+  scoring_granularity: mixed
+  target_population: Multi-step planning of experimental protocols in biology
+  task_source: literature_derived
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: none
+  quantitative_tolerance: null
+  reasoning_demand: medium
+  safety_criticality: low
+  task_taxonomy:
+  - next-step prediction
+  - full protocol generation from description + admissible functions
+  - function retrieval (per common description; unverified)
+  tool_composition: LLM composes admissible pseudofunctions into an ordered plan; no execution.
+  tool_interface:
+  - natural_language
+  workflow_depth: multi_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Static JSON dataset; evaluation via src/run_evaluate.py in repo.
+  injected_faults: false
+  novelty_control: null
+  sample_real_or_simulated: dataset
+  sample_types:
+  - protocol text / pseudocode
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models:
+  - GPT-3.5
+  - GPT-4
+  multi_agent: false
+  planner: none
+  rag_or_memory: some
+  tools: []
+  verifier_or_self_debug: none
+  vision_used: false
+transfer_relevant_findings:
+- Pseudocode/admissible-function abstraction makes protocol planning automatically gradable — a pattern reusable
+  for instrument-control plans.
+- Retrieval of pseudocode enabled generation of a protocol that worked physically — early evidence that abstracted
+  plans transfer to the bench.
+limitations:
+- Only two OpenAI models; small evaluation set; text-only.
+- BioProt evaluation-set size and full metric table not verified (ACL Anthology / arXiv blocked; repo README minimal).
+related:
+- bioprobench
+- lab_bench
+- biolp_bench
+notes: Authors (O'Donoghue, Shtedritski, Ginger, Abboud, Ghareeb, Rodriques; Align to Innovate / Crick / FutureHouse
+  / Oxford), venue and 70.6%/65% figures from search excerpts of ACL Anthology and arXiv. DOI not retrieved. Dataset
+  size of the pseudocode-annotated subset unverified.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://aclanthology.org/2023.emnlp-main.162/
+  - https://github.com/bioplanner/bioplanner
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

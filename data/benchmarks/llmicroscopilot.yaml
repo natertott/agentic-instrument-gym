@@ -1,0 +1,100 @@
+id: llmicroscopilot
+record_type: system
+name: 'LLMicroscopilot: An LLM assistant for scanning tunneling and transmission electron microscopy measurements'
+short_name: LLMicroscopilot
+year: 2024
+venue: LLM Hackathon for Applications in Materials Science and Chemistry 2024 (project); Zenodo record 14051590;
+  summarised in arXiv 2411.15221 (hackathon reflections)
+authors_short: Schloz & Cojal Gonzalez (Humboldt-Universität zu Berlin)
+arxiv: null
+doi: null
+url: https://zenodo.org/records/14051590
+code_url: https://gitlab.com/Schlozma/llm_autotem
+data_url: null
+license: MIT (GitLab repository)
+status: preprint
+summary: |
+  Hackathon prototype in which a general foundation LLM gains STEM-specific competence through tools wrapping the abTEM multislice simulator API, performing experimental parameter estimation and simulated experiment execution. Planned extensions include open-source microscope hardware control and RAG database access. No quantitative evaluation.
+benchmark_features:
+  agents_evaluated: []
+  evaluation_target:
+  - simulation_control
+  - instrument_control
+  execution_mode: simulator
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results: []
+  holdout_or_split_design: null
+  instruments:
+  - name: abTEM STEM simulation
+    modality: microscopy
+    real_or_simulated: simulated
+  leakage_or_contamination_risk: n/a
+  metric_types:
+  - other
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: true
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - scanning transmission electron microscopy
+  - scanning tunneling microscopy
+  scoring_granularity: binary
+  target_population: Parameter estimation and experiment execution for STEM via a simulator
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: none
+  quantitative_tolerance: null
+  reasoning_demand: medium
+  safety_criticality: none
+  task_taxonomy:
+  - parameter estimation
+  - experiment execution
+  tool_composition: LLM tool-calling over abTEM API functions
+  tool_interface:
+  - python_api
+  - natural_language
+  workflow_depth: single_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Simulation-only prototype (7 commits, 3 branches on GitLab, started 2024-05-09)
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: simulated
+  sample_types:
+  - simulated atomic structures
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models: []
+  multi_agent: false
+  planner: react
+  rag_or_memory: none
+  tools:
+  - abTEM simulation API
+  verifier_or_self_debug: none
+  vision_used: null
+transfer_relevant_findings: []
+limitations:
+- Demonstration; no benchmark
+related:
+- tem_agent
+notes: demonstration. LLM identity not verified (Zenodo and GitLab README blocked). Description assembled from the
+  arXiv 2411.15221 hackathon paper's search snippet and the llmhackathon GitHub profile.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://zenodo.org/records/14051590
+  - https://gitlab.com/Schlozma/llm_autotem
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

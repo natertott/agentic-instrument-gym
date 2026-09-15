@@ -1,0 +1,108 @@
+id: llm_spm_2024
+record_type: system
+name: Synergizing human expertise and AI efficiency with language model for microscopy operation and automated experiment
+  design
+short_name: null
+year: 2024
+venue: 'Machine Learning: Science and Technology (IOP), published 13 June 2024'
+authors_short: Liu et al. (Yongtao Liu, Marti Checa, Rama K. Vasudevan; ORNL)
+arxiv: null
+doi: 10.1088/2632-2153/ad52e9
+url: https://iopscience.iop.org/article/10.1088/2632-2153/ad52e9
+code_url: null
+data_url: null
+license: null
+status: published
+summary: |
+  Explores using ChatGPT-4 together with scanning probe microscope APIs for experimental design, workflow programming and data analysis. The LLM converts natural-language experiment ideas into executable code on the microscope API and can describe microscopy images generically, but the authors report it fails to go beyond basic analyses for in-depth technical experimental design. Demonstration/perspective study rather than a benchmark.
+benchmark_features:
+  agents_evaluated:
+  - ChatGPT-4 (GPT-4) with API access
+  evaluation_target:
+  - code_generation
+  - protocol_planning
+  - data_analysis
+  execution_mode: physical_instrument
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results:
+  - 'Qualitative: GPT-4 useful for ideation-to-code on microscope APIs and generic image description; weak at in-depth
+    technical experimental design (per abstract).'
+  holdout_or_split_design: null
+  instruments:
+  - name: scanning probe microscope with Python API (ORNL; exact model not verified)
+    modality: microscopy
+    real_or_simulated: real
+  leakage_or_contamination_risk: Not applicable (no benchmark).
+  metric_types:
+  - human_eval
+  n_agent_configs: 1
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: false
+  primary_metric: Qualitative assessment of generated code/analysis usefulness
+  repetitions_per_task: null
+  sampling_strategy: Illustrative case studies chosen by the authors.
+  scientific_domains:
+  - scanning probe microscopy
+  - materials characterization
+  scoring_granularity: mixed
+  target_population: Human-in-the-loop SPM operation and experiment design assisted by an LLM.
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: image_interpretation
+  quantitative_tolerance: null
+  reasoning_demand: medium
+  safety_criticality: low
+  task_taxonomy:
+  - experimental design
+  - programming workflows
+  - data analysis
+  tool_composition: LLM writes code against microscope API; human executes/reviews.
+  tool_interface:
+  - python_api
+  - natural_language
+  workflow_depth: multi_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: ORNL SPM with Python API; human-in-the-loop use of GPT-4 (details not verified).
+  injected_faults: null
+  novelty_control: None.
+  sample_real_or_simulated: real
+  sample_types: []
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models:
+  - GPT-4 (ChatGPT-4)
+  multi_agent: false
+  planner: none
+  rag_or_memory: none
+  tools:
+  - microscope Python API (via generated code)
+  verifier_or_self_debug: none
+  vision_used: true
+transfer_relevant_findings:
+- Early evidence (2024) that LLM code generation on microscope APIs is practical for routine workflow scripting
+  but that analysis depth and experimental-design reasoning are limiting; consistent with AFMBench's later finding
+  that code generation is the dominant failure class.
+limitations:
+- 'Demonstration, not benchmark: no task set, no success metrics, single model.'
+related:
+- afmbench
+- llm_sns_spm_2024
+notes: |
+  Demonstration, not benchmark. Details taken from the OSTI/IOP abstract as surfaced in search results; full text not reachable. arXiv id not verified (there is an early-2024 arXiv preprint of this work but its number was not confirmed this session, so left null). Instrument model, sample types and code availability unverified.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://iopscience.iop.org/article/10.1088/2632-2153/ad52e9
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

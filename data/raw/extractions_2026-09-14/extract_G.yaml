@@ -1,0 +1,1377 @@
+# extract_G.yaml -- evaluation frameworks, metric proposals, and safety/abstention benchmarks
+# relevant to LLM agents controlling scientific instruments / self-driving labs.
+#
+# PROVENANCE CAVEAT (applies to every record): during this session the egress proxy blocked
+# arxiv.org, export.arxiv.org, nature.com, pubs.rsc.org, dl.acm.org, doi.org, PubMed/PMC,
+# EuropePMC, Semantic Scholar, ChemRxiv, ResearchGate, HuggingFace, alphaXiv and *.github.io;
+# WebSearch quota was exhausted after the first 6 queries. Only github.com pages and the
+# GitHub code/repo search API were reachable. Facts below therefore come from (a) verbatim
+# copies of arXiv abstracts mirrored in GitHub repos (arXiv-daily digest repos, RSS mirrors),
+# (b) official GitHub repositories/READMEs/project-website source, (c) a mirrored full-text
+# JSON of the Volk & Abolhasani paper, and (d) the six WebSearch result snippets obtained
+# before the quota ran out. Anything sourced only from a third-party *summary* (not a verbatim
+# abstract or official repo) is flagged "secondary" in notes. Nothing was fabricated; fields
+# that could not be verified are null.
+
+id: volk_abolhasani_2024_sdl_performance_metrics
+record_type: framework
+name: "Performance metrics to unleash the power of self-driving labs in chemistry and materials science"
+short_name: "SDL performance metrics (Volk & Abolhasani)"
+year: 2024
+venue: "Nature Communications 15:1378"
+authors_short: "Volk & Abolhasani"
+arxiv: null
+doi: "10.1038/s41467-024-45569-5"
+url: "https://www.nature.com/articles/s41467-024-45569-5"
+code_url: null
+data_url: null
+license: null
+status: published
+summary: >
+  Perspective arguing that SDL studies cannot be compared from publications alone because
+  reported quantities (e.g. optimization rate) are not comparable across experimental spaces.
+  Proposes a shared definition of an SDL ("automated experimental workflows (physical world)
+  with algorithm-selected experimental parameters (digital world)") and seven performance
+  metrics that every SDL paper should report, then reviews the literature under that lens
+  (only 23% of surveyed studies included real-world benchmarking; 62% of ML studies showed
+  model validation; 71% reported no precision data).
+schema_axes_proposed:
+  - "Degree of autonomy (levels: piecewise; semi-closed-loop; closed-loop; self-motivated)"
+  - "Operational lifetime (demonstrated unassisted; demonstrated assisted; theoretical unassisted; theoretical assisted; plus labor requirements/scalability)"
+  - "Throughput (theoretical throughput vs demonstrated throughput; covers material preparation rate and analysis speed)"
+  - "Experimental precision (standard deviation of replicates of a single condition, collected in an unbiased/interleaved manner)"
+  - "Material usage (safety, monetary cost, environmental impact: total active hazardous quantity; total material per experiment; high-value material per experiment; environmentally hazardous material per experiment incl. waste streams)"
+  - "Accessible parameter space (demonstrated vs theoretical ranges; min/max bounds per parameter; parameterization in the optimizer; qualitative constraints on usable parameters)"
+  - "Optimization efficiency (optimized feature achieved and number of experiments required; benchmark vs state-of-the-art literature and vs random sampling; regression validation with train/test split; explainable-AI parameter influence, e.g. Shapley plots)"
+benchmark_features:
+  evaluation_target: null
+  execution_mode: null
+  instruments: []
+  scientific_domains: ["chemistry", "materials science"]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: null
+  task_source: null
+  sampling_strategy: null
+  metric_types: []
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: null
+  has_abstention_eval: null
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results: []
+  open_source: null
+task_features:
+  workflow_depth: null
+  perceptual_demand: null
+  reasoning_demand: null
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: null
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: null
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: null
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Autonomy should be reported as a discrete level defined by where humans touch the loop (data transfer, measurement collection, system reset, experiment selection), not as a binary 'autonomous' claim -- directly reusable as an agent-benchmark axis."
+  - "Report theoretical AND demonstrated values (throughput, lifetime, parameter space); the gap between them is itself informative."
+  - "Precision must be measured with unbiased replicates (alternate the test condition with random conditions) -- analogous to repeated-run variance for stochastic agents."
+  - "Optimization claims need a random-sampling control and out-of-sample regression validation; 'reaching an optimum' alone is not evidence of algorithm quality."
+  - "Material/hazard accounting per experiment is a cost axis absent from most agent benchmarks."
+limitations:
+  - "Perspective/heuristic; metrics are defined qualitatively, no reference implementation or scoring rubric."
+  - "Chemistry/materials focus; does not address LLM-agent-specific axes (tool use, abstention, provenance)."
+related: ["adesiji_2026_benchmarking_sdls", "canty_abolhasani_2026_sdl_review", "leong_2025_safe_sdls"]
+notes: >
+  nature.com blocked; the metric list and verbatim definitions were extracted from a mirrored
+  full-text JSON of the paper (GitHub repo NoahW99/genai-research-assistant, data/json_papers/...)
+  and cross-checked against a phys.org press summary listing the seven metrics. Figure 1 "Key
+  metrics for quantifying performance in SDLs", Figure 2 "Degrees of autonomy in SDLs", Table 1
+  overview of suggested metrics. License not stated in the mirrored text; Nat Commun articles
+  are normally CC BY 4.0 but this was NOT verified. One third-party bib cites page 1612; the
+  article number 1378 (as given in the assignment and other bibs) is used.
+---
+id: adesiji_2026_benchmarking_sdls
+record_type: framework
+name: "Benchmarking self-driving labs"
+short_name: "AF/EF SDL benchmarking"
+year: 2026
+venue: "Digital Discovery 5:14-27 (2026); arXiv preprint Aug 2025"
+authors_short: "Adesiji et al. (Adesiji, Wang, Kuo, Brown)"
+arxiv: "2508.06642"
+doi: "10.1039/D5DD00337G"
+url: "https://arxiv.org/abs/2508.06642"
+code_url: "https://github.com/kabrownlab/benchmarking"
+data_url: "https://github.com/kabrownlab/benchmarking"
+license: "MIT (code repo)"
+status: published
+summary: >
+  Review that quantifies how much SDLs accelerate learning by reducing the number of experiments
+  needed for a goal. Formalizes two metrics -- acceleration factor (AF: how much faster an
+  algorithm reaches a goal than a reference strategy) and enhancement factor (EF: how much
+  better the result is at a fixed budget) -- surveys reported values (AF median 6, tending to
+  increase with dimensionality; EF varies by >2 orders of magnitude but consistently peaks at
+  10-20 experiments per dimension), and runs simulated Bayesian-optimization campaigns showing EF
+  depends on the statistical properties of the parameter space while AF depends on its complexity.
+schema_axes_proposed:
+  - "Acceleration factor (AF): ratio of experiments required by a reference strategy (e.g. random/grid) vs the SDL algorithm to reach a goal"
+  - "Enhancement factor (EF): improvement in best-found objective relative to the reference strategy at equal experiment count"
+  - "Reference strategy / baseline must be declared (random sampling as default control)"
+  - "Dimensionality of the parameter space (AF rises with dimension -- 'blessing of dimensionality')"
+  - "Experiments-per-dimension budget (EF peaks at 10-20 experiments per dimension)"
+  - "Statistical properties of the objective landscape: contrast (peak-to-median ratio), smoothness/Lipschitz constant, noise level (repo's simulated study varies these)"
+  - "Repetition protocol for stochastic optimizers (repo: 100 runs x 100 steps per test function; reports peak EF and step-to-peak)"
+benchmark_features:
+  evaluation_target: ["experiment-selection algorithm (BO vs random) as a component of an SDL"]
+  execution_mode: "simulated (synthetic 2D Gaussian test functions) plus literature meta-analysis"
+  instruments: []
+  scientific_domains: ["materials science", "chemistry"]
+  n_tasks: null
+  n_task_families: 3
+  n_instances_or_runs_reported: null
+  repetitions_per_task: "100 runs per function, 100 steps per run (code repo)"
+  target_population: "SDL optimization campaigns"
+  task_source: "synthetic parametric test functions (contrast series f_c_1..f_c_5, Lipschitz series f_l_1..f_l_5, Gaussian noise sigma 0.05/0.10)"
+  sampling_strategy: null
+  metric_types: ["acceleration factor", "enhancement factor", "step-to-peak"]
+  primary_metric: "acceleration factor (AF)"
+  scoring_granularity: "per campaign"
+  has_human_baseline: false
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: ["Bayesian optimization (BoTorch/GPyTorch)", "random search"]
+  n_agent_configs: null
+  headline_results:
+    - "Literature AF median = 6; AF tends to increase with dimensionality"
+    - "Reported EF values span >2 orders of magnitude, peaking at 10-20 experiments per dimension"
+    - "Simulations: EF depends on statistical properties of the space (contrast, smoothness, noise); AF depends on its complexity"
+  open_source: true
+task_features:
+  workflow_depth: null
+  perceptual_demand: null
+  reasoning_demand: null
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: true
+  safety_criticality: null
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: "simulated"
+  signal_quality_variation: "Gaussian noise perturbations (sigma = 0.05, 0.10)"
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: false
+  environment_description: "Synthetic 2D Gaussian objective functions with tunable contrast, Lipschitz constant and noise."
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Any acceleration claim must name its reference strategy; AF/EF give a common language for comparing agents that choose experiments."
+  - "Landscape statistics (contrast, smoothness, noise) confound comparisons -- benchmark schemas should record them as environment features."
+  - "Because gains scale with dimension and budget, report experiments-per-dimension alongside raw counts."
+limitations:
+  - "Metrics measure the decision algorithm's sample efficiency, not hardware reliability, safety, or provenance."
+  - "Simulation study is 2D and synthetic; literature AF/EF values come from heterogeneous baselines."
+  - "Third-party note claims most surveyed SDL studies ignore manufacturability/cost/durability constraints (secondary, unverified)."
+related: ["volk_abolhasani_2024_sdl_performance_metrics", "chen_2026_agentic_sdl_soft_matter_taxonomy"]
+notes: >
+  RSC and arXiv pages blocked. Abstract verified verbatim from an arXiv RSS mirror in GitHub
+  (ehijano/rss_fetch). Journal citation and DOI verified only via third-party citations
+  (e.g. Caesiumatic/CombHTS, Kopachelli/arxiv-frontier). The code repo (kabrownlab/benchmarking,
+  'Data and code related to benchmarking self-driving labs') README does not name the paper
+  explicitly; its contents (EF curves, contrast/Lipschitz/noise series) match the abstract.
+  Formal AF/EF equations and any explicit reporting checklist could not be read; 'recommendations'
+  above are limited to what the abstract and repo support.
+---
+id: canty_abolhasani_2026_sdl_review
+record_type: survey
+name: "The past, present and future of self-driving laboratories"
+short_name: "SDL past/present/future (Canty & Abolhasani)"
+year: 2026
+venue: "Nature Reviews Chemistry 10:523-537 (published 31 Jul 2026)"
+authors_short: "Canty & Abolhasani"
+arxiv: null
+doi: "10.1038/s41570-026-00847-2"
+url: "https://www.nature.com/articles/s41570-026-00847-2"
+code_url: null
+data_url: null
+license: null
+status: published
+summary: >
+  Review tracing a decade of SDLs from narrowly focused automation tools to multipurpose
+  discovery platforms in which algorithms propose, execute and interpret experiments with
+  limited human intervention. Frames the next phase around three interdependent requirements --
+  scalability, generalizability and provenance-complete experimentation -- as prerequisites for
+  SDLs that reliably scale throughput and transfer workflows and learned models across
+  laboratories toward 'collective scientific superintelligence'.
+schema_axes_proposed:
+  - "Scalability (reliably scaling throughput; physical/agent extensibility; remote and distributed operation)"
+  - "Generalizability (transfer of workflows and learned models across laboratories; device and protocol abstraction)"
+  - "Provenance-complete experimentation (comprehensive structured (meta)data; interoperable data and metadata standards; ontology integration)"
+  - "Modular hardware"
+  - "Trustworthy AI agents that reason under uncertainty within rigorous safety and ethical bounds"
+  - "Cross-lab transferability / SDLs as shared scientific infrastructure (vs 'faster silos')"
+benchmark_features:
+  evaluation_target: null
+  execution_mode: null
+  instruments: []
+  scientific_domains: ["chemistry", "materials science"]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: null
+  task_source: null
+  sampling_strategy: null
+  metric_types: []
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: null
+  has_abstention_eval: null
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results: []
+  open_source: null
+task_features:
+  workflow_depth: null
+  perceptual_demand: null
+  reasoning_demand: null
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: null
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: null
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: null
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Generalizability is framed as cross-laboratory transfer of workflows AND learned models -- an agent benchmark should test transfer across instruments/labs, not just across tasks on one rig."
+  - "Provenance completeness (structured metadata sufficient to reconstruct an experiment) is elevated to a first-class requirement, implying benchmarks should score trace/log completeness."
+  - "Trustworthy reasoning under uncertainty within safety/ethical bounds is named as a requirement for AI agents in SDLs."
+limitations:
+  - "Review; no quantitative metric definitions verified."
+  - "Only abstract-level content was accessible; detailed requirement definitions (Table 1, eras) rest on secondary sources."
+related: ["volk_abolhasani_2024_sdl_performance_metrics", "leong_2025_safe_sdls", "zhang_2026_agent_generalizability_survey"]
+notes: >
+  nature.com blocked. Abstract-level facts (three requirements, 'collective scientific
+  superintelligence', volume/pages) come from the WebSearch snippet of the Nature page plus a
+  GitHub news digest (Supwils/swil-news). A third-party visualization repo (yetiswang/sdl-map)
+  reports the review's framing as eras 2014-2019 / 2020-2023 / 2024-present and axes
+  G=generalizability, S=scalability, D=comprehensive structured (meta)data with a Table 1 of
+  milestone platforms (ARES OS, Chemputer, Mobile Robot Chemist, Coscientist, MINERVA) --
+  secondary, unverified. Exact wording of 'trustworthy reasoning' requirement not verified.
+---
+id: leong_2025_safe_sdls
+record_type: framework
+name: "Steering towards safe self-driving laboratories"
+short_name: "Safe SDLs (Leong et al.)"
+year: 2025
+venue: "Nature Reviews Chemistry 9(10):707-722 (published 18 Aug 2025); ChemRxiv preprint Dec 2024"
+authors_short: "Leong et al. (Leong, Griesbach, Zhang, Darvish, Zhao, Mandal, Zou, Hao, Bernales, Aspuru-Guzik)"
+arxiv: null
+doi: "10.1038/s41570-025-00747-x"
+url: "https://www.nature.com/articles/s41570-025-00747-x"
+code_url: null
+data_url: null
+license: null
+status: published
+summary: >
+  Perspective on safety in self-driving laboratories. Juxtaposes the development trajectory of
+  SDLs with other autonomous technologies (notably autonomous vehicles) and focuses on
+  safeguards against accidents ranging from near-misses to catastrophic failures.
+schema_axes_proposed:
+  - "Accident-severity spectrum from near-miss to catastrophic failure (verified from abstract)"
+  - "Development-trajectory comparison with other autonomous technologies, e.g. autonomous vehicles (verified from abstract)"
+  - "UNVERIFIED: the paper's detailed safety taxonomy / layered safety framework could not be read in this session"
+benchmark_features:
+  evaluation_target: null
+  execution_mode: null
+  instruments: []
+  scientific_domains: ["chemistry", "materials science"]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: null
+  task_source: null
+  sampling_strategy: null
+  metric_types: []
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: null
+  has_abstention_eval: null
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results: []
+  open_source: null
+task_features:
+  workflow_depth: null
+  perceptual_demand: null
+  reasoning_demand: null
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: null
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: null
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: null
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Frames SDL safety by analogy to autonomous-vehicle safety maturation, suggesting graded autonomy levels and incident-severity classes as benchmark axes (framing only; details unverified)."
+  - "Cited by later work (e.g. Safe-SDL arXiv 2602.15061, GPMs-book) as the reference for 'safety and governance concerns' in closing the loop in real labs."
+limitations:
+  - "Body text inaccessible in this session: the safety taxonomy/layers requested by the assignment are NOT extracted."
+related: ["canty_abolhasani_2026_sdl_review", "zhang_2026_safe_sdl_framework", "labsafety_bench_2024"]
+notes: >
+  nature.com, PubMed, ChemRxiv (engage id 6764449b6dde43c908a1d8c6), ResearchGate and Semantic
+  Scholar all blocked; GitHub code search found only citations/bib entries and a truncated
+  abstract ("...the rise of self-driving laboratories (SDLs), which leverage robo[tics]...").
+  Abstract gist (safeguards against accidents from near-misses to catastrophic failures;
+  juxtaposition with other autonomous technologies) comes from the PubMed snippet returned by
+  WebSearch. The safety taxonomy/layers must be filled in from the primary source in a session
+  with publisher access.
+---
+id: agentabstain_2026
+record_type: benchmark
+name: "AgentAbstain: Do LLM Agents Know When Not to Act?"
+short_name: "AgentAbstain"
+year: 2026
+venue: "arXiv preprint (Jul 2026); venue not stated"
+authors_short: "Liu et al. (Xun Liu, Yi Evie Zhang, Vira Kasprova, Parisa Rabbani, Pardis Sadat Zahraei, Tianyu Zhang, Ali Ebrahimpour-Boroojeny, Varun Chandrasekaran; UIUC)"
+arxiv: "2607.10059"
+doi: null
+url: "https://arxiv.org/abs/2607.10059"
+code_url: "https://github.com/AntiQuality/agentabstain"
+data_url: "https://huggingface.co/datasets/antiquality/agentabstain"
+license: "Code MIT; dataset CC BY 4.0"
+status: preprint
+summary: >
+  First systematic evaluation framework for agentic abstention -- the calibrated ability of
+  tool-using LLM agents to recognize when NOT to act. Benchmark of 263 paired tasks in 42
+  executable MCP sandbox environments (541 tools), where each should-act task has a
+  should-abstain twin differing by one controlled perturbation, so always-act or always-refuse
+  policies cap at 50% paired accuracy. Generated by the AbstainGen pipeline (deterministic DAG
+  replay + cross-family LLM critics; the generator itself is not open-sourced to limit
+  contamination). Best of 17 frontier models (Gemini 3.1 Pro) reaches only 59.5% paired accuracy;
+  abstention ability is largely independent of task-solving ability, and agents exhibit
+  'post-hoc abstention' (executing an irreversible action before recognizing the trigger).
+schema_axes_proposed:
+  - "Paired should-act / should-abstain task design with a single controlled perturbation"
+  - "Perturbation dimension: query/instruction (132 pairs); environment state (63); tool inventory (34); tool runtime behavior (34)"
+  - "Abstention trigger timing: pre-execution (visible before any tool call) vs runtime (surfaces through tool returns)"
+  - "Eight abstention scenarios: S1 missing critical parameter; S2 ambiguous action specification; S3 conflicting constraints; S4 high-stakes action; S5 insufficient tool capability; S6 critical tool failure; S7 conflicting evidence; S8 emergent risk discovery"
+  - "Tool categories: lookup (read-only, 246); verify (validation gates, 119); commit (state-mutating, 176 = 155 write + 21 delete)"
+  - "Metrics: Paired Accuracy (primary); Act accuracy; Abstain accuracy; CAR = Conditioned Abstention Rate (abstain accuracy restricted to pairs whose act side was solved)"
+  - "Dual scoring signal: deterministic commit check on the tool-call trace + LLM judge on the terminal response (isolates post-hoc abstention)"
+  - "Agent harness as a reported variable (Claude SDK, OpenAI SDK, Google ADK, OpenClaw)"
+benchmark_features:
+  evaluation_target: ["tool-using LLM agents (abstention/act decision)", "agent harnesses"]
+  execution_mode: "executable sandbox (MCP environments), automated"
+  instruments: []
+  scientific_domains: ["general/enterprise tasks (not scientific): retail orders, email, filesystem, banking, phone/messaging, vehicle control, web/CMS, document review, infrastructure control, maps, HR, security/privacy, health portal, trading, flight/travel, calendar, chat, notes, +24 more"]
+  n_tasks: 526
+  n_task_families: 8
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "tool-using LLM agents"
+  task_source: "synthetic, generated by AbstainGen pipeline; 3 independent annotators rated 94-98% of sampled tasks well-designed"
+  sampling_strategy: "paired perturbation design"
+  metric_types: ["paired accuracy", "act accuracy", "abstain accuracy", "conditioned abstention rate"]
+  primary_metric: "Paired Accuracy"
+  scoring_granularity: "per pair (both sides must pass); per side"
+  has_human_baseline: false
+  has_safety_eval: true
+  has_abstention_eval: true
+  holdout_or_split_design: "generator withheld so fresh instances can be regenerated; no train/test split reported"
+  leakage_or_contamination_risk: "mitigated by withholding AbstainGen; dataset itself is public"
+  agents_evaluated: ["Claude Opus 4.7", "Claude Sonnet 4.6", "Claude Haiku 4.5", "GPT-5.5", "GPT-5", "GPT-5.4", "GPT-5.2", "GPT-5.1", "GPT-4o", "Gemini 3.1 Pro", "Gemini 3 Flash", "GLM-5", "GPT-OSS 120B", "MiniMax M2.5", "DeepSeek V3.2", "DeepSeek V4 Pro", "Kimi K2.5"]
+  n_agent_configs: 17
+  headline_results:
+    - "Gemini 3.1 Pro: paired 59.5% (act 90.5, abstain 65.4, CAR 65.7)"
+    - "Claude Opus 4.7: paired 59.4% (act 76.5, abstain 79.0, CAR 77.6)"
+    - "Claude Sonnet 4.6: paired 53.4%; GPT-5.5: 52.5%; Claude Haiku 4.5: 49.7%; GPT-5: 49.6%; GPT-5.4: 48.7%; GLM-5: 47.8%; GPT-OSS 120B: 46.2%; GPT-5.2: 42.9%"
+    - "Abstention capability largely independent of task-solving capability; post-hoc abstention is a recurring failure mode"
+  open_source: true
+task_features:
+  workflow_depth: "multi-step tool-use episodes (lookup -> verify -> commit)"
+  perceptual_demand: "text/tool-return only"
+  reasoning_demand: "constraint checking, ambiguity detection, risk recognition from tool outputs"
+  tool_interface: ["MCP tool calls (541 tools)"]
+  tool_composition: "sequential; commit tools are state-mutating/irreversible"
+  quantitative_tolerance: null
+  closed_loop_feedback: true
+  safety_criticality: "high-stakes / irreversible actions explicitly modelled (S4, S8; delete/write commits)"
+  task_taxonomy: ["S1 missing parameter", "S2 ambiguous spec", "S3 conflicting constraints", "S4 high-stakes", "S5 insufficient tool capability", "S6 critical tool failure", "S7 conflicting evidence", "S8 emergent risk"]
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: "simulated (sandboxed MCP environments)"
+  signal_quality_variation: null
+  novelty_control: "generator withheld; fresh instances regenerable"
+  calibration_or_api_state_variation: "environment-state (63) and tool-inventory (34) perturbations"
+  injected_faults: true
+  environment_description: "42 executable MCP sandbox environments across everyday/enterprise domains; tool-runtime-behavior perturbations (34 pairs) inject failures such as critical tool failure."
+agent_features_evaluated:
+  models: ["see agents_evaluated"]
+  vision_used: false
+  rag_or_memory: null
+  planner: "harness-native agent loops (Claude SDK, OpenAI SDK, Google ADK, OpenClaw)"
+  tools: ["MCP lookup/verify/commit tools"]
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: false
+  deterministic_execution: true
+transfer_relevant_findings:
+  - "Paired act/abstain design is the key methodological export: prevents refusal-biased agents from scoring well and is directly applicable to instrument-control tasks (e.g. proceed vs halt when a stage limit or sample state is ambiguous)."
+  - "Trigger timing (pre-execution vs runtime) and 'post-hoc abstention' map onto irreversible physical actions in labs."
+  - "Scoring on the executed tool trace rather than the model's text avoids 'said refuse but still acted' errors."
+  - "CAR separates abstention competence from task competence."
+limitations:
+  - "Domains are general/enterprise, not scientific instruments; no physical/perceptual demand."
+  - "Generator not released; single dataset version; no repetition/seed protocol reported in README."
+  - "No human baseline."
+related: ["labsafety_bench_2024", "scisafeeval_2024", "zhang_2026_safe_sdl_framework"]
+notes: >
+  arXiv blocked; all facts from the official GitHub README (AntiQuality/agentabstain), the
+  project-website source (agentabstain/agentabstain.github.io index.html) and an arXiv-digest
+  mirror (xianshang33/llm-paper-daily). Title on the website: 'Do LLM Agents Know When Not to
+  Act?'. n_tasks = 263 pairs x 2 sides = 526 task instances. Paper date/venue field not verified.
+---
+id: zhang_2026_agent_generalizability_survey
+record_type: survey
+name: "Generalizability of Large Language Model-Based Agents: A Comprehensive Survey"
+short_name: "Agent generalizability survey"
+year: 2026
+venue: "ACM Computing Surveys 58(10) (2026); arXiv Sep 2025"
+authors_short: "Zhang et al. (Minxing Zhang, Yi Yang, Roy Xie, Bhuwan Dhingra, Shuyan Zhou, Jian Pei)"
+arxiv: "2509.16330"
+doi: "10.1145/3794858"
+url: "https://arxiv.org/abs/2509.16330"
+code_url: null
+data_url: null
+license: null
+status: published
+summary: >
+  First comprehensive review of generalizability in LLM-based agents, defined as the ability to
+  maintain consistent performance across varied instructions, tasks, environments and domains,
+  especially beyond the agent's fine-tuning data. Situates generalizability within a hierarchical
+  domain-task ontology, reviews datasets, evaluation dimensions and metrics (and their
+  limitations), categorizes improvement methods (backbone LLM / agent components / their
+  interactions), distinguishes generalizable frameworks from generalizable agents, and calls for
+  standardized frameworks and variance- and cost-based metrics.
+schema_axes_proposed:
+  - "Generalization levels: instruction-level; task-level; environment-level; domain-level (hierarchical domain-task ontology; domains mapped to NAICS codes per secondary digest)"
+  - "In-distribution vs beyond-fine-tuning-data performance"
+  - "Variance-based metric (sigma): performance disparity across task categories within a domain (secondary digest)"
+  - "Cost-based metric: 'generalizability cost' comparing specialist vs generalist agents (secondary digest)"
+  - "Generalizable framework (prompting/RAG, no weight updates) vs generalizable agent (fine-tuned) distinction"
+  - "Method locus: backbone LLM / agent components (perception, memory) / component interactions (tool selection, retrieval, re-planning)"
+  - "Recommendation: standardized evaluation frameworks; dynamic curricula in low-latency sandboxes"
+benchmark_features:
+  evaluation_target: null
+  execution_mode: null
+  instruments: []
+  scientific_domains: ["general (web navigation, household robotics, etc.)"]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: null
+  task_source: null
+  sampling_strategy: null
+  metric_types: []
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: null
+  has_abstention_eval: null
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results: []
+  open_source: null
+task_features:
+  workflow_depth: null
+  perceptual_demand: null
+  reasoning_demand: null
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: null
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: null
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: null
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Provides the four-level vocabulary (instruction/task/environment/domain) for labelling what an instrument-control benchmark's held-out split actually tests."
+  - "Argues aggregate accuracy hides generalization gaps; recommends variance across task categories and cost of generality as reported metrics."
+  - "Framework-level generality (e.g. ReAct) does not imply agent-level generality -- benchmark records should distinguish the two."
+limitations:
+  - "Survey; no empirical validation. Detailed ontology/metric definitions rest on a secondary digest."
+related: ["johnson_abshire_2026_microscopy_agent_benchmarks", "canty_abolhasani_2026_sdl_review"]
+notes: >
+  arXiv/ACM blocked. Abstract verified verbatim from arXiv-daily mirrors (CSQianDong,
+  HuggingAGI). Section headings from a third-party style report: 1 Introduction; 2 LLM-based
+  Agents and Ecosystems; 3 Measuring LLM-based Agent Generalizability; 4 Improving LLM-Based Agent
+  Generalizability via the Backbone LLM (list truncated). The four-level taxonomy names are
+  supported by the abstract ('instructions, tasks, environments, and domains'); NAICS mapping,
+  sigma and generalizability-cost metric names come from memgrafter/research-digests (secondary).
+  CSUR volume/issue (58(10)) taken from the assignment; the DOI 10.1145/3794858 was confirmed to
+  resolve to this title via a search result.
+---
+id: labsafety_bench_2024
+record_type: benchmark
+name: "LabSafety Bench: Benchmarking LLMs on Safety Issues in Scientific Labs (journal title: Benchmarking large language models on safety risks in scientific laboratories)"
+short_name: "LabSafety Bench"
+year: 2024
+venue: "arXiv Oct 2024; Nature Machine Intelligence (published 14 Jan 2026, per third-party listings)"
+authors_short: "Zhou et al. (Yujun Zhou, Jingdong Yang, Yue Huang, Kehan Guo, Zoe Emory, Bikram Ghosh, Amita Bedar, Sujay Shekar, Zhenwen Liang, Pin-Yu Chen, Tian Gao, Werner Geyer, Nuno Moniz, Nitesh V. Chawla, Xiangliang Zhang)"
+arxiv: "2410.14182"
+doi: "10.1038/s42256-025-01152-1"
+url: "https://arxiv.org/abs/2410.14182"
+code_url: "https://github.com/YujunZhou/LabSafety-Bench"
+data_url: "https://huggingface.co/datasets/yujunzhou/LabSafety_Bench"
+license: "MIT (code)"
+status: published
+summary: >
+  Knowledge/reasoning benchmark for lab-safety competence of LLMs and VLMs built on a taxonomy
+  aligned with OSHA protocols. Latest version: 765 expert-verified multiple-choice questions
+  (632 text-only, 133 multimodal) plus 404 realistic lab scenarios yielding 3,128 open-ended
+  questions in two tasks -- Hazards Identification Test (HIT) and Consequence Identification
+  Test (CIT). Across 19 LLMs/VLMs no model exceeds 70% on hazard identification; proprietary
+  models lead on MCQs but not on open-ended scenario reasoning.
+schema_axes_proposed:
+  - "Hazard taxonomy aligned with OSHA protocols (categories x subcategories; exact counts unverified -- one third-party note says 4 x 10)"
+  - "Question format: multiple-choice (text-only vs multimodal/image) vs open-ended scenario"
+  - "Scenario tasks: Hazards Identification Test (HIT) and Consequence Identification Test (CIT)"
+  - "Reporting by category, difficulty level and subject area"
+  - "Prompting conditions: zero-shot, chain-of-thought, few-shot, hints"
+benchmark_features:
+  evaluation_target: ["LLM/VLM safety knowledge and hazard/consequence reasoning (no tool use)"]
+  execution_mode: "static QA (MCQ + open-ended, LLM/expert graded)"
+  instruments: []
+  scientific_domains: ["chemistry", "biology", "physics", "radiation", "general laboratory safety"]
+  n_tasks: 3893
+  n_task_families: 2
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "LLMs and vision-language models"
+  task_source: "expert-AI collaboration with human expert verification; grounded in OSHA/WHO protocols and textbooks"
+  sampling_strategy: null
+  metric_types: ["accuracy (MCQ)", "accuracy/score on HIT and CIT open-ended tasks"]
+  primary_metric: "accuracy"
+  scoring_granularity: "per question"
+  has_human_baseline: true
+  has_safety_eval: true
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "public dataset; original v1 questions are static MCQs"
+  agents_evaluated: ["GPT-4o", "GPT-4o-mini", "o3-mini", "Llama-3.3-70B", "Llama-3-8B-Instruct", "Vicuna-7B", "Mistral-7B", "InstructBLIP-7B", "Qwen-VL-Chat", "InternVL2", "(19 models total in latest version: 8 proprietary, 7 open-weight LLMs, 4 VLMs)"]
+  n_agent_configs: 19
+  headline_results:
+    - "v1 (Oct 2024): GPT-4o outperforms human participants on the 765 MCQs but still makes critical errors"
+    - "Latest: no model exceeds 70% accuracy on the Hazards Identification Test (an intermediate version reported 75% on 520 scenarios / 4,090 questions)"
+    - "Proprietary models excel on structured MCQs but show no clear advantage on open-ended scenario reasoning"
+  open_source: true
+task_features:
+  workflow_depth: "single-turn"
+  perceptual_demand: "text; 133 image-based MCQs"
+  reasoning_demand: "hazard identification, risk assessment, consequence prediction"
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: false
+  safety_criticality: "content is safety-critical but no actions are executed"
+  task_taxonomy: ["MCQ text", "MCQ multimodal", "HIT scenario", "CIT scenario"]
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: "n/a (static questions)"
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: false
+  environment_description: "Static question bank; no environment."
+agent_features_evaluated:
+  models: ["see agents_evaluated"]
+  vision_used: true
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Provides an OSHA-aligned hazard taxonomy reusable for labelling safety-critical instrument-control tasks."
+  - "Shows knowledge-level safety competence (MCQ) does not transfer to open-ended hazard reasoning -- an agent benchmark should test both."
+  - "Used downstream as the evaluation target in Safe-SDL (arXiv 2602.15061)."
+limitations:
+  - "No tool use, no physical or simulated execution; measures knowledge, not behaviour."
+  - "Exact taxonomy counts and human-baseline protocol not verified in this session."
+related: ["scisafeeval_2024", "agentabstain_2026", "zhang_2026_safe_sdl_framework"]
+notes: >
+  arXiv blocked. Abstracts of v1 (2024-10), v2 (2025-02, 520 scenarios/4,090 open-ended, 75%
+  threshold) and v3 (2026-02, 404 scenarios/3,128 open-ended, 19 models, 70%) recovered verbatim
+  from an arXiv listing mirror (Luvata/arxive). Composition numbers (632/133) and model list from
+  the official README via WebFetch. NMI DOI and 'published January 14, 2026' come from third-party
+  listings (Omni-Scientist/Awesome-AI-Scientist, kai9987kai/NexusBioTwin) -- secondary.
+  n_tasks = 765 MCQ + 3,128 open-ended = 3,893. '4 x 10 hazard taxonomy' is from an unrelated
+  third-party project note (shiinayane/LabMate) and is unverified.
+---
+id: scisafeeval_2024
+record_type: benchmark
+name: "SciSafeEval: A Comprehensive Benchmark for Safety Alignment of Large Language Models in Scientific Tasks"
+short_name: "SciSafeEval"
+year: 2024
+venue: "arXiv Oct 2024 (Zhejiang University, Duke University)"
+authors_short: "Li et al. (first author Tianhao Li -- inferred from project site/HF handle, unverified)"
+arxiv: "2410.03769"
+doi: null
+url: "https://arxiv.org/abs/2410.03769"
+code_url: "https://github.com/KAIMA04/SciSafeEval"
+data_url: "https://huggingface.co/datasets/Tianhao0x01/SciSafeEval"
+license: null
+status: preprint
+summary: >
+  Safety-alignment benchmark for scientific LLMs spanning chemistry, biology, medicine and
+  physics with 31,840 samples expressed in textual, molecular (SMILES), protein (FASTA) and
+  genomic representations. Evaluates zero-shot, few-shot and chain-of-thought settings and adds
+  a 'jailbreak' feature (WildTeaming adversarial prompts) to test defenses against malicious
+  intent; scoring is pass/fail on whether the model refuses hazardous requests.
+schema_axes_proposed:
+  - "Scientific domain: chemistry / biology / medicine / physics"
+  - "Input representation: natural language; molecular (SMILES); protein (FASTA); genomic sequence"
+  - "Prompting regime: zero-shot; few-shot (5-shot); chain-of-thought"
+  - "Adversarial regime: jailbreak-enhanced prompts (WildTeaming)"
+  - "Metrics: refusal/pass rate (harmlessness), helpfulness, jailbreak success rate"
+benchmark_features:
+  evaluation_target: ["LLM safety alignment / refusal on hazardous scientific requests"]
+  execution_mode: "static prompt-response"
+  instruments: []
+  scientific_domains: ["chemistry", "biology", "medicine", "physics"]
+  n_tasks: 31840
+  n_task_families: 4
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "general and scientific LLMs"
+  task_source: "curated from established scientific and hazard databases"
+  sampling_strategy: null
+  metric_types: ["pass/fail refusal rate", "jailbreak success rate"]
+  primary_metric: "pass rate (safe refusal)"
+  scoring_granularity: "per sample"
+  has_human_baseline: false
+  has_safety_eval: true
+  has_abstention_eval: true
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: ["LLaMa-3.1-8B", "LLaMa-3.1-70B", "Qwen2.5-7B", "Claude 3.5", "GPT-4o"]
+  n_agent_configs: 5
+  headline_results:
+    - "Few-shot and CoT prompting substantially improve safe-refusal rates (secondary digest)"
+    - "Smaller (8B) models more vulnerable to jailbreak than larger variants (secondary digest)"
+    - "Claude 3.5 reported at 98.20% pass rate on gene-classification tasks; GPT-4o 62.77% on physics CoT (secondary digest, unverified)"
+  open_source: true
+task_features:
+  workflow_depth: "single-turn"
+  perceptual_demand: "text / sequence strings"
+  reasoning_demand: "recognizing hazardous intent encoded in scientific notation"
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: false
+  safety_criticality: "content-level (hazardous synthesis/design requests)"
+  task_taxonomy: ["chemistry", "biology", "medicine", "physics"]
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: "n/a"
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: false
+  environment_description: "Static prompt set; no environment."
+agent_features_evaluated:
+  models: ["see agents_evaluated"]
+  vision_used: false
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Refusal-only scoring assumes refusal is always correct -- the opposite failure mode (over-refusal) is not measured, which AgentAbstain's paired design addresses."
+  - "Representation axis (SMILES/FASTA/genomic vs text) is a useful template for instrument benchmarks that mix natural-language and machine-readable inputs."
+limitations:
+  - "Single jailbreak method; no benign-vs-harmful pairing; no execution."
+  - "Author list, license, venue and per-domain task counts could not be verified."
+related: ["labsafety_bench_2024", "agentabstain_2026"]
+notes: >
+  arXiv blocked; official README did not render via WebFetch (repo KAIMA04/SciSafeEval exists,
+  described as 'Official repository of SciSafeEval'; project site scisafeeval.tianhao.li).
+  Sample count, domains, representations, prompting/jailbreak settings, model list and results
+  come from a BenchmarkCards entry and memgrafter digest (secondary). Awesome-LLM-Safety lists the
+  affiliations as Zhejiang University and Duke University. An LLM-eval-survey README points to
+  github.com/DavidLee528/SciSafeEval, which returned 404.
+---
+id: zhou_2026_lost_in_benchmarks_irt
+record_type: framework
+name: "Lost in Benchmarks? Rethinking Large Language Model Benchmarking with Item Response Theory"
+short_name: "PSN-IRT / Lost in Benchmarks"
+year: 2026
+venue: "AAAI 2026 (Oral); arXiv May 2025"
+authors_short: "Zhou et al. (Hongli Zhou, Hui Huang, Ziqing Zhao, Lvyuan Han, Huicheng Wang, Kehai Chen, Muyun Yang, Wei Bao, Jian Dong, Bing Xu, Conghui Zhu, Hailong Cao, Tiejun Zhao)"
+arxiv: "2505.15055"
+doi: null
+url: "https://arxiv.org/abs/2505.15055"
+code_url: "https://github.com/Joe-Hall-Lee/PSN-IRT"
+data_url: null
+license: null
+status: published
+summary: >
+  Psychometric audit of LLM benchmarks motivated by leaderboard inconsistencies and poor
+  separability among top models. Proposes PSN-IRT (Pseudo-Siamese Network for Item Response
+  Theory), a 4-parameter IRT model trained end-to-end that jointly estimates model ability and
+  per-item discrimination, difficulty, guessing rate and feasibility. Applied to 11 benchmarks
+  (41,871 items, 12 LLMs via OpenCompass) it reveals varied measurement-quality shortcomings and
+  shows that PSN-IRT-selected smaller item subsets align better with human preference.
+schema_axes_proposed:
+  - "Item discrimination (a): how well an item separates strong from weak models"
+  - "Item difficulty (b): ability threshold for a correct answer"
+  - "Guessing rate (c): probability of correct answer without competence (flags contamination/leakage)"
+  - "Feasibility upper bound (d): max attainable success even for the best models"
+  - "Model ability estimate (theta) as the latent quantity benchmarks should recover"
+  - "Benchmark-level diagnostics: saturation / low discrimination, insufficient difficulty ceiling, leakage, cross-leaderboard ranking inconsistency, redundancy (item subsets can reproduce full rankings)"
+  - "Human-preference alignment as external validity check for a benchmark"
+benchmark_features:
+  evaluation_target: null
+  execution_mode: null
+  instruments: []
+  scientific_domains: ["general LLM benchmarks (e.g. MMLU, GSM8K, MATH, HumanEval+)"]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: 41871
+  repetitions_per_task: null
+  target_population: null
+  task_source: null
+  sampling_strategy: null
+  metric_types: []
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: null
+  has_abstention_eval: null
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: 12
+  headline_results:
+    - "Significant and varied measurement-quality shortcomings across 11 mainstream benchmarks"
+    - "PSN-IRT-selected smaller benchmarks keep stronger alignment with human preference; third-party note reports Kendall tau = 1.00 vs full-benchmark ranking and 79.98% vs 72.11% response-prediction accuracy over classical IRT (unverified)"
+  open_source: true
+task_features:
+  workflow_depth: null
+  perceptual_demand: null
+  reasoning_demand: null
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: null
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: null
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: null
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "A benchmark schema should carry per-item difficulty and discrimination (or at least report their distribution) so that a 53-task instrument suite can be judged for saturation and redundancy."
+  - "High guessing rate is a contamination signal usable for physical-task benchmarks whose prompts leak online."
+  - "Fewer, well-discriminating items can preserve ranking -- relevant when physical experiments are expensive."
+limitations:
+  - "Requires a response matrix over many models; with few evaluated agents item parameters are unstable (see jiang_2026_trust_irt)."
+related: ["jiang_2026_trust_irt", "johnson_abshire_2026_microscopy_agent_benchmarks"]
+notes: >
+  arXiv/AAAI OJS blocked. Abstract verified verbatim from arXiv-daily mirrors; scale (11
+  benchmarks, 41,871 items, 12 LLMs, OpenCompass source) and the four item parameters from the
+  official README (Joe-Hall-Lee/PSN-IRT). AAAI proceedings entry: ojs.aaai.org article 40814.
+  Kendall-tau and accuracy figures come from a third-party paper note (zhaoyang97/Paper-Notes).
+---
+id: jiang_2026_trust_irt
+record_type: framework
+name: "Can We Trust Item Response Theory for AI Evaluation?"
+short_name: "Trust IRT for AI eval"
+year: 2026
+venue: "arXiv Jul 2026 (v2 by 20 Jul 2026)"
+authors_short: "Jiang et al. (Han Jiang, Sunbeom Kwon, Jinwen Luo, Ziang Xiao, Susu Zhang)"
+arxiv: "2607.15190"
+doi: null
+url: "https://arxiv.org/abs/2607.15190"
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: >
+  Simulation study of whether IRT estimation tools built for human testing remain reliable in
+  the AI-benchmark regime (few evaluated models, very many items, skewed/clustered/multimodal
+  capability distributions). Using item parameters and ability distributions from six LLM
+  benchmarks, three IRT models and four estimators (marginal maximum likelihood, MCMC,
+  variational inference, neural pseudo-Siamese) across 18,000 conditions, it finds classical
+  estimators can be infeasible at benchmark scale while scalable estimators yield unreliable
+  item-level and ranking inferences with small or non-normal model sets, and identifies the
+  sample sizes and diagnostics needed for trustworthy use.
+schema_axes_proposed:
+  - "Number of evaluated models (system sample size) as a validity condition for item-level statistics"
+  - "Number of items relative to models (regime mismatch vs human testing)"
+  - "Shape of the capability distribution (skewed / clustered / multimodal vs normal)"
+  - "Estimator choice: MML; MCMC; variational inference; neural pseudo-Siamese (PSN-IRT)"
+  - "IRT model choice (three common models, e.g. 1PL/2PL/3PL -- exact set unverified)"
+  - "Reliability targets: model rankings; predicted performance; item characteristics (difficulty, discrimination)"
+  - "Computational feasibility / scalability of estimation"
+  - "Diagnostics and minimum sample sizes before trusting IRT-based benchmark claims"
+benchmark_features:
+  evaluation_target: null
+  execution_mode: null
+  instruments: []
+  scientific_domains: ["general LLM benchmarks"]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: 18000
+  repetitions_per_task: null
+  target_population: null
+  task_source: null
+  sampling_strategy: null
+  metric_types: []
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: null
+  has_abstention_eval: null
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results:
+    - "Classical IRT estimators can become computationally infeasible on large benchmarks"
+    - "Scalable estimators can produce unreliable item-level and ranking inferences when the model set is small or non-normally distributed"
+  open_source: null
+task_features:
+  workflow_depth: null
+  perceptual_demand: null
+  reasoning_demand: null
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: null
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: null
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: null
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Instrument-agent benchmarks typically evaluate a handful of agent configurations -- exactly the small, non-normal system samples where IRT item statistics are unreliable; a schema should record n_agent_configs so readers can judge whether item-level claims are trustworthy."
+  - "Warns against over-interpreting per-task difficulty/discrimination estimates from small studies."
+limitations:
+  - "Simulation-based; specific thresholds/diagnostics not accessible in this session."
+related: ["zhou_2026_lost_in_benchmarks_irt"]
+notes: >
+  arXiv blocked; abstract (v1 and v2 wording) verified verbatim from multiple arXiv mirrors in
+  GitHub (CSQianDong/Awesome-arXiv-Daily-Reporter, 2shin0/arxiv-ai-mailing, santosomar RSS
+  archive). Code URL and exact IRT model set not verified.
+---
+id: labosbench_2026
+record_type: benchmark
+name: "LabOSBench: Benchmarking Computer Use Agents for Scientific Instrument Control"
+short_name: "LabOSBench"
+year: 2026
+venue: "arXiv Jun 2026"
+authors_short: "Zou et al. (Anqi Zou, Han Deng, Chengyu Zhang, Junquan Hu, Yu Wang, Yuxiang Xing, Aokai Zhang, Hanling Zhang, Zhaoyang Liu, Ben Fei, Zhihui Wang, Wanli Ouyang)"
+arxiv: "2606.16802"
+doi: null
+url: "https://arxiv.org/abs/2606.16802"
+code_url: "https://github.com/Su-ISE-2001/LABOSBENCH (repo of that name found; official status unverified)"
+data_url: null
+license: "component-specific (per repo README; agent code partly forked from OSWorld)"
+status: preprint
+summary: >
+  Benchmark for multimodal GUI/computer-use agents built on web-based scientific-instrument
+  simulators, motivated by the cost, safety risk and irreproducibility of evaluating agents on
+  real high-precision instruments. Constructs 96 subtasks across eight instrument simulators
+  covering sample loading, alignment, parameter tuning, data acquisition and result inspection;
+  evaluates general VLMs, specialized GUI-agent models and agentic frameworks at subtask and
+  end-to-end levels. Agents complete many structured GUI subtasks but struggle with
+  feedback-driven operations and long-horizon workflows.
+schema_axes_proposed:
+  - "Instrument type (FIB, SEM, EDS, APT, light/fluorescence microscope, SPM, TEM, XRD)"
+  - "Workflow stage: sample loading; alignment; parameter tuning; data acquisition; result inspection"
+  - "Evaluation level: subtask vs end-to-end workflow"
+  - "Agent class: general-purpose VLM vs specialized GUI-agent model vs agentic framework"
+  - "Operation type: structured GUI actions vs feedback-driven parameter adjustment"
+  - "Execution-based (state-checked) evaluation in browser simulators rather than OS virtualization"
+benchmark_features:
+  evaluation_target: ["computer-use / GUI agents controlling instrument UIs"]
+  execution_mode: "simulated instrument web UIs driven via browser (Playwright)"
+  instruments: ["FIB", "SEM", "EDS", "APT", "LFM", "SPM", "TEM", "XRD"]
+  scientific_domains: ["materials characterization", "microscopy", "spectroscopy", "diffraction"]
+  n_tasks: 96
+  n_task_families: 8
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "multimodal GUI agents"
+  task_source: "authored subtasks on custom web simulators (FIB 20, SEM 12, EDS 8, APT 12, LFM 12, SPM 14, TEM 10, XRD 8 per repo)"
+  sampling_strategy: null
+  metric_types: ["subtask success rate", "end-to-end workflow success rate"]
+  primary_metric: "success rate"
+  scoring_granularity: "per subtask and per full workflow"
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: ["general-purpose VLMs", "specialized GUI agent models", "agentic frameworks (specific models not verified; repo example uses gpt-5.5-medium)"]
+  n_agent_configs: null
+  headline_results:
+    - "Agents complete many structured GUI subtasks but struggle with feedback-driven operations and long-horizon workflow execution"
+  open_source: true
+task_features:
+  workflow_depth: "subtask to multi-stage end-to-end workflow"
+  perceptual_demand: "screenshot/GUI perception (vision-language)"
+  reasoning_demand: "feedback-driven parameter adjustment"
+  tool_interface: ["GUI (mouse/keyboard via browser)"]
+  tool_composition: "sequential GUI operations"
+  quantitative_tolerance: null
+  closed_loop_feedback: true
+  safety_criticality: "motivated by safety of real instruments; simulated so no physical risk"
+  task_taxonomy: ["sample loading", "alignment", "parameter tuning", "data acquisition", "result inspection"]
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: "simulated"
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Suite of web-based scientific-instrument simulators operated directly in a browser; no OS virtualization."
+agent_features_evaluated:
+  models: ["not verified"]
+  vision_used: true
+  rag_or_memory: null
+  planner: null
+  tools: ["browser GUI actions"]
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: null
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Closest existing benchmark to 'LLM agents controlling scientific instruments'; its instrument x workflow-stage grid is a natural schema template."
+  - "Separates structured GUI competence from feedback-driven control -- the latter is where agents fail."
+limitations:
+  - "GUI-only interface (no API/scripting control); simulators, not real instruments; model list and run counts unverified."
+related: ["johnson_abshire_2026_microscopy_agent_benchmarks", "agentabstain_2026"]
+notes: >
+  arXiv blocked; abstract and author list verified verbatim from arXiv mirrors (2shin0,
+  xiaoqixiaowei). Per-instrument subtask counts, Playwright/OSWorld details and 'gpt-5.5-medium'
+  example from the README of github.com/Su-ISE-2001/LABOSBENCH (created 2026-06-15, 0 stars) --
+  whether this is the authors' official repo is unverified.
+---
+id: johnson_abshire_2026_microscopy_agent_benchmarks
+record_type: benchmark
+name: "Agentic self-driving microscopy benchmarks support qualification but do not necessarily generalize to unseen tasks"
+short_name: "Microscopy agent qualification benchmarks"
+year: 2026
+venue: "arXiv Aug 2026 (cs.AI, cross-listed cs.LG)"
+authors_short: "Johnson & Abshire (Nathan S. Johnson, Ian Abshire)"
+arxiv: "2608.05266"
+doi: null
+url: "https://arxiv.org/abs/2608.05266"
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: >
+  Develops a benchmark and trace-logging framework for LLM agents that control microscopes, to
+  reveal how agent-architecture choices affect performance and whether benchmarks predict
+  performance on unseen tasks. Evaluates one-, two- and three-agent graph topologies, five LLMs,
+  RAG/context parameters and operational constraints across 53 microscopy benchmark tests (105
+  agent configurations, 1,949 test runs, 49,109 RAG retrievals). Configurations differ clearly in
+  latency, token use, cost and failure mode, but surrogate models trained on architecture +
+  results do not reliably predict performance on new tasks: the benchmarks support
+  qualification, regression testing, diagnosis and direct comparison, not a task-independent
+  global configuration model.
+schema_axes_proposed:
+  - "Agent graph topology (one-, two-, three-agent); agent responsibilities and delegation rules"
+  - "Choice of LLM (five evaluated)"
+  - "Retrieval-augmented generation and context parameters"
+  - "Operational constraints"
+  - "Per-run observables: latency, token use, cost, failure mode (trace logging)"
+  - "Benchmark purpose classes: qualification; regression testing; diagnosis; direct comparison; (vs) prediction of unseen-task performance"
+  - "Seen vs unseen task split as the test of generalization"
+benchmark_features:
+  evaluation_target: ["agentic microscope controllers (architecture, LLM, RAG settings)"]
+  execution_mode: null
+  instruments: ["microscopes (type not verified); motivation cites synchrotron beamlines"]
+  scientific_domains: ["microscopy / materials characterization"]
+  n_tasks: 53
+  n_task_families: null
+  n_instances_or_runs_reported: 1949
+  repetitions_per_task: null
+  target_population: "LLM microscopy agents"
+  task_source: null
+  sampling_strategy: null
+  metric_types: ["task pass/fail", "latency", "token use", "cost", "failure mode"]
+  primary_metric: null
+  scoring_granularity: "per test run"
+  has_human_baseline: null
+  has_safety_eval: null
+  has_abstention_eval: null
+  holdout_or_split_design: "held-out unseen tasks used to test surrogate-model prediction"
+  leakage_or_contamination_risk: null
+  agents_evaluated: ["105 configurations spanning 1/2/3-agent topologies x 5 LLMs x RAG/context settings x operational constraints"]
+  n_agent_configs: 105
+  headline_results:
+    - "Clear differences in latency, token use, cost and failure mode between configurations"
+    - "Surrogate models did not reliably predict an agent's performance on new, unseen tasks"
+    - "Heterogeneous test suite does not support a task-independent global configuration model"
+  open_source: null
+task_features:
+  workflow_depth: null
+  perceptual_demand: null
+  reasoning_demand: null
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: null
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: null
+  signal_quality_variation: null
+  novelty_control: "unseen-task evaluation"
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: ["five LLMs (names not verified)"]
+  vision_used: null
+  rag_or_memory: "RAG with varied retrieval/context parameters (49,109 retrievals logged)"
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: true
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Directly on-topic negative result: passing a heterogeneous instrument benchmark qualifies an agent but does not predict generalization -- a schema should label each benchmark's intended purpose (qualification/regression/diagnosis/comparison vs generalization claim)."
+  - "Trace-level metrics (latency, tokens, cost, failure mode) should be first-class fields."
+limitations:
+  - "Only the abstract was accessible; instrument types, LLM names, task taxonomy and code availability unverified."
+related: ["labosbench_2026", "zhang_2026_agent_generalizability_survey", "jiang_2026_trust_irt"]
+notes: >
+  arXiv blocked; abstract and authors verified verbatim from arXiv mirrors (CSQianDong,
+  2shin0, zmcddn). This paper is itself a candidate 'position/benchmark' item for assignment
+  item 9.
+---
+id: chen_2026_agentic_sdl_soft_matter_taxonomy
+record_type: survey
+name: "Agentic AI for Self-Driving Laboratories in Soft Matter: Taxonomy, Benchmarks, and Open Challenges"
+short_name: "Agentic SDL taxonomy (soft matter)"
+year: 2026
+venue: "arXiv Jan 2026 (cs.AI)"
+authors_short: "Chen et al. (Xuanzhou Chen, Audrey Wang, Stanley Yin, Hanyang Jiang, Dong Zhang)"
+arxiv: "2601.17920"
+doi: null
+url: "https://arxiv.org/abs/2601.17920"
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: >
+  Survey/position paper framing SDL autonomy as an agent-environment interaction problem with
+  explicit observations, actions, costs and constraints. Reviews BO/active learning, planning/RL
+  and tool-using agents; emphasizes verifiable, provenance-aware policies; proposes a
+  capability-driven taxonomy and synthesizes benchmark task templates and metrics prioritizing
+  cost-aware performance, robustness to drift, constraint-violation behaviour and
+  reproducibility; outlines open challenges (multi-modal representation, calibrated uncertainty,
+  safe exploration, shared benchmark infrastructure).
+schema_axes_proposed:
+  - "Decision horizon (single-step/bandit to sequential MDP/POMDP)"
+  - "Uncertainty modeling"
+  - "Action parameterization"
+  - "Constraint handling (pre-execution enforcement vs post-hoc detection)"
+  - "Failure recovery"
+  - "Human involvement"
+  - "Metrics: cost-aware performance; robustness to drift/non-stationarity; constraint-violation behaviour; reproducibility (reconstructing conditions from provenance logs)"
+  - "Environment properties: expensive actions; noisy and delayed feedback; strict feasibility/safety constraints; non-stationarity"
+  - "Verifiable and provenance-aware policies"
+benchmark_features:
+  evaluation_target: null
+  execution_mode: null
+  instruments: []
+  scientific_domains: ["soft matter", "materials"]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: null
+  task_source: null
+  sampling_strategy: null
+  metric_types: []
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: null
+  has_abstention_eval: null
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results: []
+  open_source: null
+task_features:
+  workflow_depth: null
+  perceptual_demand: null
+  reasoning_demand: null
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: null
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: null
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: null
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Explicitly proposes benchmark task templates and metric priorities for agentic SDLs -- closest thing found to a 2026 position paper on benchmarking lab agents."
+  - "Constraint-violation behaviour and drift robustness are named as metrics, complementing AgentAbstain's abstention axis."
+limitations:
+  - "Abstract-level verification only; template names (e.g. LCST targeting, multi-objective mechanics, aging studies) are from a secondary digest."
+related: ["adesiji_2026_benchmarking_sdls", "volk_abolhasani_2024_sdl_performance_metrics", "zhang_2026_safe_sdl_framework"]
+notes: >
+  Abstract and authors verified verbatim from an arXiv mirror (LIHUA919/AI-Agents-Daily-Research
+  jsonl). Taxonomy axis names are in the abstract; their level definitions and the specific task
+  templates come from memgrafter/research-digests (secondary).
+---
+id: zhang_2026_safe_sdl_framework
+record_type: framework
+name: "Safe-SDL: Establishing Safety Boundaries and Control Mechanisms for AI-Driven Self-Driving Laboratories"
+short_name: "Safe-SDL"
+year: 2026
+venue: "arXiv Feb 2026"
+authors_short: "Zhang et al. (Zihan Zhang, Haohui Que, Junhan Chang, Xin Zhang, Hao Wei, Tong Zhu)"
+arxiv: "2602.15061"
+doi: null
+url: "https://arxiv.org/abs/2602.15061"
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: >
+  Framework for safety boundaries and control mechanisms in AI-driven SDLs. Identifies the
+  'Syntax-to-Safety Gap' (syntactically correct AI commands whose physical safety implications
+  are not captured) as the central deployment challenge and addresses it with three components:
+  formally defined Operational Design Domains (ODDs), Control Barrier Functions (CBFs) for
+  real-time state-space safety guarantees, and a Transactional Safety Protocol (CRUTD) ensuring
+  atomic consistency between digital planning and physical execution. Grounds the framework in
+  UniLabOS and the Osprey architecture and evaluates foundation models against LabSafety Bench,
+  finding significant safety failures.
+schema_axes_proposed:
+  - "Syntax-to-Safety Gap (command validity vs physical safety)"
+  - "Operational Design Domain (ODD) boundaries"
+  - "Control Barrier Functions / continuous state-space monitoring"
+  - "Transactional safety protocol (CRUTD) -- atomicity between digital plan and physical execution"
+  - "Architectural safety mechanisms as required (not optional) layer, evaluated separately from model-level safety knowledge"
+benchmark_features:
+  evaluation_target: null
+  execution_mode: null
+  instruments: []
+  scientific_domains: ["chemistry / autonomous laboratories"]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: null
+  task_source: null
+  sampling_strategy: null
+  metric_types: []
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: true
+  has_abstention_eval: null
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results:
+    - "Current foundation models exhibit significant safety failures on LabSafety Bench, motivating architectural safety mechanisms"
+  open_source: null
+task_features:
+  workflow_depth: null
+  perceptual_demand: null
+  reasoning_demand: null
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: "high (physical laboratory actions)"
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: null
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: "ODD + CBF + CRUTD proposed as the guard layer"
+  multi_agent: null
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Argues safety must be evaluated at the architecture level (guards, ODD enforcement) rather than only via model knowledge benchmarks -- suggests a 'guards_or_safety_layer' axis is essential in benchmark records."
+limitations:
+  - "Abstract-level verification only; no benchmark released."
+related: ["leong_2025_safe_sdls", "labsafety_bench_2024", "agentabstain_2026"]
+notes: >
+  Abstract and authors verified verbatim from arXiv mirrors (CSQianDong, 2shin0). A related
+  item surfaced only via third-party notes and was NOT verified: 'LABSHIELD: Benchmarking agentic
+  AI safety in scientific laboratories' (arXiv 2603.11987, Mar 2026), reportedly with a 4-tier
+  action scheme EXECUTE / SAFE_SLOW / STOP_AND_ALERT / REFUSE and a 'Tier-Underestimation' metric
+  -- worth fetching in a session with arXiv access.

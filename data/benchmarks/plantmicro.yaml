@@ -1,0 +1,95 @@
+id: plantmicro
+record_type: benchmark
+name: Benchmarking Vision-Language Models for Microscopic Plant Image Understanding (PlantMicro)
+short_name: PlantMicro
+year: 2026
+venue: arXiv (Jun 2026)
+authors_short: Wei et al. (University of Queensland)
+arxiv: '2606.22497'
+doi: null
+url: https://arxiv.org/abs/2606.22497
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: |
+  A VLM benchmark for microscopic plant images spanning light, fluorescence and electron microscopy, filling a gap left by biomedical-centric microscopy benchmarks. Counts and results not retrievable.
+benchmark_features:
+  agents_evaluated: []
+  evaluation_target:
+  - perception
+  - question_answering
+  execution_mode: static_text
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results: []
+  holdout_or_split_design: null
+  instruments:
+  - name: none
+    modality: microscopy
+    real_or_simulated: none
+  leakage_or_contamination_risk: null
+  metric_types:
+  - success_rate
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: null
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - plant science
+  scoring_granularity: binary
+  target_population: Microscopic plant image understanding
+  task_source: mixed
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: image_interpretation
+  quantitative_tolerance: null
+  reasoning_demand: medium
+  safety_criticality: none
+  task_taxonomy: []
+  tool_composition: none
+  tool_interface:
+  - natural_language
+  workflow_depth: single_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: null
+  injected_faults: false
+  novelty_control: null
+  sample_real_or_simulated: dataset
+  sample_types:
+  - 'plant tissue micrographs: light'
+  - fluorescence
+  - electron
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models: []
+  multi_agent: false
+  planner: none
+  rag_or_memory: none
+  tools: []
+  verifier_or_self_debug: none
+  vision_used: true
+transfer_relevant_findings: []
+limitations:
+- Only title/authors/one-line summary verified
+related:
+- micro_bench
+- microvqa
+notes: Short record; all quantitative fields unverified.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2606.22497
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

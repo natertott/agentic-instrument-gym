@@ -1,0 +1,165 @@
+# =============================================================================
+# VERSA Test Suite: Geometry & Recipe Operations
+# =============================================================================
+# Tests for geometry calculations and recipe-based workflows
+# Category: unit, integration
+# =============================================================================
+
+tests:
+  # ===========================================================================
+  # GEOMETRY CALCULATIONS
+  # ===========================================================================
+  
+  - test_id: "geom_001"
+    name: "Calculate Magnification"
+    description: "Calculate required magnification for target pixel size"
+    category: "framework_sweep"
+    tags: ["geometry", "magnification", "calculation", "framework_sweep"]
+    
+    user_prompt: |
+      Calculate the source and detector positions needed to achieve a 2 micron pixel size
+      for a sample with bounding box 1mm x 1mm x 1mm.
+      Report back with the source and detector values in your final message.
+    
+    expected:
+      expected_tools:
+        - "calculate_geometry_for_pixel_size"
+    
+    performance:
+      max_llm_calls: 20
+      max_tool_calls: 20
+    
+    timeout_seconds: 120
+
+  - test_id: "geom_002"
+    name: "Recenter XY from Sidecar"
+    description: "Calculate stage movements to center object in XY view"
+    category: "framework_sweep"
+    tags: ["geometry", "centering", "xy", "framework_sweep"]
+    
+    user_prompt: |
+     Collect an image at sample stage theta=0 degrees and
+      calculate the stage movements needed to center an object located at
+      pixel position (row=250, col=350) in the XY plane view.
+    
+    expected:
+      expected_tools:
+        - "recenter_xy_from_sidecar"
+    
+    performance:
+      max_llm_calls: 10
+      max_tool_calls: 10
+    
+    timeout_seconds: 600
+
+  - test_id: "geom_003"
+    name: "Recenter YZ from Sidecar"
+    description: "Calculate stage movements to center object in YZ view (theta=90)"
+    category: "framework_sweep"
+    tags: ["geometry", "centering", "yz"]
+    
+    user_prompt: |
+      Collect an image at sample stage theta=90 degrees and
+      calculate the stage movements needed to center an object located at
+      pixel position (row=250, col=350) in the YZ plane view.
+    
+    expected:
+      expected_tools:
+        - "recenter_yz_from_sidecar"
+    
+    performance:
+      max_llm_calls: 10
+      max_tool_calls: 10
+    
+    timeout_seconds: 600
+
+
+  # ===========================================================================
+  # RECIPE OPERATIONS
+  # ===========================================================================
+  
+  - test_id: "recipe_001"
+    name: "Modify Recipe Parameters"
+    description: "Load a recipe template and modify acquisition parameters"
+    category: "framework_sweep"
+    tags: ["recipe", "modify", "basic"]
+    
+    user_prompt: |
+      Modify and save a new recipe file with:
+      1. Set the voltage to 60kV and power to 5W
+      2. Set the exposure time to 2 seconds
+      3. Set the binning to 2
+      4. Save the recipe to artifacts/modified_recipe.rcp
+    
+    expected:
+      expected_tools:
+        - "recipe_modify_and_save"
+      expected_files:
+        - "modified_recipe.rcp"
+      verify_files_exist: true
+    
+    performance:
+      max_llm_calls: 8
+      max_tool_calls: 4
+    
+    timeout_seconds: 120
+
+  - test_id: "recipe_002"
+    name: "Create Tomography Recipe"
+    description: "Create a recipe for tomographic acquisition"
+    category: "framework_sweep"
+    tags: ["recipe", "tomography", "advanced"]
+    
+    user_prompt: |
+      Create a tomography recipe:
+      1. Set start angle to -90 degrees
+      2. Set end angle to 90 degrees
+      3. Set voltage to 80kV and power to 7W
+      4. Set exposure per frame to 1 second
+      5. Set binning to 4
+      6. Save to artifacts/tomo_recipe.rcp
+    
+    expected:
+      expected_tools:
+        - "recipe_modify_and_save"
+      expected_files:
+        - "tomo_recipe.rcp"
+      verify_files_exist: true
+    
+    performance:
+      max_llm_calls: 8
+      max_tool_calls: 4
+    
+    timeout_seconds: 120
+
+  - test_id: "recipe_004"
+    name: "Create and Run Recipe Workflow"
+    description: "Create a recipe, then execute it"
+    category: "framework_sweep"
+    tags: ["recipe", "workflow", "complete"]
+    
+    user_prompt: |
+      Create and run a quick scout acquisition:
+      1. Create a recipe with:
+         - Voltage: 40kV, Power: 3W
+         - Exposure: 0.5 seconds, Binning: 4
+         - Start angle: 0, End angle: 0 (single projection)
+      2. Save as artifacts/scout_recipe.rcp
+      3. Run the recipe
+      4. Report when complete
+    
+    expected:
+      expected_tools:
+        - "recipe_modify_and_save"
+        - "recipe_open_and_run"
+      expected_files:
+        - "scout_recipe.rcp"
+      verify_files_exist: true
+    
+    performance:
+      max_duration_ms: 300000
+      max_llm_calls: 15
+      max_tool_calls: 8
+    
+    timeout_seconds: 420
+

@@ -1,0 +1,114 @@
+id: labbench2
+record_type: benchmark
+name: 'LABBench2: An Improved Benchmark for AI Systems Performing Biology Research'
+short_name: LABBench2
+year: 2026
+venue: arXiv preprint (v1 2026-02-04, v2 2026-05-05)
+authors_short: Jon M. Laurent, Albert Bou et al.
+arxiv: '2604.09554'
+doi: null
+url: https://arxiv.org/abs/2604.09554
+code_url: https://github.com/EdisonScientific/labbench2
+data_url: https://huggingface.co/datasets/futurehouse/labbench2
+license: null
+status: preprint
+summary: |
+  LABBench2 reprises the LAB-Bench capability categories with ~1,900 tasks in more realistic contexts (answering from PDFs, images and bioinformatics files), adds open-response/retrieval variants for figures and tables, and new families for patents, clinical trials and source-quality assessment. Model accuracies drop 26-46% per subtask relative to LAB-Bench.
+benchmark_features:
+  agents_evaluated: []
+  evaluation_target:
+  - question_answering
+  - protocol_planning
+  - data_analysis
+  execution_mode: static_text
+  has_abstention_eval: null
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results:
+  - Model-specific accuracy differences of -26% to -46% across subtasks relative to LAB-Bench
+  holdout_or_split_design: null
+  instruments: []
+  leakage_or_contamination_risk: Newly released 2026; lower short-term contamination than LAB-Bench.
+  metric_types:
+  - success_rate
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: 11
+  n_tasks: 1900
+  open_source: true
+  primary_metric: Accuracy
+  repetitions_per_task: null
+  sampling_strategy: New task families and realistic-context variants of LAB-Bench categories; details unverified.
+  scientific_domains:
+  - molecular biology
+  - genomics
+  - protocols
+  - literature
+  - patents
+  - clinical trials
+  scoring_granularity: binary
+  target_population: Real-world capabilities of AI systems performing useful biology research tasks
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: mixed
+  quantitative_tolerance: null
+  reasoning_demand: high
+  safety_criticality: none
+  task_taxonomy:
+  - cloning
+  - dbqa2
+  - figqa2
+  - tableqa2 (image and PDF variants)
+  - litqa3
+  - patentqa
+  - protocolqa2
+  - seqqa2
+  - sourcequality
+  - suppqa2
+  - trialqa
+  tool_composition: Requires reading PDFs, images and bioinformatics files; agent scaffolding left to evaluator.
+  tool_interface:
+  - natural_language
+  workflow_depth: mixed
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Static dataset on HF with evaluation code on GitHub.
+  injected_faults: false
+  novelty_control: null
+  sample_real_or_simulated: dataset
+  sample_types:
+  - PDFs
+  - images
+  - bioinformatics files
+  - text
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models: []
+  multi_agent: false
+  planner: null
+  rag_or_memory: null
+  tools: []
+  verifier_or_self_debug: none
+  vision_used: mixed
+transfer_relevant_findings:
+- Moving the same competencies from clean MCQ to realistic artifacts cut accuracy by 26-46 points — strong evidence
+  that interface realism dominates difficulty.
+limitations:
+- Brief record; models evaluated, per-family counts and license not verified (arXiv/HF/alphaXiv blocked).
+related:
+- lab_bench
+notes: Facts from search excerpts and a third-party summary card (yuema137/scientific-eval-environments). protocolqa2
+  is the lab-workflow-relevant family.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2604.09554
+  - https://github.com/EdisonScientific/labbench2
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

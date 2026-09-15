@@ -1,0 +1,90 @@
+# =============================================================================
+# VERSA Test Suite: Image Analysis Unit Tests
+# =============================================================================
+# Comprehensive unit tests for image analysis and processing tools
+# Category: unit
+# =============================================================================
+
+tests:
+
+  # ===========================================================================
+  # PYTHON CODE EXECUTION
+  # ===========================================================================
+
+  - test_id: "python_002"
+    name: "Image Statistics with Python"
+    description: "Calculate image statistics using custom Python code"
+    category: "unit"
+    tags: ["image", "python", "statistics"]
+    
+    user_prompt: |
+      Write and execute Python code to:
+      1. Acquire an image
+      2. Write custom python code to compute the image pixel intensity mean and standard deviation
+      3. Print the results
+    
+    expected:
+      expected_tools:
+        - "single_acquisition"
+        - "execute_python_code"
+    
+    performance:
+      max_llm_calls: 8
+      max_tool_calls: 4
+    
+    timeout_seconds: 120
+
+  # - test_id: "python_003"
+  #   name: "Create Visualization with Python"
+  #   description: "Use Python to create custom visualization"
+  #   category: "unit"
+  #   tags: ["image", "python", "visualization"]
+    
+  #   user_prompt: |
+  #     Write Python code to load any tiff in the workspace and create a visualization
+  #     showing both the original image and its histogram side by side.
+  #     Save the result as artifacts/visualization.png
+    
+  #   expected:
+  #     expected_tools:
+  #       - "execute_python_code"
+  #     expected_agents:
+  #       - "supervisor"
+  #       - "image"
+  #     expected_files:
+  #       - "visualization.png"
+  #     verify_files_exist: true
+    
+  #   performance:
+  #     max_llm_calls: 10
+  #     max_tool_calls: 5
+    
+  #   timeout_seconds: 150
+
+  # - test_id: "python_004"
+  #   name: "Save JSON Results with Python"
+  #   description: "Use Python to save analysis results to JSON"
+  #   category: "unit"
+  #   tags: ["image", "python", "json", "output"]
+    
+  #   user_prompt: |
+  #     Write Python code to:
+  #     1. Load any image in the workspace
+  #     2. Calculate basic statistics (mean, std, min, max)
+  #     3. Save the statistics to artifacts/stats.json
+    
+  #   expected:
+  #     expected_tools:
+  #       - "execute_python_code"
+  #     expected_agents:
+  #       - "supervisor"
+  #       - "image"
+  #     expected_files:
+  #       - "stats.json"
+  #     verify_files_exist: true
+    
+  #   performance:
+  #     max_llm_calls: 10
+  #     max_tool_calls: 5
+    
+  #   timeout_seconds: 120

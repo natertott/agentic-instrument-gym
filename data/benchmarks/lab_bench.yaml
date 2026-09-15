@@ -1,0 +1,137 @@
+id: lab_bench
+record_type: benchmark
+name: 'LAB-Bench: Measuring Capabilities of Language Models for Biology Research'
+short_name: LAB-Bench
+year: 2024
+venue: arXiv preprint (FutureHouse)
+authors_short: Jon M. Laurent et al.
+arxiv: '2407.10362'
+doi: null
+url: https://arxiv.org/abs/2407.10362
+code_url: https://github.com/Future-House/LAB-Bench
+data_url: https://huggingface.co/datasets/futurehouse/lab-bench
+license: CC-BY-SA-4.0
+status: preprint
+summary: |
+  LAB-Bench is a 2,400+ question multiple-choice benchmark of practical biology-research capabilities: literature extraction (LitQA2), database retrieval (DbQA), supplementary-information access (SuppQA), figure and table interpretation (FigQA, TableQA), protocol troubleshooting (ProtocolQA), sequence manipulation (SeqQA) and multi-step molecular cloning scenarios (CloningScenarios). Models are scored on accuracy, precision and coverage (they may abstain) against human expert biologists.
+benchmark_features:
+  agents_evaluated:
+  - Claude 3.5 Sonnet
+  - GPT-4o
+  - other frontier and open models (full list not verified)
+  evaluation_target:
+  - question_answering
+  - protocol_planning
+  - data_analysis
+  execution_mode: static_text
+  has_abstention_eval: true
+  has_human_baseline: true
+  has_safety_eval: false
+  headline_results:
+  - Claude 3.5 Sonnet leads by a narrow 0.033 accuracy margin over GPT-4o (search excerpt)
+  - All models near random on FigQA except Claude 3.5 Sonnet
+  - On open-response CloningScenarios both Claude 3.5 Sonnet and GPT-4o score only 0.20 accuracy, suggesting reliance
+    on distractor elimination
+  - Models often refuse to answer questions requiring database or supplementary-material lookup, lowering coverage
+  holdout_or_split_design: 80% public / 20% private held-out subset for contamination monitoring
+  instruments: []
+  leakage_or_contamination_risk: Public 80% split is widely used and likely in pre-training corpora by now; private
+    20% mitigates. LABBench2 (2026) was created partly because LAB-Bench abilities 'improved substantially'.
+  metric_types:
+  - success_rate
+  - other
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: 8
+  n_tasks: 2457
+  open_source: true
+  primary_metric: Accuracy (with precision and coverage reported separately because models may decline to answer)
+  repetitions_per_task: null
+  sampling_strategy: Questions written/curated by domain experts across eight categories; ~80% (1,967 questions)
+    publicly released, ~20% held privately for contamination monitoring. CloningScenarios are complex real-world
+    cloning workflows designed to require tool use; ProtocolQA reported as 135 questions with 100% human coverage
+    (search excerpt).
+  scientific_domains:
+  - molecular biology
+  - molecular cloning
+  - bioinformatics / sequence analysis
+  - biology literature
+  scoring_granularity: binary
+  target_population: Capabilities foundational to practical biology research (beyond textbook knowledge), benchmarked
+    against human expert biology researchers
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: mixed
+  quantitative_tolerance: Exact-match MCQ; open-response variant for CloningScenarios
+  reasoning_demand: mixed
+  safety_criticality: none
+  task_taxonomy:
+  - LitQA2
+  - DbQA
+  - SuppQA
+  - FigQA
+  - TableQA
+  - ProtocolQA
+  - SeqQA
+  - CloningScenarios
+  tool_composition: Static MCQ; some categories (DbQA, SuppQA, CloningScenarios) are designed to require external
+    tools (database lookup, sequence tools) but the benchmark itself provides no environment.
+  tool_interface:
+  - natural_language
+  workflow_depth: mixed
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Static dataset (HF); evaluation harness in GitHub repo computing accuracy/precision/coverage
+    on full set and subsets.
+  injected_faults: false
+  novelty_control: Private held-out 20%
+  sample_real_or_simulated: dataset
+  sample_types:
+  - text questions
+  - figures
+  - tables
+  - DNA/protein sequences
+  - plasmid maps
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models:
+  - Claude 3.5 Sonnet
+  - GPT-4o
+  - others not verified
+  multi_agent: false
+  planner: none
+  rag_or_memory: varied
+  tools: []
+  verifier_or_self_debug: none
+  vision_used: mixed
+transfer_relevant_findings:
+- Abstention-aware scoring (precision vs coverage) separates knowledge gaps from refusal behaviour — a design worth
+  borrowing for instrument agents.
+- ProtocolQA and CloningScenarios are the lab-workflow-relevant subsets; multi-step cloning is where frontier models
+  fell to 0.20 in open-response mode.
+- Successor LABBench2 shows 26-46% accuracy drops when the same capabilities are tested in more realistic contexts
+  (PDFs, images, bioinformatics files) — realism of the interface, not the concept, drives difficulty.
+limitations:
+- MCQ format allows distractor elimination; no execution or instrument interaction.
+- Per-category counts, full model list and exact numeric table could not be verified (arXiv/HF blocked).
+related:
+- labbench2
+- bioprobench
+- bioplanner
+- biolp_bench
+- labos
+notes: |
+  Verified directly: GitHub README (categories, metrics accuracy/precision/coverage, CC-BY-SA-4.0, 80/20 public/private split, HF dataset link). Total 2,457 questions, 1,967 public, ProtocolQA=135, the 0.033 margin and 0.20 cloning figure come from search excerpts / a third-party summary card and should be checked against the paper. The README summariser also reported 'eight primary domains encompassing 30 specialized subtasks' — unverified. DOI: none found.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2407.10362
+  - https://github.com/Future-House/LAB-Bench
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

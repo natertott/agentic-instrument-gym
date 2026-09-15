@@ -1,0 +1,106 @@
+id: domain_slm_spm_2026
+record_type: system
+name: 'Autonomous Laboratory Agent via Customized Domain-Specific Language Model and Modular AI Interface (later
+  version titled: Integrating Domain-Specialized Language Models with AI Measurement Tools for Deterministic Atomic-Resolution
+  Experimentation)'
+short_name: null
+year: 2026
+venue: arXiv preprint, 24 February 2026
+authors_short: Diao et al. (Zhuo Diao, Kouma Matsumoto, Linfeng Hou, Masahiro Ohara, Hayato Yamashita; The University
+  of Osaka / Shizuoka University)
+arxiv: '2602.20669'
+doi: null
+url: https://arxiv.org/abs/2602.20669
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: |
+  Proposes an autonomous-laboratory agent built from customised small, domain-specific language models coordinated through a modular AI interface with AI-driven measurement tools, targeting deterministic execution under strict physical constraints. Demonstrates real-time atomic-resolution scanning probe microscopy experiments at room temperature with instruction-level control and multi-step experimental planning.
+benchmark_features:
+  agents_evaluated:
+  - customised small/domain-specific language models (names not verified)
+  evaluation_target:
+  - instrument_control
+  - protocol_planning
+  execution_mode: physical_instrument
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results:
+  - 'Qualitative: real-time atomic-resolution SPM experiments at room temperature with instruction-level control
+    and multi-step planning (per abstract); numeric success rates not verifiable this session.'
+  holdout_or_split_design: null
+  instruments:
+  - name: room-temperature atomic-resolution SPM (AFM/STM type and vendor not verified)
+    modality: microscopy
+    real_or_simulated: real
+  leakage_or_contamination_risk: Unknown; full text not accessible.
+  metric_types:
+  - other
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: null
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - surface science
+  - atomic-resolution scanning probe microscopy
+  scoring_granularity: mixed
+  target_population: Instruction-level and multi-step autonomous control of a precision SPM by small task-specific
+    language models.
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: image_reading
+  quantitative_tolerance: null
+  reasoning_demand: medium
+  safety_criticality: medium
+  task_taxonomy: []
+  tool_composition: Task-specific small LMs + modular AI measurement tools (details not verified).
+  tool_interface:
+  - python_api
+  - natural_language
+  workflow_depth: multi_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Real room-temperature atomic-resolution SPM (details not verified).
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: real
+  sample_types: []
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: true
+  guards_or_safety_layer: null
+  models: []
+  multi_agent: null
+  planner: varied
+  rag_or_memory: null
+  tools: []
+  verifier_or_self_debug: null
+  vision_used: null
+transfer_relevant_findings:
+- Argues for deterministic execution and domain adaptation of small LMs (rather than frontier general models) as
+  the route to reliable precision-instrument control -- a contrasting design choice to AILA's general-LLM multi-agent
+  approach.
+limitations:
+- Could not verify whether a quantitative benchmark (task counts, success rates) is reported; treat as demonstration
+  until full text is checked.
+related:
+- llm_sns_spm_2024
+- afmbench
+notes: |
+  Only the abstract and author list (from search snippets) were accessible; arXiv and mirrors blocked. Whether this paper contains a real quantitative evaluation is unknown -- n_tasks set to null and flagged 'demonstration, not benchmark' pending verification. Later arXiv version carries a different title (given above).
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2602.20669
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

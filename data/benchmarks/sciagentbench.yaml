@@ -1,0 +1,100 @@
+id: sciagentbench
+record_type: benchmark
+name: 'SciAgentGym / SciAgentBench: Benchmarking Multi-Step Scientific Tool-use in LLM Agents'
+short_name: SciAgentBench
+year: 2026
+venue: arXiv preprint (Feb 2026); Fudan NLP Lab
+authors_short: Yujiong Shen et al.
+arxiv: '2602.12984'
+doi: null
+url: https://arxiv.org/abs/2602.12984
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: |
+  Brief follow-up entry (not a ScienceAgentBench version, despite the similar name). SciAgentGym is an interactive environment with 1,780 domain-specific tools across four natural-science disciplines, and SciAgentBench is a tiered evaluation suite of 259 tasks (1,134 sub-questions) in physics (109), chemistry (81), materials science (37) and life sciences (32), graded L1-L3 by step count. GPT-5's success falls from 60.6% to 30.9% as horizons lengthen; the authors' SciForge data synthesis trains an 8B model (SciAgent-8B) that outperforms a 235B model.
+benchmark_features:
+  agents_evaluated:
+  - GPT-5
+  - Qwen3-235B-class model
+  - SciAgent-8B
+  evaluation_target:
+  - data_analysis
+  - code_generation
+  - question_answering
+  execution_mode: hybrid
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results:
+  - GPT-5 success drops from 60.6% (short) to 30.9% (long horizon); ~70% drop from 3-step to 8+-step tasks
+  holdout_or_split_design: null
+  instruments: []
+  leakage_or_contamination_risk: null
+  metric_types:
+  - success_rate
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: 4
+  n_tasks: 259
+  open_source: null
+  primary_metric: Task success rate
+  repetitions_per_task: null
+  sampling_strategy: Tiered by number of required steps (L1-L3); details not verified
+  scientific_domains:
+  - physics
+  - chemistry
+  - materials science
+  - life sciences
+  scoring_granularity: null
+  target_population: Long-horizon multi-step scientific tool use
+  task_source: mixed
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: null
+  quantitative_tolerance: null
+  reasoning_demand: high
+  safety_criticality: none
+  task_taxonomy:
+  - L1 / L2 / L3 by step count
+  tool_composition: 1,780 tools; multi-step chaining is the object of study
+  tool_interface:
+  - python_api
+  workflow_depth: mixed
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Tool-use gym; details not verified
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: none
+  sample_types: []
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models:
+  - GPT-5
+  - SciAgent-8B
+  multi_agent: false
+  planner: null
+  rag_or_memory: null
+  tools: []
+  verifier_or_self_debug: null
+  vision_used: null
+transfer_relevant_findings:
+- Sharp horizon-length degradation for frontier models
+limitations:
+- Only search-snippet level verification in this session
+related:
+- scienceagentbench
+notes: All facts from search snippets quoting the arXiv abstract; repository, license and metric details not verified.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2602.12984
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

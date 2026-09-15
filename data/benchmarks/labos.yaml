@@ -1,0 +1,132 @@
+id: labos
+record_type: system
+name: 'LabOS: The AI-XR Co-Scientist That Sees and Works With Humans'
+short_name: LabOS
+year: 2025
+venue: arXiv / bioRxiv preprint (also posted on Research Square)
+authors_short: Zaixi Zhang et al. (first author inferred from GitHub owner; full list not verified)
+arxiv: '2510.14861'
+doi: 10.1101/2025.10.16.679418
+url: https://arxiv.org/abs/2510.14861
+code_url: https://github.com/zaixizhang/LabOS
+data_url: null
+license: Apache-2.0 (code)
+status: preprint
+summary: |
+  LabOS is a system paper, not primarily a benchmark: an AI co-scientist combining a self-evolving multi-agent reasoning stack (planning/manager, researcher/development, critic, tool-creation agents drawing on a 'Tool Ocean' of autonomously generated tools) with XR smart-glasses interfaces for human-in-the-loop physical lab execution. It introduces LabSuperVision, a VLM benchmark of 200+ egocentric lab video sessions with protocols, step segments and expert-labeled error events, and reports results on HLE-Biomedicine, LAB-Bench subsets and wet-lab error detection.
+benchmark_features:
+  agents_evaluated:
+  - LabOS (multi-agent, Gemini 3 backbone via OpenRouter per current README)
+  - unnamed commercial systems as comparators
+  evaluation_target:
+  - perception
+  - question_answering
+  - protocol_planning
+  execution_mode: hybrid
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results:
+  - 'Humanity''s Last Exam - Biomedicine: 32% (+8% vs next best) [GitHub README]'
+  - 'LAB-Bench DBQA: 61% (top score); LAB-Bench LitQA: 65% (top score) [GitHub README]'
+  - 'Wet-lab error detection: >90% vs ~40% for commercial systems [GitHub README]'
+  holdout_or_split_design: null
+  instruments:
+  - name: XR smart glasses / fixed cameras observing human wet-lab work
+    modality: generic_lab
+    real_or_simulated: real
+  leakage_or_contamination_risk: LabSuperVision videos are newly recorded; external benchmarks (LAB-Bench, HLE)
+    are public.
+  metric_types:
+  - success_rate
+  - other
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: true
+  primary_metric: Accuracy on external QA benchmarks (HLE-Biomedicine, LAB-Bench DBQA/LitQA) and wet-lab error-detection
+    accuracy (LabSuperVision)
+  repetitions_per_task: null
+  sampling_strategy: 'LabSuperVision: >200 egocentric video sessions (2-45 min) recorded during real experiments
+    across biomedical and materials-science labs via fixed cameras and XR glasses; each with gold-standard protocol,
+    step segments, expert-labeled error events and critical parameters.'
+  scientific_domains:
+  - biomedicine
+  - cancer immunotherapy target discovery
+  - mechanistic cell biology
+  - materials science labs (LabSuperVision)
+  scoring_granularity: mixed
+  target_population: Human-AI collaborative biomedical research spanning hypothesis generation, experimental design,
+    physical validation and documentation
+  task_source: mixed
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: image_interpretation
+  quantitative_tolerance: null
+  reasoning_demand: high
+  safety_criticality: medium
+  task_taxonomy:
+  - hypothesis generation
+  - experimental design
+  - data analysis
+  - physical validation with XR guidance
+  - automated documentation
+  - wet-lab error detection (LabSuperVision)
+  tool_composition: Tool Ocean of 98 biomedical tools across seven categories (databases, screening, sequence analysis,
+    search, development environments, web utilities, biosecurity) orchestrated by four agents; XR glasses stream
+    video to VLM for step tracking / error flagging.
+  tool_interface:
+  - python_api
+  - natural_language
+  - physical
+  workflow_depth: long_horizon
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Real biomedical and materials labs; humans execute protocols wearing XR glasses while
+    agents observe, reason and guide.
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: real
+  sample_types:
+  - real biological samples in human-operated wet labs
+  signal_quality_variation: Egocentric video from diverse labs and camera setups
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: false
+  guards_or_safety_layer: some
+  models:
+  - Gemini 3 (current README); models at time of paper not verified
+  multi_agent: true
+  planner: plan_and_execute
+  rag_or_memory: some
+  tools:
+  - Tool Ocean (98 tools)
+  - web search
+  - literature retrieval
+  - bioinformatics databases
+  verifier_or_self_debug: external_verifier
+  vision_used: true
+transfer_relevant_findings:
+- Claims a lab-specific VLM benchmark (LabSuperVision) yields visual reasoning that surpasses general-purpose models
+  on lab-specific tasks — i.e., domain video data matters for perception of lab state.
+- System-level rather than benchmark-level evidence; useful mainly as a source of the LabSuperVision perception
+  benchmark and as context for the (unrelated) LabOSBench name.
+limitations:
+- Primarily a system/demonstration paper; evaluation numbers are reported by the authors on their own README without
+  full tables verified here.
+- LabSuperVision task definitions, metrics and release status could not be verified (HF/bioRxiv blocked).
+related:
+- labosbench
+- lab_bench
+notes: |
+  Distinct from LabOSBench (different authors; LabOS README does not mention LabOSBench). arXiv, bioRxiv, alphaXiv, ResearchGate, Research Square and ai4labos.com were all egress-blocked; facts come from the GitHub README (verified) and search excerpts of the bioRxiv/arXiv abstract. Full author list, exact submission date (bioRxiv DOI implies 2025-10-16), and LabSuperVision metrics unverified. 'Tool Ocean' size (98 tools) reflects the current README and may differ from the paper.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2510.14861
+  - https://github.com/zaixizhang/LabOS
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

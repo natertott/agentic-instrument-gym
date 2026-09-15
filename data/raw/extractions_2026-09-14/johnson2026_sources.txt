@@ -1,0 +1,379 @@
+================================================================================
+PROVENANCE NOTE (written 2026-09-14 by the extraction agent)
+================================================================================
+arxiv.org (abs/html/pdf/export), semanticscholar, alphaxiv, pith.science,
+awesomepapers.io, r.jina.ai and archive.org were ALL blocked by the session's
+egress proxy, so the arXiv HTML full text of 2608.05266 could NOT be fetched.
+This file therefore contains, in order:
+  (1) the verbatim arXiv abstract (mirrored in a GitHub arXiv-digest repo,
+      CSQianDong/Awesome-arXiv-Daily-Reporter, 7-Aug-2026/AI/README.md);
+  (2) sentences from the paper body that were surfaced verbatim/near-verbatim
+      by web-search snippets of https://arxiv.org/html/2608.05266
+      (these are quotations of the paper as returned by the search engine,
+      not a contiguous text);
+  (3) the FULL text of the paper's Supplementary Information PDF, extracted
+      from the authors' GitHub repository
+      https://github.com/natertott/agentic_microscopy_benchmarks_XRM
+      (file SupplementaryInformation.pdf, pypdf text extraction);
+  (4) the repository README.
+arXiv metadata gathered from search results: arXiv:2608.05266, posted
+2026-08-05, 20 pages, 8 figures, subjects cs.AI, cond-mat.mtrl-sci, cs.LG.
+Authors: Nathan S Johnson, Ian Abshire (Carl Zeiss Research Microscopy
+Solutions, 5300 Central Boulevard, Dublin, CA 94568 per SI).
+
+================================================================================
+(1) ARXIV ABSTRACT (verbatim, from digest mirror)
+================================================================================
+Title: Agentic self-driving microscopy benchmarks support qualification but do not necessarily generalize to unseen tasks
+Authors: Nathan S Johnson, Ian Abshire
+Link: https://arxiv.org/pdf/2608.05266
+
+Large language model agents are increasingly being developed to control a wide range of scientific characterization tools including microscopes and synchrotron beamlines. Research into agentic control of physical infrastructure is nascent and there are few well-established paradigms for how to engineer an agentic system. There are many choices to make when designing a microscopy agent, including the choice of LLM, the number of agents to use, agent responsibilities and delegation rules, retrieval-augmented generation parameters, and more. When designing and optimizing an agentic microscope controller, researchers not only want to ensure that the agent can correctly perform known tasks but also that the agent can generalize to new tasks that it has not encountered before. In this study, we develop a benchmark and trace-logging framework that reveals a) how different choices of agent architecture impact performance at microscopy tasks and b) the limitations of benchmarks for predicting if a particular agent will perform well on unseen microscopy tasks. The framework was used to evaluate one-, two-, and three-agent graph topologies, five LLMs, RAG and context parameters, and operational constraints across 53 microscopy benchmark tests. In total, 105 agent configurations, 1,949 individual test runs, and 49,109 RAG retrievals were recorded. Direct comparisons showed clear differences in latency, token use, cost, and failure mode between configurations. However, surrogate models trained on agent architecture and test results did not reliably predict an agent's performance on new, unseen tasks. These results show that these benchmarks are useful for qualification, regression testing, diagnosis, and direct comparison, but the current heterogeneous test suite does not support a task-independent global configuration model. 
+
+================================================================================
+(2) BODY SENTENCES SURFACED BY SEARCH SNIPPETS OF arxiv.org/html/2608.05266
+================================================================================
+- "The benchmark contained 53 tests divided into seven suites: a six-test end-to-end workflow, 12 integration workflows, 19 atomic instrument-control tests, six geometry and recipe tests, eight regression and performance tests, one image-analysis test, and one debugging test."
+- "The tests ranged from a single instrument action to workflows that required setup, image acquisition, segmentation, geometric calculation, recipe generation, and safe shutdown."
+- "The composite pass criteria included scientific or numerical correctness together with the trace, file, and operational checks defined for each test."
+- "Microscope control was provided through the Model Context Protocol (MCP), with the LangGraph controller acting as an MCP client and sending structured tool calls to six Python MCP servers that controlled the microscope, created and executed acquisition recipes, performed geometry and optics calculations, processed images, read and wrote files, and executed custom Python code."
+- "A system designer must choose the LLM, the number and responsibilities of agents, the tool interface, the amount of conversational history retained, the use of retrieval-augmented generation (RAG), and the parameters that control retrieval and model sampling."
+- "The benchmark runner recorded the configuration snapshot, test outcome, tool and agent traces, duration, token use, estimated cost, LLM calls, tool calls, created files, errors, and all RAG retrieval events."
+- "Single- and two-agent systems covered a similar range of pass rates, but the one-agent systems used as many as 10,000 fewer tokens per test than corresponding two-agent systems. The three-agent topology did not provide a consistent improvement in pass rate and was not included in the subsequent broad configuration sweep."
+- "Two-agent systems more frequently exceeded limits on duration, LLM calls, or tool calls, which is consistent with previous observations of agents continuing to take actions after the requested task is effectively complete."
+- "Multi-agent topologies did not consistently improve pass rates and generally increased tokens, calls, and time."
+- "A tradeoff between composite pass rate and total tokens per test for the evaluated LLMs and graph topologies is shown with 95% confidence intervals."
+- "RAG retrieval auditing identified knowledge fragments associated with success or failure, but pruning based on these retrospective associations did not consistently improve performance."
+- "When test identity was removed from the design matrix, both the L2-regularized logistic regression and random forest models achieved an ROC-AUC of 0.55 for predicting success on unseen tasks. In contrast, under a configuration-held-out evaluation where test identity remained in the training data, the [random-forest] model achieved an ROC-AUC of approximately 0.78."
+- "Test identity was the strongest predictor of the pass outcome, followed by LLM choice and the number of agents. The surrogate therefore learned a substantial amount about intrinsic task difficulty rather than a task-independent configuration response."
+- "Repeated runs of the same task and configuration were not fully independent."
+- "The configuration dataset was historical and unbalanced rather than a complete factorial experiment, with model, prompt, framework, code, software, and hardware versions changing during the study, and runs collected using a simulator and multiple ZEISS Versa microscope models."
+- "Across the study, 105 agent configurations were represented by 1,949 test runs, and 49,109 RAG retrievals were recorded."
+- "The benchmark records, preprocessing scripts, surrogate-modeling code, and plotting notebooks are available at github.com/natertott/agentic_microscopy_benchmarks_XRM, and a PDF of the Supplemental Information can also be found in that repository."
+- Acknowledgment (per snippet): "The ZEISS X-ray Microscopy engineering teams provided support for this work."
+
+================================================================================
+(3) SUPPLEMENTARY INFORMATION - FULL EXTRACTED TEXT
+    (note: SI carries an alternate title: "Self-driving microscopy benchmarks
+     support qualification but not task-independent configuration selection
+     for large language model agents")
+================================================================================
+Supplementary Information
+Self-driving microscopy benchmarks support qualification but not task-independent
+configuration selection for large language model agents
+Nathan S. Johnson1 and Ian Abshire1
+1Carl Zeiss Research Microscopy Solutions, 5300 Central Boulevard, Dublin, CA 94568
+1 Agent state model
+All nodes in the graph operated on a shared mutableAgentStatedictionary. This state provided the working
+memory of the system while limiting dependence on an indefinitely growing conversation history. Table 1
+summarizes the principal fields.
+2 MCP server implementation
+The controller used six MCP servers. Each server was implemented as a separate Python service with a
+bounded responsibility. This separation allowed the software requirements and safety checks for instrument
+control, image processing, and free-form code execution to be managed independently.
+2.1 Versa instrument-control server
+TheVersaserver wrapped the ZEISS vendor API (XradiaPy.Core.XRM) and exposed deterministic tools
+for instrument-state queries, X-ray source control, axis motion, filter and objective selection, and image
+acquisition. Each acquisition wrote an image and a JSON metadata sidecar containing the instrument state.
+The sidecar was used by downstream geometry and image-analysis tools.
+The server exposed small, composable actions rather than a monolithic workflow command. Higher-level
+sequencing remained in the LangGraph controller, where planning, retries, and agent coordination could be
+recorded in the workflow trace.
+2.2 Recipe server
+TheVersa-Recipeserver wrapped the ZEISS recipe API (XradiaPy.Recipe.Recipe). It modified acquisi-
+tion parameters, wrote updated recipe files to the run workspace, opened and executed recipes, and emitted
+JSON snapshots of the recipe state. Recorded fields included the objective, filter, angular range, number of
+projections, and acquisition parameters.
+2.3 Geometry and optics server
+TheGeometryserver performed calibration-aware calculations for sample centering and imaging geometry.
+Centering tools converted image-space centroids into stage-space corrections using the image shape, pixel
+size, stage position, sample rotation, and fixed sign conventions stored in the tool implementation. This
+removed the need for the LLM to remember axis mappings or calculate movement signs from free-form
+context.
+The server also selected source and detector positions to satisfy a requested field of view or pixel size
+while respecting calibrated mechanical and detector limits. It returned either a feasible configuration or a
+structured report explaining why no solution was available.
+1
+State key Type Description
+messageslist[Message] Bounded transcript containing human, AI, and tool messages.
+Older messages may be pruned or summarized to enforce token
+and message-count budgets.
+nextstr Next uncompleted task in the current workflow.
+run_idstr Unique identifier assigned at the beginning of the workflow.
+working_directorystr Active directory used for file operations.
+tasksList[dict] Structured task records containing identifiers, descriptions, as-
+signments, status, and optional results.
+assigned_tasks_for_agentList[str] Tasks delegated by the supervisor to a worker agent.
+agent_completed_tasksList[str] Tasks reported as complete by a worker agent.
+retry_countint Number of attempts made on the active task.
+last_errorstr Most recent tool or workflow error.
+resultsList[dict] Structured results returned by MCP tool calls.
+filesList[str] Files created during the workflow, including images, volumes,
+JSON metadata, recipes, and plots.
+shared_dataDict[str, object] Structured values passed between agents, including file keys, in-
+strument positions, and analysis results.
+prior_summaryList[str] Compressedsummariesofmessagesremovedfromtheactivetran-
+script.
+Table 1: RepresentativeAgentStateschema used by the LangGraph controller.
+2.4 Image-analysis server
+TheImageAnalysisserver exposed deterministic image-processing operations used for centering, trans-
+mission measurement, and workflow verification. The server usednumpy,Pillow,scikit-image, and
+matplotlib. Tools included TIFF loading, Otsu thresholding, connected-component measurements, cen-
+troids, bounding boxes, histograms, and annotated image generation.
+2.5 File-handling server
+TheFileReadingserver provided guarded file operations, including directory listing, file-existence checks,
+JSON and text reading, and controlled path resolution. Relative paths were resolved from the active working
+directory, and errors were returned as structured messages rather than raw tracebacks.
+2.6 Python-execution server
+Thepython_executorserver accepted a Python source string, optionally saved the code in the run artifacts
+directory, and executed it in a subprocess while recording standard output, standard error, and wall-clock
+time. Dedicated MCP tools were preferred for repeated scientific operations. Free-form execution was
+reserved for analyses or plots that were not already represented by validated tools.
+3 Agent prompts
+The one-agent graph used one prompt for a ReAct agent with access to all six MCP servers. The two-agent
+graph used a supervisor and one unified worker. The three-agent graph used a supervisor with separate
+instrument and image-analysis workers. Table 2 summarizes the roles. The exact Python source files supplied
+for this study are included with the manuscript package. The full prompt listings are included in the code
+repository.
+2
+Topology Prompt role Responsibility encoded in the prompt
+One-agent Unified ReAct agent Plans the complete workflow, controls the instrument, han-
+dles files and recipes, performs image analysis, and executes
+Python.
+Two-agent Supervisor Creates and updates the task list, delegates related batches
+to the unified worker, and determines when the workflow is
+complete.
+Two-agent Unified worker Executes instrument-control, recipe, file, geometry, image-
+analysis, and Python tasks assigned by the supervisor.
+Three-agent Supervisor Creates the task plan and assigns consecutive instrument or
+image-analysis tasks to the corresponding specialist.
+Three-agent Instrument worker Executes microscope motion, X-ray control, image acquisition,
+recipe creation, and recipe execution.
+Three-agent Image-analysis worker Processes TIFF images, performs segmentation and measure-
+ment, writes analysis files, and executes custom Python.
+Table 2: System-prompt roles used by the three agent graph topologies.
+Outcome or metric Definition
+Required tool The workflow must call a specified MCP tool.
+Required text output The final response must contain a specified value or string.
+Required agent A specified agent must be visited in graph topologies where responsibility is divided
+among agents.
+File creation A file with the required name or extension must be created in the run workspace.
+File contents A created text or JSON file must contain a specified value or field.
+Quantitative result A measured or calculated value must fall within the tolerance defined for the test.
+Forbidden tool A specified tool must not be called during the workflow.
+Duration Wall-clock time required to complete the test.
+Input and output tokens Total LLM token use recorded during the workflow.
+Estimated cost EstimatedAPIcostcalculatedfromrecordedtokenuseandthemodel-specificpricing
+configured in the benchmark framework.
+LLM calls Number of model invocations during the workflow.
+Tool calls Number of MCP tool invocations during the workflow.
+Retrieval identifiers Stable identifier for every RAG entry retrieved during the workflow.
+Table 3: Pass/fail checks and operational metrics recorded by the benchmark framework. Tests used different
+combinations of checks depending on their intended purpose.
+4 Benchmark definitions
+The benchmark used a composite pass definition. A run passed only when all checks defined for that test were
+satisfied. The available checks and operational metrics recorded for every run are summarized in Table 3.
+4.1 Benchmark suites
+The 53 tests were divided into seven source YAML files. Some suites were intended primarily for qualification
+and regression, while others combined several operations into integrated workflows. Table 4 summarizes the
+suite structure. The complete YAML definitions are included, in full, in the code repository.
+4.2 Golden end-to-end suite
+The six-testtdp_workflowsuite was used as a repeated end-to-end benchmark. Table 5 is a compact
+summary; the YAML listings in manuscript repository are the authoritative definition.
+3
+YAML suite Role No.
+tests
+Task scope Primary pass/fail basis
+tdp_workflow.yamlGolden suite 6 End-to-end 3D-printed
+artifact workflow covering
+setup, centering, sample
+sizing, geometry selection,
+recipe creation and execu-
+tion, and safe shutdown.
+Required actions, artifact
+creation and verification,
+forbidden-tool checks, and
+operational limits.
+integration_workflows.yamlSupporting 12 Multi-tool workflows com-
+bining setup, acquisition,
+imageanalysis, surveyimag-
+ing, transmission or expo-
+sure calculation, and com-
+plete imaging sequences.
+Required actions and arti-
+facts together with LLM-
+call, tool-call, duration, and
+timeout limits.
+unit_instrument.yamlSupporting 19 Atomic control tests for
+source state, stage motion,
+objective and filter selec-
+tion, and image acquisition.
+Required instrument action
+and operational limits.
+geometry_recipe.yamlSupporting 6 Geometry and recipe tests
+for magnification, centering
+transforms, recipe modifica-
+tion, and recipe execution.
+Required calculations, tool
+calls, and artifact verifica-
+tion.
+regression_performance.yamlSupporting 8 Regression, idempotency,
+safety, timing, and stress
+tests for known failure
+modes and performance
+bounds.
+Required action and opera-
+tional limits.
+unit_image.yamlSupporting 1 Image-analysis test using
+custom Python after acqui-
+sition.
+Required acquisition and
+analysis behavior.
+debug.yamlSupporting 1 Minimal smoke test for
+benchmark execution.
+Successful tool execution.
+Table 4: Machine-readable benchmark suites used to evaluate the agentic microscope controller.
+5 Study-specific efficiency score
+A study-specific efficiency score was used during configuration screening to combine pass rate with resource
+use. The score included mean duration, mean token use, estimated cost, LLM calls, tool calls, and the
+number of failures. Table 6 lists the relative weights used in the analysis. This score was used as a practical
+utility function for the present system and was not intended as a general definition of agent efficiency.
+6 Physical validation definitions
+Thefiveholdoutvalidationtasksweredefinedseparatelyfromthe53-testbenchmark. Table7summarizesthe
+expected outputs and numerical criteria. A normalized machine-readable definition is included in manuscript
+repository.
+4
+Test ID Test name Purpose Principal pass criteria Limits
+tdp_001 setup_instrument_tdpSet up the instrument for gen-
+eral imaging and acquire an im-
+age without plotting.
+Callturn_xray_on,
+move_axis_absolute, and
+single_acquisition; at least
+five tool calls; do not
+callexecute_python_codeor
+plot_tiff.
+Duration≤600
+s; LLM calls
+≤20; tool calls
+≤15; timeout
+600 s.
+tdp_002 center_sample_tdpCenter the sample in the field of
+view and save the final stage po-
+sition.
+Call movement, acquisition,
+Otsu segmentation, and
+XY/YZ recentering tools;
+createcentered_position.json.
+Duration≤300
+s; LLM calls
+≤30; tool calls
+≤20; timeout
+800 s.
+tdp_003 estimate_size_tdpEstimate sample dimensions
+from two orthogonal views.
+Acquire and segment images; at
+least seven tool calls; create
+sample_size.json.
+Duration≤300
+s; LLM calls
+≤30; tool calls
+≤20; timeout
+1000 s.
+tdp_004 calculate_magnification_tdpCalculate source and detector
+positions for a requested 100-µm
+pixel size.
+Readsample_size.json;
+call geometry and Python-
+execution tools; create
+magnification_settings.json.
+Duration≤300
+s; LLM calls
+≤20; tool calls
+≤10; timeout
+600 s.
+tdp_005 create_run_recipe_tdpCreate and execute a recipe us-
+ing the centered position and
+magnification settings.
+Call recipe modification
+and execution tools; at
+least three tool calls; create
+modified_recipe.rcp.
+Duration≤600
+s; LLM calls
+≤20; tool calls
+≤9; no separate
+timeout is
+specified in the
+YAML.
+tdp_end end_testing_tdpTurn off X-rays and return the
+stage, source, and detector to
+specified positions.
+Call movement and
+turn_xray_offtools; at least
+four tool calls.
+Duration≤180
+s; LLM calls
+≤20; tool calls
+≤15; timeout
+600 s.
+Table 5: Compact summary of the golden end-to-end benchmark suite.
+Metric Pass
+rate
+Mean
+duration
+Mean
+tokens
+LLM
+calls
+Tool
+calls
+No.
+failures
+Weight0.4 0.15 0.15 0.1 0.1 0.1
+Table 6: Weights used in the study-specific efficiency score.
+Test ID Required file Required tools or workflow action File-content or quantitative crite-
+rion
+validation_001 setup_position.jsonTurn on X-rays; acquire images; recen-
+ter from sidecar; execute Python; at least
+eight tool calls.
+Stage X650±100µm; stage Y11100±
+500µm; stage Z0±100µm; source Z
+−87±10mm; detector Z50±10mm.
+validation_002 sample_size.jsonAcquire orthogonal views and execute
+Python; at least three tool calls.
+length_x= 29±1mm;length_y= 29±
+2mm;length_z= 29±1mm.
+validation_003 optimal_exposure.jsonAcquire an image and execute Python
+to select an exposure for approximately
+5000 counts in the sample region.
+optimal_exposure= 5.0±0.25s.
+validation_004 TDP_006_optimal.rcpRead current positions and the saved ex-
+posure; call recipe modification and exe-
+cution tools; begin acquisition.
+Required recipe file exists.
+validation_005 number_of_defects.jsonSegment the latest reconstructed TIFF
+stack using multi-Otsu; plot slices
+through pores larger than 1 mm; execute
+Python.
+number_of_defectsequals the integer 5.
+Table 7: Definitions of the five holdout physical validation tasks.
+5
+Figure 1: Composite pass rate for each of the 53 benchmark tests across the configurations on which it was
+evaluated. Error bars show 95% Wilson confidence intervals.
+6
+================================================================================
+(4) REPOSITORY README (github.com/natertott/agentic_microscopy_benchmarks_XRM, MIT license, (c) 2026 Nathan Johnson)
+================================================================================
+# agentic_microscopy_benchmarks_XRM
+This repository contains benchmark test results for an agentic self-driving X-ray microscopy system. It also contains supplemental information for the paper associated with the benchmarks.
+
+FILES IN THIS REPOSITORY:
+agent_eval_core_master_updated.py - This is the core Python file that is used to load, process, model, and plot the benchmark test results.
+agent_eval_master_analysis_updated.ipynb - This Jupyter notebook comprises the main plotting and analysis functions from the study. The majority of the figures that appear in the paper are created through this notebook. This includes the training of the surrogate models and in-depth RAG analysis. Crucially, this notebook compares ALL CONFIGS across ALL BENCHMARK TESTS. 
+framework_comparison_updated.ipynb - This notebook is used to compare the one-, two-, and three-agent frameworks across their consistent benchmark tests.
+optimal_config_comparisons_updated.ipynb - This notebook is used to compare the optimal agent configurations, as identified by the analysis in agent_eval_master_analysis_updated. Please note that this notebook requires importing specific benchmark test results, which can be found inside the sweep_results.zip compressed folder.
+
+sweep_results.zip - This compressed file contains all configurations and all benchmark test results from the study. The folder is split up into two sub-folders: surrogate_modeling_benchmark_suites and full_suite_optimal_configs. The subfolder surrogate_modeling_benchmark_suites contains all test results across all configs tested in the study. The subfolder full_suite_optimal_configs only contains test results for the three optimal and one baseline agents tested. 
+
+You can also find the YAML files defining all benchmarks inside this repository.

@@ -1,0 +1,186 @@
+id: scienceboard
+record_type: benchmark
+name: 'ScienceBoard: Evaluating Multimodal Autonomous Agents in Realistic Scientific Workflows'
+short_name: ScienceBoard
+year: 2025
+venue: ICLR 2026 (accepted 2026-01-26); earlier oral at the Workshop on Computer Use Agents (WCUA) @ ICML 2025;
+  arXiv v1 27 May 2025, v3 latest
+authors_short: Qiushi Sun et al. (Sun, Liu, Ma, Ding, Xu, Yin, Zhao, Wu, Cheng, Liu, ... ; OS-Copilot / Shanghai
+  AI Lab / HKU)
+arxiv: '2505.19897'
+doi: null
+url: https://arxiv.org/abs/2505.19897
+code_url: https://github.com/OS-Copilot/ScienceBoard
+data_url: Task JSONs in repo (tasks/VM); VM snapshot https://huggingface.co/OS-Copilot/ScienceBoard-Env; agent trajectories
+  https://huggingface.co/datasets/OS-Copilot/ScienceBoard-Traj
+license: MIT (repo LICENSE)
+status: published
+summary: |
+  ScienceBoard is a computer-use benchmark in which multimodal agents operate real scientific desktop software inside an Ubuntu virtual machine (built on the OSWorld infrastructure) to complete 169 human-curated tasks in six applications: UCSF ChimeraX (biochemistry), KAlgebra (algebra), Lean 4 (theorem proving), GRASS GIS (geoinformatics), Celestia (astronomy) and TeXstudio (scientific writing). Agents observe screenshots and/or accessibility trees and act through GUI (pyautogui) and CLI actions; success is verified by querying the applications' internal state through instrumented plugins/REST servers. State-of-the-art agents (GPT-4o, Claude 3.7, UI-TARS, etc.) reached only about 15% overall success at release, versus 60.27% for humans; later GPT-5 reached 24.20% under the best observation setting.
+benchmark_features:
+  agents_evaluated:
+  - GPT-4o
+  - Claude-3.7-Sonnet
+  - Gemini (2.x)
+  - Qwen2.5-VL
+  - InternVL (incl. InternVL-3)
+  - QVQ
+  - OS-Atlas
+  - GUI-Actor
+  - UI-TARS-72B-DPO and UI-TARS-1.5-7B
+  - GPT-5 (added in v3)
+  - CODA (authors' dual-brain planner+executor agent, Aug 2025, reported SOTA)
+  evaluation_target:
+  - computer_use
+  - instrument_control
+  - protocol_planning
+  - perception
+  execution_mode: simulator
+  has_abstention_eval: false
+  has_human_baseline: true
+  has_safety_eval: false
+  headline_results:
+  - State-of-the-art agents (GPT-4o, Claude 3.7, UI-TARS) achieve only ~15% overall success rate at initial release
+  - 'Human experts: 60.27% success rate'
+  - 'GPT-5 under the most favourable screenshot + a11y-tree setting: 24.20% overall (arXiv v3, search-snippet)'
+  - Screenshot + a11y tree is the most effective observation; Set-of-Marks sometimes hurts on scientific software
+  holdout_or_split_design: Single evaluation set; additional 'Raw' Lean (26) and 'Dual' ChimeraX (29) task variants
+    in repo for non-VM / dual-agent settings
+  instruments:
+  - name: UCSF ChimeraX (molecular visualization/structure analysis) via chimerax-states plugin
+    modality: none
+    real_or_simulated: digital_twin
+  - name: GRASS GIS (geospatial analysis GUI/CLI)
+    modality: none
+    real_or_simulated: digital_twin
+  - name: Celestia (astronomy simulator)
+    modality: none
+    real_or_simulated: digital_twin
+  - name: KAlgebra (symbolic math/plotting)
+    modality: none
+    real_or_simulated: digital_twin
+  - name: Lean 4 (theorem prover, also 'Raw' REPL mode)
+    modality: none
+    real_or_simulated: digital_twin
+  - name: TeXstudio (LaTeX editor)
+    modality: none
+    real_or_simulated: digital_twin
+  leakage_or_contamination_risk: Tasks and checkers are public on GitHub; VM snapshot public. Software manuals are
+    in pretraining data, but task-specific state checks limit trivial memorization.
+  metric_types:
+  - success_rate
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: 6
+  n_tasks: 169
+  open_source: true
+  primary_metric: 'Task success rate: execution-based checks on application internal state (e.g. loaded model name,
+    layer list) or file outputs after the episode'
+  repetitions_per_task: null
+  sampling_strategy: 'Tasks designed by annotators with disciplinary backgrounds after studying software tutorials/manuals;
+    standardized instructions, initialization and evaluation functions, with two-person cross-validation (search-snippet).
+    Repo distribution: GRASS GIS 34, Celestia 33, KAlgebra 31, ChimeraX 29, Lean 26, TeXstudio 16 (tasks/VM; repo-verified,
+    matches paper percentages 20.2/19.6/18.5/17.3/15.5/8.9)'
+  scientific_domains:
+  - biochemistry / structural biology
+  - algebra
+  - formal theorem proving
+  - geographic information systems
+  - astronomy
+  - scientific documentation
+  scoring_granularity: binary
+  target_population: Realistic multi-application scientific workflows a computer-use agent would need to execute
+    for scientists, spanning GUI, CLI and code interaction
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: image_interpretation
+  quantitative_tolerance: Checkers compare application state to expected values (string/structure equality via lambda
+    predicates in task JSON); numeric tolerances, where present, are task-specific and not surveyed here
+  reasoning_demand: high
+  safety_criticality: low
+  task_taxonomy:
+  - 'By application/domain: ChimeraX (biochemistry), KAlgebra (algebra), Lean 4 (theorem proving), GRASS GIS (GIS),
+    Celestia (astronomy), TeXstudio (documentation)'
+  - 'By setting: VM (GUI), Raw (direct app/REPL), Dual (two-agent)'
+  tool_composition: Agents combine GUI actions (pyautogui clicks/typing, optionally relative coordinates), terminal/CLI
+    commands and in-app command languages (ChimeraX commands, GRASS commands, Lean code); tasks have a per-task
+    'steps' budget field in JSON (e.g. 5 for simple tasks). Multi-agent 'Community' abstraction supports planner/executor
+    combinations.
+  tool_interface:
+  - gui
+  - cli
+  - python_api
+  - rest_api
+  workflow_depth: multi_step
+sample_environment_features:
+  calibration_or_api_state_variation: Each task has an initialize block (reset config/history files, launch app
+    with REST remote-control port, wait times); VM snapshot 'sci_bench' restored between tasks
+  environment_description: 'OSWorld-derived harness controlling an Ubuntu VM in VMware Workstation Pro; observation
+    types: screenshot, a11y tree, screenshot+a11y, Set-of-Marks; applications recompiled or plugged to expose internal
+    state over RESTful APIs for initialization and evaluation; recommended host: 32 GB RAM, >100 GB disk'
+  injected_faults: false
+  novelty_control: No held-out split; tasks curated to require multi-step, software-specific procedures
+  sample_real_or_simulated: dataset
+  sample_types:
+  - PDB structures fetched in ChimeraX
+  - GIS mapsets (e.g. natural_earth countries)
+  - celestial bodies/events in Celestia
+  - algebraic expressions/plots
+  - Lean theorems
+  - LaTeX documents
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: false
+  guards_or_safety_layer: none
+  models:
+  - GPT-4o
+  - Claude-3.7-Sonnet
+  - Gemini
+  - Qwen2.5-VL
+  - InternVL
+  - QVQ
+  - OS-Atlas
+  - GUI-Actor
+  - UI-TARS-72B-DPO
+  - UI-TARS-1.5-7B
+  - GPT-5
+  - CODA
+  multi_agent: true
+  planner: varied
+  rag_or_memory: none
+  tools:
+  - pyautogui GUI control
+  - terminal
+  - in-app command consoles
+  - Lean REPL
+  verifier_or_self_debug: none
+  vision_used: mixed
+transfer_relevant_findings:
+- Observation modality strongly affects success; SoM prompting that helps on general GUI benchmarks can hurt on
+  dense scientific UIs
+- 'GUI-specialist action models (UI-TARS, OS-Atlas) do not close the gap: domain/software knowledge and planning
+  dominate'
+- Large human-agent gap (60.27% vs ~15-24%) persists across model generations
+- Dual-brain planner/executor (CODA) improves over single agents, suggesting decomposition of scientific reasoning
+  and grounding
+limitations:
+- Binary success only; no partial credit or cost reporting verified
+- Requires proprietary VMware and a large VM image; evaluation is slow and hardware-heavy
+- Six applications; tasks per app are small (16-34)
+- Human performance details (number of participants, protocol) not verifiable here
+related:
+- scienceagentbench
+- discoveryworld
+notes: |
+  Repo-verified: MIT license, ICLR 2026 acceptance date, WCUA@ICML oral, VM snapshot and trajectory releases, OSWorld/VMware basis, instrumented app forks (chimerax-states, kalgebra, Celestia, grass-gui), model env-vars, per-app task JSON counts (169 in tasks/VM), task JSON schema (steps, initialize, evaluate with state/info predicates), Community multi-agent abstraction. Search-snippet: 169 tasks, six domains, four observation settings, ~15% SOTA, 60.27% human, GPT-5 24.20%, annotation process. The qiushisun.github.io project page source in the ScienceBoard-Home repo currently renders an OS-Genesis template (no leaderboard table recoverable). Not verifiable: DOI, repetitions, n_agent_configs, per-model table.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2505.19897
+  - https://github.com/OS-Copilot/ScienceBoard
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

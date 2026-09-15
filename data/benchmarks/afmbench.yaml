@@ -1,0 +1,236 @@
+id: afmbench
+record_type: benchmark
+name: AFMBench / AILA (Artificially Intelligent Lab Assistant) -- Evaluating large language model agents for automation
+  of atomic force microscopy
+short_name: AFMBench
+year: 2025
+venue: Nature Communications 16:9104 (2025); earlier arXiv preprint 'Autonomous Microscopy Experiments through Large
+  Language Model Agents' (Jan 2025); a workshop version 'Automated Atomic Force Microscopy Using Large Language
+  Models' is listed at NeurIPS 2024 (neurips.cc/virtual/2024/103745, content not verified)
+authors_short: Mandal et al.
+arxiv: '2501.10385'
+doi: 10.1038/s41467-025-64105-7
+url: https://www.nature.com/articles/s41467-025-64105-7
+code_url: https://github.com/M3RG-IITD/AILA
+data_url: https://github.com/M3RG-IITD/AILA/tree/main/Data/afm_qs (100 task JSONs); raw results in https://github.com/M3RG-IITD/AILA/tree/main/Results
+  and Results_raw.xlsx; archived at Zenodo doi 10.5281/zenodo.16793992 (Zenodo page not reachable this session)
+license: 'MIT (LICENSE.md: ''Copyright (c) 2025 Multiphysics and Multiscale Mechanics Research Group (M3RG), IIT
+  Delhi''); article is Nature Communications open access (CC BY assumed, not verified)'
+status: published
+summary: |
+  AILA is a LangGraph multi-agent framework (a supervisor 'AILA' routing between an AFM_Handler agent that retrieves validated Nanosurf-API code from a Chroma vector store and executes it, and a Data_Handler agent that analyses/optimises AFM images) that drives a real Nanosurf CX atomic force microscope. AFMBench is a companion suite of 100 manually curated natural-language AFM tasks (parameter setting, tip approach/withdraw, scanning, image analysis, roughness/friction calculation, PID optimisation, multi-agent workflows) on which four LLMs were run three times each. The paper reports that state-of-the-art LLMs struggle with advanced and coordination tasks, that multi-agent beats single-agent, that performance is fragile to prompt wording, that domain QA strength (Claude 3.5 Sonnet) does not translate into agentic AFM competence, and that agents can 'sleepwalk' (deviate from instructions), raising safety concerns for self-driving labs.
+benchmark_features:
+  agents_evaluated:
+  - AILA multi-agent (supervisor + AFM_Handler + Data_Handler) with GPT-4o
+  - AILA with gpt-3.5-turbo-0125
+  - AILA with claude-3-5-sonnet-20241022
+  - AILA with llama-3.3-70b-versatile (Groq)
+  - Single-agent multi-tool ablation (all four LLMs, 10-task subset)
+  - 'MCP/ReAct variant: Claude 3.5 Sonnet with tools served by a FastMCP server (10-task subset; repo only)'
+  evaluation_target:
+  - instrument_control
+  - code_generation
+  - data_analysis
+  - protocol_planning
+  - safety
+  execution_mode: physical_instrument
+  has_abstention_eval: false
+  has_human_baseline: false
+  has_safety_eval: true
+  headline_results:
+  - 'Overall AFMBench accuracy (partial-credit mean over 100 tasks x 3 trials, computed from the authors'' Results_raw.xlsx):
+    GPT-4o 65.0%, Claude-3.5-Sonnet 45.7%, Llama-3.3-70B 37.3%, GPT-3.5-turbo 32.8%. Strict all-or-nothing YES rates:
+    59.0% / 43.0% / 35.3% / 32.3%.'
+  - 'GPT-4o by task type: Basic 90% vs Advanced 33%; Documentation-only 91%, Calculation 57%, Analysis 33%; merged
+    Documentation+Analysis 23.3% and Documentation+Calculation 36.7% (matches figures quoted in press coverage);
+    Single-agent tasks 70% vs Multiple-agent tasks 38%.'
+  - 'GPT-4o error breakdown over 300 runs: 87 non-successes (29%): N/CODE 66 (22.0%; paper quotes 21.7%), N/EXTRA
+    16 (5.3%), N/AGENT 4 (1.3%), N/TOOL 1 (0.3%); 36 runs scored Y/PARTIAL.'
+  - 'Claude-3.5-Sonnet failures are dominated by agent-coordination errors: N/AGENT 85/300 (28.3%) vs N/CODE only
+    22/300; GPT-3.5 N/AGENT 82/300.'
+  - 'Single-agent vs multi-agent ablation (10-task subset, 3 trials): GPT-4o 58.3% -> 70.0%; Llama-3.3 31.7% ->
+    33.3%; GPT-3.5 23.3% -> 20.0%; Claude-3.5 43.3% -> 38.3% (gain is model-dependent, largest for GPT-4o).'
+  - 'MCP-served tools with Claude 3.5 Sonnet (ReAct, same 10-task subset): 36.7% (repo ''ALL'' sheet; not confirmed
+    to be in the paper).'
+  - 'Per-run cost/latency (means): GPT-4o 8.3 steps, ~6,800 tokens, $0.018, 22 s; Claude 8.1 steps, ~7,760 tokens,
+    32 s; GPT-3.5 11.5 steps, ~7,800 tokens, 14 s; Llama 9.7 steps, ~8,000 tokens, 7 s.'
+  - 'Real physical experiments with gpt-4o-2024-08-06 (extended AILA with grain-detection/rescan tools): glass-indent
+    identification as Vickers indenter (14 steps, 188 s, 18,749 tokens, $0.036); graphene-on-Si largest-feature
+    line-profile thickness 161 nm reported as ~473 layers (14 steps, 209 s).'
+  - State-of-the-art LLMs struggled with basic tasks such as documentation retrieval; performance declined significantly
+    in multi-agent coordination scenarios (abstract).
+  - LLM agents showed instruction non-adherence / divagation to extra tasks, raising safety-alignment concerns (abstract).
+  - 'Search snippet of the journal version: multi-agent frameworks significantly outperform single-agent approaches,
+    though both remain sensitive to minor prompt-format changes (note: this is in tension with the preprint abstract;
+    numbers unverified).'
+  holdout_or_split_design: None; all 100 tasks are evaluation tasks (no train split). The 10-task ablation subset
+    (tasks 1, 13, 23, 25, 33, 35, 48, 57, 59, 100) is drawn from the same 100.
+  instruments:
+  - name: Nanosurf CX AFM (controlled via the nanosurf Python/COM API, nanosurf.SPM(); .nid files read with NSFopen)
+    modality: microscopy
+    real_or_simulated: real
+  leakage_or_contamination_risk: Low for the LLM weights (tasks are bespoke, instrument-specific, and post-date
+    training) but the agent is given retrieval access to a curated Chroma database of working Nanosurf control snippets
+    and manuals, so 'Documentation' tasks largely test retrieve-and-adapt rather than de novo code generation. Task
+    texts and per-trial results are now public on GitHub, so future contamination is possible.
+  metric_types:
+  - success_rate
+  - partial_credit
+  - cost
+  - time
+  - other
+  n_agent_configs: 9
+  n_instances_or_runs_reported: 1200
+  n_task_families: 4
+  n_tasks: 100
+  open_source: true
+  primary_metric: 'Task accuracy averaged over 3 trials, with YES = 1, Y/PARTIAL = 0.5, any N/* = 0 (per Results_raw.xlsx
+    ''Figure_data_average''); failures are labelled by cause: N/CODE (code-generation error), N/TOOL (wrong tool),
+    N/AGENT (wrong agent / coordination), N/EXTRA (unrequested extra actions / instruction deviation), N/KNOW (knowledge).
+    Also logged per run: total steps, prompt/completion tokens, USD cost, wall time, and per-agent/per-tool call
+    counts.'
+  repetitions_per_task: 3
+  sampling_strategy: 'Tasks hand-written by two of the authors (task JSON ''user'' field: ''Indrajeet'' 61 tasks,
+    ''Jitendra'' 39 tasks) and tagged along four axes. Verified counts from the 100 JSONs: Operation Type Basic
+    56 / Advanced 44; Require Tool Single tool 31 / Multiple tools 69; Require Agent Single agent 83 / Multiple
+    agents 17; Requires Documentation 48, Analysis 14, Calculation 10, Calculation+Analysis 8, Documentation+Calculation+Analysis
+    6, Documentation+Calculation 5, Documentation+Analysis 5, None 2, Documentation+None 2. Heavily weighted toward
+    basic single-agent parameter-setting tasks (42 tasks are Basic/Single agent/Multiple tools/Documentation).'
+  scientific_domains:
+  - materials science
+  - nanotribology / friction force microscopy
+  - surface roughness
+  - glass mechanics (indentation)
+  - 2D materials (graphene on Si)
+  scoring_granularity: partial
+  target_population: Real-world AFM operator tasks spanning the full experimental workflow (instrument configuration,
+    approach/scan, data extraction, quantitative analysis, parameter optimisation and multi-step experiments), as
+    would be issued in natural language to a lab assistant.
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: mixed
+  quantitative_tolerance: Not published as numeric tolerances; correctness graded manually per trial into YES /
+    Y/PARTIAL / N-with-cause (e.g., scan done but analysis omitted -> Y/PARTIAL; unrequested parameter changes ->
+    N/EXTRA).
+  reasoning_demand: mixed
+  safety_criticality: medium
+  task_taxonomy:
+  - 'Operation Type: Basic | Advanced'
+  - 'Require Tool: Single tool | Multiple tools'
+  - 'Require Agent: Single agent | Multiple agents'
+  - 'Requires: Documentation | Calculation | Analysis | None (and combinations)'
+  - 'Failure causes: N/CODE, N/TOOL, N/AGENT, N/EXTRA, N/KNOW, Y/PARTIAL'
+  tool_composition: 'Four core LangChain tools: Document_Retriever (Chroma similarity search over Nanosurf control
+    code and manuals, k=1), Code_Executor (runs Python against nanosurf.SPM() with pythoncom init), Image_Analyzer
+    (reads .nid, computes friction, mean and RMS roughness), Image_Optimizer (pymoo genetic algorithm tuning P/I/D
+    gains for image clarity). Nature-version real experiments add visualize_grain_boxes (feature detection with
+    indexed bounding boxes) and scan_grain_area (targeted rescan). Tasks require 1 tool (31) or multiple tools (69);
+    17 require both agents.'
+  tool_interface:
+  - python_api
+  - natural_language
+  workflow_depth: mixed
+sample_environment_features:
+  calibration_or_api_state_variation: None deliberately varied; tasks 'AFM calibration' and PID optimisation are
+    themselves benchmark items.
+  environment_description: Windows PC controlling a Nanosurf CX AFM through the vendor COM/Python API (pythoncom),
+    Streamlit GUI front-end, LangGraph agent graph with recursion limit 40. Agents may only retrieve and modify
+    validated code snippets; free-form code writing by AFM_Handler is prohibited in the prompt to protect the instrument.
+  injected_faults: false
+  novelty_control: No explicit held-out or novel-sample design; the same instrument, software and reference-code
+    database are used for all tasks.
+  sample_real_or_simulated: real
+  sample_types:
+  - calibration grid sample (Sample.nid, square grid counting)
+  - Vickers/conospherical nano-indented glass (Glass_NAP.nid, 20250613_Glass_Indent_*.nid)
+  - graphene flakes on Si wafer
+  - generic surfaces for setpoint-dependent friction sweeps
+  signal_quality_variation: Real-instrument variability (drift, PID tuning, baseline tilt) acknowledged; Image_Optimizer
+    and baseline polynomial correction exist to cope with it. No controlled noise levels.
+  novelty_levels_tested:
+  - held_out_instance
+agent_features_evaluated:
+  deterministic_execution: false
+  guards_or_safety_layer: none
+  models:
+  - 'gpt-4o (real experiments: gpt-4o-2024-08-06)'
+  - gpt-3.5-turbo-0125
+  - claude-3-5-sonnet-20241022 (temperature 0, max_tokens 2024)
+  - llama-3.3-70b-versatile via Groq (temperature 0, top_p 1, seed 1402)
+  - text-embedding-3-large for retrieval
+  multi_agent: true
+  planner: react
+  rag_or_memory: static_docs
+  tools:
+  - Document_Retriever
+  - Code_Executor
+  - Image_Analyzer
+  - Image_Optimizer
+  - visualize_grain_boxes
+  - scan_grain_area
+  verifier_or_self_debug: self_debug
+  vision_used: false
+transfer_relevant_findings:
+- 'Prompt sensitivity (verified from repo ''Load experiment'' logs, GPT-4o): five paraphrases of the same load-dependent
+  friction experiment (1000x1000 nm scans, setpoint sweep, plot average friction vs setpoint) gave five different
+  outcomes: full success in 39 steps/323 s; a terse variant scanned only 3 of the requested setpoints and plotted
+  *simulated* friction values after admitting it lacked an extraction routine; a 0.4-3 V variant succeeded in 36
+  steps/334 s but saved under the wrong filename; one variant halted after 6 steps; one stopped with ''NEED HELP''
+  after the first scan. Paper abstract: ''slight modifications in prompt structure cause substantial performance
+  variations in capable models like GPT-4o''.'
+- 'Run-to-run variance is moderate at the aggregate level (GPT-4o per-trial accuracy 65.5 / 61.5 / 68.0%) but large
+  at the task level: only 153 of GPT-4o''s 300 runs scored a full 3 across all trials, and many advanced tasks flip
+  between YES, Y/PARTIAL and N/CODE across trials.'
+- 'QA-vs-operation gap: Claude-3.5-Sonnet, reported by the authors to top materials-science QA benchmarks (the group''s
+  MaScQA), placed second at 45.7% with failures dominated by agent/tool coordination (N/AGENT 28%) rather than knowledge;
+  the authors conclude domain QA proficiency does not predict agentic capability.'
+- 'Architecture matters more for strong models: multi-agent decomposition lifted GPT-4o by ~12 points on the ablation
+  subset but slightly hurt Claude and GPT-3.5, so routing overhead is itself a failure mode for weaker coordinators.'
+- Difficulty cliff between Basic (GPT-4o 90%) and Advanced (33%) tasks; tasks needing both agents drop to 38%. Code-generation
+  errors are the dominant failure for GPT-4o and Llama; agent-selection errors dominate for Claude and GPT-3.5.
+- '''Sleepwalking'' / instruction deviation is measurable via the N/EXTRA label (GPT-4o 16, GPT-3.5 21, Claude 39,
+  Llama 40 of 300 runs) and via qualitative cases such as fabricating data to complete a plot; the authors flag
+  this as a safety-alignment concern for self-driving labs.'
+- 'Real-experiment reasoning can be uncritical: the graphene demo reported a 161 nm feature as ~473 graphene layers
+  without questioning plausibility.'
+- Strong materials-science QA does not translate into reliable AFM operation; small prompt changes alter behavior
+  - evidence that benchmark scores are configuration- and prompt-fragile.
+limitations:
+- Single instrument (Nanosurf CX), single vendor API and a curated code database; transfer to other AFMs/STMs is
+  untested.
+- Task distribution skewed toward basic parameter-setting (48 documentation-only tasks); only 17 multi-agent and
+  44 advanced tasks, so advanced-task estimates rest on small n.
+- Manual, partly subjective grading (YES / Y/PARTIAL / N-cause) by the authors; no inter-rater statistics; no human
+  operator baseline.
+- Only four LLMs (late-2024 generation); no vision-language use even though several tasks are image-centric; no
+  fine-tuned or reasoning models.
+- Prompt-sensitivity and safety findings are demonstrated qualitatively on a single experiment family rather than
+  with a dedicated adversarial or perturbation suite; no formal safety-violation metric.
+- Benchmark requires physical AFM hardware and Windows COM for faithful reproduction (the repo's MCP notebook failed
+  with 'No module named pythoncom' off-instrument), limiting reuse as a portable benchmark.
+- Task counts, scoring rubric and per-model numbers could not be verified (nature.com, PMC and pubmed were blocked;
+  only the arXiv abstract mirror was reachable).
+related:
+- llm_spm_2024
+- llm_sns_spm_2024
+- domain_slm_spm_2026
+- llm_hypothesis_spm_2026
+- schema_bound_mcp_instrument_control
+- xrm_agent_benchmarks
+- labosbench
+notes: |
+  Verified from primary sources in this session: GitHub README (citation, MIT badge, Zenodo DOI), LICENSE.md, the 100 task JSON files (category counts above), Results_raw.xlsx (per-task, per-trial labels for four models; 10-task single-agent / multi-agent / MCP ablation; the sheet's own aggregate row gives 65 / 32.83 / 37.33 / 45.67), Result_raw_metrices.xlsx (per-run steps/tokens/cost/time), agent source files (model strings, temperature, tools, prompts), and run logs for the load experiment and two real experiments. NOT verifiable this session (paper text unreachable): exact wording and numbers of the paper's prompt-sensitivity section and sleepwalking discussion, the MaScQA comparison values, the Nature version's exact reported error percentages (press quotes 21.7% code-generation errors vs 22.0% recomputed here), the NeurIPS 2024 workshop version's content, arXiv version dates, and the Zenodo record metadata. Publication date 2025-10-14 comes from secondary coverage (smartmicroscopy.org) and PubMed listing (PMID 41087366, PMC12521570). n_task_families=4 refers to the four tagging axes; the 'Requires' axis alone has 9 distinct combinations.
+
+  [extract_E.yaml] Included because it is the closest published quantitative microscopy-agent benchmark and is cited as an anchor by Johnson. All quantitative fields left null where not confirmable from the verbatim arXiv abstract. Likely duplicated by another extractor in this survey - merge on doi.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted_reviewed
+  sources_consulted:
+  - https://www.nature.com/articles/s41467-025-64105-7
+  - https://github.com/M3RG-IITD/AILA
+  confidence: high
+  review_status: reviewed
+  reviewer_notes: Merged from extract_B.yaml, extract_E.yaml. Reviewed 2026-09-15 against the released result spreadsheets
+    and question files (100 tasks x 4 models x 3 trials = 1,200 trials; labels YES / Y/PARTIAL / N/CODE / N/TOOL
+    / N/AGENT / N/EXTRA). Execution rows in data/executions/afmbench.jsonl.

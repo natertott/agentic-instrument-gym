@@ -1,0 +1,98 @@
+id: schema_bound_mcp_instrument_control
+record_type: system
+name: Schema-Bound LLM Control of Scientific Instrumentation through Model Context Protocol Skills
+short_name: null
+year: 2026
+venue: arXiv preprint (2026)
+authors_short: authors not verified
+arxiv: '2607.17012'
+doi: null
+url: https://arxiv.org/abs/2607.17012
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: |
+  Positions the Model Context Protocol (MCP) as the binding layer between LLM agents and scientific instruments, exposing instrument capabilities as schema-checked MCP tools/skills so that agent actions are bounded and traceable. Scanning probe microscopy (specifically AFM) is chosen as the experimental testbed; the text describes schema-checked agent traces and reproducible regression suites as the intended foundation for closed-loop autonomous microscopy.
+benchmark_features:
+  agents_evaluated: []
+  evaluation_target:
+  - instrument_control
+  - safety
+  execution_mode: hybrid
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: true
+  headline_results: []
+  holdout_or_split_design: null
+  instruments:
+  - name: atomic force microscope (vendor not verified)
+    modality: microscopy
+    real_or_simulated: real
+  leakage_or_contamination_risk: Unknown.
+  metric_types:
+  - other
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: null
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - scanning probe microscopy
+  - laboratory automation
+  - agent-tool protocols
+  scoring_granularity: mixed
+  target_population: Bounded, schema-validated LLM control of lab instruments via MCP skills.
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: structured_readout
+  quantitative_tolerance: null
+  reasoning_demand: medium
+  safety_criticality: medium
+  task_taxonomy: []
+  tool_composition: MCP host/client/server with JSON-Schema-typed instrument tools ('skills').
+  tool_interface:
+  - mcp
+  workflow_depth: mixed
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: AFM exposed through MCP skills (details not verified).
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: real
+  sample_types: []
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: some
+  models: []
+  multi_agent: null
+  planner: null
+  rag_or_memory: null
+  tools:
+  - MCP instrument skills
+  verifier_or_self_debug: external_verifier
+  vision_used: null
+transfer_relevant_findings:
+- Schema-bound tool interfaces are proposed precisely to remove the free-form code-generation failure class that
+  dominates AFMBench errors; the AILA repo itself contains a FastMCP server variant that scored 36.7% on a 10-task
+  subset with Claude 3.5 Sonnet.
+limitations:
+- Could not verify whether any quantitative benchmark or regression-suite results are reported; treat as framework/demonstration.
+related:
+- afmbench
+notes: |
+  Only a search snippet was accessible; authors, evaluation details and code URL unverified -- 'demonstration, not benchmark' pending full-text check. Adjacent 2026 preprints surfaced but NOT verified as SPM-specific and therefore not given records: 'LAP: An Agent-to-Instrument Protocol for Autonomous Science' (arXiv 2606.03755), "It's not the Language Model, it's the Tool: Deterministic Mediation for Scientific Workflows" (arXiv 2605.13245), and Xie, He & Castellanos-Gomez, 'Toward Full Autonomous Laboratory Instrumentation Control with LLMs', Small Structures 6:2500173 (2025) (scanning photocurrent microscope / single-pixel camera, ChatGPT-assisted scripting, no benchmark). Also surfaced: 'Integrated AI Framework for Room-Temperature Atom Manipulation in SPM' (Nano Letters 2025; 25 h autonomous STM atom manipulation) and 'Autonomous STM Imaging via Deep Learning' (JACS 2024) -- these use CNN/U-Net/DQN agents, with no verified LLM component, so they are excluded. No dedicated STM-LLM-agent benchmark with quantitative evaluation was found in this session's searches.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2607.17012
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

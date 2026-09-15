@@ -1,0 +1,101 @@
+id: troubleshootingbench
+record_type: benchmark
+name: TroubleshootingBench (OpenAI internal wet-lab troubleshooting evaluation)
+short_name: TroubleshootingBench
+year: 2025
+venue: Described in OpenAI system/preparedness cards (gpt-oss model card arXiv 2508.10925; GPT-5 system card; 'Estimating
+  Worst-Case Frontier Risks of Open-Weight LLMs' arXiv 2508.03153)
+authors_short: OpenAI
+arxiv: '2508.10925'
+doi: null
+url: https://arxiv.org/abs/2508.10925
+code_url: null
+data_url: null
+license: null
+status: published
+summary: |
+  A private OpenAI evaluation in which PhD scientists (virology, genetics, microbiology, protein engineering) transcribed protocols they personally used (substantially altered if adapted from publications) and wrote three troubleshooting questions each, describing a subtle realistic execution error and the resulting failed outcome. It targets tacit, hands-on knowledge not available online, in contrast to ProtocolQA.
+benchmark_features:
+  agents_evaluated:
+  - OpenAI models in respective system cards
+  evaluation_target:
+  - protocol_planning
+  - safety
+  execution_mode: static_text
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: true
+  headline_results: []
+  holdout_or_split_design: Fully private
+  instruments: []
+  leakage_or_contamination_risk: Designed to be uncontaminated (procedures not online).
+  metric_types:
+  - success_rate
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: 1
+  n_tasks: null
+  open_source: false
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: Three troubleshooting questions per expert-transcribed protocol; uncontaminated, non-public
+    procedures.
+  scientific_domains:
+  - virology
+  - genetics
+  - microbiology
+  - protein engineering
+  scoring_granularity: null
+  target_population: Tacit wet-lab troubleshooting knowledge relevant to biosecurity uplift assessment
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: none
+  quantitative_tolerance: null
+  reasoning_demand: high
+  safety_criticality: high
+  task_taxonomy:
+  - wet-lab execution-error troubleshooting
+  tool_composition: None.
+  tool_interface:
+  - natural_language
+  workflow_depth: single_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Static private QA set.
+  injected_faults: true
+  novelty_control: Private expert-authored protocols
+  sample_real_or_simulated: dataset
+  sample_types:
+  - protocol text
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models: []
+  multi_agent: false
+  planner: none
+  rag_or_memory: none
+  tools: []
+  verifier_or_self_debug: none
+  vision_used: false
+transfer_relevant_findings:
+- Explicit design choice to source tasks from experts' personal, unpublished procedures to defeat contamination
+  — the strongest novelty control among protocol benchmarks surveyed.
+limitations:
+- Private; no counts, scores or release. Facts from search excerpts of OpenAI system cards.
+related:
+- lab_bench
+- biolp_bench
+- benchbench_protocol
+notes: Included because it is a wet-lab protocol benchmark repeatedly cited alongside ProtocolQA/BioLP-bench; not
+  independently verifiable.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2508.10925
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

@@ -1,0 +1,90 @@
+id: thinking_microscopes
+record_type: survey
+name: 'Thinking microscopes: agentic AI and the future of electron microscopy'
+short_name: Thinking Microscopes
+year: 2026
+venue: npj Computational Materials 12, 149 (2026)
+authors_short: Jamali, Aghazadeh & Kacher (Georgia Tech)
+arxiv: null
+doi: 10.1038/s41524-026-02077-y
+url: https://www.nature.com/articles/s41524-026-02077-y
+code_url: null
+data_url: null
+license: null
+status: published
+summary: |
+  Perspective article proposing electron microscopes with directly integrated agentic AI that draw on prior knowledge, interpret outcomes, iteratively refine protocols and generate hypotheses, acting as co-scientists. Advocates open data repositories and secure remote instrument access. No evaluation.
+benchmark_features:
+  agents_evaluated: []
+  evaluation_target:
+  - instrument_control
+  execution_mode: static_text
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results: []
+  holdout_or_split_design: null
+  instruments:
+  - name: electron microscopes (conceptual)
+    modality: microscopy
+    real_or_simulated: none
+  leakage_or_contamination_risk: n/a
+  metric_types: []
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: false
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - electron microscopy
+  - materials science
+  scoring_granularity: null
+  target_population: null
+  task_source: null
+task_features:
+  closed_loop_feedback: null
+  perceptual_demand: null
+  quantitative_tolerance: null
+  reasoning_demand: null
+  safety_criticality: null
+  task_taxonomy: []
+  tool_composition: null
+  tool_interface: []
+  workflow_depth: null
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: null
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: none
+  sample_types: []
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models: []
+  multi_agent: null
+  planner: null
+  rag_or_memory: null
+  tools: []
+  verifier_or_self_debug: none
+  vision_used: null
+transfer_relevant_findings: []
+limitations:
+- Perspective; no experiments
+related:
+- tem_agent
+- emseek
+notes: Not a benchmark; included as context. Content from phys.org and Georgia Tech news summaries (nature.com blocked).
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://www.nature.com/articles/s41524-026-02077-y
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

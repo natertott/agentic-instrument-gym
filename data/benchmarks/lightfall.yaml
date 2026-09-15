@@ -1,0 +1,116 @@
+id: lightfall
+record_type: system
+name: 'Lightfall: An API-first, LLM-addressable control platform for synchrotron beamlines'
+short_name: Lightfall
+year: 2026
+venue: arXiv preprint (June 2026)
+authors_short: null
+arxiv: '2606.06711'
+doi: null
+url: https://arxiv.org/abs/2606.06711
+code_url: https://github.com/als-controls/lightfall
+data_url: null
+license: BSD-3-Clause
+status: preprint
+summary: |
+  Lightfall is a facility-wide beamline control platform (PySide6 GUI, Bluesky/ophyd, Tiled, EPICS, NATS IPC) whose API-first architecture exposes every panel, device and scan plan through one uniform addressable interface. An embedded Claude-based agent drives experiments from single move-and-read to Gaussian-process-driven autonomous scans, and beamline staff extend the application at runtime via "skills" plugins the agent authors and commits. In testing at the ALS COSMIC-Scattering beamline; endstation plugins exist for ALS 7.0.1.1 and NSLS-II CMS 11-BM. Demo/platform paper.
+benchmark_features:
+  agents_evaluated:
+  - Claude (embedded agent; Claude Code via lightfall-mcp-bridge)
+  evaluation_target:
+  - instrument_control
+  - code_generation
+  execution_mode: physical_instrument
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results:
+  - 'Closed development loop: scientist authors a panel change in natural language, agent emits and applies it,
+    commit lands in the beamline plugin repo; per-iteration cost fixed in scientist time rather than developer hours
+    (abstract)'
+  holdout_or_split_design: null
+  instruments:
+  - name: ALS COSMIC-Scattering beamline (7.0.1.1) via Lightfall
+    modality: synchrotron
+    real_or_simulated: real
+  leakage_or_contamination_risk: null
+  metric_types:
+  - time
+  - other
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: true
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - soft X-ray scattering
+  - beamline operations
+  scoring_granularity: null
+  target_population: Scientist requests ranging from single device move/read to autonomous GP-driven scans, plus
+    natural-language UI/panel modifications
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: structured_readout
+  quantitative_tolerance: null
+  reasoning_demand: medium
+  safety_criticality: medium
+  task_taxonomy:
+  - move-and-read
+  - scan plans
+  - GP-driven autonomous scans
+  - skill/plugin authoring
+  tool_composition: Uniform action API over panels/devices/scan plans; NATS-based IPC; lightfall-mcp-bridge exposes
+    list_instances / list_actions / execute_action to Claude Code with dynamic action discovery
+  tool_interface:
+  - natural_language
+  - python_api
+  - mcp
+  - gui
+  workflow_depth: mixed
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Live beamline control application; also runnable with simulated ophyd devices (not verified)
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: real
+  sample_types: []
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: some
+  models:
+  - Claude
+  multi_agent: false
+  planner: react
+  rag_or_memory: null
+  tools:
+  - Lightfall action API
+  - Bluesky plans
+  - skills plugins
+  verifier_or_self_debug: null
+  vision_used: null
+transfer_relevant_findings:
+- Making the whole control application addressable through one API (rather than wrapping selected tools) lets the
+  agent discover capabilities dynamically without bridge updates
+limitations:
+- No quantitative evaluation found; platform description
+- Author list not retrievable in this session
+related:
+- osprey_als_bl531
+- vision
+notes: |
+  arXiv page blocked; author list unverified (repo is under the als-controls GitHub org, LBNL). Facility and abstract claims come from search snippets. License from repo README.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2606.06711
+  - https://github.com/als-controls/lightfall
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

@@ -1,0 +1,109 @@
+id: pipette_wetlab_sim
+record_type: benchmark
+name: An Embodied Simulation Platform, Benchmark, and Data-Efficient Augmentation Framework for Wet-Lab Robotics
+  (Pipette)
+short_name: Pipette
+year: 2026
+venue: arXiv preprint, 2026-06-11
+authors_short: null
+arxiv: '2606.12936'
+doi: null
+url: https://arxiv.org/abs/2606.12936
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: |
+  Pipette is a wet-lab robot-learning simulation platform releasing 43+ editable lab assets, an 11-task embodied benchmark (sample handling, culture-ware manipulation, device operation, precision placement), natural-language scene/task construction, and a demonstration-augmentation pipeline. It targets VLA/imitation policies (ACT, SmolVLA, pi0) rather than LLM agents, but is the closest lab-instrument simulator benchmark for physical manipulation.
+benchmark_features:
+  agents_evaluated:
+  - ACT
+  - SmolVLA
+  - pi0
+  evaluation_target:
+  - simulation_control
+  - instrument_control
+  execution_mode: simulator
+  has_abstention_eval: false
+  has_human_baseline: false
+  has_safety_eval: false
+  headline_results:
+  - ACT 65.5% average success with 30 demos/task; augmentation lifts SmolVLA 44.1% -> 74.7% and pi0 40.4% -> 46.5%
+  holdout_or_split_design: null
+  instruments:
+  - name: simulated wet-lab devices and culture-ware (pipettes, plates, etc.)
+    modality: liquid_handling
+    real_or_simulated: simulated
+  leakage_or_contamination_risk: null
+  metric_types:
+  - success_rate
+  n_agent_configs: 3
+  n_instances_or_runs_reported: null
+  n_task_families: 4
+  n_tasks: 11
+  open_source: true
+  primary_metric: Task success rate
+  repetitions_per_task: null
+  sampling_strategy: 11 authored tasks; 30 human demonstrations per task; simulation augmentation with lighting/camera/speed/action
+    perturbations and automatic success filtering.
+  scientific_domains:
+  - wet-lab biology robotics
+  scoring_granularity: binary
+  target_population: Embodied manipulation tasks in biology wet labs
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: image_interpretation
+  quantitative_tolerance: Automatic task success checks (thresholds unverified)
+  reasoning_demand: low
+  safety_criticality: low
+  task_taxonomy:
+  - sample handling
+  - culture-ware manipulation
+  - device operation
+  - precision placement
+  tool_composition: Low-level robot policies; natural-language scene construction for task authoring.
+  tool_interface:
+  - physical
+  workflow_depth: single_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Physics simulation with 43+ open-source wet-lab assets and an extensible asset pipeline.
+  injected_faults: false
+  novelty_control: null
+  sample_real_or_simulated: simulated
+  sample_types:
+  - simulated labware
+  signal_quality_variation: Lighting, camera, speed and action perturbations
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models:
+  - ACT
+  - SmolVLA
+  - pi0
+  multi_agent: false
+  planner: none
+  rag_or_memory: none
+  tools: []
+  verifier_or_self_debug: none
+  vision_used: true
+transfer_relevant_findings:
+- Simulation perturbation augmentation is what closes the gap for VLA policies — analogous to state/appearance randomization
+  for GUI instrument simulators.
+limitations:
+- Not an LLM-agent benchmark; included only as the nearest wet-lab simulator benchmark. Details from search excerpt
+  only.
+related:
+- protoact
+- labosbench
+notes: arXiv blocked; facts from search excerpt of abstract.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2606.12936
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

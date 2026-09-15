@@ -1,0 +1,148 @@
+id: discoverybench
+record_type: benchmark
+name: 'DiscoveryBench: Towards Data-Driven Discovery with Large Language Models'
+short_name: DiscoveryBench
+year: 2024
+venue: ICLR 2025 (conference paper); arXiv preprint Jul 2024
+authors_short: Bodhisattwa Prasad Majumder et al. (Allen Institute for AI)
+arxiv: '2407.01725'
+doi: null
+url: https://arxiv.org/abs/2407.01725
+code_url: https://github.com/allenai/discoverybench
+data_url: https://huggingface.co/datasets/allenai/discoverybench (also in repo under discoverybench/real and discoverybench/synth)
+license: ODC Attribution License (ODC-By) per repo LICENSE
+status: published
+summary: |
+  DiscoveryBench formalizes data-driven hypothesis search and verification: each task gives an agent one or more datasets with metadata and a natural-language discovery goal, and the agent must analyse the data and state a hypothesis (context, variables, relationship) that is compared to the gold hypothesis derived from a published paper. It has 264 real tasks (DB-REAL; 25 train / 239 test) manually derived from workflows in over 20 papers across six domains (sociology, biology, humanities, economics, engineering, meta-science) plus 903 synthetic tasks (DB-SYNTH) for controlled complexity studies. Evaluation uses an LLM-judged Hypothesis Matching Score; the best system (Reflexion with oracle feedback on GPT-4o) scores about 25%.
+benchmark_features:
+  agents_evaluated:
+  - CodeGen
+  - ReAct
+  - DataVoyager
+  - Reflexion (Oracle)
+  - NoDataGuess
+  - with GPT-4o, GPT-4-0125-preview, Llama-3-70B (repo also supports gpt-4-turbo, claude-3-opus, gemini-pro)
+  evaluation_target:
+  - data_analysis
+  - code_generation
+  - question_answering
+  execution_mode: hybrid
+  has_abstention_eval: false
+  has_human_baseline: false
+  has_safety_eval: false
+  headline_results:
+  - Best system scores only 25% HMS overall
+  - 'Reflexion (Oracle) + GPT-4o: 24.5% HMS on DB-REAL and 15.7% on DB-SYNTH; CodeGen, ReAct and DataVoyager between
+    5.7% and 16.3%'
+  - 'Per-domain (DB-REAL): biology 0%, engineering 7%, sociology 23%, economics 25%'
+  - Follow-up AutoSDT-Coder-32B raises HMS to 8.1 (17.4% relative gain) for an open-weight model
+  holdout_or_split_design: 'DB-REAL: 25 train / 239 test tasks; DB-SYNTH: train/dev/test folders (repo). Metadata
+    files bundle several queries per dataset (repo: 144 real-test metadata files hold the 239 test queries)'
+  instruments: []
+  leakage_or_contamination_risk: Gold hypotheses come from published papers, so LLMs may recall findings without
+    analysing data; the paper includes a 'NoDataGuess' baseline that answers without opening the data to screen
+    for such leakage
+  metric_types:
+  - llm_judge
+  - partial_credit
+  - other
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: 6
+  n_tasks: 264
+  open_source: true
+  primary_metric: 'Hypothesis Matching Score (HMS): LLM-judged alignment between predicted and gold hypotheses over
+    context, variables and relationships, weighted by context F1'
+  repetitions_per_task: null
+  sampling_strategy: 'DB-REAL: authors manually extracted discovery goals, gold hypotheses and workflows from published
+    papers with public data (e.g. NLS incarceration/SES/BMI, World Bank education-GDP, archaeology, invasive-plant
+    introduction pathways, meta-regression, requirements engineering); 114 tasks require multiple datasets (up to
+    6). DB-SYNTH: LLM-generated hypotheses/datasets/workflows with systematic variation of complexity (repo has
+    synth train/dev/test folders such as ancient-languages_0_3, astronomy_1_2 encoding complexity levels)'
+  scientific_domains:
+  - sociology
+  - biology
+  - humanities (incl. archaeology)
+  - economics
+  - engineering (requirements engineering for ML systems)
+  - meta-science (meta-regression)
+  scoring_granularity: continuous
+  target_population: 'Real-world data-driven discovery tasks faced by researchers: from raw dataset(s) and a goal
+    to a verified hypothesis, including data cleaning, statistical modelling and semantic interpretation'
+  task_source: mixed
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: structured_readout
+  quantitative_tolerance: No numeric tolerance; hypotheses are compared semantically (context/variables/relationship)
+    by an LLM judge, so quantitative effect sizes are only assessed insofar as the judge deems the relationship
+    equivalent
+  reasoning_demand: high
+  safety_criticality: none
+  task_taxonomy:
+  - DB-REAL vs DB-SYNTH
+  - workflow tags per task (e.g. time series analysis, data cleaning, data visualization, regression, meta-analysis)
+  - 'six domains: sociology, biology, humanities, economics, engineering, meta-science'
+  tool_composition: 'Agents iteratively write and execute Python analysis code (pandas/statsmodels-style) over CSVs,
+    then verbalize a hypothesis; optional flags add domain knowledge or workflow tags to the prompt (repo: --add_domain_knowledge,
+    --add_workflow_tags)'
+  tool_interface:
+  - python_api
+  - natural_language
+  workflow_depth: multi_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Local Python execution with datasets on disk; metadata JSON supplies dataset descriptions,
+    column descriptions, domain knowledge and queries; evaluation script compares predicted vs gold hypothesis (and
+    optionally workflows)
+  injected_faults: false
+  novelty_control: Train/test split on tasks; synthetic tasks provide unseen domains and controlled complexity
+  sample_real_or_simulated: dataset
+  sample_types:
+  - tabular CSV datasets from published studies (survey panels, economic indicators, archaeological artefact counts,
+    pollen time series, meta-analysis tables) and LLM-synthesized tables
+  signal_quality_variation: Real datasets include raw and pre-processed variants (e.g. nls_raw vs nls_incarceration,
+    meta_regression_raw vs meta_regression) so data-cleaning burden varies
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models:
+  - GPT-4o
+  - GPT-4-0125-preview
+  - Llama-3-70B
+  multi_agent: true
+  planner: varied
+  rag_or_memory: varied
+  tools:
+  - Python code interpreter
+  - DataVoyager multi-agent planner/programmer
+  - Reflexion self-reflection with oracle evaluator feedback
+  verifier_or_self_debug: varied
+  vision_used: false
+transfer_relevant_findings:
+- Performance collapses on domains needing advanced statistics (biology 0%, engineering 7%) versus regression-style
+  social-science analyses
+- Oracle-feedback Reflexion nearly doubles other scaffolds, indicating verification signals matter more than base
+  model
+- Synthetic tasks are harder than real ones for the same agent (15.7% vs 24.5%), and difficulty scales with workflow
+  complexity
+- NoDataGuess control needed because published findings can be recalled without data
+limitations:
+- LLM-judged metric; no execution-based ground truth for hypotheses
+- Small train split (25); no human baseline
+- Gold hypotheses reflect one paper's analysis choices; alternative valid analyses may be penalized
+related:
+- scienceagentbench
+- discoveryworld
+- autosdt
+notes: |
+  Repo-verified: license (ODC-By), agent types (coder/react) and supported models, CLI flags, metadata schema, domain folder names and file counts (real test 144 metadata files, real train 14, synth test 200 metadata files), HF link. Search-snippet: 264/903 counts, 25/239 split, 114 multi-dataset tasks, six domain names, HMS definition, agent names, 24.5%/15.7% and per-domain numbers, ICLR 2025 venue (proceedings.iclr.cc file listed). Not verifiable: repetitions, n_agent_configs, exact paper count ('over 20'), DOI.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2407.01725
+  - https://github.com/allenai/discoverybench
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

@@ -1,0 +1,218 @@
+id: labosbench
+record_type: benchmark
+name: 'LabOSBench: Benchmarking Computer Use Agents for Scientific Instrument Control'
+short_name: LabOSBench
+year: 2026
+venue: arXiv preprint (cs); no peer-reviewed venue identified
+authors_short: Zou et al.
+arxiv: '2606.16802'
+doi: null
+url: https://arxiv.org/abs/2606.16802
+code_url: https://github.com/Su-ISE-2001/LABOSBENCH
+data_url: https://su-ise-2001.github.io/LABOSBENCH/
+license: Per-component licenses (repo states it 'follows the original licenses of each submodule'; agent code partially
+  forked from OSWorld). No single top-level license verified.
+status: preprint
+summary: |
+  LabOSBench is a browser-based, executable benchmark for multimodal GUI / computer-use agents that must operate eight web simulators of scientific instruments (SEM, TEM, LFM, XRD, EDS, APT, FIB, SPM) through realistic control panels (sliders, toggles, live plots, status indicators). It defines 96 subtasks spanning sample loading, alignment, parameter tuning, data acquisition and result inspection, plus full-workflow (end-to-end) episodes, and scores agents with execution-based state checks. Strong general multimodal models complete many structured subtasks but collapse on feedback-driven adjustment, scientific-state interpretation and long-horizon execution.
+schema_axes_proposed:
+- Instrument type (FIB, SEM, EDS, APT, light/fluorescence microscope, SPM, TEM, XRD)
+- 'Workflow stage: sample loading; alignment; parameter tuning; data acquisition; result inspection'
+- 'Evaluation level: subtask vs end-to-end workflow'
+- 'Agent class: general-purpose VLM vs specialized GUI-agent model vs agentic framework'
+- 'Operation type: structured GUI actions vs feedback-driven parameter adjustment'
+- Execution-based (state-checked) evaluation in browser simulators rather than OS virtualization
+benchmark_features:
+  agents_evaluated:
+  - Qwen3VL-32B
+  - EvoCUA-8B
+  - Claude Sonnet-4.5
+  - Kimi-K2.5
+  - Seed-1.6
+  - GPT-5.5
+  - Claude Opus-4.5
+  - UI-TARS-1.5-7B
+  - GUI-Owl-7B
+  - GTA1 w/ GPT-5.5
+  - VLAA-GUI w/ Claude Opus-4.5
+  - Hippo Agent w/ Claude Opus-4.5
+  evaluation_target:
+  - computer_use
+  - instrument_control
+  - perception
+  execution_mode: digital_twin
+  has_abstention_eval: false
+  has_human_baseline: true
+  has_safety_eval: false
+  headline_results:
+  - 'Human performance: 0.924 average subtask score'
+  - 'Best agent: GTA1 w/ GPT-5.5, 0.814 average subtask score'
+  - General-purpose models Seed-1.6 (0.763) and GPT-5.5 (0.726) beat most specialized GUI agents
+  - 'Specialized GUI / small models (per BenchmarkList mirror of the paper table): UI-TARS-1.5-7B 0.35, EvoCUA-8B
+    0.35, GUI-Owl-7B 0.325, Qwen3VL-32B 0.275'
+  - 'End-to-end (full workflow) success for GPT-5.5: EDS 70.0%, APT 80.0%, XRD 60.0%; 0% on SEM, SPM, TEM, LFM,
+    FIB; average end-to-end success only 26.3% vs much higher subtask-level scores (severe error accumulation)'
+  - 96 subtasks across 8 simulators; agents handle structured GUI subtasks but fail on feedback-driven parameter
+    adjustment and long-horizon execution (abstract).
+  - Agents complete many structured GUI subtasks but struggle with feedback-driven operations and long-horizon workflow
+    execution
+  holdout_or_split_design: None described; all 96 subtasks are public in the repo (Git LFS). No train/test split.
+  instruments:
+  - name: Scanning Electron Microscope (SEM) web simulator
+    modality: microscopy
+    real_or_simulated: simulated
+  - name: Transmission Electron Microscope (TEM) web simulator
+    modality: microscopy
+    real_or_simulated: simulated
+  - name: Light/Fluorescence Microscope (LFM) web simulator
+    modality: microscopy
+    real_or_simulated: simulated
+  - name: X-Ray Diffraction (XRD) web simulator
+    modality: diffraction
+    real_or_simulated: simulated
+  - name: Energy-Dispersive Spectroscopy (EDS) web simulator
+    modality: spectroscopy
+    real_or_simulated: simulated
+  - name: Atom Probe Tomography (APT) web simulator
+    modality: spectroscopy
+    real_or_simulated: simulated
+  - name: Focused Ion Beam (FIB) web simulator
+    modality: microscopy
+    real_or_simulated: simulated
+  - name: Scanning Probe Microscope (SPM) web simulator
+    modality: microscopy
+    real_or_simulated: simulated
+  leakage_or_contamination_risk: Simulators and task definitions are fully public on GitHub (created 2026-06-15);
+    simulators are custom-built (Go backend + static web frontends), so pre-training contamination of the exact
+    GUIs is unlikely, but future fine-tuning on the released environments is possible.
+  metric_types:
+  - success_rate
+  - partial_credit
+  - other
+  n_agent_configs: 12
+  n_instances_or_runs_reported: null
+  n_task_families: 8
+  n_tasks: 96
+  open_source: true
+  primary_metric: 'Average subtask score (execution-based subtask success averaged across subtasks and runs); secondary:
+    end-to-end episode success rate (all required subtasks completed within step budget)'
+  repetitions_per_task: 2
+  sampling_strategy: Authors built eight high-fidelity interactive web environments and hand-defined subtasks per
+    instrument (FIB 20, SEM 12, EDS 8, APT 12, LFM 12, SPM 14, TEM 10, XRD 8 = 96). Subtasks are chained into full
+    workflows per instrument. Each task is issued as a natural-language instruction.
+  scientific_domains:
+  - materials characterization
+  - electron microscopy
+  - light/fluorescence microscopy
+  - diffraction and spectroscopy
+  - micro/nano-fabrication
+  - scanning probe microscopy
+  scoring_granularity: mixed
+  target_population: Operator-level GUI control of high-precision scientific instruments (microscopy imaging, diffraction/spectroscopic
+    analysis, micro-nano fabrication/manipulation) as encountered in real instrument software
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: image_interpretation
+  quantitative_tolerance: Execution-based checkers on logged simulator state; the paper states it can evaluate intermediate
+    scientific-state quality (e.g., focus/alignment/image adjustment) rather than only final completion. Exact tolerances
+    not verified.
+  reasoning_demand: mixed
+  safety_criticality: low
+  task_taxonomy:
+  - 'Three experimental paradigms: (i) advanced microscopy imaging (SEM, TEM, LFM); (ii) diffraction and spectroscopic
+    analysis (XRD, EDS, APT); (iii) precision micro-nanofabrication and manipulation (FIB, SPM)'
+  - 'Workflow stages: sample loading, alignment, parameter tuning, data acquisition, result inspection'
+  - 'Evaluation levels: subtask-level vs full-workflow (end-to-end episode)'
+  - 'Qualitative task classes discussed: structured operations with clear feedback and short action sequences (EDS,
+    XRD) vs feedback-driven focusing / image-quality adjustment / long procedures / fine-grained operations / visual
+    target localization (SEM, FIB, LFM)'
+  tool_composition: Single instrument GUI per task; agent perceives screenshots and emits mouse/keyboard actions
+    via a Playwright-driven Chromium browser (OSWorld-derived agent harness). No API/CLI shortcuts.
+  tool_interface:
+  - gui
+  workflow_depth: mixed
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: 'Eight interactive web apps (Go backend ''simulator-master'' + static frontends) preserving
+    domain-specific control modalities: multi-dimensional sliders, discrete toggles, real-time dynamic plots, multi-state
+    status indicators. Runs in a standard browser on port 8080; no OS-level virtualization. Observations: screenshots
+    plus logged simulator state.'
+  injected_faults: null
+  novelty_control: Custom-built simulators not seen in pre-training; no explicit novelty split.
+  sample_real_or_simulated: simulated
+  sample_types:
+  - virtual specimens rendered by each simulator (details not verified)
+  signal_quality_variation: Simulators render dynamic plots and image states that change with parameters (focus,
+    alignment, image quality); explicit noise/quality randomization not verified.
+  novelty_levels_tested:
+  - held_out_instance
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models:
+  - GPT-5.5
+  - Claude Opus-4.5
+  - Claude Sonnet-4.5
+  - Seed-1.6
+  - Kimi-K2.5
+  - Qwen3VL-32B
+  - EvoCUA-8B
+  - UI-TARS-1.5-7B
+  - GUI-Owl-7B
+  multi_agent: false
+  planner: varied
+  rag_or_memory: none
+  tools:
+  - Playwright browser actions (click/type/scroll) on simulator GUI
+  verifier_or_self_debug: varied
+  vision_used: true
+transfer_relevant_findings:
+- 'Subtask competence does not transfer to workflow competence: GPT-5.5 scores 0.726 on average subtasks but 26.3%
+  end-to-end, with 0% on five of eight instruments.'
+- 'Task difficulty tracks feedback structure, not instrument prestige: EDS/XRD/APT (structured operations, clear
+  feedback, short sequences) are solvable; SEM/FIB/LFM (feedback-driven focusing, image-quality adjustment, long
+  procedures, fine-grained visual localization) are not.'
+- General-purpose frontier VLMs outperform GUI-specialized 7-8B models by a wide margin (0.73-0.76 vs 0.28-0.35),
+  and wrapping a frontier model in an agentic GUI framework (GTA1) adds further gains (0.814).
+- A human baseline of 0.924 shows the tasks are well-posed for operators, so the gap is agent capability, not task
+  ambiguity.
+- Subtask vs full-task modes separate local GUI grounding failures from long-horizon compounding failures - a split
+  design relevant to modelling transfer.
+- Closest existing benchmark to 'LLM agents controlling scientific instruments'; its instrument x workflow-stage
+  grid is a natural schema template.
+- Separates structured GUI competence from feedback-driven control -- the latter is where agents fail.
+limitations:
+- 'Web simulators, not physical instruments: cannot capture hardware latency, calibration uncertainty, safety constraints,
+  or real laboratory failure modes (authors'' statement).'
+- Covers a selected set of instruments (microscopy, spectroscopy, diffraction, tomography); excludes wet-lab protocols,
+  robotic manipulation, chemical synthesis, multi-instrument experimental planning (authors' statement).
+- Evaluation relies on screenshots and logged simulator states; some scientific decisions may require richer observations,
+  domain knowledge or multimodal sensor signals (authors' statement).
+- Repo is early-stage (3 commits; unified CLI, Docker, VLAA-GUI/Hippo baselines and cross-subtask memory evaluation
+  listed as 'coming soon').
+- Simulated GUIs only; per-model numbers not accessible in this session.
+- GUI-only interface (no API/scripting control); simulators, not real instruments; model list and run counts unverified.
+related:
+- labos
+- afmbench
+- spm_bench
+- xrm_agent_benchmarks
+- agentabstain
+notes: |
+  arXiv abstract/HTML pages were egress-blocked; title, author list (Anqi Zou, Han Deng, Chengyu Zhang, Junquan Hu, Yu Wang, Yuxiang Xing, Aokai Zhang, Hanling Zhang, Zhaoyang Liu, Ben Fei, Zhihui Wang, Wanli Ouyang), abstract claims, the 3-paradigm taxonomy, baseline list, headline numbers (0.924 human, 0.814 GTA1, 0.763 Seed-1.6, 0.726 GPT-5.5, 26.3% end-to-end, per-instrument 70/80/60%) and the limitations paragraph come from search-engine excerpts of arxiv.org/html/2606.16802 and should be re-checked against the PDF. The arXiv abstract title uses 'for'; the HTML version title reads 'towards'. Per-instrument subtask counts, Playwright/OSWorld architecture, run parameters and license statement were verified directly from the GitHub README (Su-ISE-2001/LABOSBENCH, created 2026-06-15). The 0.35/0.325/0.275 small-model scores come from a third-party mirror (benchmarklist.com) quoted in a search excerpt. Author affiliations, submission date, exact step budget, and the exact subtask-checker definitions could not be verified. There is no evidence LabOSBench is affiliated with the LabOS AI-XR co-scientist project; the shared name appears coincidental (different author groups; LabOS README does not mention LabOSBench).
+
+  [extract_E.yaml] Recorded briefly because it includes microscope simulators (SEM/TEM/LFM/SPM); abstract and design details come from a GitHub mirror (CMander02/DailyAgentPapers). Probably covered by another extractor - merge on arxiv id.
+
+  [extract_G.yaml] arXiv blocked; abstract and author list verified verbatim from arXiv mirrors (2shin0, xiaoqixiaowei). Per-instrument subtask counts, Playwright/OSWorld details and 'gpt-5.5-medium' example from the README of github.com/Su-ISE-2001/LABOSBENCH (created 2026-06-15, 0 stars) -- whether this is the authors' official repo is unverified.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted_reviewed
+  sources_consulted:
+  - https://arxiv.org/abs/2606.16802
+  - https://github.com/Su-ISE-2001/LABOSBENCH
+  confidence: medium
+  review_status: reviewed
+  reviewer_notes: 'Merged from extract_C.yaml, extract_E.yaml, extract_G.yaml. Reviewed 2026-09-15: execution_mode
+    set to digital_twin because the eight simulators are instrument-specific stateful GUIs, not abstract environments;
+    numbers from the repository are high-confidence, numbers from search excerpts medium.'

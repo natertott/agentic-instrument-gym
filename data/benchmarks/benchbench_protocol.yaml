@@ -1,0 +1,104 @@
+id: benchbench_protocol
+record_type: benchmark
+name: 'BenchBench-Protocol: Evaluating Real-World Wet-Lab Protocol Reasoning and Modification'
+short_name: BenchBench-Protocol
+year: 2026
+venue: arXiv preprint (Benchling), submitted 2026-08-24
+authors_short: Aditya Sivakumar et al.
+arxiv: '2608.23898'
+doi: null
+url: https://arxiv.org/abs/2608.23898
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: |
+  BenchBench-Protocol contains 149 protocol-modification tasks recovered from real edits scientists made to published protocols during experimental work (96 source protocols, nine wet-lab biology domains). Each task asks the model to adapt a protocol to a new experiment and is scored with an expert-verified weighted rubric grounded in the actual modification and its downstream dependencies. Claude Opus 5 leads at 59.2% normalized rubric score; others score 34.1-47.1%.
+benchmark_features:
+  agents_evaluated:
+  - Claude Opus 5
+  - other frontier models (names not verified)
+  evaluation_target:
+  - protocol_planning
+  execution_mode: static_text
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results:
+  - 'Claude Opus 5: 59.2% normalized rubric score; other models 34.1-47.1%'
+  - Benchmark remains unsaturated even taking best of ten attempts
+  holdout_or_split_design: null
+  instruments: []
+  leakage_or_contamination_risk: Source protocols are published; the modifications are private/real-world and thus
+    unlikely to be memorized.
+  metric_types:
+  - rubric
+  - llm_judge
+  - pass_at_k
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: 9
+  n_tasks: 149
+  open_source: null
+  primary_metric: Normalized weighted rubric score (graded by GPT-5.6 Terra at medium reasoning)
+  repetitions_per_task: Best-of-10 attempts reported in addition to single-attempt
+  sampling_strategy: Diffs between published protocols and scientist-modified versions (from Benchling usage) form
+    the query and rubric; only tasks rated highly by domain-expert reviewers retained.
+  scientific_domains:
+  - wet-lab biology (nine domains, not enumerated in verified sources)
+  scoring_granularity: partial
+  target_population: Routine real-world protocol adaptation by wet-lab scientists
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: none
+  quantitative_tolerance: Rubric elements weighted; must account for prior choices and downstream steps.
+  reasoning_demand: high
+  safety_criticality: low
+  task_taxonomy:
+  - protocol modification / adaptation (nine wet-lab domains)
+  tool_composition: None.
+  tool_interface:
+  - natural_language
+  workflow_depth: multi_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Static text tasks with LLM-graded rubrics.
+  injected_faults: false
+  novelty_control: Tasks derived from private real edits
+  sample_real_or_simulated: dataset
+  sample_types:
+  - protocol text
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models:
+  - Claude Opus 5
+  - others
+  multi_agent: false
+  planner: none
+  rag_or_memory: none
+  tools: []
+  verifier_or_self_debug: none
+  vision_used: false
+transfer_relevant_findings:
+- Real usage traces (scientist edits) are a viable, contamination-resistant task source; rubric grading captures
+  partial credit on multi-constraint edits.
+limitations:
+- Public data/code release, full model list and license not verified (arXiv and benchling.com blocked).
+related:
+- bioprobench
+- biolp_bench
+- lab_bench
+notes: 'All facts from search excerpts of the arXiv abstract/HTML. Authors: Aditya Sivakumar, Ashu Singhal, Nicholas
+  Larus-Stone, Nithin Parsan (Benchling).'
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2608.23898
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

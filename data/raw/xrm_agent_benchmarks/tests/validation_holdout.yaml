@@ -1,0 +1,161 @@
+# =============================================================================
+# VERSA Test Suite: 3D Printed Sample Workflow Tests
+# =============================================================================
+# Multi-step workflows involving multiple agents and tools.
+# Use the "integration" category and the "validation" tag.
+# =============================================================================
+
+tests:
+  - test_id: "validation_001"
+    name: "setup_measure_initial_acquire"
+    description: "Configure the instrument for downstream imaging and analysis."
+    category: "validation"
+    tags: [ "validation" ]
+    
+    user_prompt: |
+      Set the instrument up for general imaging. Use an X-ray power of 3 W and a voltage of 40 kV. Center the sample in the
+      image field of view. Calculate a source and detector position so that the image FOV is 1.25x as wide as the sample.
+      Move the source and detector to this new position. Save the sample stage position, source position, and detector position
+      in a JSON file called 'setup_position.json' under the keys 'stage_position_x', 'stage_position_y', 'stage_position_z',
+      'source_position_z', and 'detector_position_z'.
+
+    expected:
+      expected_tools:
+        - turn_xray_on
+        - single_acquisition
+        - recenter_xy_from_sidecar
+        - execute_python_code
+      min_tool_calls: 8
+      expected_files:
+        - setup_position.json
+      verify_files_exist: true
+      expected_file_contents:
+        setup_position.json:
+          - key: stage_position_x
+            op: approx
+            value: 650
+            tolerance: 100
+          - key: stage_position_y
+            op: approx
+            value: 11100
+            tolerance: 500
+          - key: stage_position_z
+            op: approx
+            value: 0
+            tolerance: 100
+          - key: source_position_z
+            op: approx
+            value: -87
+            tolerance: 10
+          - key: detector_position_z
+            op: approx
+            value: 50
+            tolerance: 10
+
+  - test_id: "validation_002"
+    name: "measure_sample_size"
+    description: "Measure the sample lengths in the x, y, and z dimensions."
+    category: "validation"
+    tags: [ "validation" ]
+    
+    user_prompt: |
+      Collect views of the sample in the xy (theta=0) and yz (theta=90) planes. Segment the image and measure the sample's
+      length (in mm) in the x, y, and z dimensions. Save these lengths under the keys 'length_x', 'length_y', and 'length_z'
+      in a JSON file called 'sample_size.json'. Round to the nearest tenth of a millimeter.
+
+    expected:
+      expected_tools:
+        - single_acquisition
+        - execute_python_code
+      min_tool_calls: 3
+      expected_files:
+        - sample_size.json
+      verify_files_exist: true
+      expected_file_contents:
+        sample_size.json:
+          - key: length_x
+            op: approx
+            value: 29
+            tolerance: 1.0
+          - key: length_y
+            op: approx
+            value: 29
+            tolerance: 2.0
+          - key: length_z
+            op: approx
+            value: 29
+            tolerance: 1.0
+
+  - test_id: "validation_003"
+    name: "optimize_exposure"
+    description: "Optimize the exposure time for TDP Sample #6"
+    category: "validation"
+    tags: [ "validation" ]
+
+    user_prompt: |
+      Acquire an image using a 1 second exposure time and binning 2. Segment the image to find the sample and measure
+      the average intensity in the sample region. Calculate a new exposure time that achieves an average of approximately
+      5000 counts inside the sample region. Save this exposure time in a JSON file called 'optimal_exposure.json' under
+      the key 'optimal_exposure'.
+
+    expected:
+      expected_tools:
+        - single_acquisition
+        - execute_python_code
+      min_tool_calls: 1
+      expected_files:
+        - optimal_exposure.json
+      verify_files_exist: true
+      expected_file_contents:
+        optimal_exposure.json:
+          - key: optimal_exposure
+            op: approx
+            value: 5
+            tolerance: 1
+
+  - test_id: "validation_004"
+    name: "create_recipe_run"
+    description: "Use the optimized parameters to create a recipe file and run it."
+    category: "validation"
+    tags: [ "validation" ]
+
+    user_prompt: |
+      Get the current sample stage, source, and detector positions. Open the file 'optimal_exposure.json' to get the optimal
+      exposure time for the sample. Create a recipe file that uses the current instrument sample stage position as the
+      initial sample position and uses the current source and detector positions. The recipe should also use the
+      optimal exposure time from 'optimal_exposure.json' and set the reference axis as 'Sample X'. Save the recipe file
+      as 'TDP_006_optimal.rcp'. Begin a recipe acquisition.
+
+    expected:
+      expected_tools:
+        - recipe_modify_and_save
+        - recipe_open_and_run
+      min_tool_calls: 1
+      expected_files:
+        - TDP_006_optimal.rcp
+      verify_files_exist: true
+
+  - test_id: "validation_005"
+    name: "measure_tdp_defects"
+    description: "Measure the number of defects inside TDP sample #6"
+    category: "validation"
+    tags: [ "validation" ]
+
+    user_prompt: |
+      Open the most recently collected 3D tomography reconstruction saved as a TIFF stack. Segment the 3D dataset
+      using a multi-Otsu filter. Find all pore regions inside the sample that have a diameter larger than 1 mm. Create a
+      plot that shows a 2D slice through every one of these defects. Count how many defects there are and save the count
+      in a JSON file called 'number_of_defects.json' under the key 'number_of_defects'. The saved value must be an integer.
+
+    expected:
+      expected_tools:
+        - execute_python_code
+      min_tool_calls: 1
+      expected_files:
+        - number_of_defects.json
+      verify_files_exist: true
+      expected_file_contents:
+        number_of_defects.json:
+          - key: number_of_defects
+            op: equals
+            value: 5

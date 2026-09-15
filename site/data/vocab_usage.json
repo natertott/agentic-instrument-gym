@@ -1,0 +1,145 @@
+{
+ "execution_mode": {
+  "physical_instrument": 14,
+  "digital_twin": 2,
+  "simulator": 8,
+  "execution_trace": 1,
+  "static_code_eval": 7,
+  "static_text": 16,
+  "hybrid": 9
+ },
+ "task_source": {
+  "expert_curated": 35,
+  "literature_derived": 7,
+  "synthetic_generated": 4,
+  "factorial_design": 0,
+  "crowd": 0,
+  "mixed": 6
+ },
+ "scoring_granularity": {
+  "binary": 17,
+  "partial": 3,
+  "continuous": 8,
+  "mixed": 17
+ },
+ "workflow_depth": {
+  "single_step": 13,
+  "multi_step": 19,
+  "long_horizon": 10,
+  "mixed": 11
+ },
+ "perceptual_demand": {
+  "none": 12,
+  "structured_readout": 13,
+  "image_reading": 3,
+  "image_interpretation": 16,
+  "mixed": 7
+ },
+ "reasoning_demand": {
+  "low": 2,
+  "medium": 17,
+  "high": 25,
+  "mixed": 9
+ },
+ "safety_criticality": {
+  "none": 21,
+  "low": 12,
+  "medium": 16,
+  "high": 4
+ },
+ "sample_real_or_simulated": {
+  "real": 18,
+  "simulated": 10,
+  "dataset": 23,
+  "none": 4
+ },
+ "planner": {
+  "none": 22,
+  "react": 9,
+  "plan_and_execute": 6,
+  "tree_search": 0,
+  "varied": 10,
+  "unknown": 0
+ },
+ "rag_or_memory": {
+  "none": 24,
+  "static_docs": 1,
+  "episodic": 0,
+  "both": 0,
+  "varied": 4,
+  "unknown": 0,
+  "some": 12
+ },
+ "verifier": {
+  "none": 32,
+  "self_debug": 2,
+  "external_verifier": 7,
+  "human": 0,
+  "varied": 5,
+  "unknown": 0
+ },
+ "guards": {
+  "none": 30,
+  "allowlist": 1,
+  "human_in_loop": 0,
+  "both": 0,
+  "varied": 0,
+  "unknown": 0,
+  "some": 11
+ },
+ "evaluation_target": {
+  "instrument_control": 25,
+  "code_generation": 17,
+  "computer_use": 2,
+  "question_answering": 15,
+  "perception": 15,
+  "protocol_planning": 22,
+  "data_analysis": 19,
+  "simulation_control": 9,
+  "safety": 9
+ },
+ "metric_type": {
+  "success_rate": 32,
+  "pass_at_k": 2,
+  "partial_credit": 11,
+  "trace_alignment": 1,
+  "llm_judge": 6,
+  "rubric": 4,
+  "human_eval": 2,
+  "cost": 5,
+  "time": 7,
+  "safety_violations": 1,
+  "calibration": 1,
+  "accuracy": 1,
+  "other": 37
+ },
+ "tool_interface": {
+  "python_api": 33,
+  "cli": 4,
+  "gui": 4,
+  "rest_api": 3,
+  "mcp": 8,
+  "natural_language": 38,
+  "physical": 2
+ },
+ "novelty_level": {
+  "seen_in_development": 1,
+  "held_out_instance": 5,
+  "held_out_task": 1,
+  "held_out_task_family": 0,
+  "held_out_sample_class": 0,
+  "held_out_environment": 0,
+  "held_out_combination": 0
+ },
+ "instrument_modality": {
+  "microscopy": 26,
+  "spectroscopy": 2,
+  "diffraction": 3,
+  "synchrotron": 7,
+  "liquid_handling": 1,
+  "robotics": 2,
+  "generic_lab": 4,
+  "computation": 0,
+  "none": 2
+ }
+}

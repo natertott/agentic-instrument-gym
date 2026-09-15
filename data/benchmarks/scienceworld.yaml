@@ -1,0 +1,161 @@
+id: scienceworld
+record_type: benchmark
+name: 'ScienceWorld: Is your Agent Smarter than a 5th Grader?'
+short_name: ScienceWorld
+year: 2022
+venue: EMNLP 2022 (main conference), pp. 11279-11298; arXiv v1 Mar 2022, v2 Nov 2022
+authors_short: Ruoyao Wang et al. (Wang, Jansen, Côté, Ammanabrolu)
+arxiv: '2203.07540'
+doi: 10.18653/v1/2022.emnlp-main.775
+url: https://aclanthology.org/2022.emnlp-main.775/
+code_url: 'https://github.com/allenai/ScienceWorld (PyPI: scienceworld; HF Space demo MarcCote/ScienceWorld)'
+data_url: Environment generates tasks procedurally; no static dataset (playthrough transcripts at https://sciworld.apps.allenai.org/explore)
+license: Apache-2.0 (repo LICENSE)
+status: published
+summary: |
+  ScienceWorld is a text-based interactive environment (Scala simulator with a Python py4j API) in which agents carry out elementary-school science tasks -- boiling or melting substances, measuring melting points, building circuits, testing conductivity, growing plants, mixing chemicals, classifying organisms, and running Mendelian genetics experiments -- inside a simulated house with thermodynamic, electrical, chemical and biological simulation engines. It defines 30 tasks across 10 curriculum topics with 7,207 parametric variations and scores agents by a 0-1 progress score over gold sub-goals. Reinforcement-learning text agents (DRRN, KG-A2C, CALM) and T5-based behaviour-cloning/decision-transformer agents all perform poorly; DRRN, the best, averaged only 0.17.
+benchmark_features:
+  agents_evaluated:
+  - DRRN
+  - KG-A2C
+  - CALM
+  - Behavior Cloning T5 (BC-T5)
+  - Text Decision Transformer T5 (TDT-T5)
+  evaluation_target:
+  - simulation_control
+  - protocol_planning
+  - instrument_control
+  execution_mode: simulator
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results:
+  - Best model (DRRN, 1.5M parameters) averaged a score of 0.17 across the 30 tasks
+  - Online RL agents (DRRN, KG-A2C) outperformed 11B-parameter T5 agents trained offline (CALM, BC-T5, TDT-T5),
+    an inverse-scaling-style finding
+  holdout_or_split_design: Parametric variations of each task split into train / dev / test sets so evaluation uses
+    unseen variations of seen task types
+  instruments:
+  - name: Thermometer
+    modality: generic_lab
+    real_or_simulated: simulated
+  - name: Stove, oven, freezer, blast furnace, Bunsen burner (heating/cooling devices)
+    modality: generic_lab
+    real_or_simulated: simulated
+  - name: Electrical circuit components (batteries, wires, bulbs, switches, generators)
+    modality: generic_lab
+    real_or_simulated: simulated
+  - name: Inclined planes, containers, seeds/flower pots, chemical mixtures
+    modality: generic_lab
+    real_or_simulated: simulated
+  leakage_or_contamination_risk: Low for LLM pretraining at time of release (2022); later LLM-agent papers (e.g.
+    SwiftSage, ReAct-style) use ScienceWorld heavily, so its gold trajectories and task descriptions are now widely
+    available online
+  metric_types:
+  - partial_credit
+  - success_rate
+  n_agent_configs: 5
+  n_instances_or_runs_reported: null
+  n_task_families: 10
+  n_tasks: 30
+  open_source: true
+  primary_metric: Task progress score (0-1, normalized over gold sub-goals) averaged over test variations; 1.0 =
+    task completed
+  repetitions_per_task: Variations per task range from 10 to 1,386 (total 7,207, summed from the repo task table);
+    paper evaluates agents over held-out variations (exact per-task evaluation counts not verifiable here)
+  sampling_strategy: Author-designed tasks mirroring curriculum topics; each task parametrically varied (substances,
+    objects, room layouts, target values) giving 7,207 variations; variations are partitioned into train/dev/test
+    splits (proportions not verifiable here)
+  scientific_domains:
+  - elementary physical science (changes of state, thermometry, electricity, friction)
+  - life science (classification, plant growth, life spans, life stages, Mendelian genetics)
+  - chemistry (mixing, paint colours)
+  scoring_granularity: partial
+  target_population: Grounded scientific reasoning at the level of a standardized elementary (grade-5) science curriculum
+    -- can an agent that knows the facts actually perform the experiment?
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: structured_readout
+  quantitative_tolerance: Numeric state (e.g. temperature, melting point, angle) is tracked by the simulator; sub-goals
+    check states such as 'substance is boiling' or 'thermometer used on X' rather than agent-reported values with
+    tolerances; measurement tasks require reporting the correct value/class
+  reasoning_demand: high
+  safety_criticality: none
+  task_taxonomy:
+  - 1 Matter (boil, melt, freeze, change-the-state-of-matter-of)
+  - 2 Measurement (use-thermometer, measure-melting-point-known/unknown-substance)
+  - 3 Electricity (power-component, power-component-renewable-vs-nonrenewable-energy, test-conductivity, test-conductivity-of-unknown-substances)
+  - 4 Classification (find-living-thing, find-non-living-thing, find-plant, find-animal)
+  - 5 Biology (grow-plant, grow-fruit)
+  - 6 Chemistry (chemistry-mix, chemistry-mix-paint-secondary-color, chemistry-mix-paint-tertiary-color)
+  - 7 Biology (lifespan-longest-lived, lifespan-shortest-lived, lifespan-longest-lived-then-shortest-lived)
+  - 8 Biology (identify-life-stages-1, identify-life-stages-2)
+  - 9 Forces (inclined-plane-determine-angle, inclined-plane-friction-named/unnamed-surfaces)
+  - 10 Biology (mendelian-genetics-known-plant, mendelian-genetics-unknown-plant)
+  tool_composition: Agent issues text commands from ~25 action templates combined with objects (up to ~200k valid
+    action-object pairs per step per secondary source); tasks require chaining navigation, container/device manipulation,
+    instrument reading and waiting for simulated processes
+  tool_interface:
+  - natural_language
+  - python_api
+  workflow_depth: long_horizon
+sample_environment_features:
+  calibration_or_api_state_variation: Simplification presets (teleportAction, openDoors, selfWateringFlowerPots,
+    noElectricalAction, openContainers) change environment affordances; README warns the 'easy' preset differs from
+    the paper's Appendix B.5
+  environment_description: Ten interconnected locations (kitchen, workshop, greenhouse, etc.) with ~200 object types;
+    simulation engines for thermodynamics, electrical circuits, chemistry and biological processes (plant growth,
+    life cycles, genetics); text observations, valid-action enumeration and gold action sequences exposed through
+    the Python API
+  injected_faults: false
+  novelty_control: Held-out parametric variations; 'unknown substance' and 'unnamed surface' task variants test
+    generalization beyond memorized names
+  sample_real_or_simulated: simulated
+  sample_types:
+  - 'simulated household/lab objects: substances (water, ice, metals, unknown substances), electrical components,
+    plants and seeds, animals, paints, inclined-plane surfaces'
+  signal_quality_variation: Deterministic simulation; unknown-substance variants hide identities so agents must
+    measure. Version 1.3.0 (repo) made object enumeration deterministic, fixing stochastic simulation outcomes
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: true
+  guards_or_safety_layer: none
+  models:
+  - DRRN (RL)
+  - KG-A2C (RL)
+  - CALM (GPT-2 action generator + RL)
+  - T5-11B behaviour cloning
+  - T5-11B text decision transformer
+  multi_agent: false
+  planner: none
+  rag_or_memory: none
+  tools: []
+  verifier_or_self_debug: none
+  vision_used: false
+transfer_relevant_findings:
+- 'Model size did not translate into interactive competence: 11B T5 agents underperformed a 1.5M-parameter RL agent'
+- Parametric variation with held-out test variations is used explicitly to defeat memorization of layouts and object
+  names
+- Environment simplifications materially change difficulty; results are not comparable across presets
+- Determinism fix in v1.3.0 can change physics trajectories and gold paths, so numbers across simulator versions
+  may differ
+limitations:
+- Text-only, elementary-level science; instruments are abstractions (e.g. a thermometer reading) rather than realistic
+  devices
+- Original baselines predate LLM agents; no human baseline reported despite the title's framing (could not verify)
+- Progress scoring depends on hand-written sub-goal lists per task
+related:
+- discoveryworld
+- scigym
+notes: |
+  Repo-verified: title, venue, DOI, pages, license, 30-task table with variation counts (sum 7,207), simplification presets, baseline agent repos, v1.3.0 determinism change. Search-snippet: 10 topic names, DRRN 0.17 average, agent list, ~25 action templates / 10 locations / ~200 object types (from a secondary summary, unverified). Not verifiable here: train/dev/test proportions of variations, per-task scores, human baseline (has_human_baseline left null), DOI already given from ACL anthology citation in repo.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://aclanthology.org/2022.emnlp-main.775/
+  - 'https://github.com/allenai/ScienceWorld (PyPI: scienceworld; HF Space demo MarcCote/ScienceWorld)'
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

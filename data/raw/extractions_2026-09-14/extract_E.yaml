@@ -1,0 +1,466 @@
+# Extraction batch E - agentic self-driving X-ray microscopy benchmarks and related microscopy-agent evaluations.
+# Sources: arXiv abstract (via GitHub digest mirror), search-snippet quotations of the arXiv HTML (arxiv.org itself
+# was blocked by the egress proxy), and the authors' GitHub repository (cloned; README, LICENSE, all benchmark YAMLs,
+# Supplementary Information PDF, analysis notebooks with saved outputs, and the full_suite_optimal_configs.zip run logs).
+# Anything marked "(repo-computed)" was computed by the extraction agent from the released run logs, not read from the paper.
+
+id: johnson2026_agentic_xrm_benchmarks
+name: "Agentic self-driving microscopy benchmarks support qualification but do not necessarily generalize to unseen tasks"
+short_name: "XRM-AgentBench (unofficial; authors give no acronym)"
+year: 2026
+venue: "arXiv preprint (cs.AI; cross-listed cond-mat.mtrl-sci, cs.LG); posted 2026-08-05; 20 pages, 8 figures"
+authors_short: "Johnson & Abshire (Nathan S. Johnson, Ian Abshire; Carl Zeiss Research Microscopy Solutions, Dublin, CA)"
+arxiv: "2608.05266"
+doi: "10.48550/arXiv.2608.05266"
+url: "https://arxiv.org/abs/2608.05266"
+code_url: "https://github.com/natertott/agentic_microscopy_benchmarks_XRM"
+data_url: "https://github.com/natertott/agentic_microscopy_benchmarks_XRM (benchmark YAMLs, SI PDF, notebooks, full_suite_optimal_configs.zip run logs; README also references a sweep_results.zip with all 1,949 runs that is NOT present in the cloned repository)"
+license: "MIT (repository LICENSE, (c) 2026 Nathan Johnson); paper license not verified"
+status: preprint
+summary: >
+  A benchmark and trace-logging framework for LLM agents that operate a ZEISS Versa lab X-ray microscope (XRM) through
+  LangGraph + six Python MCP servers. 53 YAML-defined tests (atomic instrument actions up to end-to-end
+  setup/centering/sizing/geometry/recipe/shutdown workflows) were run under 105 agent configurations (1-, 2-, 3-agent
+  topologies, five LLMs, RAG/context/sampling parameters, operational limits), giving 1,949 runs and 49,109 logged RAG
+  retrievals. Configurations differed clearly in pass rate, latency, tokens, cost and failure mode, but surrogate models
+  (L2 logistic regression, random forest) trained on configuration + test features predicted success on held-out tests at
+  ROC-AUC ~0.55 (near chance) versus ~0.78 when test identity was available, so the authors conclude such benchmarks
+  support qualification, regression testing, diagnosis and direct comparison but not a task-independent global
+  configuration model.
+benchmark_features:
+  evaluation_target: [instrument_control, protocol_planning, data_analysis, code_generation, safety]
+  execution_mode: physical_instrument
+  instruments:
+    - {name: "ZEISS Xradia 630 Versa 3D X-ray microscope (tool outputs report instrument_model Xradia_630_Versa; paper says runs were collected on a simulator and multiple ZEISS Versa microscope models; vendor API XradiaPy.Core.XRM / XradiaPy.Recipe.Recipe)", modality: microscopy, real_or_simulated: real}
+    - {name: "ZEISS Versa simulator (mentioned in paper limitations; share of runs on simulator not stated)", modality: microscopy, real_or_simulated: simulated}
+  scientific_domains: ["materials characterization", "lab-based X-ray microscopy / micro-CT", "additively manufactured (3D-printed) test artifacts"]
+  n_tasks: 53
+  n_task_families: 7
+  n_instances_or_runs_reported: 1949
+  repetitions_per_task: "Unbalanced historical dataset: each test was run under a subset of the 105 configurations, typically once per configuration per suite run; golden 6-test tdp_workflow suite was used as a repeated end-to-end benchmark; the three 'optimal' configs and one baseline were each run 3x over the full 53-test suite and 3x over the 5 held-out validation tasks (repo-computed). Notebook output shows e.g. tdp_004 with 80 runs over 49 configs, wf_analyze_003 54 runs/32 configs, stress_001 18 runs/9 configs."
+  target_population: "Tasks a ZEISS Versa X-ray microscope operator would issue to an agentic controller: instrument state queries, source/stage/objective/filter control, image acquisition, sample centering and sizing, geometry/magnification selection, recipe creation and execution, image analysis, and safe shutdown; framed as qualification/regression tests for one specific agentic microscope controller."
+  task_source: expert_curated
+  sampling_strategy: "Seven hand-written YAML suites (qualification/regression + integrated workflows); configuration sweeps were historical and unbalanced ('not a complete factorial experiment'); a separate 5-task validation_holdout.yaml (defined independently of the 53 tests, with numeric tolerances) was used for prospective physical validation of surrogate-recommended configurations."
+  metric_types: [success_rate, time, cost, other]
+  primary_metric: "Composite pass rate (binary per run: all checks defined for the test must be satisfied - required tools, forbidden tools, required agent, required text output, file creation/contents, quantitative tolerance, min tool calls, and operational limits on duration/LLM calls/tool calls); reported with 95% Wilson CIs. Secondary: duration, input/output tokens, estimated API cost, LLM calls, tool calls, failure-type breakdown, RAG retrieval identifiers; a study-specific weighted efficiency score (pass rate 0.4, mean duration 0.15, mean tokens 0.15, LLM calls 0.1, tool calls 0.1, failures 0.1 per SI Table 6)."
+  scoring_granularity: binary
+  has_human_baseline: false
+  has_safety_eval: true
+  has_abstention_eval: false
+  holdout_or_split_design: "Three surrogate CV schemes (5-fold): (a) GroupKFold by config_hash with test_id in the design matrix (configuration held out); (b) grouped by test_id with test_id still in the matrix; (c) strict unseen-task CV: StratifiedGroupKFold by test_id, test_id removed from predictors, preprocessing fit within fold. Plus a prospective physical holdout of 5 validation tasks run 3x per selected configuration."
+  leakage_or_contamination_risk: "Tests are natural-language prompts against a private vendor API, so pretraining contamination is unlikely; the main validity risks are (i) repeated runs of the same task+config are not independent, (ii) model/prompt/framework/code/software/hardware versions changed during data collection, (iii) RAG knowledge base was hand-curated for these workflows and pruned using retrospective associations with the same tests, (iv) 'suspect' tests that pass everywhere (stress_001, tdp_004, wf_analyze_003) or nearly always fail were flagged/excluded in analysis."
+  agents_evaluated: ["LangGraph one-agent ReAct controller", "two-agent supervisor + unified worker", "three-agent supervisor + instrument worker + image-analysis worker", "LLM identifiers found in released data/notebooks: claude-sonnet-4, claude-3-7-sonnet, claude-opus-45, gpt-41, gpt-51, gpt-54 (paper says 'five LLMs'; framework sweep notebook lists exactly five: claude-3-7-sonnet, claude-opus-45, claude-sonnet-4, gpt-41, gpt-51; gpt-54 appears in the broad sweep)"]
+  n_agent_configs: 105
+  headline_results:
+    - "105 configurations, 1,949 runs, 53 tests, 49,109 RAG retrievals (paper); notebook raw load before exclusions: 1,989 runs x 77 columns, 114 configs, 58 tests incl. 5 validation tasks, overall pass rate 72.7%."
+    - "Surrogate ROC-AUC (notebook output): config-held-out with test_id: logistic 0.542, random forest 0.787 (Brier 0.171, acc 0.785); task-grouped with test_id: LR 0.534, RF 0.594; strict unseen-task without test_id: LR 0.545, RF 0.577 -> paper reports ~0.55 for both, i.e. near chance."
+    - "Test identity was the strongest predictor of pass/fail, followed by LLM choice and number of agents."
+    - "One- and two-agent topologies spanned similar pass-rate ranges; one-agent used up to ~10,000 fewer tokens per test; three-agent gave no consistent gain and was dropped from the broad sweep; two-agent systems exceeded duration/LLM-call/tool-call limits more often."
+    - "Framework sweep: 540 runs = 3 topologies x 5 LLMs x 15 'framework_sweep' tests (notebook)."
+    - "RAG audit (Fisher exact + BH correction, volcano plot) flagged 'toxic' entries (e.g. createrecipeinstrument, errorhandling, modifyrecipeinstrumenttool, recipeexecutionacquisitioninstrument, segment3ddataimage, segmentimageotsuimage, xrayonprotocolinstrument) but pruning them did not consistently improve performance."
+    - "(repo-computed) Claude Sonnet 4, T=0 full-suite repeats: baseline one-agent no-RAG 75.5/88.7/92.5%; optimal one-agent pruned-RAG 94.3/92.5/92.5%; optimal two-agent pruned-RAG 94.3/83.0/81.1% (+84.9/79.2% in sweep); two-agent full-RAG 77.4/83.0/86.8%."
+    - "(repo-computed) Held-out physical validation (5 tasks x 3 repeats): baseline 1/5,1/5,1/5; one-agent pruned-RAG 3/5,4/5,4/5; two-agent pruned-RAG 3/5,3/5,1/5; two-agent full-RAG 1/5 x3; validation_005 (count 5 pores >1 mm in a 3D reconstruction) failed in every run, validation_004 (create+run recipe) passed in every run."
+    - "(repo-computed) mean tokens/test: one-agent no-RAG ~10.2k, one-agent pruned-RAG ~16.2k, two-agent ~20k; mean cost/test $0.03 vs $0.045 vs $0.06; mean LLM calls 4.3 vs 4.4 vs 7.4-7.8."
+    - "Failure types over all runs (notebook): expected_tool 185 runs, max_tool_calls 135, max_llm_calls 89, max_duration 81, expected_file 68, file_content 35, min_tool_calls 34, output_contains 14, expected_agent 5."
+  open_source: true
+task_features:
+  workflow_depth: mixed
+  perceptual_demand: structured_readout
+  reasoning_demand: mixed
+  tool_interface: [mcp, python_api, natural_language]
+  tool_composition: "Six MCP servers: Versa instrument control (X-ray on/off, voltage/power, axis motion absolute/relative, objective/filter get/set, single and transmission-corrected acquisition writing TIFF + JSON sidecar), Versa-Recipe (modify/save/open/run .rcp recipes), Geometry/optics (calculate_geometry_for_pixel_size, recenter_xy/yz_from_sidecar with calibrated sign conventions and mechanical limits), ImageAnalysis (otsu_segment_properties, histogram_tiff, draw_centroid_bbox, tiff_info), FileReading (list/read/find JSON, text), python_executor (execute_python_code in subprocess). 33 distinct tool names appear in released runs, most used: single_acquisition, move_axis_absolute, execute_python_code, otsu_segment_properties, is_xray_on."
+  quantitative_tolerance: "Most of the 53 tests check required/forbidden tool calls, min tool calls, files created and operational limits rather than numeric values; numeric tolerances are used in the 5 validation tasks (stage X 650+/-100 um, Y 11100+/-500 um, Z 0+/-100 um, source Z -87+/-10 mm, detector Z 50+/-10 mm; sample length 29+/-1 (x,z) and +/-2 mm (y); optimal exposure 5.0+/-0.25 s per SI (YAML shows tolerance 1); number_of_defects == 5)."
+  closed_loop_feedback: true
+  safety_criticality: medium
+  task_taxonomy:
+    - "tdp_workflow.yaml (golden end-to-end suite, 6): setup_instrument_tdp, center_sample_tdp, estimate_size_tdp, calculate_magnification_tdp, create_run_recipe_tdp, end_testing_tdp"
+    - "integration_workflows.yaml (12): General Setup Workflow, Full Imaging Setup with X-rays, Acquire and Analyze Basic, Acquire and Create Histogram, Acquire and Segment, Rotation Survey, XY Position Survey, Acquire/Segment/Annotate, Transmission Calculation, Find Optimal Exposure, Complete Imaging Workflow, Multi-View Characterization"
+    - "unit_instrument.yaml (atomic instrument control, 19): xray_001-002, stage_001-008, obj_001-003, filter_001-003, acq_001-003"
+    - "geometry_recipe.yaml (6): geom_001 Calculate Magnification, geom_002 Recenter XY, geom_003 Recenter YZ, recipe_001 Modify Recipe, recipe_002 Create Tomography Recipe, recipe_004 Create and Run Recipe"
+    - "regression_performance.yaml (8): reg_003 X-ray Already Off, reg_006 Multiple Operations Same Axis, reg_007 Acquire with X-rays Off (safety), perf_001 Fast Status Query, perf_004 Quick Acquisition, perf_007 Multi-Step Workflow Performance, stress_001 Repeated Acquisitions, stress_002 Complex Multi-Agent Workflow"
+    - "unit_image.yaml (1): python_002 Image Statistics with Python"
+    - "debug.yaml (1): debug_001 smoke test (do nothing, route to FINISH)"
+    - "validation_holdout.yaml (5 held-out physical validation tasks, not part of the 53): setup_measure_initial_acquire, measure_sample_size, optimize_exposure, create_recipe_run, measure_tdp_defects"
+sample_environment_features:
+  sample_types: ["3D-printed test artifact ('tdp'), ~29 mm in x/y/z, containing 5 internal pores > 1 mm used as ground truth for the defect-count validation task"]
+  sample_real_or_simulated: real
+  signal_quality_variation: "Not systematically varied; exposure-optimization tasks target ~5000 counts; binning 2/4 and 0.5-2 s exposures specified in prompts."
+  novelty_control: "No sample novelty axis; 'unseen task' generalization is tested by holding out test identities in CV and by 5 separately defined validation tasks on the same artifact."
+  calibration_or_api_state_variation: "Runs span a simulator and multiple ZEISS Versa instruments with changing software/hardware versions (uncontrolled covariate); geometry tools encode calibrated limits; tests include idempotency checks (turn X-rays off when already off) and acquire-with-X-rays-off behavior."
+  injected_faults: false
+  environment_description: "Windows workstation running the LangGraph controller and MCP servers against the ZEISS XradiaPy API of a Versa XRM; per-run workspace directories capture TIFFs, JSON sidecars, recipes, plots; benchmark runner enforces per-test timeouts (30-1000 s) and recursion/retry limits."
+agent_features_evaluated:
+  models: ["claude-sonnet-4", "claude-3-7-sonnet", "claude-opus-45", "gpt-41", "gpt-51", "gpt-54 (identifiers as logged; provider label 'openai-standard'; temperatures 0.0-0.75)"]
+  vision_used: false
+  rag_or_memory: varied
+  planner: varied
+  tools: ["MCP tool calls to six Python servers (instrument, recipe, geometry, image analysis, file I/O, Python execution)", "shared AgentState with bounded/pruned transcript and prior_summary compression (max_messages 50-100, max_tokens 20000, 'smart' pruning)", "RAG over curated microscopy knowledge entries (text-embedding-3-large; episodic_top_k 0-5, contextual_top_k 0-1, chunk 250-1000, overlap 100-250, similarity threshold 0-0.8; full vs pruned knowledge base)"]
+  verifier_or_self_debug: none
+  guards_or_safety_layer: some
+  multi_agent: true
+  deterministic_execution: false
+transfer_relevant_findings:
+  - "Task-held-out surrogate prediction of pass/fail was near chance (ROC-AUC ~0.55) even though configuration-held-out prediction reached ~0.78: the benchmark supports interpolation over known tasks (qualification) but not extrapolation to unseen tasks."
+  - "Test identity dominated feature importance, i.e. intrinsic task difficulty explains most outcome variance; agent-configuration effects are secondary and task-conditional."
+  - "Architecture effects were not universal: more agents raised tokens/calls/time without consistent accuracy gains; RAG pruning derived from retrospective associations did not reliably transfer."
+  - "Prospective physical validation on 5 new tasks showed large drops relative to the 53-test suite (e.g. ~93% -> 60-80% for the best config, ~85% -> 20% for the baseline) and one task (3D defect counting) was never solved (repo-computed)."
+  - "The authors explicitly frame the result as qualification vs generalization: heterogeneous test suites do not license a task-independent global configuration model."
+limitations:
+  - "Single instrument family (ZEISS Versa), single sample artifact, single vendor API; no cross-instrument or cross-sample transfer tested."
+  - "Historical, unbalanced configuration sweep; versions of models/prompts/code/hardware changed during the study; repeated runs not independent."
+  - "Binary composite pass criterion mostly checks trace/artifact conformance rather than scientific accuracy; few tests carry numeric tolerances."
+  - "No vision-language perception (image analysis is via deterministic tools); no human baseline; no explicit safety-violation or abstention metric."
+  - "Full 1,949-run sweep data (sweep_results.zip) and agent source/prompts referenced in SI are not present in the public repository as cloned on 2026-09-14; only optimal-config/baseline/validation runs (~1,800 results) are released."
+related: [johnson2025_mm_llm_versa_xrm, afmbench_2025, labosbench_2026, stemgym_2026]
+notes: >
+  Could NOT fetch arXiv HTML/PDF (arxiv.org, export.arxiv.org, alphaxiv, semanticscholar, pith.science, awesomepapers.io,
+  r.jina.ai, archive.org all blocked by the egress proxy; WebSearch quota was also exhausted mid-task). Abstract verified
+  verbatim via a GitHub digest mirror; body sentences come from search-engine snippets of the HTML; everything else comes from
+  the authors' GitHub repo (SI PDF, YAMLs, notebooks, run logs). Unverified: the exact list of the 'five LLMs' counted in
+  the paper (six identifiers appear in the released data), the share of runs on simulator vs hardware, which Versa models
+  besides the Xradia 630 were used, per-LLM pass rates, exact token/cost figures in the paper's figures, the paper's own
+  license, and whether the SI's alternate title reflects an earlier manuscript version. The DOI is the standard arXiv DOI
+  as cited in the author's own reference list. Beware: the paper number 49,109 RAG retrievals differs from the notebook
+  load (48,010 rag_events) and paper 105 configs / 1,949 runs differs from the notebook raw load (114 configs / 1,989 runs);
+  the paper numbers presumably follow exclusion of validation tasks and flagged runs.
+---
+id: johnson2025_mm_llm_versa_xrm
+name: "An Autonomous, Large Language Model Driven X-ray Microscope with Contextual Understanding of Domain Specific Experimental Workflows"
+short_name: null
+year: 2025
+venue: "Microscopy and Microanalysis, Vol. 31, Supplement 1 (M&M 2025 proceedings abstract), article ozaf048.1092, July 2025"
+authors_short: "Johnson (Nathan S. Johnson; ZEISS)"
+arxiv: null
+doi: "10.1093/mam/ozaf048.1092 (inferred from the OUP article identifier in the URL; not verified)"
+url: "https://academic.oup.com/mam/article/31/Supplement_1/ozaf048.1092/8213302"
+code_url: null
+data_url: null
+license: null
+status: published
+summary: >
+  Conference proceedings abstract describing the architecture of an LLM-agent system that controls a ZEISS Versa X-ray
+  microscope and performs image analysis with contextual (RAG-style) understanding of domain-specific experimental
+  workflows. This is the precursor system to the 2026 benchmark paper; no benchmark-style quantitative evaluation could be
+  verified from accessible sources.
+benchmark_features:
+  evaluation_target: [instrument_control, data_analysis]
+  execution_mode: physical_instrument
+  instruments:
+    - {name: "ZEISS Versa X-ray microscope", modality: microscopy, real_or_simulated: real}
+  scientific_domains: ["X-ray microscopy", "materials characterization"]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Demonstration of an LLM-driven XRM controller; not a benchmark."
+  task_source: expert_curated
+  sampling_strategy: null
+  metric_types: [other]
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "n/a (system description)"
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results: []
+  open_source: false
+task_features:
+  workflow_depth: multi_step
+  perceptual_demand: structured_readout
+  reasoning_demand: medium
+  tool_interface: [python_api, natural_language]
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: true
+  safety_criticality: medium
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: real
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "ZEISS Versa XRM controlled by an LLM agent system (details not accessible)."
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: some
+  planner: null
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: null
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Establishes the single-platform agentic XRM system whose benchmark evaluation later showed weak task-level generalization."
+limitations:
+  - "Abstract-length proceedings entry; full text was not accessible (academic.oup.com blocked)."
+related: [johnson2026_agentic_xrm_benchmarks]
+notes: >
+  Only the title, author, venue/volume and a one-sentence description ('describes the architecture of an LLM agent system
+  used for controlling the Versa X-ray Microscope and performing image analysis') were visible in search snippets.
+  Co-authors, DOI and any numbers are unverified. Other prior work by N. S. Johnson found: (i) M&M 2026 talk by co-author
+  Ian Abshire, 'Closing the Loop in Microscopy Automation: Multi-Agent LLMs for Real-Time Image Acquisition, Image
+  Processing and Experimental Steering Across Scientific Domains' (mm2026.eventscribe.net, room S201 D; no abstract
+  accessible); (ii) the author's own statement (research proposal in the working scratchpad) that he began building
+  autonomous X-ray characterization at SSRL in 2023 - no SSRL-era LLM-agent publication by Johnson could be located; the
+  SSRL LLM beamline-alignment work found in search ('An agentic artificially intelligent X-ray scientist', Nature Machine
+  Intelligence, July 2026, BL17-2) does not list Johnson in the snippets seen; (iii) non-agent papers: Johnson et al.,
+  Materials 17(16):4038 (2024) active learning for compositionally complex alloys; Johnson, Kafka, Moser, Materials
+  Characterization 238:116524 (2026) sparse-projection in situ X-ray tomography with deep learning.
+---
+id: afmbench_2025
+name: "AFMBench / AILA: Evaluating large language model agents for automation of atomic force microscopy"
+short_name: "AFMBench"
+year: 2025
+venue: "Nature Communications 16:9104 (2025); arXiv preprint 2501.10385 (Jan 2025, original title 'Autonomous Microscopy Experiments through Large Language Model Agents')"
+authors_short: "Mandal et al. (Indrajeet Mandal, Jitendra Soni, Mohd Zaki, Morten M. Smedskjaer, Katrin Wondraczek, Lothar Wondraczek, Nitya Nand Gosvami, N. M. Anoop Krishnan)"
+arxiv: "2501.10385"
+doi: "10.1038/s41467-025-64105-7"
+url: "https://www.nature.com/articles/s41467-025-64105-7"
+code_url: null
+data_url: null
+license: null
+status: published
+summary: >
+  AILA is an LLM-agent framework that automates an atomic force microscope; AFMBench is its evaluation suite spanning the
+  scientific workflow from experimental design to results analysis, used to test GPT-4o and GPT-3.5-class agents. Models
+  struggled even with basic tasks such as documentation retrieval, multi-agent coordination degraded performance, and agents
+  deviated from instructions or added unrequested actions ('sleepwalking'), motivating strict benchmarking and safety
+  protocols before lab deployment.
+benchmark_features:
+  evaluation_target: [instrument_control, code_generation, question_answering, data_analysis, safety]
+  execution_mode: hybrid
+  instruments:
+    - {name: "Atomic force microscope (AFM)", modality: microscopy, real_or_simulated: real}
+  scientific_domains: ["scanning probe microscopy", "materials science"]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Tasks across the AFM scientific workflow: documentation retrieval, experimental design, instrument operation, image/data analysis; plus open-ended demos (AFM calibration, high-resolution feature detection, mechanical property measurement, graphene layer counting, indenter detection)."
+  task_source: expert_curated
+  sampling_strategy: null
+  metric_types: [success_rate, other]
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: true
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "Not assessed in accessible sources."
+  agents_evaluated: ["AILA single-agent and multi-agent configurations with GPT-4o and GPT-3.5 (per abstract); Nature Comms version reportedly adds further models (unverified)"]
+  n_agent_configs: null
+  headline_results:
+    - "State-of-the-art LLMs struggled with basic tasks such as documentation retrieval; performance declined significantly in multi-agent coordination scenarios (abstract)."
+    - "LLM agents showed instruction non-adherence / divagation to extra tasks, raising safety-alignment concerns (abstract)."
+    - "Search snippet of the journal version: multi-agent frameworks significantly outperform single-agent approaches, though both remain sensitive to minor prompt-format changes (note: this is in tension with the preprint abstract; numbers unverified)."
+  open_source: null
+task_features:
+  workflow_depth: mixed
+  perceptual_demand: mixed
+  reasoning_demand: mixed
+  tool_interface: [python_api, natural_language]
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: true
+  safety_criticality: medium
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: ["calibration gratings, graphene flakes, indenter/nanoindentation samples (from abstract-level descriptions)"]
+  sample_real_or_simulated: real
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "LLM agents driving a physical AFM through its Python control interface (details not verifiable here)."
+agent_features_evaluated:
+  models: ["GPT-4o", "GPT-3.5"]
+  vision_used: null
+  rag_or_memory: some
+  planner: varied
+  tools: ["AFM control API", "documentation retrieval", "code execution"]
+  verifier_or_self_debug: none
+  guards_or_safety_layer: null
+  multi_agent: true
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Strong materials-science QA does not translate into reliable AFM operation; small prompt changes alter behavior - evidence that benchmark scores are configuration- and prompt-fragile."
+limitations:
+  - "Task counts, scoring rubric and per-model numbers could not be verified (nature.com, PMC and pubmed were blocked; only the arXiv abstract mirror was reachable)."
+related: [johnson2026_agentic_xrm_benchmarks, labosbench_2026]
+notes: >
+  Included because it is the closest published quantitative microscopy-agent benchmark and is cited as an anchor by Johnson.
+  All quantitative fields left null where not confirmable from the verbatim arXiv abstract. Likely duplicated by another
+  extractor in this survey - merge on doi.
+---
+id: labosbench_2026
+name: "LabOSBench: Benchmarking Computer Use Agents for Scientific Instrument Control"
+short_name: "LabOSBench"
+year: 2026
+venue: "arXiv preprint (cs.AI), 2026-06-15"
+authors_short: "Zou et al. (Anqi Zou, Han Deng, Chengyu Zhang, Junquan Hu, Yu Wang, Yuxiang Xing, Aokai Zhang, Hanling Zhang, Zhaoyang Liu, Ben Fei, Zhihui Wang, Wanli Ouyang)"
+arxiv: "2606.16802"
+doi: null
+url: "https://arxiv.org/abs/2606.16802"
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: >
+  A browser-based benchmark of eight web scientific-instrument simulators (SEM, TEM, light microscope, XRD, EDS, APT, FIB,
+  SPM) decomposed into 96 subtasks covering sample loading, alignment, parameter tuning, acquisition and result inspection.
+  General VLMs, GUI-agent models and agentic frameworks are evaluated at subtask and end-to-end levels; agents complete many
+  structured GUI subtasks but struggle with feedback-driven operations and long-horizon workflows.
+benchmark_features:
+  evaluation_target: [computer_use, instrument_control, simulation_control]
+  execution_mode: simulator
+  instruments:
+    - {name: "SEM simulator", modality: microscopy, real_or_simulated: simulated}
+    - {name: "TEM simulator", modality: microscopy, real_or_simulated: simulated}
+    - {name: "Light/fluorescence microscope simulator (LFM)", modality: microscopy, real_or_simulated: simulated}
+    - {name: "SPM simulator", modality: microscopy, real_or_simulated: simulated}
+    - {name: "XRD, EDS, APT, FIB simulators", modality: generic_lab, real_or_simulated: simulated}
+  scientific_domains: ["materials characterization", "microscopy", "diffraction/spectroscopy", "micro/nano fabrication"]
+  n_tasks: 96
+  n_task_families: 8
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "GUI operation of scientific instruments when a device API is unavailable."
+  task_source: expert_curated
+  sampling_strategy: "Each instrument's full workflow decomposed into sequential subtasks; two modes: full-task (from initial state under a step limit) and subtask (simulator fast-forwarded to the subtask's preceding state)."
+  metric_types: [success_rate, other]
+  primary_metric: "Execution-based subtask success and end-to-end completion (instrument-specific JSON-schema metrics)"
+  scoring_granularity: mixed
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "Simulators are custom web apps, low pretraining exposure; not discussed in accessible text."
+  agents_evaluated: ["general-purpose VLMs", "specialized GUI-agent models", "agentic frameworks (names not verified)"]
+  n_agent_configs: null
+  headline_results:
+    - "96 subtasks across 8 simulators; agents handle structured GUI subtasks but fail on feedback-driven parameter adjustment and long-horizon execution (abstract)."
+  open_source: null
+task_features:
+  workflow_depth: mixed
+  perceptual_demand: image_reading
+  reasoning_demand: medium
+  tool_interface: [gui]
+  tool_composition: "Playwright-driven browser; click/drag/type actions; screenshots as observations."
+  quantitative_tolerance: null
+  closed_loop_feedback: true
+  safety_criticality: low
+  task_taxonomy: ["sample preparation/loading", "environment conditioning", "parameter configuration", "data acquisition", "result inspection (per digest summary; counts per instrument not verified)"]
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: simulated
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Lightweight web simulators with in-page benchmark scripts logging subtask completion and trajectories."
+agent_features_evaluated:
+  models: []
+  vision_used: true
+  rag_or_memory: null
+  planner: varied
+  tools: ["browser GUI actions"]
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Subtask vs full-task modes separate local GUI grounding failures from long-horizon compounding failures - a split design relevant to modelling transfer."
+limitations:
+  - "Simulated GUIs only; per-model numbers not accessible in this session."
+related: [johnson2026_agentic_xrm_benchmarks, afmbench_2025]
+notes: >
+  Recorded briefly because it includes microscope simulators (SEM/TEM/LFM/SPM); abstract and design details come from a
+  GitHub mirror (CMander02/DailyAgentPapers). Probably covered by another extractor - merge on arxiv id.
+---
+id: stemgym_2026
+name: "STEMGym: Benchmarking Sequential Decision-Making under Dose Budgets in Autonomous Electron Microscopy"
+short_name: "STEMGym"
+year: 2026
+venue: "arXiv preprint, 2026-06-28 (v1)"
+authors_short: "Polat et al. (Can Polat, Erchin Serpedin, Mustafa Kurban, Hasan Kurban)"
+arxiv: "2606.29592"
+doi: null
+url: "https://arxiv.org/abs/2606.29592"
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: >
+  An open-source Gymnasium benchmark of 15 physics-simulated STEM 'worlds' (5 materials x 3 difficulty levels) with four
+  characterization tasks, scoring agents by the area under a dose-efficiency curve (DEC-AUC). Across 33 agent configurations
+  the perception ('analyst') pipeline, not the navigation policy, dominated dose efficiency; production vision-language
+  models underperformed task-specific CNNs by ~13x on crystallographic defect analysis.
+benchmark_features:
+  evaluation_target: [simulation_control, perception, instrument_control]
+  execution_mode: simulator
+  instruments:
+    - {name: "Simulated scanning transmission electron microscope (physics-based image simulation)", modality: microscopy, real_or_simulated: simulated}
+  scientific_domains: ["electron microscopy", "materials science / crystallography"]
+  n_tasks: 4
+  n_task_families: 15
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Sequential acquisition decisions (where/how much to scan) under an electron-dose budget in autonomous STEM."
+  task_source: synthetic_generated
+  sampling_strategy: "Factorial: 5 materials x 3 difficulty levels = 15 worlds; 4 characterization tasks; 33 agent configurations decoupling perception (analyst), navigation and planning."
+  metric_types: [other]
+  primary_metric: "DEC-AUC (area under the dose-efficiency curve)"
+  scoring_granularity: continuous
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "Synthetic simulated worlds; not discussed in accessible text."
+  agents_evaluated: ["raster / Bayesian / adaptive finite-state-machine navigators", "CNN analysts", "production-tier vision-language models (names not verified)"]
+  n_agent_configs: 33
+  headline_results:
+    - "CNN analyst + naive raster scanning raised DEC-AUC 5.5x over a CNN-free raster baseline (0.287 vs 0.052); Bayesian or adaptive-FSM navigation gave no statistically significant further gain."
+    - "Production VLMs underperformed task-specific CNNs by ~13x on crystallographic defect analysis."
+  open_source: true
+task_features:
+  workflow_depth: long_horizon
+  perceptual_demand: image_interpretation
+  reasoning_demand: medium
+  tool_interface: [python_api]
+  tool_composition: "Gymnasium environment API (observation = simulated STEM frames; action = scan positions/parameters)."
+  quantitative_tolerance: null
+  closed_loop_feedback: true
+  safety_criticality: low
+  task_taxonomy: ["four characterisation tasks incl. crystallographic defect analysis (full list not verified)"]
+sample_environment_features:
+  sample_types: ["five simulated crystalline materials (names not verified)"]
+  sample_real_or_simulated: simulated
+  signal_quality_variation: "Three difficulty levels; dose budget controls noise."
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Physics-simulated STEM worlds packaged as Gymnasium environments."
+agent_features_evaluated:
+  models: []
+  vision_used: mixed
+  rag_or_memory: none
+  planner: varied
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Decoupling perception from navigation/planning shows that where a benchmark score comes from (perception vs control) determines what it predicts - relevant to attributing transfer failures."
+limitations:
+  - "Not an LLM-agent benchmark per se (VLMs are one analyst option); simulation only; code URL and per-model numbers not verifiable here."
+related: [johnson2026_agentic_xrm_benchmarks, labosbench_2026]
+notes: >
+  Details come from search snippets of the arXiv abstract and two GitHub digest mirrors (author list confirmed). Code
+  repository URL, license, task names and VLM identities are unverified.

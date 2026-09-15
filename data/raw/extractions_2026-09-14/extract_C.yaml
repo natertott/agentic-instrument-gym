@@ -1,0 +1,1010 @@
+# extract_C.yaml — benchmarks for LLM agents controlling / reasoning about scientific instruments & lab workflows
+# Extraction date: 2026-09-14. Sources are PRIMARY where reachable (GitHub READMEs, project pages) and otherwise
+# search-engine excerpts of the arXiv abstract/HTML pages (arxiv.org, huggingface.co, aclanthology.org, biorxiv.org,
+# openreview.net, semanticscholar.org were all blocked by the network egress proxy in this session).
+# Any number sourced only from a search-result excerpt is flagged in `notes`.
+
+id: labosbench
+name: "LabOSBench: Benchmarking Computer Use Agents for Scientific Instrument Control"
+short_name: LabOSBench
+year: 2026
+venue: "arXiv preprint (cs); no peer-reviewed venue identified"
+authors_short: "Anqi Zou et al."
+arxiv: "2606.16802"
+doi: null
+url: "https://arxiv.org/abs/2606.16802"
+code_url: "https://github.com/Su-ISE-2001/LABOSBENCH"
+data_url: "https://su-ise-2001.github.io/LABOSBENCH/"
+license: "Per-component licenses (repo states it 'follows the original licenses of each submodule'; agent code partially forked from OSWorld). No single top-level license verified."
+status: preprint
+summary: >
+  LabOSBench is a browser-based, executable benchmark for multimodal GUI / computer-use agents that must operate
+  eight web simulators of scientific instruments (SEM, TEM, LFM, XRD, EDS, APT, FIB, SPM) through realistic
+  control panels (sliders, toggles, live plots, status indicators). It defines 96 subtasks spanning sample loading,
+  alignment, parameter tuning, data acquisition and result inspection, plus full-workflow (end-to-end) episodes,
+  and scores agents with execution-based state checks. Strong general multimodal models complete many structured
+  subtasks but collapse on feedback-driven adjustment, scientific-state interpretation and long-horizon execution.
+benchmark_features:
+  evaluation_target: [computer_use, instrument_control, perception]
+  execution_mode: simulator
+  instruments:
+    - {name: "Scanning Electron Microscope (SEM) web simulator", modality: microscopy, real_or_simulated: simulated}
+    - {name: "Transmission Electron Microscope (TEM) web simulator", modality: microscopy, real_or_simulated: simulated}
+    - {name: "Light/Fluorescence Microscope (LFM) web simulator", modality: microscopy, real_or_simulated: simulated}
+    - {name: "X-Ray Diffraction (XRD) web simulator", modality: diffraction, real_or_simulated: simulated}
+    - {name: "Energy-Dispersive Spectroscopy (EDS) web simulator", modality: spectroscopy, real_or_simulated: simulated}
+    - {name: "Atom Probe Tomography (APT) web simulator", modality: spectroscopy, real_or_simulated: simulated}
+    - {name: "Focused Ion Beam (FIB) web simulator", modality: microscopy, real_or_simulated: simulated}
+    - {name: "Scanning Probe Microscope (SPM) web simulator", modality: microscopy, real_or_simulated: simulated}
+  scientific_domains: ["materials characterization", "electron microscopy", "light/fluorescence microscopy", "diffraction and spectroscopy", "micro/nano-fabrication", "scanning probe microscopy"]
+  n_tasks: 96
+  n_task_families: 8
+  n_instances_or_runs_reported: null
+  repetitions_per_task: "Paper (per search excerpt): per-instrument subtask scores average over two runs per subtask. Repo example commands use --runs 5 as a configurable parameter."
+  target_population: "Operator-level GUI control of high-precision scientific instruments (microscopy imaging, diffraction/spectroscopic analysis, micro-nano fabrication/manipulation) as encountered in real instrument software"
+  task_source: expert_curated
+  sampling_strategy: "Authors built eight high-fidelity interactive web environments and hand-defined subtasks per instrument (FIB 20, SEM 12, EDS 8, APT 12, LFM 12, SPM 14, TEM 10, XRD 8 = 96). Subtasks are chained into full workflows per instrument. Each task is issued as a natural-language instruction."
+  metric_types: [success_rate, partial_credit, other]
+  primary_metric: "Average subtask score (execution-based subtask success averaged across subtasks and runs); secondary: end-to-end episode success rate (all required subtasks completed within step budget)"
+  scoring_granularity: mixed
+  has_human_baseline: true
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: "None described; all 96 subtasks are public in the repo (Git LFS). No train/test split."
+  leakage_or_contamination_risk: "Simulators and task definitions are fully public on GitHub (created 2026-06-15); simulators are custom-built (Go backend + static web frontends), so pre-training contamination of the exact GUIs is unlikely, but future fine-tuning on the released environments is possible."
+  agents_evaluated: ["Qwen3VL-32B", "EvoCUA-8B", "Claude Sonnet-4.5", "Kimi-K2.5", "Seed-1.6", "GPT-5.5", "Claude Opus-4.5", "UI-TARS-1.5-7B", "GUI-Owl-7B", "GTA1 w/ GPT-5.5", "VLAA-GUI w/ Claude Opus-4.5", "Hippo Agent w/ Claude Opus-4.5"]
+  n_agent_configs: 12
+  headline_results:
+    - "Human performance: 0.924 average subtask score"
+    - "Best agent: GTA1 w/ GPT-5.5, 0.814 average subtask score"
+    - "General-purpose models Seed-1.6 (0.763) and GPT-5.5 (0.726) beat most specialized GUI agents"
+    - "Specialized GUI / small models (per BenchmarkList mirror of the paper table): UI-TARS-1.5-7B 0.35, EvoCUA-8B 0.35, GUI-Owl-7B 0.325, Qwen3VL-32B 0.275"
+    - "End-to-end (full workflow) success for GPT-5.5: EDS 70.0%, APT 80.0%, XRD 60.0%; 0% on SEM, SPM, TEM, LFM, FIB; average end-to-end success only 26.3% vs much higher subtask-level scores (severe error accumulation)"
+  open_source: true
+task_features:
+  workflow_depth: mixed
+  perceptual_demand: image_interpretation
+  reasoning_demand: mixed
+  tool_interface: [gui]
+  tool_composition: "Single instrument GUI per task; agent perceives screenshots and emits mouse/keyboard actions via a Playwright-driven Chromium browser (OSWorld-derived agent harness). No API/CLI shortcuts."
+  quantitative_tolerance: "Execution-based checkers on logged simulator state; the paper states it can evaluate intermediate scientific-state quality (e.g., focus/alignment/image adjustment) rather than only final completion. Exact tolerances not verified."
+  closed_loop_feedback: true
+  safety_criticality: low
+  task_taxonomy:
+    - "Three experimental paradigms: (i) advanced microscopy imaging (SEM, TEM, LFM); (ii) diffraction and spectroscopic analysis (XRD, EDS, APT); (iii) precision micro-nanofabrication and manipulation (FIB, SPM)"
+    - "Workflow stages: sample loading, alignment, parameter tuning, data acquisition, result inspection"
+    - "Evaluation levels: subtask-level vs full-workflow (end-to-end episode)"
+    - "Qualitative task classes discussed: structured operations with clear feedback and short action sequences (EDS, XRD) vs feedback-driven focusing / image-quality adjustment / long procedures / fine-grained operations / visual target localization (SEM, FIB, LFM)"
+sample_environment_features:
+  sample_types: ["virtual specimens rendered by each simulator (details not verified)"]
+  sample_real_or_simulated: simulated
+  signal_quality_variation: "Simulators render dynamic plots and image states that change with parameters (focus, alignment, image quality); explicit noise/quality randomization not verified."
+  novelty_control: "Custom-built simulators not seen in pre-training; no explicit novelty split."
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Eight interactive web apps (Go backend 'simulator-master' + static frontends) preserving domain-specific control modalities: multi-dimensional sliders, discrete toggles, real-time dynamic plots, multi-state status indicators. Runs in a standard browser on port 8080; no OS-level virtualization. Observations: screenshots plus logged simulator state."
+agent_features_evaluated:
+  models: ["GPT-5.5", "Claude Opus-4.5", "Claude Sonnet-4.5", "Seed-1.6", "Kimi-K2.5", "Qwen3VL-32B", "EvoCUA-8B", "UI-TARS-1.5-7B", "GUI-Owl-7B"]
+  vision_used: true
+  rag_or_memory: none
+  planner: varied
+  tools: ["Playwright browser actions (click/type/scroll) on simulator GUI"]
+  verifier_or_self_debug: varied
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Subtask competence does not transfer to workflow competence: GPT-5.5 scores 0.726 on average subtasks but 26.3% end-to-end, with 0% on five of eight instruments."
+  - "Task difficulty tracks feedback structure, not instrument prestige: EDS/XRD/APT (structured operations, clear feedback, short sequences) are solvable; SEM/FIB/LFM (feedback-driven focusing, image-quality adjustment, long procedures, fine-grained visual localization) are not."
+  - "General-purpose frontier VLMs outperform GUI-specialized 7-8B models by a wide margin (0.73-0.76 vs 0.28-0.35), and wrapping a frontier model in an agentic GUI framework (GTA1) adds further gains (0.814)."
+  - "A human baseline of 0.924 shows the tasks are well-posed for operators, so the gap is agent capability, not task ambiguity."
+limitations:
+  - "Web simulators, not physical instruments: cannot capture hardware latency, calibration uncertainty, safety constraints, or real laboratory failure modes (authors' statement)."
+  - "Covers a selected set of instruments (microscopy, spectroscopy, diffraction, tomography); excludes wet-lab protocols, robotic manipulation, chemical synthesis, multi-instrument experimental planning (authors' statement)."
+  - "Evaluation relies on screenshots and logged simulator states; some scientific decisions may require richer observations, domain knowledge or multimodal sensor signals (authors' statement)."
+  - "Repo is early-stage (3 commits; unified CLI, Docker, VLAA-GUI/Hippo baselines and cross-subtask memory evaluation listed as 'coming soon')."
+related: [labos_coscientist, afmbench, agentic_microscopy_benchmarks_xrm, spm_bench]
+notes: >
+  arXiv abstract/HTML pages were egress-blocked; title, author list (Anqi Zou, Han Deng, Chengyu Zhang, Junquan Hu,
+  Yu Wang, Yuxiang Xing, Aokai Zhang, Hanling Zhang, Zhaoyang Liu, Ben Fei, Zhihui Wang, Wanli Ouyang), abstract
+  claims, the 3-paradigm taxonomy, baseline list, headline numbers (0.924 human, 0.814 GTA1, 0.763 Seed-1.6, 0.726
+  GPT-5.5, 26.3% end-to-end, per-instrument 70/80/60%) and the limitations paragraph come from search-engine excerpts
+  of arxiv.org/html/2606.16802 and should be re-checked against the PDF. The arXiv abstract title uses 'for';
+  the HTML version title reads 'towards'. Per-instrument subtask counts, Playwright/OSWorld architecture, run
+  parameters and license statement were verified directly from the GitHub README (Su-ISE-2001/LABOSBENCH, created
+  2026-06-15). The 0.35/0.325/0.275 small-model scores come from a third-party mirror (benchmarklist.com) quoted in a
+  search excerpt. Author affiliations, submission date, exact step budget, and the exact subtask-checker definitions
+  could not be verified. There is no evidence LabOSBench is affiliated with the LabOS AI-XR co-scientist project;
+  the shared name appears coincidental (different author groups; LabOS README does not mention LabOSBench).
+---
+id: labos_coscientist
+name: "LabOS: The AI-XR Co-Scientist That Sees and Works With Humans"
+short_name: LabOS
+year: 2025
+venue: "arXiv / bioRxiv preprint (also posted on Research Square)"
+authors_short: "Zaixi Zhang et al. (first author inferred from GitHub owner; full list not verified)"
+arxiv: "2510.14861"
+doi: "10.1101/2025.10.16.679418"
+url: "https://arxiv.org/abs/2510.14861"
+code_url: "https://github.com/zaixizhang/LabOS"
+data_url: null
+license: "Apache-2.0 (code)"
+status: preprint
+summary: >
+  LabOS is a system paper, not primarily a benchmark: an AI co-scientist combining a self-evolving multi-agent
+  reasoning stack (planning/manager, researcher/development, critic, tool-creation agents drawing on a 'Tool Ocean'
+  of autonomously generated tools) with XR smart-glasses interfaces for human-in-the-loop physical lab execution.
+  It introduces LabSuperVision, a VLM benchmark of 200+ egocentric lab video sessions with protocols, step segments
+  and expert-labeled error events, and reports results on HLE-Biomedicine, LAB-Bench subsets and wet-lab error detection.
+benchmark_features:
+  evaluation_target: [perception, question_answering, protocol_planning]
+  execution_mode: hybrid
+  instruments:
+    - {name: "XR smart glasses / fixed cameras observing human wet-lab work", modality: generic_lab, real_or_simulated: real}
+  scientific_domains: ["biomedicine", "cancer immunotherapy target discovery", "mechanistic cell biology", "materials science labs (LabSuperVision)"]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Human-AI collaborative biomedical research spanning hypothesis generation, experimental design, physical validation and documentation"
+  task_source: mixed
+  sampling_strategy: "LabSuperVision: >200 egocentric video sessions (2-45 min) recorded during real experiments across biomedical and materials-science labs via fixed cameras and XR glasses; each with gold-standard protocol, step segments, expert-labeled error events and critical parameters."
+  metric_types: [success_rate, other]
+  primary_metric: "Accuracy on external QA benchmarks (HLE-Biomedicine, LAB-Bench DBQA/LitQA) and wet-lab error-detection accuracy (LabSuperVision)"
+  scoring_granularity: mixed
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "LabSuperVision videos are newly recorded; external benchmarks (LAB-Bench, HLE) are public."
+  agents_evaluated: ["LabOS (multi-agent, Gemini 3 backbone via OpenRouter per current README)", "unnamed commercial systems as comparators"]
+  n_agent_configs: null
+  headline_results:
+    - "Humanity's Last Exam - Biomedicine: 32% (+8% vs next best) [GitHub README]"
+    - "LAB-Bench DBQA: 61% (top score); LAB-Bench LitQA: 65% (top score) [GitHub README]"
+    - "Wet-lab error detection: >90% vs ~40% for commercial systems [GitHub README]"
+  open_source: true
+task_features:
+  workflow_depth: long_horizon
+  perceptual_demand: image_interpretation
+  reasoning_demand: high
+  tool_interface: [python_api, natural_language, physical]
+  tool_composition: "Tool Ocean of 98 biomedical tools across seven categories (databases, screening, sequence analysis, search, development environments, web utilities, biosecurity) orchestrated by four agents; XR glasses stream video to VLM for step tracking / error flagging."
+  quantitative_tolerance: null
+  closed_loop_feedback: true
+  safety_criticality: medium
+  task_taxonomy: ["hypothesis generation", "experimental design", "data analysis", "physical validation with XR guidance", "automated documentation", "wet-lab error detection (LabSuperVision)"]
+sample_environment_features:
+  sample_types: ["real biological samples in human-operated wet labs"]
+  sample_real_or_simulated: real
+  signal_quality_variation: "Egocentric video from diverse labs and camera setups"
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Real biomedical and materials labs; humans execute protocols wearing XR glasses while agents observe, reason and guide."
+agent_features_evaluated:
+  models: ["Gemini 3 (current README); models at time of paper not verified"]
+  vision_used: true
+  rag_or_memory: some
+  planner: plan_and_execute
+  tools: ["Tool Ocean (98 tools)", "web search", "literature retrieval", "bioinformatics databases"]
+  verifier_or_self_debug: verifier
+  guards_or_safety_layer: some
+  multi_agent: true
+  deterministic_execution: false
+transfer_relevant_findings:
+  - "Claims a lab-specific VLM benchmark (LabSuperVision) yields visual reasoning that surpasses general-purpose models on lab-specific tasks — i.e., domain video data matters for perception of lab state."
+  - "System-level rather than benchmark-level evidence; useful mainly as a source of the LabSuperVision perception benchmark and as context for the (unrelated) LabOSBench name."
+limitations:
+  - "Primarily a system/demonstration paper; evaluation numbers are reported by the authors on their own README without full tables verified here."
+  - "LabSuperVision task definitions, metrics and release status could not be verified (HF/bioRxiv blocked)."
+related: [labosbench, lab_bench]
+notes: >
+  Distinct from LabOSBench (different authors; LabOS README does not mention LabOSBench). arXiv, bioRxiv,
+  alphaXiv, ResearchGate, Research Square and ai4labos.com were all egress-blocked; facts come from the GitHub README
+  (verified) and search excerpts of the bioRxiv/arXiv abstract. Full author list, exact submission date (bioRxiv DOI
+  implies 2025-10-16), and LabSuperVision metrics unverified. 'Tool Ocean' size (98 tools) reflects the current
+  README and may differ from the paper.
+---
+id: lab_bench
+name: "LAB-Bench: Measuring Capabilities of Language Models for Biology Research"
+short_name: LAB-Bench
+year: 2024
+venue: "arXiv preprint (FutureHouse)"
+authors_short: "Jon M. Laurent et al."
+arxiv: "2407.10362"
+doi: null
+url: "https://arxiv.org/abs/2407.10362"
+code_url: "https://github.com/Future-House/LAB-Bench"
+data_url: "https://huggingface.co/datasets/futurehouse/lab-bench"
+license: "CC-BY-SA-4.0"
+status: preprint
+summary: >
+  LAB-Bench is a 2,400+ question multiple-choice benchmark of practical biology-research capabilities: literature
+  extraction (LitQA2), database retrieval (DbQA), supplementary-information access (SuppQA), figure and table
+  interpretation (FigQA, TableQA), protocol troubleshooting (ProtocolQA), sequence manipulation (SeqQA) and
+  multi-step molecular cloning scenarios (CloningScenarios). Models are scored on accuracy, precision and coverage
+  (they may abstain) against human expert biologists.
+benchmark_features:
+  evaluation_target: [question_answering, protocol_planning, data_analysis]
+  execution_mode: static_text
+  instruments: []
+  scientific_domains: ["molecular biology", "molecular cloning", "bioinformatics / sequence analysis", "biology literature"]
+  n_tasks: 2457
+  n_task_families: 8
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Capabilities foundational to practical biology research (beyond textbook knowledge), benchmarked against human expert biology researchers"
+  task_source: expert_curated
+  sampling_strategy: "Questions written/curated by domain experts across eight categories; ~80% (1,967 questions) publicly released, ~20% held privately for contamination monitoring. CloningScenarios are complex real-world cloning workflows designed to require tool use; ProtocolQA reported as 135 questions with 100% human coverage (search excerpt)."
+  metric_types: [success_rate, other]
+  primary_metric: "Accuracy (with precision and coverage reported separately because models may decline to answer)"
+  scoring_granularity: binary
+  has_human_baseline: true
+  has_safety_eval: false
+  has_abstention_eval: true
+  holdout_or_split_design: "80% public / 20% private held-out subset for contamination monitoring"
+  leakage_or_contamination_risk: "Public 80% split is widely used and likely in pre-training corpora by now; private 20% mitigates. LABBench2 (2026) was created partly because LAB-Bench abilities 'improved substantially'."
+  agents_evaluated: ["Claude 3.5 Sonnet", "GPT-4o", "other frontier and open models (full list not verified)"]
+  n_agent_configs: null
+  headline_results:
+    - "Claude 3.5 Sonnet leads by a narrow 0.033 accuracy margin over GPT-4o (search excerpt)"
+    - "All models near random on FigQA except Claude 3.5 Sonnet"
+    - "On open-response CloningScenarios both Claude 3.5 Sonnet and GPT-4o score only 0.20 accuracy, suggesting reliance on distractor elimination"
+    - "Models often refuse to answer questions requiring database or supplementary-material lookup, lowering coverage"
+  open_source: true
+task_features:
+  workflow_depth: mixed
+  perceptual_demand: mixed
+  reasoning_demand: mixed
+  tool_interface: [natural_language]
+  tool_composition: "Static MCQ; some categories (DbQA, SuppQA, CloningScenarios) are designed to require external tools (database lookup, sequence tools) but the benchmark itself provides no environment."
+  quantitative_tolerance: "Exact-match MCQ; open-response variant for CloningScenarios"
+  closed_loop_feedback: false
+  safety_criticality: none
+  task_taxonomy: ["LitQA2", "DbQA", "SuppQA", "FigQA", "TableQA", "ProtocolQA", "SeqQA", "CloningScenarios"]
+sample_environment_features:
+  sample_types: ["text questions", "figures", "tables", "DNA/protein sequences", "plasmid maps"]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: "Private held-out 20%"
+  calibration_or_api_state_variation: null
+  injected_faults: false
+  environment_description: "Static dataset (HF); evaluation harness in GitHub repo computing accuracy/precision/coverage on full set and subsets."
+agent_features_evaluated:
+  models: ["Claude 3.5 Sonnet", "GPT-4o", "others not verified"]
+  vision_used: mixed
+  rag_or_memory: varied
+  planner: none
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Abstention-aware scoring (precision vs coverage) separates knowledge gaps from refusal behaviour — a design worth borrowing for instrument agents."
+  - "ProtocolQA and CloningScenarios are the lab-workflow-relevant subsets; multi-step cloning is where frontier models fell to 0.20 in open-response mode."
+  - "Successor LABBench2 shows 26-46% accuracy drops when the same capabilities are tested in more realistic contexts (PDFs, images, bioinformatics files) — realism of the interface, not the concept, drives difficulty."
+limitations:
+  - "MCQ format allows distractor elimination; no execution or instrument interaction."
+  - "Per-category counts, full model list and exact numeric table could not be verified (arXiv/HF blocked)."
+related: [labbench2, bioprobench, bioplanner, biolp_bench, labos_coscientist]
+notes: >
+  Verified directly: GitHub README (categories, metrics accuracy/precision/coverage, CC-BY-SA-4.0, 80/20 public/private
+  split, HF dataset link). Total 2,457 questions, 1,967 public, ProtocolQA=135, the 0.033 margin and 0.20 cloning
+  figure come from search excerpts / a third-party summary card and should be checked against the paper. The README
+  summariser also reported 'eight primary domains encompassing 30 specialized subtasks' — unverified. DOI: none found.
+---
+id: labbench2
+name: "LABBench2: An Improved Benchmark for AI Systems Performing Biology Research"
+short_name: LABBench2
+year: 2026
+venue: "arXiv preprint (v1 2026-02-04, v2 2026-05-05)"
+authors_short: "Jon M. Laurent, Albert Bou et al."
+arxiv: "2604.09554"
+doi: null
+url: "https://arxiv.org/abs/2604.09554"
+code_url: "https://github.com/EdisonScientific/labbench2"
+data_url: "https://huggingface.co/datasets/futurehouse/labbench2"
+license: null
+status: preprint
+summary: >
+  LABBench2 reprises the LAB-Bench capability categories with ~1,900 tasks in more realistic contexts (answering from
+  PDFs, images and bioinformatics files), adds open-response/retrieval variants for figures and tables, and new families
+  for patents, clinical trials and source-quality assessment. Model accuracies drop 26-46% per subtask relative to LAB-Bench.
+benchmark_features:
+  evaluation_target: [question_answering, protocol_planning, data_analysis]
+  execution_mode: static_text
+  instruments: []
+  scientific_domains: ["molecular biology", "genomics", "protocols", "literature", "patents", "clinical trials"]
+  n_tasks: 1900
+  n_task_families: 11
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Real-world capabilities of AI systems performing useful biology research tasks"
+  task_source: expert_curated
+  sampling_strategy: "New task families and realistic-context variants of LAB-Bench categories; details unverified."
+  metric_types: [success_rate]
+  primary_metric: "Accuracy"
+  scoring_granularity: binary
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: null
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "Newly released 2026; lower short-term contamination than LAB-Bench."
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results:
+    - "Model-specific accuracy differences of -26% to -46% across subtasks relative to LAB-Bench"
+  open_source: true
+task_features:
+  workflow_depth: mixed
+  perceptual_demand: mixed
+  reasoning_demand: high
+  tool_interface: [natural_language]
+  tool_composition: "Requires reading PDFs, images and bioinformatics files; agent scaffolding left to evaluator."
+  quantitative_tolerance: null
+  closed_loop_feedback: false
+  safety_criticality: none
+  task_taxonomy: ["cloning", "dbqa2", "figqa2", "tableqa2 (image and PDF variants)", "litqa3", "patentqa", "protocolqa2", "seqqa2", "sourcequality", "suppqa2", "trialqa"]
+sample_environment_features:
+  sample_types: ["PDFs", "images", "bioinformatics files", "text"]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: false
+  environment_description: "Static dataset on HF with evaluation code on GitHub."
+agent_features_evaluated:
+  models: []
+  vision_used: mixed
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Moving the same competencies from clean MCQ to realistic artifacts cut accuracy by 26-46 points — strong evidence that interface realism dominates difficulty."
+limitations:
+  - "Brief record; models evaluated, per-family counts and license not verified (arXiv/HF/alphaXiv blocked)."
+related: [lab_bench]
+notes: "Facts from search excerpts and a third-party summary card (yuema137/scientific-eval-environments). protocolqa2 is the lab-workflow-relevant family."
+---
+id: bioprobench
+name: "BioProBench: A Corpus and Benchmark for Biological Protocol Reasoning in Autonomous Science (earlier title: Comprehensive Dataset and Benchmark in Biological Protocol Understanding and Reasoning)"
+short_name: BioProBench
+year: 2025
+venue: "ICML 2026 (per official repo citation); arXiv 2025-05-11"
+authors_short: "Yuyang Liu et al."
+arxiv: "2505.07889"
+doi: null
+url: "https://arxiv.org/abs/2505.07889"
+code_url: "https://github.com/YuyangSunshine/bioprobench"
+data_url: "https://huggingface.co/BioProBench"
+license: "CC BY-NC 4.0"
+status: published
+summary: >
+  BioProBench is a large-scale multi-task benchmark for procedural reasoning over biological wet-lab protocols, built
+  from BioProCorpus (22,413 human-written protocols from 5 repositories across 16 subdomains) into 523,784 instances
+  across five tasks: Protocol QA, Step Ordering, Error Correction, Protocol Generation and Protocol Reasoning. Frontier
+  LLMs score ~70-74% on QA but fall to ~50% exact-match on ordering and <15 BLEU on generation, with weak quantitative
+  precision and safety awareness.
+benchmark_features:
+  evaluation_target: [protocol_planning, question_answering, safety]
+  execution_mode: static_text
+  instruments: []
+  scientific_domains: ["molecular biology", "cell biology", "biochemistry", "16 biological subdomains (not enumerated in verified sources)"]
+  n_tasks: 523784
+  n_task_families: 5
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Procedural understanding and generation of real wet-lab biology protocols as needed by autonomous-science agents"
+  task_source: literature_derived
+  sampling_strategy: "Protocols collected from 5 authoritative protocol repositories; task instances systematically (largely automatically) constructed from them with quality filtering; benchmark test subsets drawn from the instance pool (split sizes not verified)."
+  metric_types: [success_rate, partial_credit, calibration, other]
+  primary_metric: "Task-specific: accuracy (PQA), exact match + Kendall's tau (ORD), F1 (ERR), BLEU + step recall/precision (GEN), accuracy/Brier (REA)"
+  scoring_granularity: mixed
+  has_human_baseline: null
+  has_safety_eval: true
+  has_abstention_eval: false
+  holdout_or_split_design: "Train/dev/test splits released as a training resource plus benchmark; exact sizes not verified"
+  leakage_or_contamination_risk: "Source protocols are public web documents (protocols.io etc.), so protocol text is likely in pre-training data; constructed tasks (ordering, error injection) mitigate direct memorization."
+  agents_evaluated: ["Gemini-2.5-pro-exp", "DeepSeek-R1", "DeepSeek-V3", "domain-specific small biology LLMs", "ICML update: gpt-5.4-2026-03-05, gemini-3-flash-preview-nothinking, claude-sonnet-4-5-20250929", "others (12 total per README; 10 per v1 abstract)"]
+  n_agent_configs: 12
+  headline_results:
+    - "Top models ~74% PQA accuracy; Gemini-2.5-pro-exp 70.27% PQA accuracy and 65% F1 on ERR"
+    - "ORD: best exact match 51.80%, Kendall's tau 0.81 for top model"
+    - "GEN: BLEU < 15 for all models"
+    - "Open models DeepSeek-R1/V3 approach closed-source levels on some tasks; small domain-specific models underperform"
+  open_source: true
+task_features:
+  workflow_depth: multi_step
+  perceptual_demand: none
+  reasoning_demand: high
+  tool_interface: [natural_language]
+  tool_composition: "Pure text; no tools or execution."
+  quantitative_tolerance: "Paper emphasises failures in quantitative precision (volumes, concentrations, times); scoring details unverified."
+  closed_loop_feedback: false
+  safety_criticality: medium
+  task_taxonomy: ["PQA (Protocol Question Answering)", "ORD (Step Ordering)", "ERR (Error Correction)", "GEN (Protocol Generation)", "REA (Protocol Reasoning)"]
+sample_environment_features:
+  sample_types: ["protocol text"]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: true
+  environment_description: "Static corpus + instance files on Hugging Face; evaluation scripts on GitHub. Error-correction instances contain injected protocol errors."
+agent_features_evaluated:
+  models: ["Gemini-2.5-pro-exp", "DeepSeek-R1", "DeepSeek-V3", "GPT-5.4", "Gemini-3-flash", "Claude Sonnet 4.5", "others"]
+  vision_used: false
+  rag_or_memory: none
+  planner: none
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Surface comprehension (QA) is nearly solved while ordering/generation — the parts an executing agent actually needs — remain at ~50% EM / <15 BLEU."
+  - "High Kendall's tau with low exact match implies models grasp local pairwise step order but not global procedure structure — analogous to LabOSBench's subtask-vs-workflow gap."
+  - "Explicit finding of poor quantitative precision and safety awareness in protocol text."
+limitations:
+  - "Text-only; no execution or instrument feedback."
+  - "Automatically constructed instances at 500k scale; per-task test sizes and human validation rate not verified here."
+related: [bioplanner, biolp_bench, benchbench_protocol, lab_bench, protoact_biop2e]
+notes: >
+  Verified from GitHub README (YuyangSunshine/bioprobench and /bioprotocolbench): corpus/instance counts, 5 tasks,
+  metrics, CC BY-NC 4.0, ICML 2026 citation, 12 models. Numeric results (70.27%, 65% F1, 51.80% EM, tau 0.81, BLEU<15,
+  ~74%) come from search excerpts of the arXiv HTML / OpenReview PDF (both blocked for direct fetch). Title changed
+  between v1 ('Comprehensive Dataset and Benchmark...') and later versions. A companion agent paper (BioProAgent) is
+  listed in the repo. DOI for ICML proceedings not yet available.
+---
+id: bioplanner
+name: "BioPlanner: Automatic Evaluation of LLMs on Protocol Planning in Biology"
+short_name: BioPlanner
+year: 2023
+venue: "EMNLP 2023 (main), pp. 2676-2694, Singapore"
+authors_short: "Odhran O'Donoghue et al."
+arxiv: "2310.10632"
+doi: null
+url: "https://aclanthology.org/2023.emnlp-main.162/"
+code_url: "https://github.com/bioplanner/bioplanner"
+data_url: "https://github.com/bioplanner/bioplanner"
+license: null
+status: published
+summary: >
+  BioPlanner introduces BioProt, a dataset of biology protocols (sourced from protocols.io) paired with pseudocode
+  representations, and an automatic evaluation in which an LLM must reconstruct a protocol's pseudocode from a
+  high-level description and a list of admissible pseudofunctions. GPT-4 predicted the next protocol step with 70.6%
+  accuracy vs 65% for GPT-3.5, and a generated protocol was executed successfully in a wet lab as external validation.
+benchmark_features:
+  evaluation_target: [protocol_planning]
+  execution_mode: static_text
+  instruments: []
+  scientific_domains: ["biology wet-lab protocols (protocols.io)"]
+  n_tasks: null
+  n_task_families: 3
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Multi-step planning of experimental protocols in biology"
+  task_source: literature_derived
+  sampling_strategy: "Publicly available protocols from protocols.io (pool of >9,000) converted to pseudocode by an LLM and used as ground truth; pseudocode for evaluation subset human-verified (per paper; details unverified)."
+  metric_types: [success_rate, partial_credit, other]
+  primary_metric: "Next-step prediction accuracy; protocol-generation similarity metrics against ground-truth pseudocode"
+  scoring_granularity: mixed
+  has_human_baseline: false
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "protocols.io protocols are public and likely in GPT training data; pseudocode abstraction partly mitigates."
+  agents_evaluated: ["GPT-3.5", "GPT-4"]
+  n_agent_configs: 2
+  headline_results:
+    - "GPT-4 next-step prediction accuracy 70.6% vs GPT-3.5 65%"
+    - "A novel protocol generated from retrieved pseudocode was run successfully in a biological laboratory"
+  open_source: true
+task_features:
+  workflow_depth: multi_step
+  perceptual_demand: none
+  reasoning_demand: medium
+  tool_interface: [natural_language]
+  tool_composition: "LLM composes admissible pseudofunctions into an ordered plan; no execution."
+  quantitative_tolerance: null
+  closed_loop_feedback: false
+  safety_criticality: low
+  task_taxonomy: ["next-step prediction", "full protocol generation from description + admissible functions", "function retrieval (per common description; unverified)"]
+sample_environment_features:
+  sample_types: ["protocol text / pseudocode"]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: false
+  environment_description: "Static JSON dataset; evaluation via src/run_evaluate.py in repo."
+agent_features_evaluated:
+  models: ["GPT-3.5", "GPT-4"]
+  vision_used: false
+  rag_or_memory: some
+  planner: none
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Pseudocode/admissible-function abstraction makes protocol planning automatically gradable — a pattern reusable for instrument-control plans."
+  - "Retrieval of pseudocode enabled generation of a protocol that worked physically — early evidence that abstracted plans transfer to the bench."
+limitations:
+  - "Only two OpenAI models; small evaluation set; text-only."
+  - "BioProt evaluation-set size and full metric table not verified (ACL Anthology / arXiv blocked; repo README minimal)."
+related: [bioprobench, lab_bench, biolp_bench]
+notes: "Authors (O'Donoghue, Shtedritski, Ginger, Abboud, Ghareeb, Rodriques; Align to Innovate / Crick / FutureHouse / Oxford), venue and 70.6%/65% figures from search excerpts of ACL Anthology and arXiv. DOI not retrieved. Dataset size of the pseudocode-annotated subset unverified."
+---
+id: biolp_bench
+name: "BioLP-bench: Measuring understanding of biological lab protocols by large language models"
+short_name: BioLP-bench
+year: 2024
+venue: "bioRxiv preprint (v1 2024-08; v4 latest)"
+authors_short: "Ivanov (single author per repo contact; not verified)"
+arxiv: null
+doi: "10.1101/2024.08.21.608694"
+url: "https://www.biorxiv.org/content/10.1101/2024.08.21.608694v4"
+code_url: "https://github.com/baceolus/BioLP-bench"
+data_url: "https://github.com/baceolus/BioLP-bench"
+license: null
+status: preprint
+summary: >
+  BioLP-bench tests whether a model can find the single protocol-breaking mistake deliberately inserted into a
+  biology lab protocol (alongside many harmless perturbations). Implemented on the UK AISI Inspect framework with
+  model-graded scoring, it found frontier 2024 models far below humans: GPT-4o 17%, Mistral Large 16%, most others ~7%,
+  vs a 79% human baseline.
+benchmark_features:
+  evaluation_target: [protocol_planning, question_answering]
+  execution_mode: static_text
+  instruments: []
+  scientific_domains: ["biology wet-lab protocols"]
+  n_tasks: null
+  n_task_families: 1
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Expert-level understanding of why lab protocols work, as needed to catch fatal errors"
+  task_source: expert_curated
+  sampling_strategy: "Author-modified versions of common protocols: multiple non-fatal edits plus one fatal mistake per test case (e.g., dilution arithmetic, physical-parameter errors such as glycerol stocks at -20 C)."
+  metric_types: [success_rate, llm_judge]
+  primary_metric: "Accuracy of identifying the fatal mistake (model-graded by GPT-4o-class grader)"
+  scoring_granularity: binary
+  has_human_baseline: true
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "Base protocols are common/public; the injected mistakes are novel."
+  agents_evaluated: ["GPT-4o", "GPT-4o mini", "Mistral Large", "Mistral Nemo", "Claude 3 Haiku", "Claude 3.5 Sonnet", "Gemini 1.5 Flash", "Gemini 1.5 Pro"]
+  n_agent_configs: 8
+  headline_results:
+    - "Human baseline 79% accuracy"
+    - "GPT-4o 17%, Mistral Large 16%; GPT-4o mini, Claude 3 Haiku, Claude 3.5 Sonnet, Mistral Nemo, Gemini 1.5 Flash/Pro ~7%"
+    - "Manual review of GPT-4o grading found no false positives/negatives"
+  open_source: true
+task_features:
+  workflow_depth: single_step
+  perceptual_demand: none
+  reasoning_demand: high
+  tool_interface: [natural_language]
+  tool_composition: "None."
+  quantitative_tolerance: "Includes arithmetic/dilution errors requiring quantitative checking."
+  closed_loop_feedback: false
+  safety_criticality: low
+  task_taxonomy: ["fatal-mistake identification in protocols (mathematical errors, physical-parameter errors, other)"]
+sample_environment_features:
+  sample_types: ["protocol text"]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: "Novel injected mistakes"
+  calibration_or_api_state_variation: null
+  injected_faults: true
+  environment_description: "Inspect-framework eval; supports OpenAI, Anthropic, Google, Mistral, HF APIs."
+agent_features_evaluated:
+  models: ["GPT-4o", "Mistral Large", "Claude 3.5 Sonnet", "Gemini 1.5 Pro", "others"]
+  vision_used: false
+  rag_or_memory: none
+  planner: none
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Fault-injection into otherwise valid procedures is a cheap, contamination-resistant way to probe causal understanding; 2024 frontier models were near floor."
+limitations:
+  - "Small single-author benchmark; number of protocols/test cases and later-model results not verified (bioRxiv blocked)."
+  - "A search excerpt also mentions '38.4%' for human experts on a random subset — inconsistent with the 79% figure; both unverified."
+related: [bioprobench, lab_bench, benchbench_protocol]
+notes: "Numbers from search excerpts of bioRxiv v3/v4 and a 2025 follow-up paper; README (verified) confirms Inspect framework and model-graded scoring but gives no counts or license. Later versions of the paper reportedly updated model results."
+---
+id: benchbench_protocol
+name: "BenchBench-Protocol: Evaluating Real-World Wet-Lab Protocol Reasoning and Modification"
+short_name: BenchBench-Protocol
+year: 2026
+venue: "arXiv preprint (Benchling), submitted 2026-08-24"
+authors_short: "Aditya Sivakumar et al."
+arxiv: "2608.23898"
+doi: null
+url: "https://arxiv.org/abs/2608.23898"
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: >
+  BenchBench-Protocol contains 149 protocol-modification tasks recovered from real edits scientists made to published
+  protocols during experimental work (96 source protocols, nine wet-lab biology domains). Each task asks the model to
+  adapt a protocol to a new experiment and is scored with an expert-verified weighted rubric grounded in the actual
+  modification and its downstream dependencies. Claude Opus 5 leads at 59.2% normalized rubric score; others score 34.1-47.1%.
+benchmark_features:
+  evaluation_target: [protocol_planning]
+  execution_mode: static_text
+  instruments: []
+  scientific_domains: ["wet-lab biology (nine domains, not enumerated in verified sources)"]
+  n_tasks: 149
+  n_task_families: 9
+  n_instances_or_runs_reported: null
+  repetitions_per_task: "Best-of-10 attempts reported in addition to single-attempt"
+  target_population: "Routine real-world protocol adaptation by wet-lab scientists"
+  task_source: expert_curated
+  sampling_strategy: "Diffs between published protocols and scientist-modified versions (from Benchling usage) form the query and rubric; only tasks rated highly by domain-expert reviewers retained."
+  metric_types: [rubric, llm_judge, pass_at_k]
+  primary_metric: "Normalized weighted rubric score (graded by GPT-5.6 Terra at medium reasoning)"
+  scoring_granularity: partial
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: "Source protocols are published; the modifications are private/real-world and thus unlikely to be memorized."
+  agents_evaluated: ["Claude Opus 5", "other frontier models (names not verified)"]
+  n_agent_configs: null
+  headline_results:
+    - "Claude Opus 5: 59.2% normalized rubric score; other models 34.1-47.1%"
+    - "Benchmark remains unsaturated even taking best of ten attempts"
+  open_source: null
+task_features:
+  workflow_depth: multi_step
+  perceptual_demand: none
+  reasoning_demand: high
+  tool_interface: [natural_language]
+  tool_composition: "None."
+  quantitative_tolerance: "Rubric elements weighted; must account for prior choices and downstream steps."
+  closed_loop_feedback: false
+  safety_criticality: low
+  task_taxonomy: ["protocol modification / adaptation (nine wet-lab domains)"]
+sample_environment_features:
+  sample_types: ["protocol text"]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: "Tasks derived from private real edits"
+  calibration_or_api_state_variation: null
+  injected_faults: false
+  environment_description: "Static text tasks with LLM-graded rubrics."
+agent_features_evaluated:
+  models: ["Claude Opus 5", "others"]
+  vision_used: false
+  rag_or_memory: none
+  planner: none
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Real usage traces (scientist edits) are a viable, contamination-resistant task source; rubric grading captures partial credit on multi-constraint edits."
+limitations:
+  - "Public data/code release, full model list and license not verified (arXiv and benchling.com blocked)."
+related: [bioprobench, biolp_bench, lab_bench]
+notes: "All facts from search excerpts of the arXiv abstract/HTML. Authors: Aditya Sivakumar, Ashu Singhal, Nicholas Larus-Stone, Nithin Parsan (Benchling)."
+---
+id: protoact_biop2e
+name: "ProtoAct: Turning Wet-Lab Protocols into Embodied Robotic Actions (introduces the BioP2E benchmark)"
+short_name: ProtoAct / BioP2E
+year: 2026
+venue: "arXiv preprint (cs.RO)"
+authors_short: null
+arxiv: "2608.01690"
+doi: null
+url: "https://arxiv.org/abs/2608.01690"
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: >
+  ProtoAct is a protocol-grounding framework (ProtoRAG retrieval, RefineChecker consistency checking, ActSchema
+  schema-constrained JSON action functions) that converts free-form biology protocols into executable robot subtasks.
+  It introduces BioP2E, in which 22 cell-culture protocols were manually annotated into 258 monitoring conditions,
+  910 executable subtasks and 962 grounded action calls, and evaluates seven LLM backbones.
+benchmark_features:
+  evaluation_target: [protocol_planning, code_generation]
+  execution_mode: hybrid
+  instruments:
+    - {name: "lab robot executing generated action calls (sim and real; details unverified)", modality: robotics, real_or_simulated: digital_twin}
+  scientific_domains: ["cell culture"]
+  n_tasks: 22
+  n_task_families: 1
+  n_instances_or_runs_reported: 962
+  repetitions_per_task: null
+  target_population: "Translation of wet-lab protocols into embodied robotic execution"
+  task_source: expert_curated
+  sampling_strategy: "22 cell-culture protocols manually annotated by the authors."
+  metric_types: [success_rate, other]
+  primary_metric: null
+  scoring_granularity: mixed
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: ["seven LLM backbones (names not verified)"]
+  n_agent_configs: 7
+  headline_results:
+    - "BioP2E: 22 protocols -> 258 monitoring conditions, 910 subtasks, 962 action calls; ablations show retrieval, posterior checking and schema constraints contribute complementarily"
+  open_source: null
+task_features:
+  workflow_depth: long_horizon
+  perceptual_demand: none
+  reasoning_demand: high
+  tool_interface: [python_api, natural_language]
+  tool_composition: "Schema-constrained JSON action functions for robots."
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: medium
+  task_taxonomy: ["monitoring conditions", "executable subtasks", "grounded action calls"]
+sample_environment_features:
+  sample_types: ["cell-culture protocols"]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: "Text-to-action grounding; downstream execution in simulated and real robotic tasks (details unverified)."
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: some
+  planner: plan_and_execute
+  tools: ["ProtoRAG", "RefineChecker", "ActSchema"]
+  verifier_or_self_debug: verifier
+  guards_or_safety_layer: some
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Schema-constrained action grounding plus a posterior consistency checker is the recurring recipe for reliable protocol-to-action translation."
+limitations:
+  - "Brief record from search excerpt only; authors, metrics and release unverified."
+related: [bioprobench, pipette_wetlab_sim]
+notes: "arXiv blocked; all facts from a search excerpt of the abstract."
+---
+id: pipette_wetlab_sim
+name: "An Embodied Simulation Platform, Benchmark, and Data-Efficient Augmentation Framework for Wet-Lab Robotics (Pipette)"
+short_name: Pipette
+year: 2026
+venue: "arXiv preprint, 2026-06-11"
+authors_short: null
+arxiv: "2606.12936"
+doi: null
+url: "https://arxiv.org/abs/2606.12936"
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: >
+  Pipette is a wet-lab robot-learning simulation platform releasing 43+ editable lab assets, an 11-task embodied
+  benchmark (sample handling, culture-ware manipulation, device operation, precision placement), natural-language
+  scene/task construction, and a demonstration-augmentation pipeline. It targets VLA/imitation policies (ACT, SmolVLA, pi0)
+  rather than LLM agents, but is the closest lab-instrument simulator benchmark for physical manipulation.
+benchmark_features:
+  evaluation_target: [simulation_control, instrument_control]
+  execution_mode: simulator
+  instruments:
+    - {name: "simulated wet-lab devices and culture-ware (pipettes, plates, etc.)", modality: liquid_handling, real_or_simulated: simulated}
+  scientific_domains: ["wet-lab biology robotics"]
+  n_tasks: 11
+  n_task_families: 4
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Embodied manipulation tasks in biology wet labs"
+  task_source: expert_curated
+  sampling_strategy: "11 authored tasks; 30 human demonstrations per task; simulation augmentation with lighting/camera/speed/action perturbations and automatic success filtering."
+  metric_types: [success_rate]
+  primary_metric: "Task success rate"
+  scoring_granularity: binary
+  has_human_baseline: false
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: ["ACT", "SmolVLA", "pi0"]
+  n_agent_configs: 3
+  headline_results:
+    - "ACT 65.5% average success with 30 demos/task; augmentation lifts SmolVLA 44.1% -> 74.7% and pi0 40.4% -> 46.5%"
+  open_source: true
+task_features:
+  workflow_depth: single_step
+  perceptual_demand: image_interpretation
+  reasoning_demand: low
+  tool_interface: [physical]
+  tool_composition: "Low-level robot policies; natural-language scene construction for task authoring."
+  quantitative_tolerance: "Automatic task success checks (thresholds unverified)"
+  closed_loop_feedback: true
+  safety_criticality: low
+  task_taxonomy: ["sample handling", "culture-ware manipulation", "device operation", "precision placement"]
+sample_environment_features:
+  sample_types: ["simulated labware"]
+  sample_real_or_simulated: simulated
+  signal_quality_variation: "Lighting, camera, speed and action perturbations"
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: false
+  environment_description: "Physics simulation with 43+ open-source wet-lab assets and an extensible asset pipeline."
+agent_features_evaluated:
+  models: ["ACT", "SmolVLA", "pi0"]
+  vision_used: true
+  rag_or_memory: none
+  planner: none
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Simulation perturbation augmentation is what closes the gap for VLA policies — analogous to state/appearance randomization for GUI instrument simulators."
+limitations:
+  - "Not an LLM-agent benchmark; included only as the nearest wet-lab simulator benchmark. Details from search excerpt only."
+related: [protoact_biop2e, labosbench]
+notes: "arXiv blocked; facts from search excerpt of abstract."
+---
+id: spm_bench
+name: "SPM-Bench: Benchmarking Large Language Models for Scanning Probe Microscopy"
+short_name: SPM-Bench
+year: 2026
+venue: "arXiv preprint"
+authors_short: null
+arxiv: "2602.22971"
+doi: null
+url: "https://arxiv.org/abs/2602.22971"
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: "Title-only hit surfaced while researching LabOSBench: an LLM benchmark specific to scanning probe microscopy. No abstract or details could be retrieved in this session; included as a pointer for follow-up."
+benchmark_features:
+  evaluation_target: [question_answering]
+  execution_mode: static_text
+  instruments:
+    - {name: "Scanning probe microscopy (domain of questions; interaction mode unknown)", modality: microscopy, real_or_simulated: none}
+  scientific_domains: ["scanning probe microscopy"]
+  n_tasks: null
+  n_task_families: null
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: null
+  task_source: null
+  sampling_strategy: null
+  metric_types: []
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: false
+  has_abstention_eval: false
+  holdout_or_split_design: null
+  leakage_or_contamination_risk: null
+  agents_evaluated: []
+  n_agent_configs: null
+  headline_results: []
+  open_source: null
+task_features:
+  workflow_depth: null
+  perceptual_demand: null
+  reasoning_demand: null
+  tool_interface: []
+  tool_composition: null
+  quantitative_tolerance: null
+  closed_loop_feedback: null
+  safety_criticality: null
+  task_taxonomy: []
+sample_environment_features:
+  sample_types: []
+  sample_real_or_simulated: null
+  signal_quality_variation: null
+  novelty_control: null
+  calibration_or_api_state_variation: null
+  injected_faults: null
+  environment_description: null
+agent_features_evaluated:
+  models: []
+  vision_used: null
+  rag_or_memory: null
+  planner: null
+  tools: []
+  verifier_or_self_debug: null
+  guards_or_safety_layer: null
+  multi_agent: null
+  deterministic_execution: null
+transfer_relevant_findings: []
+limitations: ["Stub record: nothing beyond the title and arXiv id was verifiable (arXiv blocked, search budget exhausted)."]
+related: [labosbench, afmbench]
+notes: "Evaluation_target/execution_mode are guesses from the title ('Benchmarking Large Language Models') and must be confirmed."
+---
+id: troubleshootingbench
+name: "TroubleshootingBench (OpenAI internal wet-lab troubleshooting evaluation)"
+short_name: TroubleshootingBench
+year: 2025
+venue: "Described in OpenAI system/preparedness cards (gpt-oss model card arXiv 2508.10925; GPT-5 system card; 'Estimating Worst-Case Frontier Risks of Open-Weight LLMs' arXiv 2508.03153)"
+authors_short: "OpenAI"
+arxiv: "2508.10925"
+doi: null
+url: "https://arxiv.org/abs/2508.10925"
+code_url: null
+data_url: null
+license: null
+status: published
+summary: >
+  A private OpenAI evaluation in which PhD scientists (virology, genetics, microbiology, protein engineering) transcribed
+  protocols they personally used (substantially altered if adapted from publications) and wrote three troubleshooting
+  questions each, describing a subtle realistic execution error and the resulting failed outcome. It targets tacit,
+  hands-on knowledge not available online, in contrast to ProtocolQA.
+benchmark_features:
+  evaluation_target: [protocol_planning, safety]
+  execution_mode: static_text
+  instruments: []
+  scientific_domains: ["virology", "genetics", "microbiology", "protein engineering"]
+  n_tasks: null
+  n_task_families: 1
+  n_instances_or_runs_reported: null
+  repetitions_per_task: null
+  target_population: "Tacit wet-lab troubleshooting knowledge relevant to biosecurity uplift assessment"
+  task_source: expert_curated
+  sampling_strategy: "Three troubleshooting questions per expert-transcribed protocol; uncontaminated, non-public procedures."
+  metric_types: [success_rate]
+  primary_metric: null
+  scoring_granularity: null
+  has_human_baseline: null
+  has_safety_eval: true
+  has_abstention_eval: false
+  holdout_or_split_design: "Fully private"
+  leakage_or_contamination_risk: "Designed to be uncontaminated (procedures not online)."
+  agents_evaluated: ["OpenAI models in respective system cards"]
+  n_agent_configs: null
+  headline_results: []
+  open_source: false
+task_features:
+  workflow_depth: single_step
+  perceptual_demand: none
+  reasoning_demand: high
+  tool_interface: [natural_language]
+  tool_composition: "None."
+  quantitative_tolerance: null
+  closed_loop_feedback: false
+  safety_criticality: high
+  task_taxonomy: ["wet-lab execution-error troubleshooting"]
+sample_environment_features:
+  sample_types: ["protocol text"]
+  sample_real_or_simulated: dataset
+  signal_quality_variation: null
+  novelty_control: "Private expert-authored protocols"
+  calibration_or_api_state_variation: null
+  injected_faults: true
+  environment_description: "Static private QA set."
+agent_features_evaluated:
+  models: []
+  vision_used: false
+  rag_or_memory: none
+  planner: none
+  tools: []
+  verifier_or_self_debug: none
+  guards_or_safety_layer: none
+  multi_agent: false
+  deterministic_execution: null
+transfer_relevant_findings:
+  - "Explicit design choice to source tasks from experts' personal, unpublished procedures to defeat contamination — the strongest novelty control among protocol benchmarks surveyed."
+limitations: ["Private; no counts, scores or release. Facts from search excerpts of OpenAI system cards."]
+related: [lab_bench, biolp_bench, benchbench_protocol]
+notes: "Included because it is a wet-lab protocol benchmark repeatedly cited alongside ProtocolQA/BioLP-bench; not independently verifiable."

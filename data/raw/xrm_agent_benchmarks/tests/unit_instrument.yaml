@@ -1,0 +1,377 @@
+# =============================================================================
+# VERSA Test Suite: Instrument Unit Tests
+# =============================================================================
+# Comprehensive unit tests for individual instrument control operations
+# Category: unit
+# =============================================================================
+
+tests:
+  # ===========================================================================
+  # X-RAY SOURCE CONTROL
+  # ===========================================================================
+  
+  - test_id: "xray_001"
+    name: "Turn X-rays On/Off Cycle"
+    description: "Verify the system can turn X-rays on at specified settings, verify status, then turn off"
+    category: "unit"
+    tags: ["special", "instrument", "xray", "safety", "core"]
+    
+    user_prompt: "Turn on the X-rays at 40kV and 3W, even if they are already on. Verify the X-rays are on. Then turn the X-rays off and verify they are off."
+    
+    expected:
+      expected_tools:
+        - "turn_xray_on"
+        - "is_xray_on"
+        - "turn_xray_off"
+    
+    performance:
+      max_duration_ms: 180000
+      max_llm_calls: 12
+      max_tool_calls: 6
+    
+    timeout_seconds: 360
+
+  - test_id: "xray_002"
+    name: "Check X-ray Status"
+    description: "Query X-ray source status without changing it"
+    category: "unit"
+    tags: ["instrument", "xray", "status", "basic"]
+    
+    user_prompt: "Check if the X-ray source is currently on or off, and report the current voltage and power settings."
+    
+    expected:
+      expected_tools:
+        - "is_xray_on"
+    
+    performance:
+      max_llm_calls: 4
+      max_tool_calls: 3
+    
+    timeout_seconds: 60
+
+  # ===========================================================================
+  # STAGE MOVEMENT
+  # ===========================================================================
+  
+  - test_id: "stage_001"
+    name: "Move Single Axis - Sample X"
+    description: "Move Sample X axis to absolute position"
+    category: "unit"
+    tags: ["instrument", "stage", "movement", "basic"]
+    
+    user_prompt: "Move the Sample X axis to position 0.0 microns."
+    
+    expected:
+      expected_tools:
+        - "move_axis_absolute"
+    
+    performance:
+      max_llm_calls: 5
+      max_tool_calls: 2
+    
+    timeout_seconds: 60
+
+  - test_id: "stage_002"
+    name: "Move Single Axis - Sample Y"
+    description: "Move Sample Y axis to absolute position"
+    category: "unit"
+    tags: ["instrument", "stage", "movement", "basic"]
+    
+    user_prompt: "Move the Sample Y axis to position 0.0 microns."
+    
+    expected:
+      expected_tools:
+        - "move_axis_absolute"
+    
+    performance:
+      max_llm_calls: 5
+      max_tool_calls: 2
+    
+    timeout_seconds: 60
+
+  - test_id: "stage_003"
+    name: "Move Single Axis - Sample Z"
+    description: "Move Sample Z axis to absolute position"
+    category: "unit"
+    tags: ["instrument", "stage", "movement", "basic"]
+    
+    user_prompt: "Move the Sample Z axis to position 0.0 microns."
+    
+    expected:
+      expected_tools:
+        - "move_axis_absolute"
+    
+    performance:
+      max_llm_calls: 5
+      max_tool_calls: 2
+    
+    timeout_seconds: 60
+
+  - test_id: "stage_004"
+    name: "Move Sample Theta (Rotation)"
+    description: "Rotate sample stage to specific angle"
+    category: "unit"
+    tags: ["instrument", "stage", "rotation", "basic"]
+    
+    user_prompt: "Rotate the sample stage (Sample Theta) to 45 degrees."
+    
+    expected:
+      expected_tools:
+        - "move_axis_absolute"
+    
+    performance:
+      max_llm_calls: 5
+      max_tool_calls: 2
+    
+    timeout_seconds: 90
+
+  - test_id: "stage_005"
+    name: "Move Source Z Position"
+    description: "Move X-ray source to specified Z position"
+    category: "unit"
+    tags: ["instrument", "stage", "source", "basic"]
+    
+    user_prompt: "Move the Source Z position to -100 mm."
+    
+    expected:
+      expected_tools:
+        - "move_axis_absolute"
+    
+    performance:
+      max_llm_calls: 5
+      max_tool_calls: 2
+    
+    timeout_seconds: 90
+
+  - test_id: "stage_006"
+    name: "Move Detector Z Position"
+    description: "Move detector to specified Z position"
+    category: "unit"
+    tags: ["instrument", "stage", "detector", "basic"]
+    
+    user_prompt: "Move the Detector Z position to 100 mm."
+    
+    expected:
+      expected_tools:
+        - "move_axis_absolute"
+    
+    performance:
+      max_llm_calls: 5
+      max_tool_calls: 2
+    
+    timeout_seconds: 90
+
+  - test_id: "stage_007"
+    name: "Multiple Axis Movements"
+    description: "Move multiple axes in sequence"
+    category: "unit"
+    tags: ["instrument", "stage", "movement", "advanced"]
+    
+    user_prompt: "Move the Sample X, Y, and Z axes to position (0, 0, 0). Then move the Source Z to -100 mm and Detector Z to 100 mm."
+    
+    expected:
+      expected_tools:
+        - "move_axis_absolute"
+      min_tool_calls: 5
+    
+    performance:
+      max_llm_calls: 12
+      max_tool_calls: 10
+    
+    timeout_seconds: 180
+
+  - test_id: "stage_008"
+    name: "Relative Axis Movement"
+    description: "Move axis by relative distance"
+    category: "unit"
+    tags: ["instrument", "stage", "movement", "relative"]
+    
+    user_prompt: "Move the Sample X axis by +100 microns relative to its current position."
+    
+    expected:
+      expected_tools:
+        - "move_axis_relative"
+    
+    performance:
+      max_llm_calls: 5
+      max_tool_calls: 2
+    
+    timeout_seconds: 60
+
+  # ===========================================================================
+  # OBJECTIVE LENS CONTROL
+  # ===========================================================================
+  
+  - test_id: "obj_001"
+    name: "Get Current Objective"
+    description: "Query currently installed objective lens"
+    category: "unit"
+    tags: ["instrument", "objective", "status"]
+    
+    user_prompt: "What objective lens is currently installed?"
+    
+    expected:
+      expected_tools:
+        - "get_objective"
+    
+    performance:
+      max_llm_calls: 4
+      max_tool_calls: 2
+    
+    timeout_seconds: 30
+
+  - test_id: "obj_002"
+    name: "List Available Objectives"
+    description: "Get list of available objective lenses"
+    category: "unit"
+    tags: ["instrument", "objective", "info"]
+    
+    user_prompt: "What objective lenses are available on this instrument?"
+    
+    expected:
+      expected_tools:
+        - "get_objective_names"
+    
+    performance:
+      max_llm_calls: 4
+      max_tool_calls: 2
+    
+    timeout_seconds: 30
+
+  - test_id: "obj_003"
+    name: "Change Objective Lens"
+    description: "Change to a different objective lens"
+    category: "unit"
+    tags: ["instrument", "objective", "change"]
+    
+    user_prompt: "Change to the 4X objective lens."
+    
+    expected:
+      expected_tools:
+        - "set_objective"
+    
+    performance:
+      max_llm_calls: 5
+      max_tool_calls: 2
+    
+    timeout_seconds: 90
+
+  # ===========================================================================
+  # FILTER CONTROL
+  # ===========================================================================
+  
+  - test_id: "filter_001"
+    name: "Get Current Filter"
+    description: "Query currently installed X-ray filter"
+    category: "unit"
+    tags: ["instrument", "filter", "status"]
+    
+    user_prompt: "What X-ray filter is currently installed?"
+    
+    expected:
+      expected_tools:
+        - "get_filter"
+    
+    performance:
+      max_llm_calls: 4
+      max_tool_calls: 2
+    
+    timeout_seconds: 30
+
+  - test_id: "filter_002"
+    name: "List Available Filters"
+    description: "Get list of available X-ray filters"
+    category: "unit"
+    tags: ["instrument", "filter", "info"]
+    
+    user_prompt: "What X-ray filters are available on this instrument?"
+    
+    expected:
+      expected_tools:
+        - "get_filter_names"
+    
+    performance:
+      max_llm_calls: 4
+      max_tool_calls: 2
+    
+    timeout_seconds: 30
+
+  - test_id: "filter_003"
+    name: "Change Filter"
+    description: "Change to a different X-ray filter"
+    category: "unit"
+    tags: ["instrument", "filter", "change"]
+    
+    user_prompt: "Change the current filter to LE1."
+    
+    expected:
+      expected_tools:
+        - "set_filter"
+    
+    performance:
+      max_llm_calls: 5
+      max_tool_calls: 2
+    
+    timeout_seconds: 60
+
+
+  # ===========================================================================
+  # IMAGE ACQUISITION
+  # ===========================================================================
+  
+  - test_id: "acq_001"
+    name: "Single Image Acquisition - Default"
+    description: "Acquire a single X-ray image with typical parameters"
+    category: "unit"
+    tags: ["instrument", "acquisition", "core"]
+    
+    user_prompt: "Acquire a single X-ray image with 1 second exposure and binning 4."
+    
+    expected:
+      expected_tools:
+        - "single_acquisition"
+    
+    performance:
+      max_duration_ms: 60000
+      max_llm_calls: 6
+      max_tool_calls: 3
+    
+    timeout_seconds: 120
+
+  - test_id: "acq_002"
+    name: "Single Image Acquisition - Short Exposure"
+    description: "Acquire image with short exposure time"
+    category: "unit"
+    tags: ["instrument", "acquisition", "exposure"]
+    
+    user_prompt: "Acquire a single X-ray image with 0.5 second exposure and binning 2."
+    
+    expected:
+      expected_tools:
+        - "single_acquisition"
+    
+    performance:
+      max_duration_ms: 45000
+      max_llm_calls: 6
+      max_tool_calls: 3
+    
+    timeout_seconds: 90
+
+  - test_id: "acq_003"
+    name: "Transmission Acquisition"
+    description: "Acquire a transmission (Reference) corrected image"
+    category: "unit"
+    tags: ["instrument", "acquisition", "exposure"]
+    
+    user_prompt: "Acquire a single transmission-corrected X-ray image with 1 second exposure and binning 2."
+    
+    expected:
+      expected_tools:
+        - "acquire_transmission_corrected"
+    
+    performance:
+      max_duration_ms: 90000
+      max_llm_calls: 6
+      max_tool_calls: 3
+    
+    timeout_seconds: 150

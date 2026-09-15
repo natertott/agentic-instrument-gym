@@ -1,0 +1,192 @@
+# =============================================================================
+# VERSA Test Suite: Regression & Performance Tests
+# =============================================================================
+# Tests for edge cases, error handling, and performance benchmarks
+# Category: regression, performance
+# =============================================================================
+
+tests:
+  # ===========================================================================
+  # REGRESSION TESTS - Edge Cases
+  # ===========================================================================
+
+  - test_id: "reg_003"
+    name: "X-ray Already Off"
+    description: "Handle turning off X-rays when already off"
+    category: "regression"
+    tags: ["regression", "xray", "idempotent", "framework_sweep"]
+    
+    user_prompt: "Turn off the X-rays, even if they are already off."
+    
+    expected:
+      expected_tools:
+        - "turn_xray_off"
+    
+    performance:
+      max_llm_calls: 4
+      max_tool_calls: 2
+    
+    timeout_seconds: 90
+
+  - test_id: "reg_006"
+    name: "Multiple Operations Same Axis"
+    description: "Handle rapid sequential movements on same axis"
+    category: "regression"
+    tags: ["regression", "movement", "sequential"]
+    
+    user_prompt: |
+      Move Sample X to 100, then to 200, then to 0, then to -100.
+      Report the final position.
+    
+    expected:
+      expected_tools:
+        - "move_axis_absolute"
+      min_tool_calls: 4
+    
+    performance:
+      max_llm_calls: 12
+      max_tool_calls: 8
+    
+    timeout_seconds: 180
+
+  - test_id: "reg_007"
+    name: "Acquire with X-rays Off"
+    description: "Attempt acquisition when X-rays are off"
+    category: "regression"
+    tags: ["regression", "acquisition", "safety"]
+    
+    user_prompt: |
+      Check to see if the X-rays are on. Turn the X-rays off, regardless of their current status. Then try to acquire an image.
+      Report what happens.
+    
+    expected:
+      expected_tools:
+        - "is_xray_on"
+        - "turn_xray_off"
+        - "single_acquisition"
+    
+    performance:
+      max_llm_calls: 8
+      max_tool_calls: 4
+    
+    timeout_seconds: 90
+
+  # ===========================================================================
+  # PERFORMANCE TESTS - Timing Benchmarks
+  # ===========================================================================
+  
+  - test_id: "perf_001"
+    name: "Fast Status Query"
+    description: "Quick query of instrument status should complete rapidly"
+    category: "performance"
+    tags: ["performance", "status", "fast"]
+    
+    user_prompt: "Is the X-ray source on?"
+    
+    expected:
+      expected_tools:
+        - "is_xray_on"
+    
+    performance:
+      max_duration_ms: 15000
+      max_llm_calls: 4
+      max_tool_calls: 2
+    
+    timeout_seconds: 30
+
+  - test_id: "perf_004"
+    name: "Quick Acquisition Performance"
+    description: "Short exposure acquisition timing"
+    category: "performance"
+    tags: ["performance", "acquisition"]
+    
+    user_prompt: "Acquire an image with 0.5 second exposure and binning 4."
+    
+    expected:
+      expected_tools:
+        - "single_acquisition"
+    
+    performance:
+      max_duration_ms: 30000
+      max_llm_calls: 5
+      max_tool_calls: 2
+    
+    timeout_seconds: 60
+
+  - test_id: "perf_007"
+    name: "Multi-Step Workflow Performance"
+    description: "Standard acquire-and-analyze workflow timing"
+    category: "performance"
+    tags: ["performance", "workflow"]
+    
+    user_prompt: "Acquire an image with 1s exposure and binning 4, then create a histogram."
+    
+    expected:
+      expected_tools:
+        - "single_acquisition"
+        - "histogram_tiff"
+    
+    performance:
+      max_duration_ms: 90000
+      max_llm_calls: 10
+      max_tool_calls: 5
+    
+    timeout_seconds: 150
+
+  # ===========================================================================
+  # STRESS TESTS
+  # ===========================================================================
+  
+  - test_id: "stress_001"
+    name: "Repeated Acquisitions"
+    description: "Multiple sequential acquisitions"
+    category: "stress"
+    tags: ["stress", "acquisition", "repeated"]
+    
+    user_prompt: |
+      Acquire 5 images in sequence, each with 0.5s exposure and binning 4.
+      Report the time taken for each acquisition.
+    
+    expected:
+      expected_tools:
+        - "single_acquisition"
+      min_tool_calls: 5
+    
+    performance:
+      max_duration_ms: 360000
+      max_llm_calls: 40
+      max_tool_calls: 20
+    
+    timeout_seconds: 300
+
+  - test_id: "stress_002"
+    name: "Complex Multi-Agent Workflow"
+    description: "Workflow requiring many agent transitions"
+    category: "stress"
+    tags: ["stress", "workflow", "agents"]
+    
+    user_prompt: |
+      1. Move Sample X to 0
+      2. Acquire an image
+      3. Create a histogram
+      4. Move Sample Y to 100
+      5. Acquire another image
+      6. Segment the image
+      7. Move Sample Y back to 0
+      8. Create a final summary plot
+    
+    expected:
+      expected_tools:
+        - "move_axis_absolute"
+        - "single_acquisition"
+        - "histogram_tiff"
+        - "otsu_segment_properties"
+        - "execute_python_code"
+      min_tool_calls: 8
+    
+    performance:
+      max_duration_ms: 360000
+      max_llm_calls: 35
+      max_tool_calls: 40
+    
+    timeout_seconds: 480

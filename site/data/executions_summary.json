@@ -1,0 +1,12 @@
+{
+ "afmbench": {
+  "n_rows": 1200,
+  "n_success": 509,
+  "n_with_success": 1200
+ },
+ "xrm_agent_benchmarks": {
+  "n_rows": 696,
+  "n_success": 570,
+  "n_with_success": 696
+ }
+}

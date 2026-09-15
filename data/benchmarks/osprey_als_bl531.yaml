@@ -1,0 +1,104 @@
+id: osprey_als_bl531
+record_type: system
+name: Orchestrating agentic systems at ALS beamline 5.3.1 with Osprey and Bluesky
+short_name: Osprey-BL531
+year: 2026
+venue: Journal of Synchrotron Radiation 33(5) (2026)
+authors_short: Chan et al.
+arxiv: null
+doi: null
+url: https://journals.iucr.org/s/issues/2026/05/00/soo5005/index.html
+code_url: https://github.com/Henry-KH-chan/osprey-bl531
+data_url: null
+license: Berkeley Lab / BSD-3-Clause style (Osprey core is BSD-3-Clause with DOE notices)
+status: published
+summary: |
+  Deploys the Osprey agentic framework (LBNL; capability-based orchestration with plan-first execution, bounded tool access and mandatory human approval for hardware writes) at ALS beamline 5.3.1. Users state experiments in natural language; the agent translates them into structured workflows over predefined beamline capabilities executed through the Bluesky Queue Server, preserving deterministic execution and existing control-system constraints. Demonstration / deployment paper.
+benchmark_features:
+  agents_evaluated: []
+  evaluation_target:
+  - instrument_control
+  - protocol_planning
+  - safety
+  execution_mode: physical_instrument
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: true
+  headline_results: []
+  holdout_or_split_design: null
+  instruments:
+  - name: ALS beamline 5.3.1 (Bluesky Queue Server, EPICS)
+    modality: synchrotron
+    real_or_simulated: real
+  leakage_or_contamination_risk: null
+  metric_types:
+  - other
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: true
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - synchrotron beamline operations
+  scoring_granularity: null
+  target_population: Natural-language experiment requests from beamline users mapped to predefined capabilities
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: null
+  perceptual_demand: structured_readout
+  quantitative_tolerance: null
+  reasoning_demand: medium
+  safety_criticality: high
+  task_taxonomy: []
+  tool_composition: Osprey orchestrator decomposes requests into auditable steps over capabilities (EPICS/Bluesky
+    connectors, skills, MCP tools); every hardware write passes an approval gate; execution via Bluesky Queue Server
+  tool_interface:
+  - natural_language
+  - python_api
+  - mcp
+  workflow_depth: multi_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Production ALS beamline 5.3.1 with Bluesky Queue Server
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: real
+  sample_types: []
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: true
+  guards_or_safety_layer: some
+  models: []
+  multi_agent: false
+  planner: plan_and_execute
+  rag_or_memory: null
+  tools:
+  - Bluesky Queue Server plans
+  - EPICS channel access
+  - Osprey capabilities/skills
+  verifier_or_self_debug: null
+  vision_used: null
+transfer_relevant_findings:
+- Constraining the agent to predefined, queue-server-executed capabilities keeps execution deterministic and auditable
+  while retaining natural-language entry
+limitations:
+- No quantitative benchmark found in accessible material; demonstration paper
+related:
+- lightfall
+- als_agentic_accelerator
+- envtrace
+notes: |
+  Authors: Ka Hung Chan, Yang Ha, Antoine Islegen-Wojdyla, Seij De Leon, Manuel Garces, Dylan McReynolds, Xiaoya Chong, Raja Vyshnavi Sriramoju, Johannes Mahl, Damian Guenzing, Wiebke Koepp, Alexander Hexemer, Thorsten Hellert, Tanny Chavez. IUCr page blocked; DOI, evaluation details and LLM models unverified. Osprey core: Hellert, Montenegro, Sulc, 'Osprey: Production-ready agentic AI for safety-critical control systems', APL Machine Learning (2026), doi 10.1063/5.0306302, arXiv 2508.15066, repo https://github.com/als-apg/osprey (BSD-3-Clause).
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://journals.iucr.org/s/issues/2026/05/00/soo5005/index.html
+  - https://github.com/Henry-KH-chan/osprey-bl531
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

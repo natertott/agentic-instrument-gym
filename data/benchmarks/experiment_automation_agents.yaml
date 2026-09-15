@@ -1,0 +1,138 @@
+id: experiment_automation_agents
+record_type: system
+name: 'Experiment automation agents: automating materials characterization with vision language model agents'
+short_name: EAA
+year: 2026
+venue: npj Computational Materials (2026); arXiv Feb 2026
+authors_short: Du et al.
+arxiv: '2602.15294'
+doi: 10.1038/s41524-026-02213-8
+url: https://www.nature.com/articles/s41524-026-02213-8
+code_url: https://github.com/AdvancedPhotonSource/EAA
+data_url: null
+license: null
+status: published
+summary: |
+  EAA is a vision-language-model agent runtime for scientific instruments, built on LangGraph task managers with tool calling, an image-follow-up mechanism so the model can see images returned by tools, optional Chroma-based long-term memory, and two-way MCP compatibility (consume instrument MCP servers; serve EAA tools to Claude Code / Gemini CLI). It was demonstrated at an Advanced Photon Source imaging beamline for automated zone-plate focusing, natural-language feature/ROI search and interactive data acquisition, spanning fully agent-driven to logic-defined workflows with embedded LLM queries.
+benchmark_features:
+  agents_evaluated: []
+  evaluation_target:
+  - instrument_control
+  - perception
+  - protocol_planning
+  execution_mode: physical_instrument
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results:
+  - 'Demonstrated at an APS imaging beamline: automated zone plate focusing, natural-language-described feature
+    search, interactive data acquisition (abstract)'
+  - Quantitative success rates / model comparisons could not be verified (Nature and arXiv blocked)
+  holdout_or_split_design: null
+  instruments:
+  - name: APS scanning X-ray microscope / imaging beamline (zone-plate optics)
+    modality: synchrotron
+    real_or_simulated: real
+  - name: Simulated scanning microscope (image acquisition, parameter tuning, focusing tests in repo)
+    modality: microscopy
+    real_or_simulated: simulated
+  leakage_or_contamination_risk: Not applicable (live-instrument demonstrations)
+  metric_types:
+  - success_rate
+  - other
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: 3
+  n_tasks: null
+  open_source: true
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: Demonstration tasks chosen by the authors at the beamline; not a sampled benchmark
+  scientific_domains:
+  - X-ray microscopy / imaging
+  - materials characterization
+  - spectroscopy (XANES adaptive sampling in package)
+  scoring_granularity: null
+  target_population: 'Routine but vision-dependent beamline procedures: focusing optics, locating features described
+    in natural language, and user-guided acquisition'
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: image_interpretation
+  quantitative_tolerance: null
+  reasoning_demand: medium
+  safety_criticality: medium
+  task_taxonomy:
+  - zone plate focusing
+  - natural-language feature search (ROI search)
+  - interactive data acquisition
+  tool_composition: Task managers (ScanningMicroscopeFocusingTaskManager, MultiAgentROISearchTaskManager, feature
+    tracking, optics tuning, MonitoringTaskManager; logic-defined AnalyticalScanningMicroscopeFocusingTaskManager)
+    call acquisition, registration, line-scan and parameter-tuning tools; instrument control served as external
+    MCP/HTTP servers (MCPRPCWrapper for logic workflows); serial tool execution; optional approval gate (require_approval=True)
+  tool_interface:
+  - mcp
+  - python_api
+  - rest_api
+  - natural_language
+  workflow_depth: multi_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Live APS imaging beamline via MCP/HTTP instrument servers (ZeroMQ-separated gateway recommended);
+    WebUI; SQLite checkpoints/transcripts; simulated microscope used in repo tests
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: real
+  sample_types:
+  - microscopy specimens at APS imaging beamline (unspecified)
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: some
+  models:
+  - OpenAI-compatible models (OpenAIConfig)
+  - Anthropic Claude (via cache_control detection / Argo / AskSage endpoints)
+  multi_agent: true
+  planner: varied
+  rag_or_memory: some
+  tools:
+  - image acquisition
+  - image registration
+  - line-scan
+  - parameter tuning
+  - Python/bash sandboxed coding
+  - file IO
+  - image captioning
+  - subagent spawning
+  - MCP tools
+  verifier_or_self_debug: varied
+  vision_used: true
+transfer_relevant_findings:
+- Image-follow-up (tools return img_path; model sees the PNG) is the key primitive for vision-in-the-loop instrument
+  agents
+- Two-way MCP lets the same instrument tools be driven by EAA, Claude Code or Gemini CLI, decoupling agent harness
+  from instrument
+- 'Hybrid design: deterministic logic-defined workflows with localized LLM queries where full autonomy is unnecessary'
+limitations:
+- Demonstration rather than benchmark; no public task set or leaderboard found
+- Specific VLMs used, trial counts and success rates unverified in this session
+- Demonstration; no quantitative evaluation in abstract
+related:
+- learn_on_the_job_agents
+- envtrace
+- xrm_agent_benchmarks
+- tem_agent
+notes: |-
+  Authors Ming Du and Mathew J. Cherukara (Argonne). arXiv submission date 17 Feb 2026 per snippet. Repo root has no LICENSE file visible and pyproject has no license field, so license=null. Which APS beamline (e.g., 2-ID/26-ID/32-ID) was not verifiable. LLM providers from docs/llm-config.md: OpenAIConfig, AskSageConfig, ArgoConfig. Memory: Chroma vector store triggered by phrases like 'remember this'. Tests include test_simulated_image_acquisition.py, test_simulated_parameter_tuning.py, test_analytical_focusing.py, test_bo.py, XANES adaptive sampling.
+
+  [extract_F.yaml] demonstration. Abstract verified from a GitHub-mirrored arXiv feed (LIHUA919/AI-Agents-Daily-Research). Included for the microscopy-agent axis even though the instrument is a synchrotron beamline.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://www.nature.com/articles/s41524-026-02213-8
+  - https://github.com/AdvancedPhotonSource/EAA
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: Merged from extract_D.yaml, extract_F.yaml.

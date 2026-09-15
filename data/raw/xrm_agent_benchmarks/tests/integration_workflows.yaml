@@ -1,0 +1,368 @@
+# =============================================================================
+# VERSA Test Suite: Integration Workflows
+# =============================================================================
+# Multi-step workflows involving multiple agents and tools
+# Category: integration
+# =============================================================================
+
+tests:
+  # ===========================================================================
+  # INSTRUMENT SETUP WORKFLOWS
+  # ===========================================================================
+  
+  - test_id: "wf_setup_001"
+    name: "General Setup Workflow"
+    description: "Set up instrument into general imaging conditions"
+    category: "integration"
+    tags: ["workflow", "setup", "instrument", "core", "framework_sweep"]
+    
+    user_prompt: |
+      Set up the instrument for general imaging:
+      1. Center the sample stage (move X, Y, Z to 0)
+      2. Move the Source Z to -100 mm
+      3. Move the Detector Z to 100 mm
+      4. Report the final positions
+    
+    expected:
+      expected_tools:
+        - "move_axis_absolute"
+      min_tool_calls: 5
+    
+    performance:
+      max_duration_ms: 180000
+      max_llm_calls: 15
+      max_tool_calls: 10
+    
+    timeout_seconds: 300
+
+  - test_id: "wf_setup_002"
+    name: "Full Imaging Setup with X-rays"
+    description: "Complete setup including X-ray source turn-on"
+    category: "integration"
+    tags: ["workflow", "setup", "xray", "core", "framework_sweep"]
+    
+    user_prompt: |
+      Prepare the instrument for imaging:
+      1. Center the sample stage (move Stage X, Y, Z to 0)
+      2. Move Source Z to -100 mm and Detector Z to 100 mm
+      3. Turn on the X-rays at 40kV and 3W
+      4. Verify X-rays are on
+      5. Take a single image with 1 second exposure and binning 4
+    
+    expected:
+      expected_tools:
+        - "move_axis_absolute"
+        - "is_xray_on"
+        - "single_acquisition"
+      min_tool_calls: 7
+    
+    performance:
+      max_duration_ms: 600000
+      max_llm_calls: 20
+      max_tool_calls: 15
+    
+    timeout_seconds: 420
+
+  # ===========================================================================
+  # ACQUIRE AND ANALYZE WORKFLOWS
+  # ===========================================================================
+  
+  - test_id: "wf_analyze_001"
+    name: "Acquire and Analyze Basic"
+    description: "Acquire image then analyze it"
+    category: "integration"
+    tags: ["workflow", "instrument", "image", "core", "framework_sweep"]
+    
+    user_prompt: |
+      1. Acquire a single X-ray image with 1 second exposure and binning 4
+      2. Analyze the acquired image and report the mean intensity
+    
+    expected:
+      expected_tools:
+        - "single_acquisition"
+        - "execute_python_code"
+    
+    performance:
+      max_duration_ms: 180000
+      max_llm_calls: 15
+      max_tool_calls: 8
+    
+    timeout_seconds: 300
+
+  - test_id: "wf_analyze_002"
+    name: "Acquire and Create Histogram"
+    description: "Acquire image and create histogram visualization"
+    category: "integration"
+    tags: ["workflow", "instrument", "image", "histogram", "framework_sweep"]
+    
+    user_prompt: |
+      1. Acquire a single X-ray image with 2 second exposure and binning 2
+      2. Create a histogram of the acquired image and save it as histogram.png
+      3. Report the intensity statistics
+    
+    expected:
+      expected_tools:
+        - "single_acquisition"
+        - "histogram_tiff"
+      expected_files:
+        - "histogram.png"
+      verify_files_exist: True
+    
+    performance:
+      max_duration_ms: 180000
+      max_llm_calls: 15
+      max_tool_calls: 8
+    
+    timeout_seconds: 300
+
+  - test_id: "wf_analyze_003"
+    name: "Acquire and Segment"
+    description: "Acquire image and segment to find sample"
+    category: "integration"
+    tags: ["workflow", "instrument", "image", "segmentation", "framework_sweep"]
+    
+    user_prompt: |
+      1. Acquire a single X-ray image with 1 second exposure and binning 4
+      2. Segment the image using Otsu thresholding
+      3. Report the centroid and bounding box of the largest region
+    
+    expected:
+      expected_tools:
+        - "single_acquisition"
+        - "otsu_segment_properties"
+    
+    performance:
+      max_duration_ms: 180000
+      max_llm_calls: 15
+      max_tool_calls: 8
+    
+    timeout_seconds: 300
+
+  # ===========================================================================
+  # MULTI-POSITION SURVEY WORKFLOWS
+  # ===========================================================================
+  
+  - test_id: "wf_survey_001"
+    name: "Rotation Survey"
+    description: "Survey sample at multiple rotation angles"
+    category: "integration"
+    tags: ["workflow", "instrument", "image", "survey", "rotation", "framework_sweep"]
+    
+    user_prompt: |
+      Perform a rotation survey:
+      1. Move to theta=0 degrees and acquire an image
+      2. Move to theta=45 degrees and acquire an image
+      3. Move to theta=90 degrees and acquire an image
+      4. Create a Python script to generate a single plot comparing the three images and save as artifacts/survey_plot.png
+    
+    expected:
+      expected_tools:
+        - "move_axis_absolute"
+        - "single_acquisition"
+        - "execute_python_code"
+      expected_files:
+        - "survey_plot.png"
+      min_tool_calls: 7
+      verify_files_exist: true
+    
+    performance:
+      max_duration_ms: 360000
+      max_llm_calls: 25
+      max_tool_calls: 15
+    
+    timeout_seconds: 480
+
+  - test_id: "wf_survey_002"
+    name: "XY Position Survey"
+    description: "Survey sample at multiple XY positions"
+    category: "integration"
+    tags: ["workflow", "instrument", "image", "survey", "position", "framework_sweep"]
+    
+    user_prompt: |
+      Perform a position survey:
+      1. Move to Sample X=0, Y=0 and acquire an image
+      2. Move to Sample X=100, Y=0 and acquire an image
+      3. Move to Sample X=0, Y=100 and acquire an image
+      4. Move back to X=0, Y=0
+      5. Report all positions visited
+    
+    expected:
+      expected_tools:
+        - "move_axis_absolute"
+        - "single_acquisition"
+      min_tool_calls: 6
+    
+    performance:
+      max_duration_ms: 300000
+      max_llm_calls: 20
+      max_tool_calls: 15
+    
+    timeout_seconds: 420
+
+  # ===========================================================================
+  # SEGMENTATION AND CENTERING WORKFLOWS
+  # ===========================================================================
+  
+  - test_id: "wf_center_001"
+    name: "Acquire, Segment, and Annotate"
+    description: "Acquire image, segment it, and create annotated visualization"
+    category: "integration"
+    tags: ["workflow", "instrument", "image", "segmentation", "annotation", "framework_sweep"]
+    
+    user_prompt: |
+      1. Acquire an X-ray image with 1 second exposure and binning 4
+      2. Segment the image using lower Otsu thresholding
+      3. Find the centroid and bounding box of the largest region
+      4. Save the centroid in a file called artifacts/centroid.json
+      5. Create a plot showing the original image with the centroid marked and save as artifacts/annotated_image.png
+    
+    expected:
+      expected_tools:
+        - "single_acquisition"
+        - "otsu_segment_properties"
+        - "execute_python_code"
+      expected_files:
+        - "centroid.json"
+        - "annotated_image.png"
+      verify_files_exist: true
+    
+    performance:
+      max_duration_ms: 300000
+      max_llm_calls: 25
+      max_tool_calls: 15
+    
+    timeout_seconds: 420
+
+
+  # ===========================================================================
+  # TRANSMISSION CALCULATION WORKFLOWS
+  # ===========================================================================
+  
+  - test_id: "wf_trans_001"
+    name: "Transmission Calculation"
+    description: "Calculate sample transmission from sample and reference images"
+    category: "integration"
+    tags: ["workflow", "instrument", "image", "transmission", "analysis", "framework_sweep"]
+    
+    user_prompt: |
+      Calculate sample transmission:
+      1. Acquire an transmission corrected image
+      2. Segment the image with a lower otsu filter to find the sample
+      3. Use Python to calculate the average transmission through the sample
+      4. Save the segmented transmission image as artifacts/segmented_transmission.tiff
+      5. Save the average transmission through the sample as artifacts/average_transmission.json
+    
+    expected:
+      expected_tools:
+        - "acquire_transmission_corrected"
+        - "execute_python_code"
+      expected_files:
+        - "average_transmission.json"
+      verify_files_exist: true
+      min_tool_calls: 5
+    
+    performance:
+      max_duration_ms: 360000
+      max_llm_calls: 25
+      max_tool_calls: 15
+    
+    timeout_seconds: 480
+
+  # ===========================================================================
+  # EXPOSURE OPTIMIZATION WORKFLOWS
+  # ===========================================================================
+  
+  - test_id: "wf_exposure_001"
+    name: "Find Optimal Exposure"
+    description: "Find exposure time for target transmission"
+    category: "integration"
+    tags: ["workflow", "instrument", "image", "exposure", "optimization", "framework_sweep"]
+    
+    user_prompt: |
+      Find the optimal exposure time:
+      1. Acquire an image with 1 second exposure and binning 4
+      2. Analyze the image to determine the mean intensity
+      3. If the mean intensity is too low (<1000), suggest a longer exposure
+      4. If the mean intensity is too high (>60000), suggest a shorter exposure
+      5. Report the recommended exposure time and save it in a file called artifacts/recommended_exposure.json
+    
+    expected:
+      expected_tools:
+        - "single_acquisition"
+        - "execute_python_code"
+      expected_files:
+        - "recommended_exposure.json"
+      verify_files_exist: true
+    
+    performance:
+      max_duration_ms: 180000
+      max_llm_calls: 15
+      max_tool_calls: 8
+    
+    timeout_seconds: 300
+
+  # ===========================================================================
+  # COMPREHENSIVE WORKFLOWS
+  # ===========================================================================
+  
+  - test_id: "wf_complete_001"
+    name: "Complete Imaging Workflow"
+    description: "Full workflow from setup to analysis"
+    category: "integration"
+    tags: ["workflow", "complete", "instrument", "image", "core", "framework_sweep"]
+    
+    user_prompt: |
+      Perform a complete imaging workflow:
+      1. Center the instrument stage, set the source and detector positions to reasonable values
+      2. Set the X-ray Source to 40kV and 3W
+      3. Acquire an image
+      4. Create a histogram and report statistics
+      5. Segment the image and report the sample location
+      6. Turn off X-rays
+      7. Provide a summary of the imaging session
+    
+    expected:
+      expected_tools:
+        - "move_axis_absolute"
+        - "single_acquisition"
+        - "otsu_segment_properties"
+        - "turn_xray_off"
+      min_tool_calls: 8
+    
+    performance:
+      max_duration_ms: 480000
+      max_llm_calls: 35
+      max_tool_calls: 20
+    
+    timeout_seconds: 600
+
+  - test_id: "wf_complete_002"
+    name: "Multi-View Characterization"
+    description: "Acquire and analyze images from multiple views"
+    category: "integration"
+    tags: ["workflow", "multiview", "instrument", "image", "framework_sweep"]
+    
+    user_prompt: |
+      Perform multi-view sample characterization:
+      1. At theta=0: acquire image and find sample centroid
+      2. At theta=90: acquire image and find sample centroid
+      3. Create a summary report comparing the centroids from both views
+      4. Save the report as artifacts/multiview_report.json
+    
+    expected:
+      expected_tools:
+        - "move_axis_absolute"
+        - "single_acquisition"
+        - "otsu_segment_properties"
+        - "execute_python_code"
+      expected_files:
+        - "multiview_report.json"
+      min_tool_calls: 6
+      verify_files_exist: true
+    
+    performance:
+      max_duration_ms: 420000
+      max_llm_calls: 30
+      max_tool_calls: 18
+    
+    timeout_seconds: 540

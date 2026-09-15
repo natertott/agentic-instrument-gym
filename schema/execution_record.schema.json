@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/natertott/agentic-instrument-gym/schema/execution_record.schema.json",
+  "title": "Execution record",
+  "description": "One row of the transfer dataset: a single agent execution of a single task instance, with its outcome and the agent / task / sample-environment / benchmark descriptors that WP2 models consume. Rows are aggregated from released logs, paper tables, or reproductions; provenance says which.",
+  "type": "object",
+  "required": ["execution_id", "benchmark_id", "task_id", "outcome", "agent", "task", "sample_environment", "benchmark", "provenance"],
+  "additionalProperties": false,
+  "properties": {
+    "execution_id": {"type": "string"},
+    "benchmark_id": {"type": "string", "description": "Foreign key to a benchmark card id."},
+    "task_id": {"type": "string"},
+    "task_family_id": {"type": ["string", "null"]},
+    "repetition_index": {"type": ["integer", "null"], "minimum": 0},
+    "timestamp": {"type": ["string", "null"]},
+    "outcome": {
+      "type": "object",
+      "required": ["success"],
+      "additionalProperties": false,
+      "properties": {
+        "success": {"type": ["boolean", "null"]},
+        "score": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "partial_credit": {"type": ["number", "null"]},
+        "safety_violation": {"type": ["boolean", "null"]},
+        "abstained": {"type": ["boolean", "null"]},
+        "abstention_correct": {"type": ["boolean", "null"]},
+        "failure_mode": {"enum": ["perception", "planning", "tool_error", "execution_error", "timeout", "unsafe_action", "wrong_quantity", "hallucinated_completion", "refusal_or_abstain", "other", null]},
+        "n_steps": {"type": ["integer", "null"]},
+        "wall_time_s": {"type": ["number", "null"]},
+        "cost_usd": {"type": ["number", "null"]},
+        "tokens_total": {"type": ["integer", "null"]},
+        "quantitative_error_rel": {"type": ["number", "null"], "description": "Relative error of a quantitative output vs. reference, if any."}
+      }
+    },
+    "agent": {
+      "type": "object",
+      "required": ["agent_id", "model"],
+      "additionalProperties": false,
+      "properties": {
+        "agent_id": {"type": "string"},
+        "model": {"type": "string"},
+        "model_provider": {"type": ["string", "null"]},
+        "model_release_date": {"type": ["string", "null"]},
+        "vision": {"type": ["boolean", "null"]},
+        "rag_or_memory": {"enum": ["none", "static_docs", "episodic", "both", "unknown", null]},
+        "planner": {"enum": ["none", "react", "plan_and_execute", "tree_search", "unknown", null]},
+        "n_tools_available": {"type": ["integer", "null"]},
+        "tools": {"type": "array", "items": {"type": "string"}},
+        "verifier": {"enum": ["none", "self_debug", "external_verifier", "human", "unknown", null]},
+        "guards": {"enum": ["none", "allowlist", "human_in_loop", "both", "unknown", null]},
+        "multi_agent": {"type": ["boolean", "null"]},
+        "n_agents": {"type": ["integer", "null"]},
+        "deterministic_execution": {"type": ["boolean", "null"], "description": "True when actions are routed through fixed, validated code paths rather than free-form generated code."},
+        "temperature": {"type": ["number", "null"]},
+        "prompt_version": {"type": ["string", "null"]},
+        "max_steps": {"type": ["integer", "null"]}
+      }
+    },
+    "task": {
+      "type": "object",
+      "required": ["instrument_modality"],
+      "additionalProperties": false,
+      "properties": {
+        "instrument": {"type": ["string", "null"]},
+        "instrument_modality": {"enum": ["microscopy", "spectroscopy", "diffraction", "synchrotron", "liquid_handling", "robotics", "generic_lab", "computation", "none"]},
+        "task_family": {"type": ["string", "null"], "description": "The benchmark's own family label, verbatim."},
+        "capability_tags": {"type": "array", "items": {"type": "string"}, "description": "Cross-benchmark capability tags, e.g. focus, roi_navigation, calibration, measurement, composition, recovery."},
+        "workflow_depth": {"enum": ["single_step", "multi_step", "long_horizon", null]},
+        "n_required_steps": {"type": ["integer", "null"]},
+        "perceptual_demand": {"enum": ["none", "structured_readout", "image_reading", "image_interpretation", null]},
+        "reasoning_demand": {"enum": ["low", "medium", "high", null]},
+        "tool_interface": {"type": "array", "items": {"enum": ["python_api", "cli", "gui", "rest_api", "mcp", "natural_language", "physical"]}},
+        "n_tools_required": {"type": ["integer", "null"]},
+        "requires_tool_chaining": {"type": ["boolean", "null"]},
+        "has_quantitative_target": {"type": ["boolean", "null"]},
+        "tolerance_rel": {"type": ["number", "null"]},
+        "closed_loop_feedback": {"type": ["boolean", "null"]},
+        "safety_criticality": {"enum": ["none", "low", "medium", "high", null]},
+        "instruction_text": {"type": ["string", "null"]}
+      }
+    },
+    "sample_environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "sample_id": {"type": ["string", "null"]},
+        "material_class": {"type": ["string", "null"]},
+        "form_factor": {"type": ["string", "null"]},
+        "sample_real_or_simulated": {"enum": ["real", "simulated", "dataset", "none", null]},
+        "signal_quality": {"enum": ["low", "nominal", "high", "unknown", null]},
+        "snr": {"type": ["number", "null"]},
+        "novelty": {"enum": ["seen_in_development", "held_out_instance", "held_out_task", "held_out_task_family", "held_out_sample_class", "held_out_environment", "held_out_combination", null]},
+        "calibration_state": {"enum": ["calibrated", "drifted", "uncalibrated", "unknown", null]},
+        "api_state": {"enum": ["nominal", "degraded", "changed", "unknown", null]},
+        "injected_fault": {"type": ["string", "null"]},
+        "facility_or_site": {"type": ["string", "null"]}
+      }
+    },
+    "benchmark": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Denormalised benchmark-design descriptors so a row is self-contained for modelling.",
+      "properties": {
+        "execution_mode": {"enum": ["physical_instrument", "digital_twin", "simulator", "execution_trace", "static_code_eval", "static_text", "hybrid", null]},
+        "metric_type": {"enum": ["success_rate", "pass_at_k", "partial_credit", "trace_alignment", "llm_judge", "rubric", "human_eval", "accuracy", "other", null]},
+        "scoring_granularity": {"enum": ["binary", "partial", "continuous", null]},
+        "repetitions_designed": {"type": ["integer", "null"]},
+        "split_role": {"enum": ["development", "test", "holdout_task", "holdout_task_family", "holdout_sample_class", "holdout_environment", "unknown", null]},
+        "leakage_risk": {"enum": ["low", "medium", "high", "unknown", null]}
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "required": ["source_type"],
+      "additionalProperties": false,
+      "properties": {
+        "source_type": {"enum": ["released_logs", "paper_table", "paper_figure", "reproduction", "internal"]},
+        "source_ref": {"type": ["string", "null"]},
+        "aggregation": {"enum": ["single_run", "mean_over_runs", null], "description": "If a paper only reports means, set mean_over_runs and put the n in repetitions_designed."},
+        "confidence": {"enum": ["high", "medium", "low", null]}
+      }
+    }
+  }
+}

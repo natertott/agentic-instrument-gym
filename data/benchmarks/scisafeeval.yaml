@@ -1,0 +1,115 @@
+id: scisafeeval
+record_type: benchmark
+name: 'SciSafeEval: A Comprehensive Benchmark for Safety Alignment of Large Language Models in Scientific Tasks'
+short_name: SciSafeEval
+year: 2024
+venue: arXiv Oct 2024 (Zhejiang University, Duke University)
+authors_short: Li et al. (first author Tianhao Li -- inferred from project site/HF handle, unverified)
+arxiv: '2410.03769'
+doi: null
+url: https://arxiv.org/abs/2410.03769
+code_url: https://github.com/KAIMA04/SciSafeEval
+data_url: https://huggingface.co/datasets/Tianhao0x01/SciSafeEval
+license: null
+status: preprint
+summary: |
+  Safety-alignment benchmark for scientific LLMs spanning chemistry, biology, medicine and physics with 31,840 samples expressed in textual, molecular (SMILES), protein (FASTA) and genomic representations. Evaluates zero-shot, few-shot and chain-of-thought settings and adds a 'jailbreak' feature (WildTeaming adversarial prompts) to test defenses against malicious intent; scoring is pass/fail on whether the model refuses hazardous requests.
+schema_axes_proposed:
+- 'Scientific domain: chemistry / biology / medicine / physics'
+- 'Input representation: natural language; molecular (SMILES); protein (FASTA); genomic sequence'
+- 'Prompting regime: zero-shot; few-shot (5-shot); chain-of-thought'
+- 'Adversarial regime: jailbreak-enhanced prompts (WildTeaming)'
+- 'Metrics: refusal/pass rate (harmlessness), helpfulness, jailbreak success rate'
+benchmark_features:
+  agents_evaluated:
+  - LLaMa-3.1-8B
+  - LLaMa-3.1-70B
+  - Qwen2.5-7B
+  - Claude 3.5
+  - GPT-4o
+  evaluation_target: []
+  execution_mode: static_text
+  has_abstention_eval: true
+  has_human_baseline: false
+  has_safety_eval: true
+  headline_results:
+  - Few-shot and CoT prompting substantially improve safe-refusal rates (secondary digest)
+  - Smaller (8B) models more vulnerable to jailbreak than larger variants (secondary digest)
+  - Claude 3.5 reported at 98.20% pass rate on gene-classification tasks; GPT-4o 62.77% on physics CoT (secondary
+    digest, unverified)
+  holdout_or_split_design: null
+  instruments: []
+  leakage_or_contamination_risk: null
+  metric_types: []
+  n_agent_configs: 5
+  n_instances_or_runs_reported: null
+  n_task_families: 4
+  n_tasks: 31840
+  open_source: true
+  primary_metric: pass rate (safe refusal)
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - chemistry
+  - biology
+  - medicine
+  - physics
+  scoring_granularity: null
+  target_population: general and scientific LLMs
+  task_source: null
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: null
+  quantitative_tolerance: null
+  reasoning_demand: null
+  safety_criticality: null
+  task_taxonomy:
+  - chemistry
+  - biology
+  - medicine
+  - physics
+  tool_composition: null
+  tool_interface: []
+  workflow_depth: null
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Static prompt set; no environment.
+  injected_faults: false
+  novelty_control: null
+  sample_real_or_simulated: null
+  sample_types: []
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models:
+  - see agents_evaluated
+  multi_agent: false
+  planner: null
+  rag_or_memory: null
+  tools: []
+  verifier_or_self_debug: null
+  vision_used: false
+transfer_relevant_findings:
+- Refusal-only scoring assumes refusal is always correct -- the opposite failure mode (over-refusal) is not measured,
+  which AgentAbstain's paired design addresses.
+- Representation axis (SMILES/FASTA/genomic vs text) is a useful template for instrument benchmarks that mix natural-language
+  and machine-readable inputs.
+limitations:
+- Single jailbreak method; no benign-vs-harmful pairing; no execution.
+- Author list, license, venue and per-domain task counts could not be verified.
+related:
+- labsafety_bench
+- agentabstain
+notes: |
+  arXiv blocked; official README did not render via WebFetch (repo KAIMA04/SciSafeEval exists, described as 'Official repository of SciSafeEval'; project site scisafeeval.tianhao.li). Sample count, domains, representations, prompting/jailbreak settings, model list and results come from a BenchmarkCards entry and memgrafter digest (secondary). Awesome-LLM-Safety lists the affiliations as Zhejiang University and Duke University. An LLM-eval-survey README points to github.com/DavidLee528/SciSafeEval, which returned 404.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2410.03769
+  - https://github.com/KAIMA04/SciSafeEval
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

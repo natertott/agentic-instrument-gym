@@ -1,0 +1,98 @@
+id: safe_sdl_framework
+record_type: framework
+name: 'Safe-SDL: Establishing Safety Boundaries and Control Mechanisms for AI-Driven Self-Driving Laboratories'
+short_name: Safe-SDL
+year: 2026
+venue: arXiv Feb 2026
+authors_short: Zhang et al. (Zihan Zhang, Haohui Que, Junhan Chang, Xin Zhang, Hao Wei, Tong Zhu)
+arxiv: '2602.15061'
+doi: null
+url: https://arxiv.org/abs/2602.15061
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: |
+  Framework for safety boundaries and control mechanisms in AI-driven SDLs. Identifies the 'Syntax-to-Safety Gap' (syntactically correct AI commands whose physical safety implications are not captured) as the central deployment challenge and addresses it with three components: formally defined Operational Design Domains (ODDs), Control Barrier Functions (CBFs) for real-time state-space safety guarantees, and a Transactional Safety Protocol (CRUTD) ensuring atomic consistency between digital planning and physical execution. Grounds the framework in UniLabOS and the Osprey architecture and evaluates foundation models against LabSafety Bench, finding significant safety failures.
+schema_axes_proposed:
+- Syntax-to-Safety Gap (command validity vs physical safety)
+- Operational Design Domain (ODD) boundaries
+- Control Barrier Functions / continuous state-space monitoring
+- Transactional safety protocol (CRUTD) -- atomicity between digital plan and physical execution
+- Architectural safety mechanisms as required (not optional) layer, evaluated separately from model-level safety
+  knowledge
+benchmark_features:
+  agents_evaluated: []
+  evaluation_target: []
+  execution_mode: null
+  has_abstention_eval: null
+  has_human_baseline: null
+  has_safety_eval: true
+  headline_results:
+  - Current foundation models exhibit significant safety failures on LabSafety Bench, motivating architectural safety
+    mechanisms
+  holdout_or_split_design: null
+  instruments: []
+  leakage_or_contamination_risk: null
+  metric_types: []
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: null
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - chemistry / autonomous laboratories
+  scoring_granularity: null
+  target_population: null
+  task_source: null
+task_features:
+  closed_loop_feedback: null
+  perceptual_demand: null
+  quantitative_tolerance: null
+  reasoning_demand: null
+  safety_criticality: null
+  task_taxonomy: []
+  tool_composition: null
+  tool_interface: []
+  workflow_depth: null
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: null
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: null
+  sample_types: []
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models: []
+  multi_agent: null
+  planner: null
+  rag_or_memory: null
+  tools: []
+  verifier_or_self_debug: null
+  vision_used: null
+transfer_relevant_findings:
+- Argues safety must be evaluated at the architecture level (guards, ODD enforcement) rather than only via model
+  knowledge benchmarks -- suggests a 'guards_or_safety_layer' axis is essential in benchmark records.
+limitations:
+- Abstract-level verification only; no benchmark released.
+related:
+- safe_sdls
+- labsafety_bench
+- agentabstain
+notes: |
+  Abstract and authors verified verbatim from arXiv mirrors (CSQianDong, 2shin0). A related item surfaced only via third-party notes and was NOT verified: 'LABSHIELD: Benchmarking agentic AI safety in scientific laboratories' (arXiv 2603.11987, Mar 2026), reportedly with a 4-tier action scheme EXECUTE / SAFE_SLOW / STOP_AND_ALERT / REFUSE and a 'Tier-Underestimation' metric -- worth fetching in a session with arXiv access.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2602.15061
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

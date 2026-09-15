@@ -1,0 +1,126 @@
+id: labsafety_bench
+record_type: benchmark
+name: 'LabSafety Bench: Benchmarking LLMs on Safety Issues in Scientific Labs (journal title: Benchmarking large
+  language models on safety risks in scientific laboratories)'
+short_name: LabSafety Bench
+year: 2024
+venue: arXiv Oct 2024; Nature Machine Intelligence (published 14 Jan 2026, per third-party listings)
+authors_short: Zhou et al. (Yujun Zhou, Jingdong Yang, Yue Huang, Kehan Guo, Zoe Emory, Bikram Ghosh, Amita Bedar,
+  Sujay Shekar, Zhenwen Liang, Pin-Yu Chen, Tian Gao, Werner Geyer, Nuno Moniz, Nitesh V. Chawla, Xiangliang Zhang)
+arxiv: '2410.14182'
+doi: 10.1038/s42256-025-01152-1
+url: https://arxiv.org/abs/2410.14182
+code_url: https://github.com/YujunZhou/LabSafety-Bench
+data_url: https://huggingface.co/datasets/yujunzhou/LabSafety_Bench
+license: MIT (code)
+status: published
+summary: |
+  Knowledge/reasoning benchmark for lab-safety competence of LLMs and VLMs built on a taxonomy aligned with OSHA protocols. Latest version: 765 expert-verified multiple-choice questions (632 text-only, 133 multimodal) plus 404 realistic lab scenarios yielding 3,128 open-ended questions in two tasks -- Hazards Identification Test (HIT) and Consequence Identification Test (CIT). Across 19 LLMs/VLMs no model exceeds 70% on hazard identification; proprietary models lead on MCQs but not on open-ended scenario reasoning.
+schema_axes_proposed:
+- Hazard taxonomy aligned with OSHA protocols (categories x subcategories; exact counts unverified -- one third-party
+  note says 4 x 10)
+- 'Question format: multiple-choice (text-only vs multimodal/image) vs open-ended scenario'
+- 'Scenario tasks: Hazards Identification Test (HIT) and Consequence Identification Test (CIT)'
+- Reporting by category, difficulty level and subject area
+- 'Prompting conditions: zero-shot, chain-of-thought, few-shot, hints'
+benchmark_features:
+  agents_evaluated:
+  - GPT-4o
+  - GPT-4o-mini
+  - o3-mini
+  - Llama-3.3-70B
+  - Llama-3-8B-Instruct
+  - Vicuna-7B
+  - Mistral-7B
+  - InstructBLIP-7B
+  - Qwen-VL-Chat
+  - InternVL2
+  - '(19 models total in latest version: 8 proprietary, 7 open-weight LLMs, 4 VLMs)'
+  evaluation_target: []
+  execution_mode: static_text
+  has_abstention_eval: false
+  has_human_baseline: true
+  has_safety_eval: true
+  headline_results:
+  - 'v1 (Oct 2024): GPT-4o outperforms human participants on the 765 MCQs but still makes critical errors'
+  - 'Latest: no model exceeds 70% accuracy on the Hazards Identification Test (an intermediate version reported
+    75% on 520 scenarios / 4,090 questions)'
+  - Proprietary models excel on structured MCQs but show no clear advantage on open-ended scenario reasoning
+  holdout_or_split_design: null
+  instruments: []
+  leakage_or_contamination_risk: public dataset; original v1 questions are static MCQs
+  metric_types: []
+  n_agent_configs: 19
+  n_instances_or_runs_reported: null
+  n_task_families: 2
+  n_tasks: 3893
+  open_source: true
+  primary_metric: accuracy
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - chemistry
+  - biology
+  - physics
+  - radiation
+  - general laboratory safety
+  scoring_granularity: null
+  target_population: LLMs and vision-language models
+  task_source: null
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: null
+  quantitative_tolerance: null
+  reasoning_demand: null
+  safety_criticality: null
+  task_taxonomy:
+  - MCQ text
+  - MCQ multimodal
+  - HIT scenario
+  - CIT scenario
+  tool_composition: null
+  tool_interface: []
+  workflow_depth: null
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Static question bank; no environment.
+  injected_faults: false
+  novelty_control: null
+  sample_real_or_simulated: null
+  sample_types: []
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models:
+  - see agents_evaluated
+  multi_agent: false
+  planner: null
+  rag_or_memory: null
+  tools: []
+  verifier_or_self_debug: null
+  vision_used: true
+transfer_relevant_findings:
+- Provides an OSHA-aligned hazard taxonomy reusable for labelling safety-critical instrument-control tasks.
+- Shows knowledge-level safety competence (MCQ) does not transfer to open-ended hazard reasoning -- an agent benchmark
+  should test both.
+- Used downstream as the evaluation target in Safe-SDL (arXiv 2602.15061).
+limitations:
+- No tool use, no physical or simulated execution; measures knowledge, not behaviour.
+- Exact taxonomy counts and human-baseline protocol not verified in this session.
+related:
+- scisafeeval
+- agentabstain
+- safe_sdl_framework
+notes: |
+  arXiv blocked. Abstracts of v1 (2024-10), v2 (2025-02, 520 scenarios/4,090 open-ended, 75% threshold) and v3 (2026-02, 404 scenarios/3,128 open-ended, 19 models, 70%) recovered verbatim from an arXiv listing mirror (Luvata/arxive). Composition numbers (632/133) and model list from the official README via WebFetch. NMI DOI and 'published January 14, 2026' come from third-party listings (Omni-Scientist/Awesome-AI-Scientist, kai9987kai/NexusBioTwin) -- secondary. n_tasks = 765 MCQ + 3,128 open-ended = 3,893. '4 x 10 hazard taxonomy' is from an unrelated third-party project note (shiinayane/LabMate) and is unverified.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2410.14182
+  - https://github.com/YujunZhou/LabSafety-Bench
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

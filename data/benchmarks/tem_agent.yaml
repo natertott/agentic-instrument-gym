@@ -1,0 +1,108 @@
+id: tem_agent
+record_type: system
+name: 'TEM Agent: enhancing transmission electron microscopy (TEM) with modern AI tools'
+short_name: TEM Agent
+year: 2025
+venue: arXiv (Nov 2025); listed as npj Computational Materials 2026 in a third-party AI4Science reading list (unverified)
+authors_short: Wall et al. (Ercius group, NCEM / Lawrence Berkeley National Laboratory)
+arxiv: '2511.08819'
+doi: null
+url: https://arxiv.org/abs/2511.08819
+code_url: null
+data_url: null
+license: null
+status: preprint
+summary: |
+  A Model-Context-Protocol framework in which a commercial LLM (Claude Sonnet 4.5 per the arXiv HTML snippet) controls several TEM subsystems, a data-management platform and HPC resources via four MCP servers using text instructions. The paper demonstrates set-up and completion of intricate TEM workflows without additional model training; no quantitative benchmark is reported in the abstract.
+benchmark_features:
+  agents_evaluated:
+  - Claude Sonnet 4.5 (per arXiv HTML snippet)
+  evaluation_target:
+  - instrument_control
+  - data_analysis
+  execution_mode: physical_instrument
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results: []
+  holdout_or_split_design: null
+  instruments:
+  - name: transmission electron microscope with multiple vendor/custom subsystems (NCEM)
+    modality: microscopy
+    real_or_simulated: real
+  leakage_or_contamination_risk: n/a (demonstration)
+  metric_types:
+  - other
+  n_agent_configs: 1
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: false
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: Demonstration workflows chosen by authors
+  scientific_domains:
+  - electron microscopy
+  - materials science
+  scoring_granularity: binary
+  target_population: Operation of a multi-vendor TEM ecosystem (microscope subsystems, data platform, HPC) through
+    natural language
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: null
+  quantitative_tolerance: null
+  reasoning_demand: medium
+  safety_criticality: medium
+  task_taxonomy: []
+  tool_composition: 'Four MCP servers: microscope subsystems, data management platform, HPC, plus curated resources'
+  tool_interface:
+  - mcp
+  - natural_language
+  workflow_depth: multi_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Real TEM at a national user facility with vendor and custom control systems exposed through
+    MCP
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: real
+  sample_types:
+  - TEM specimens (unspecified)
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models:
+  - Claude Sonnet 4.5
+  multi_agent: false
+  planner: react
+  rag_or_memory: some
+  tools:
+  - MCP microscope tools
+  - data management
+  - HPC job tools
+  verifier_or_self_debug: none
+  vision_used: null
+transfer_relevant_findings:
+- Shows that a general LLM plus a small curated MCP tool set can drive a heterogeneous multi-vendor TEM stack without
+  fine-tuning (qualitative)
+limitations:
+- Demonstration only; no task counts, success rates or repeated trials in abstract
+- Full text not accessible through proxy; LLM identity and MCP-server count come from a search-engine snippet of
+  the arXiv HTML
+related:
+- xrm_agent_benchmarks
+- emseek
+- llmicroscopilot
+notes: demonstration. Abstract verified verbatim via GitHub-mirrored arXiv listing (lxl-sword/arxiv_paper_LLM_list;
+  iopwsy/arXiv_cond-mat). Journal publication status unverified.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2511.08819
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

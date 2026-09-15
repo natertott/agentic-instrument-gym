@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "agentic-instrument-gym"
+version = "0.1.0"
+description = "Benchmark evidence schema, transfer dataset, and comparison tooling for LLM agents that control scientific instruments (WP1 of the transferability programme)."
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Nathan S. Johnson"}]
+dependencies = [
+  "pyyaml>=6.0",
+  "jsonschema>=4.17",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+aig = "aig.cli:main"
+
+[tool.setuptools]
+packages = ["aig"]

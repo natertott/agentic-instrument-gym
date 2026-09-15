@@ -1,0 +1,97 @@
+id: microscopygpt
+record_type: system
+name: 'MicroscopyGPT: Generating Atomic-Structure Captions from Microscopy Images of 2D Materials with Vision-Language
+  Transformers'
+short_name: MicroscopyGPT
+year: 2025
+venue: Journal of Physical Chemistry Letters (2025); ChemRxiv preprint
+authors_short: Choudhary et al. (NIST)
+arxiv: null
+doi: 10.1021/acs.jpclett.5c01257
+url: https://pubs.acs.org/doi/10.1021/acs.jpclett.5c01257
+code_url: https://github.com/atomgptlab/atomgpt
+data_url: null
+license: null
+status: published
+summary: |
+  A VLM (fine-tuned 11B LLaMA) that predicts full atomic configurations (lattice parameters, elements, coordinates) from simulated STEM images of ~5,000 2D materials generated with AtomVision from JARVIS-DFT and C2DB. It is a perception model, not an agent benchmark, but defines an image-to-structure task relevant to EM perception.
+benchmark_features:
+  agents_evaluated:
+  - MicroscopyGPT (LLaMA-3.2-11B-Vision fine-tune)
+  evaluation_target:
+  - perception
+  execution_mode: static_code_eval
+  has_abstention_eval: false
+  has_human_baseline: false
+  has_safety_eval: false
+  headline_results: []
+  holdout_or_split_design: null
+  instruments:
+  - name: simulated STEM images (AtomVision)
+    modality: microscopy
+    real_or_simulated: simulated
+  leakage_or_contamination_risk: Synthetic images from public databases
+  metric_types:
+  - other
+  n_agent_configs: 1
+  n_instances_or_runs_reported: null
+  n_task_families: 1
+  n_tasks: 1
+  open_source: true
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: ~5,000 2D materials from JARVIS-DFT and C2DB
+  scientific_domains:
+  - 2D materials
+  - STEM
+  scoring_granularity: continuous
+  target_population: Atomic-structure reconstruction from STEM images of 2D materials
+  task_source: synthetic_generated
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: image_interpretation
+  quantitative_tolerance: null
+  reasoning_demand: medium
+  safety_criticality: none
+  task_taxonomy:
+  - image-to-structure captioning
+  tool_composition: null
+  tool_interface: []
+  workflow_depth: single_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: null
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: simulated
+  sample_types:
+  - simulated STEM images of 2D materials
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models:
+  - LLaMA 11B vision fine-tune
+  multi_agent: false
+  planner: none
+  rag_or_memory: none
+  tools: []
+  verifier_or_self_debug: none
+  vision_used: true
+transfer_relevant_findings: []
+limitations:
+- Simulated images only; metrics not retrievable
+related:
+- emseek
+- spm_bench
+notes: Perception model rather than benchmark; short record. Metrics/numbers not verified (ACS/PMC blocked).
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://pubs.acs.org/doi/10.1021/acs.jpclett.5c01257
+  - https://github.com/atomgptlab/atomgpt
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

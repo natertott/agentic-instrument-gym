@@ -1,0 +1,60 @@
+{
+  "sweep_id": "sweep_20260625_111144_a680a0",
+  "sweep_name": "Optimal Agent Framework -- Pruned RAG",
+  "start_time": "2026-06-25T11:11:52.320272",
+  "num_configs": 2,
+  "config_variants": [
+    {
+      "llm_temperature": 0.0,
+      "episodic_top_k": 1,
+      "similarity_threshold": 0.0,
+      "llm_model": "claude-sonnet-4",
+      "chunk_size": 250,
+      "chunk_overlap": 100
+    },
+    {
+      "llm_temperature": 0.0,
+      "episodic_top_k": 1,
+      "similarity_threshold": 0.0,
+      "llm_model": "claude-sonnet-4",
+      "chunk_size": 250,
+      "chunk_overlap": 100
+    }
+  ],
+  "variant_results": [
+    {
+      "config_hash": "10494e55913b31dd",
+      "overrides": {
+        "llm_temperature": 0.0,
+        "episodic_top_k": 1,
+        "similarity_threshold": 0.0,
+        "llm_model": "claude-sonnet-4",
+        "chunk_size": 250,
+        "chunk_overlap": 100
+      },
+      "total_tests": 53,
+      "passed": 44,
+      "failed": 8,
+      "errors": 1,
+      "duration_ms": 5350541.338682175
+    },
+    {
+      "config_hash": "10494e55913b31dd",
+      "overrides": {
+        "llm_temperature": 0.0,
+        "episodic_top_k": 1,
+        "similarity_threshold": 0.0,
+        "llm_model": "claude-sonnet-4",
+        "chunk_size": 250,
+        "chunk_overlap": 100
+      },
+      "total_tests": 53,
+      "passed": 42,
+      "failed": 10,
+      "errors": 1,
+      "duration_ms": 6762779.298067093
+    }
+  ],
+  "end_time": "2026-06-25T14:35:11.544079",
+  "regression_dataset_path": "D:\\Src_Repos\\september\\testing\\sweep_results\\sweep_20260625_111144_a680a0\\regression_dataset.jsonl"
+}

@@ -1,0 +1,19 @@
+name: validate
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -e ".[dev]"
+      - run: python -m aig validate
+      - run: python -m pytest -q
+      - name: Check exported site data is current
+        run: |
+          python -m aig export
+          git diff --exit-code --stat -- site/data || (echo "site/data is stale: run 'python -m aig export' and commit" && exit 1)

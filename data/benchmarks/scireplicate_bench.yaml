@@ -1,0 +1,102 @@
+id: scireplicate_bench
+record_type: benchmark
+name: 'SciReplicate-Bench: Benchmarking LLMs in Agent-driven Algorithmic Reproduction from Research Papers'
+short_name: SciReplicate-Bench
+year: 2025
+venue: COLM 2025 (repo-verified); arXiv Apr 2025
+authors_short: Yanzheng Xiang et al. (King's College London)
+arxiv: '2504.00255'
+doi: null
+url: https://arxiv.org/abs/2504.00255
+code_url: https://github.com/xyzCS/SciReplicate-Bench
+data_url: Data.json in repo; Benchmark code repositories and 36 conda environments via SharePoint links in README
+license: null
+status: published
+summary: |
+  Brief follow-up entry. SciReplicate-Bench asks agents to implement algorithms described in recent NLP papers inside the papers' real code repositories: 100 tasks from 36 papers published in 2024, each with a prepared conda environment and test cases. The authors' Sci-Reproducer dual-agent framework (Paper Agent + Code Agent with repository and web-search tools) achieves at most 39% execution accuracy; missing or inconsistent algorithm descriptions are the main barrier.
+benchmark_features:
+  agents_evaluated:
+  - Sci-Reproducer with GPT-4o-mini and other LLMs
+  evaluation_target:
+  - code_generation
+  execution_mode: static_code_eval
+  has_abstention_eval: false
+  has_human_baseline: false
+  has_safety_eval: false
+  headline_results:
+  - Best LLM with Sci-Reproducer reaches only 39% execution accuracy
+  holdout_or_split_design: null
+  instruments: []
+  leakage_or_contamination_risk: Papers from 2024 to reduce pretraining overlap
+  metric_types:
+  - success_rate
+  - other
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: 36
+  n_tasks: 100
+  open_source: true
+  primary_metric: Execution accuracy (test cases pass); also CodeBLEU and reasoning-graph accuracy (repo Evaluation.py,
+    Reason_Process_ACC.py)
+  repetitions_per_task: null
+  sampling_strategy: 36 NLP papers (2024) with public code; 100 annotated functions/tasks
+  scientific_domains:
+  - natural language processing / machine learning
+  scoring_granularity: mixed
+  target_population: Reproducing algorithmic contributions of research papers from their descriptions
+  task_source: literature_derived
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: none
+  quantitative_tolerance: Unit-test based
+  reasoning_demand: high
+  safety_criticality: none
+  task_taxonomy: []
+  tool_composition: Paper Agent (literature tools, web search) + Code Agent (repository navigation, execution);
+    requires a single A100 80GB to run all repos
+  tool_interface:
+  - python_api
+  - cli
+  workflow_depth: multi_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: 36 pre-built conda environments, one per paper
+  injected_faults: false
+  novelty_control: null
+  sample_real_or_simulated: dataset
+  sample_types:
+  - research code repositories
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models:
+  - GPT-4o-mini (repo example)
+  - others not verified
+  multi_agent: true
+  planner: varied
+  rag_or_memory: some
+  tools:
+  - web search (Google CSE)
+  - repo code search
+  verifier_or_self_debug: varied
+  vision_used: false
+transfer_relevant_findings:
+- Underspecified algorithm descriptions, not coding skill, dominate failures
+limitations:
+- NLP-only; heavy GPU requirement; brief verification here
+related:
+- researchcodebench
+- scienceagentbench
+notes: 'Repo-verified: COLM 2025, structure, 36 environments, metrics files. Search-snippet: 100 tasks / 36 papers,
+  39% best.'
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2504.00255
+  - https://github.com/xyzCS/SciReplicate-Bench
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

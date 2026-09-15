@@ -1,0 +1,2582 @@
+{
+  "suite_run_id": "1629245d-a192-4eb7-908a-87bb1fbd9ec5",
+  "suite_name": "Tests tagged: validation",
+  "config_snapshot": {
+    "directories": {
+      "base_dir": "D:\\Src_Repos\\september\\testing\\sweep_results\\sweep_20260713_113822_c15462\\config_94c6ea045e303d2d\\workspace",
+      "log_dir": "D:\\Src_Repos\\september\\logs",
+      "rag_db_dir": "D:\\Src_Repos\\september\\rag_databases",
+      "metrics_output_dir": "D:\\Src_Repos\\september\\metrics"
+    },
+    "model": {
+      "provider": "openai-standard",
+      "model": "claude-sonnet-4",
+      "temperature": 0.0
+    },
+    "rag": {
+      "embedding_model": "text-embedding-3-large",
+      "episodic_top_k": 5,
+      "contextual_top_k": 1,
+      "chunk_size": 1000,
+      "chunk_overlap": 500,
+      "similarity_threshold": 0.8,
+      "cache_enabled": true
+    },
+    "message_management": {
+      "max_messages": 100,
+      "max_tokens": 20000,
+      "pruning_strategy": "smart",
+      "preserve_recent_messages": 10
+    },
+    "agent": {
+      "timeout": 10000,
+      "max_retries": 5,
+      "recursion_limit": 250,
+      "graph_topology": "two_agent"
+    },
+    "tools_enabled": {
+      "instrument": true,
+      "image": true,
+      "geometry": true,
+      "recipe": true,
+      "code_execution": true
+    },
+    "metrics": {
+      "enabled": true,
+      "token_counting_method": "tiktoken",
+      "retention_days": 30,
+      "cost_per_1k_input": 0.0025,
+      "cost_per_1k_output": 0.01
+    },
+    "testing": {
+      "is_test_config": true,
+      "mock_mode": false,
+      "timeout_seconds": 300000,
+      "fail_fast": false
+    }
+  },
+  "config_hash": "96895ed3c6fa1279",
+  "start_time": "2026-07-13T11:39:12.727245",
+  "end_time": "2026-07-13T12:15:09.375658",
+  "duration_ms": 2156648.395061493,
+  "total_tests": 5,
+  "passed": 1,
+  "failed": 4,
+  "skipped": 0,
+  "errors": 0,
+  "pass_rate": 0.2,
+  "results": [
+    {
+      "test_id": "validation_001",
+      "test_name": "setup_measure_initial_acquire",
+      "status": "failed",
+      "start_time": "2026-07-13T11:50:07.696618",
+      "end_time": "2026-07-13T11:50:07.712529",
+      "duration_ms": 654977.0722389221,
+      "suite_run_id": "1629245d-a192-4eb7-908a-87bb1fbd9ec5",
+      "config_snapshot": {
+        "directories": {
+          "base_dir": "D:\\Src_Repos\\september\\testing\\sweep_results\\sweep_20260713_113822_c15462\\config_94c6ea045e303d2d\\workspace",
+          "log_dir": "D:\\Src_Repos\\september\\logs",
+          "rag_db_dir": "D:\\Src_Repos\\september\\rag_databases",
+          "metrics_output_dir": "D:\\Src_Repos\\september\\metrics"
+        },
+        "model": {
+          "provider": "openai-standard",
+          "model": "claude-sonnet-4",
+          "temperature": 0.0
+        },
+        "rag": {
+          "embedding_model": "text-embedding-3-large",
+          "episodic_top_k": 5,
+          "contextual_top_k": 1,
+          "chunk_size": 1000,
+          "chunk_overlap": 500,
+          "similarity_threshold": 0.8,
+          "cache_enabled": true
+        },
+        "message_management": {
+          "max_messages": 100,
+          "max_tokens": 20000,
+          "pruning_strategy": "smart",
+          "preserve_recent_messages": 10
+        },
+        "agent": {
+          "timeout": 10000,
+          "max_retries": 5,
+          "recursion_limit": 250,
+          "graph_topology": "two_agent"
+        },
+        "tools_enabled": {
+          "instrument": true,
+          "image": true,
+          "geometry": true,
+          "recipe": true,
+          "code_execution": true
+        },
+        "metrics": {
+          "enabled": true,
+          "token_counting_method": "tiktoken",
+          "retention_days": 30,
+          "cost_per_1k_input": 0.0025,
+          "cost_per_1k_output": 0.01
+        },
+        "testing": {
+          "is_test_config": true,
+          "mock_mode": false,
+          "timeout_seconds": 300000,
+          "fail_fast": false
+        },
+        "test_id": "validation_001",
+        "test_name": "setup_measure_initial_acquire"
+      },
+      "config_hash": "9fa5e47146b0b983",
+      "failures": [
+        {
+          "check_name": "file_content",
+          "expected": "setup_position.json::stage_position_z approx 0",
+          "actual": -3985.45,
+          "message": "Key 'stage_position_z' = -3985.45, expected approx 0"
+        },
+        {
+          "check_name": "file_content",
+          "expected": "setup_position.json::source_position_z approx -87",
+          "actual": -65.3492,
+          "message": "Key 'source_position_z' = -65.3492, expected approx -87"
+        }
+      ],
+      "error_message": null,
+      "error_traceback": null,
+      "total_tokens": 352184,
+      "llm_calls": 50,
+      "tool_calls": 43,
+      "tool_names_used": [
+        "get_stage_position",
+        "get_objective_names",
+        "set_objective",
+        "turn_xray_on",
+        "get_axes_names",
+        "read_json_file",
+        "recenter_xy_from_sidecar",
+        "recenter_yz_from_sidecar",
+        "execute_python_code",
+        "otsu_segment_properties",
+        "single_acquisition",
+        "wait_for_motion_to_complete",
+        "get_instrument_status",
+        "calculate_geometry_for_fov",
+        "move_axis_absolute",
+        "get_source_detector_geometry"
+      ],
+      "tool_invocations": [
+        {
+          "name": "get_objective_names",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "get_axes_names",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "set_objective",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "move_axis_absolute",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "move_axis_absolute",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "move_axis_absolute",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "move_axis_absolute",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "move_axis_absolute",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "move_axis_absolute",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "turn_xray_on",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "wait_for_motion_to_complete",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "single_acquisition",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "otsu_segment_properties",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "recenter_xy_from_sidecar",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "read_json_file",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "calculate_geometry_for_fov",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "move_axis_absolute",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "move_axis_absolute",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "move_axis_absolute",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "move_axis_absolute",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "wait_for_motion_to_complete",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "get_instrument_status",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "otsu_segment_properties",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "recenter_xy_from_sidecar",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "move_axis_absolute",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "move_axis_absolute",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "move_axis_absolute",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "single_acquisition",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "otsu_segment_properties",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "recenter_yz_from_sidecar",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "move_axis_absolute",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "move_axis_absolute",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "read_json_file",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "calculate_geometry_for_fov",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "move_axis_absolute",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "move_axis_absolute",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "get_stage_position",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "get_source_detector_geometry",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        }
+      ],
+      "agents_visited": [
+        "supervisor",
+        "worker",
+        "supervisor",
+        "worker",
+        "supervisor",
+        "worker",
+        "supervisor"
+      ],
+      "tasks_completed": 17,
+      "estimated_cost": 0.9439,
+      "input_tokens": 343721,
+      "output_tokens": 8463,
+      "rag_retrievals": [
+        {
+          "agent": "supervisor",
+          "query_type": "episodic",
+          "query_text": "Set the instrument up for general imaging. Use an X-ray power of 3W and a voltage of 40kV. Center the sample in the \nimage field of view. Calculate a source and detector position so that the image FOV is 1.25x as wide as the sample. \nMove the source and detector to this new position. Save the sample stage position, source position, and detector position\nin a json file called 'setup_position.json' under the keys 'stage_position_x', 'stage_position_y', 'stage_position_z',\n'source_position_z' and '",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1239,
+          "latency_ms": 1701.8706798553467,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "setup001_v2",
+            "center001",
+            "twoviewcenter002",
+            "reference001",
+            "magnification001"
+          ],
+          "timestamp": "2026-07-13T11:39:14.448274",
+          "step_number": 1
+        },
+        {
+          "agent": "instrument",
+          "query_type": "episodic",
+          "query_text": "Get the list of all available objectives and axes to understand the instrument configuration Change the objective to the 0.4X objective detector Move the X-ray Source Z position to -100mm Move the Detector Z position to 100mm Move the sample stage axes to Sample X=0mm, Sample Y=-17500mm, Sample Z=0mm, Sample Theta=0 Turn on the X-rays at 40kV and 3W (as specified by user) Capture a single acquisition image for initial setup verification",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 663,
+          "latency_ms": 492.476224899292,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "generalimagingcond",
+            "changeobjectiveinstrument",
+            "moveaxisinstrumentmovement",
+            "transmissionimagetool",
+            "flatpanelchange"
+          ],
+          "timestamp": "2026-07-13T11:39:22.387954",
+          "step_number": 1
+        },
+        {
+          "agent": "image",
+          "query_type": "episodic",
+          "query_text": "Get the list of all available objectives and axes to understand the instrument configuration Change the objective to the 0.4X objective detector Move the X-ray Source Z position to -100mm Move the Detector Z position to 100mm Move the sample stage axes to Sample X=0mm, Sample Y=-17500mm, Sample Z=0mm, Sample Theta=0 Turn on the X-rays at 40kV and 3W (as specified by user) Capture a single acquisition image for initial setup verification",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1410,
+          "latency_ms": 516.6239738464355,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "centercalculationimage",
+            "geometrycalculationmagnificiationimage",
+            "referenceimageprotocolimage",
+            "computesizeprotocolimage",
+            "samplecenteringimage"
+          ],
+          "timestamp": "2026-07-13T11:39:22.904787",
+          "step_number": 1
+        },
+        {
+          "agent": "supervisor",
+          "query_type": "episodic",
+          "query_text": "Set the instrument up for general imaging. Use an X-ray power of 3W and a voltage of 40kV. Center the sample in the \nimage field of view. Calculate a source and detector position so that the image FOV is 1.25x as wide as the sample. \nMove the source and detector to this new position. Save the sample stage position, source position, and detector position\nin a json file called 'setup_position.json' under the keys 'stage_position_x', 'stage_position_y', 'stage_position_z',\n'source_position_z' and '",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1239,
+          "latency_ms": 1265.408992767334,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "setup001_v2",
+            "center001",
+            "twoviewcenter002",
+            "reference001",
+            "magnification001"
+          ],
+          "timestamp": "2026-07-13T11:45:14.164853",
+          "step_number": 1
+        },
+        {
+          "agent": "instrument",
+          "query_type": "episodic",
+          "query_text": "Segment the acquired image artifacts/19bd/0001.tiff using lower otsu segmentation to find the sample centroid; the sidecar is at metadata/19bd.json Calculate XY movement using recenter_xy_from_sidecar with the centroid from task_8 and sidecar metadata/19bd.json Apply the delta_x and delta_y movements from task_9 to center the sample in XY",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 763,
+          "latency_ms": 1004.3866634368896,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "transmissionimagetool",
+            "moveaxisinstrumentmovement",
+            "generalimagingcond",
+            "singleacquisitionprotocol",
+            "changeobjectiveinstrument"
+          ],
+          "timestamp": "2026-07-13T11:45:28.117490",
+          "step_number": 2
+        },
+        {
+          "agent": "image",
+          "query_type": "episodic",
+          "query_text": "Segment the acquired image artifacts/19bd/0001.tiff using lower otsu segmentation to find the sample centroid; the sidecar is at metadata/19bd.json Calculate XY movement using recenter_xy_from_sidecar with the centroid from task_8 and sidecar metadata/19bd.json Apply the delta_x and delta_y movements from task_9 to center the sample in XY",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 2133,
+          "latency_ms": 388.91100883483887,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "centercalculationimage",
+            "samplecenteringimage",
+            "segmentimageotsuimage",
+            "referenceimageprotocolimage",
+            "segment3ddataimage"
+          ],
+          "timestamp": "2026-07-13T11:45:28.506552",
+          "step_number": 2
+        },
+        {
+          "agent": "supervisor",
+          "query_type": "episodic",
+          "query_text": "Set the instrument up for general imaging. Use an X-ray power of 3W and a voltage of 40kV. Center the sample in the \nimage field of view. Calculate a source and detector position so that the image FOV is 1.25x as wide as the sample. \nMove the source and detector to this new position. Save the sample stage position, source position, and detector position\nin a json file called 'setup_position.json' under the keys 'stage_position_x', 'stage_position_y', 'stage_position_z',\n'source_position_z' and '",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1239,
+          "latency_ms": 962.9175662994385,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "setup001_v2",
+            "center001",
+            "twoviewcenter002",
+            "reference001",
+            "magnification001"
+          ],
+          "timestamp": "2026-07-13T11:47:47.708419",
+          "step_number": 2
+        },
+        {
+          "agent": "instrument",
+          "query_type": "episodic",
+          "query_text": "Calculate optimal source and detector positions for 1.25x sample width FOV using calculate_geometry_for_pixel_size tool with sample dimensions from metadata/sample_dimensions.json Move the X-ray Source Z and Detector Z to the calculated optimal positions from task_15 Save the current sample stage position (X, Y, Z), source position Z, and detector position Z to artifacts/setup_position.json with keys 'stage_position_x', 'stage_position_y', 'stage_position_z', 'source_position_z', 'detector_posit",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 729,
+          "latency_ms": 528.2688140869141,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "generalimagingcond",
+            "moveaxisinstrumentmovement",
+            "modifyrecipeinstrumenttool",
+            "singleacquisitionprotocol",
+            "transmissionimagetool"
+          ],
+          "timestamp": "2026-07-13T11:48:00.958969",
+          "step_number": 3
+        },
+        {
+          "agent": "image",
+          "query_type": "episodic",
+          "query_text": "Calculate optimal source and detector positions for 1.25x sample width FOV using calculate_geometry_for_pixel_size tool with sample dimensions from metadata/sample_dimensions.json Move the X-ray Source Z and Detector Z to the calculated optimal positions from task_15 Save the current sample stage position (X, Y, Z), source position Z, and detector position Z to artifacts/setup_position.json with keys 'stage_position_x', 'stage_position_y', 'stage_position_z', 'source_position_z', 'detector_posit",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1410,
+          "latency_ms": 2667.7026748657227,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "geometrycalculationmagnificiationimage",
+            "samplecenteringimage",
+            "centercalculationimage",
+            "computesizeprotocolimage",
+            "referenceimageprotocolimage"
+          ],
+          "timestamp": "2026-07-13T11:48:03.626841",
+          "step_number": 3
+        },
+        {
+          "agent": "supervisor",
+          "query_type": "episodic",
+          "query_text": "Set the instrument up for general imaging. Use an X-ray power of 3W and a voltage of 40kV. Center the sample in the \nimage field of view. Calculate a source and detector position so that the image FOV is 1.25x as wide as the sample. \nMove the source and detector to this new position. Save the sample stage position, source position, and detector position\nin a json file called 'setup_position.json' under the keys 'stage_position_x', 'stage_position_y', 'stage_position_z',\n'source_position_z' and '",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1239,
+          "latency_ms": 493.959903717041,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "setup001_v2",
+            "center001",
+            "twoviewcenter002",
+            "reference001",
+            "magnification001"
+          ],
+          "timestamp": "2026-07-13T11:49:54.908162",
+          "step_number": 3
+        }
+      ],
+      "rag_entry_ids": [
+        "setup001_v2",
+        "center001",
+        "twoviewcenter002",
+        "reference001",
+        "magnification001",
+        "generalimagingcond",
+        "changeobjectiveinstrument",
+        "moveaxisinstrumentmovement",
+        "transmissionimagetool",
+        "flatpanelchange",
+        "centercalculationimage",
+        "geometrycalculationmagnificiationimage",
+        "referenceimageprotocolimage",
+        "computesizeprotocolimage",
+        "samplecenteringimage",
+        "singleacquisitionprotocol",
+        "segmentimageotsuimage",
+        "segment3ddataimage",
+        "modifyrecipeinstrumenttool"
+      ],
+      "final_output": "supervisor\u2192FINISH batch=[] done=17 pend=0 fail=0",
+      "files_created": [
+        "artifacts\\19bd\\0001.tiff",
+        "metadata\\19bd.json",
+        "metadata\\sample_dimensions.json",
+        "artifacts\\setup_position.json",
+        "artifacts/19bd/0001.tiff",
+        "metadata/19bd.json",
+        "artifacts\\88af\\0001.tiff",
+        "metadata\\88af.json",
+        "artifacts/88af/0001.tiff",
+        "metadata/88af.json",
+        "metadata/sample_dimensions.json",
+        "artifacts\\19bd.xrm",
+        "artifacts\\88af.xrm",
+        "artifacts\\script_20260713_114303.py",
+        "artifacts\\script_20260713_114441.py",
+        "artifacts\\script_20260713_114453.py",
+        "artifacts\\script_20260713_114926.py",
+        "artifacts\\script_20260713_114940.py",
+        "metadata\\script_20260713_114303_execution.json",
+        "metadata\\script_20260713_114441_execution.json",
+        "metadata\\script_20260713_114453_execution.json",
+        "metadata\\script_20260713_114926_execution.json",
+        "metadata\\script_20260713_114940_execution.json"
+      ],
+      "message_trace": [
+        {
+          "type": "human",
+          "content": "Set the instrument up for general imaging. Use an X-ray power of 3W and a voltage of 40kV. Center the sample in the \nimage field of view. Calculate a source and detector position so that the image FOV is 1.25x as wide as the sample. \nMove the source and detector to this new position. Save the sample stage position, source position, and detector position\nin a json file called 'setup_position.json' under the keys 'stage_position_x', 'stage_position_y', 'stage_position_z',\n'source_position_z' and 'detector_position_z'.\n"
+        },
+        {
+          "type": "ai",
+          "content": "supervisor\u2192worker batch=['task_1', 'task_2', 'task_3', 'task_4', 'task_5', 'task_6', 'task_7'] done=0 pend=7 fail=0"
+        },
+        {
+          "type": "ai",
+          "content": "worker batch done=['task_1', 'task_2', 'task_3', 'task_4', 'task_5', 'task_6', 'task_7'] fail=[]"
+        },
+        {
+          "type": "ai",
+          "content": "supervisor\u2192worker batch=['task_8', 'task_9', 'task_10'] done=7 pend=7 fail=0"
+        },
+        {
+          "type": "ai",
+          "content": "worker batch done=['task_8', 'task_9', 'task_10'] fail=[]"
+        },
+        {
+          "type": "ai",
+          "content": "supervisor\u2192worker batch=['task_15', 'task_16', 'task_17'] done=14 pend=3 fail=0"
+        },
+        {
+          "type": "ai",
+          "content": "worker batch done=['task_15', 'task_16', 'task_17'] fail=[]"
+        },
+        {
+          "type": "ai",
+          "content": "supervisor\u2192FINISH batch=[] done=17 pend=0 fail=0"
+        }
+      ],
+      "workspace_dir": "D:\\Src_Repos\\september\\testing\\sweep_results\\sweep_20260713_113822_c15462\\config_94c6ea045e303d2d\\workspace"
+    },
+    {
+      "test_id": "unknown",
+      "test_name": "Unnamed Test",
+      "status": "failed",
+      "start_time": "2026-07-13T11:54:25.330397",
+      "end_time": "2026-07-13T11:54:25.347913",
+      "duration_ms": 257590.02804756165,
+      "suite_run_id": "1629245d-a192-4eb7-908a-87bb1fbd9ec5",
+      "config_snapshot": {
+        "directories": {
+          "base_dir": "D:\\Src_Repos\\september\\testing\\sweep_results\\sweep_20260713_113822_c15462\\config_94c6ea045e303d2d\\workspace",
+          "log_dir": "D:\\Src_Repos\\september\\logs",
+          "rag_db_dir": "D:\\Src_Repos\\september\\rag_databases",
+          "metrics_output_dir": "D:\\Src_Repos\\september\\metrics"
+        },
+        "model": {
+          "provider": "openai-standard",
+          "model": "claude-sonnet-4",
+          "temperature": 0.0
+        },
+        "rag": {
+          "embedding_model": "text-embedding-3-large",
+          "episodic_top_k": 5,
+          "contextual_top_k": 1,
+          "chunk_size": 1000,
+          "chunk_overlap": 500,
+          "similarity_threshold": 0.8,
+          "cache_enabled": true
+        },
+        "message_management": {
+          "max_messages": 100,
+          "max_tokens": 20000,
+          "pruning_strategy": "smart",
+          "preserve_recent_messages": 10
+        },
+        "agent": {
+          "timeout": 10000,
+          "max_retries": 5,
+          "recursion_limit": 250,
+          "graph_topology": "two_agent"
+        },
+        "tools_enabled": {
+          "instrument": true,
+          "image": true,
+          "geometry": true,
+          "recipe": true,
+          "code_execution": true
+        },
+        "metrics": {
+          "enabled": true,
+          "token_counting_method": "tiktoken",
+          "retention_days": 30,
+          "cost_per_1k_input": 0.0025,
+          "cost_per_1k_output": 0.01
+        },
+        "testing": {
+          "is_test_config": true,
+          "mock_mode": false,
+          "timeout_seconds": 300000,
+          "fail_fast": false
+        },
+        "test_id": "unknown",
+        "test_name": "Unnamed Test"
+      },
+      "config_hash": "d37c50e258b4cc20",
+      "failures": [
+        {
+          "check_name": "file_content",
+          "expected": "sample_size.json::length_x approx 29",
+          "actual": 39.9,
+          "message": "Key 'length_x' = 39.9, expected approx 29"
+        },
+        {
+          "check_name": "file_content",
+          "expected": "sample_size.json::length_y approx 29",
+          "actual": 39.9,
+          "message": "Key 'length_y' = 39.9, expected approx 29"
+        },
+        {
+          "check_name": "file_content",
+          "expected": "sample_size.json::length_z approx 29",
+          "actual": 32.3,
+          "message": "Key 'length_z' = 32.3, expected approx 29"
+        }
+      ],
+      "error_message": null,
+      "error_traceback": null,
+      "total_tokens": 102626,
+      "llm_calls": 20,
+      "tool_calls": 15,
+      "tool_names_used": [
+        "read_json_file",
+        "execute_python_code",
+        "otsu_segment_properties",
+        "single_acquisition",
+        "is_xray_on",
+        "move_axis_absolute"
+      ],
+      "tool_invocations": [
+        {
+          "name": "is_xray_on",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "move_axis_absolute",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "single_acquisition",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "move_axis_absolute",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "single_acquisition",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "otsu_segment_properties",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "otsu_segment_properties",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "read_json_file",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "otsu_segment_properties",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "otsu_segment_properties",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "read_json_file",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        }
+      ],
+      "agents_visited": [
+        "supervisor",
+        "worker",
+        "supervisor",
+        "worker",
+        "supervisor"
+      ],
+      "tasks_completed": 6,
+      "estimated_cost": 0.2988,
+      "input_tokens": 96991,
+      "output_tokens": 5635,
+      "rag_retrievals": [
+        {
+          "agent": "supervisor",
+          "query_type": "episodic",
+          "query_text": "Collect views of the sample in the xy (theta=0) and yz (theta=90) planes. Segment the image and measure the sample's\nlength (in mm) in the x, y, and z dimensions. Save these lengths under the keys 'length_x', 'length_y', and 'length_z' \nin a json file called 'sample_size.json.' Round to the nearest tenth of a millimeter.\n",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1343,
+          "latency_ms": 547.6059913635254,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "reference001",
+            "segmentcenter",
+            "center001",
+            "twoviewcenter002",
+            "magnification001"
+          ],
+          "timestamp": "2026-07-13T11:50:08.318127",
+          "step_number": 1
+        },
+        {
+          "agent": "instrument",
+          "query_type": "episodic",
+          "query_text": "Verify X-rays are on; turn them on if they are off Acquire an image at sample theta position of 0 degrees (XY plane view) Acquire an image at sample theta position of 90 degrees (YZ plane view)",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 669,
+          "latency_ms": 541.2201881408691,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "generalimagingcond",
+            "turnonxrayinstrument",
+            "singleacquisitionprotocol",
+            "xrayonprotocolinstrument",
+            "transmissionimagetool"
+          ],
+          "timestamp": "2026-07-13T11:50:17.210081",
+          "step_number": 1
+        },
+        {
+          "agent": "image",
+          "query_type": "episodic",
+          "query_text": "Verify X-rays are on; turn them on if they are off Acquire an image at sample theta position of 0 degrees (XY plane view) Acquire an image at sample theta position of 90 degrees (YZ plane view)",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1443,
+          "latency_ms": 376.4064311981201,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "centercalculationimage",
+            "referenceimageprotocolimage",
+            "computesizeprotocolimage",
+            "samplecenteringimage",
+            "segmentimageotsuimage"
+          ],
+          "timestamp": "2026-07-13T11:50:17.586641",
+          "step_number": 1
+        },
+        {
+          "agent": "supervisor",
+          "query_type": "episodic",
+          "query_text": "Collect views of the sample in the xy (theta=0) and yz (theta=90) planes. Segment the image and measure the sample's\nlength (in mm) in the x, y, and z dimensions. Save these lengths under the keys 'length_x', 'length_y', and 'length_z' \nin a json file called 'sample_size.json.' Round to the nearest tenth of a millimeter.\n",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1343,
+          "latency_ms": 548.92897605896,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "reference001",
+            "segmentcenter",
+            "center001",
+            "twoviewcenter002",
+            "magnification001"
+          ],
+          "timestamp": "2026-07-13T11:52:46.536880",
+          "step_number": 1
+        },
+        {
+          "agent": "instrument",
+          "query_type": "episodic",
+          "query_text": "Segment the XY plane image using otsu segmentation to identify sample regions and calculate bounding box. Use artifacts/2e68/0001.tiff with sidecar metadata/2e68.json Segment the YZ plane image using otsu segmentation to identify sample regions and calculate bounding box. Use artifacts/443d/0001.tiff with sidecar metadata/443d.json Calculate sample dimensions in mm from the segmented bounding boxes using pixel size from sidecar files. Extract length_x and length_y from XY plane (artifacts/2e68/0",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 655,
+          "latency_ms": 649.8663425445557,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "singleacquisitionprotocol",
+            "transmissionimagetool",
+            "generalimagingcond",
+            "createrecipeinstrument",
+            "modifyrecipeinstrumenttool"
+          ],
+          "timestamp": "2026-07-13T11:52:55.059146",
+          "step_number": 2
+        },
+        {
+          "agent": "image",
+          "query_type": "episodic",
+          "query_text": "Segment the XY plane image using otsu segmentation to identify sample regions and calculate bounding box. Use artifacts/2e68/0001.tiff with sidecar metadata/2e68.json Segment the YZ plane image using otsu segmentation to identify sample regions and calculate bounding box. Use artifacts/443d/0001.tiff with sidecar metadata/443d.json Calculate sample dimensions in mm from the segmented bounding boxes using pixel size from sidecar files. Extract length_x and length_y from XY plane (artifacts/2e68/0",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 2078,
+          "latency_ms": 460.4623317718506,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "computesizeprotocolimage",
+            "segmentimageotsuimage",
+            "segment3ddataimage",
+            "referenceimageprotocolimage",
+            "tiffinfoimageinfoimage"
+          ],
+          "timestamp": "2026-07-13T11:52:55.519749",
+          "step_number": 2
+        },
+        {
+          "agent": "supervisor",
+          "query_type": "episodic",
+          "query_text": "Collect views of the sample in the xy (theta=0) and yz (theta=90) planes. Segment the image and measure the sample's\nlength (in mm) in the x, y, and z dimensions. Save these lengths under the keys 'length_x', 'length_y', and 'length_z' \nin a json file called 'sample_size.json.' Round to the nearest tenth of a millimeter.\n",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1343,
+          "latency_ms": 527.625560760498,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "reference001",
+            "segmentcenter",
+            "center001",
+            "twoviewcenter002",
+            "magnification001"
+          ],
+          "timestamp": "2026-07-13T11:54:18.199321",
+          "step_number": 2
+        }
+      ],
+      "rag_entry_ids": [
+        "reference001",
+        "segmentcenter",
+        "center001",
+        "twoviewcenter002",
+        "magnification001",
+        "generalimagingcond",
+        "turnonxrayinstrument",
+        "singleacquisitionprotocol",
+        "xrayonprotocolinstrument",
+        "transmissionimagetool",
+        "centercalculationimage",
+        "referenceimageprotocolimage",
+        "computesizeprotocolimage",
+        "samplecenteringimage",
+        "segmentimageotsuimage",
+        "createrecipeinstrument",
+        "modifyrecipeinstrumenttool",
+        "segment3ddataimage",
+        "tiffinfoimageinfoimage"
+      ],
+      "final_output": "supervisor\u2192FINISH batch=[] done=6 pend=0 fail=0",
+      "files_created": [
+        "artifacts\\2e68\\0001.tiff",
+        "metadata\\2e68.json",
+        "artifacts\\443d\\0001.tiff",
+        "metadata\\443d.json",
+        "artifacts/sample_size.json",
+        "artifacts/2e68/0001.tiff",
+        "artifacts/443d/0001.tiff",
+        "artifacts\\19bd.xrm",
+        "artifacts\\2e68.xrm",
+        "artifacts\\443d.xrm",
+        "artifacts\\88af.xrm",
+        "artifacts\\sample_size.json",
+        "artifacts\\script_20260713_114303.py",
+        "artifacts\\script_20260713_114441.py",
+        "artifacts\\script_20260713_114453.py",
+        "artifacts\\script_20260713_114926.py",
+        "artifacts\\script_20260713_114940.py",
+        "artifacts\\script_20260713_115210.py",
+        "artifacts\\script_20260713_115225.py",
+        "artifacts\\script_20260713_115341.py",
+        "artifacts\\script_20260713_115357.py",
+        "artifacts\\setup_position.json",
+        "metadata\\19bd.json",
+        "metadata\\88af.json",
+        "metadata\\sample_dimensions.json",
+        "metadata\\script_20260713_114303_execution.json",
+        "metadata\\script_20260713_114441_execution.json",
+        "metadata\\script_20260713_114453_execution.json",
+        "metadata\\script_20260713_114926_execution.json",
+        "metadata\\script_20260713_114940_execution.json",
+        "metadata\\script_20260713_115225_execution.json",
+        "metadata\\script_20260713_115357_execution.json"
+      ],
+      "message_trace": [
+        {
+          "type": "human",
+          "content": "Collect views of the sample in the xy (theta=0) and yz (theta=90) planes. Segment the image and measure the sample's\nlength (in mm) in the x, y, and z dimensions. Save these lengths under the keys 'length_x', 'length_y', and 'length_z' \nin a json file called 'sample_size.json.' Round to the nearest tenth of a millimeter.\n"
+        },
+        {
+          "type": "ai",
+          "content": "supervisor\u2192worker batch=['task_1', 'task_2', 'task_3'] done=0 pend=6 fail=0"
+        },
+        {
+          "type": "ai",
+          "content": "worker batch done=['task_1', 'task_2', 'task_3'] fail=[]"
+        },
+        {
+          "type": "ai",
+          "content": "supervisor\u2192worker batch=['task_4', 'task_5', 'task_6'] done=3 pend=3 fail=0"
+        },
+        {
+          "type": "ai",
+          "content": "worker batch done=['task_4', 'task_5', 'task_6'] fail=[]"
+        },
+        {
+          "type": "ai",
+          "content": "supervisor\u2192FINISH batch=[] done=6 pend=0 fail=0"
+        }
+      ],
+      "workspace_dir": "D:\\Src_Repos\\september\\testing\\sweep_results\\sweep_20260713_113822_c15462\\config_94c6ea045e303d2d\\workspace"
+    },
+    {
+      "test_id": "unknown",
+      "test_name": "Unnamed Test",
+      "status": "failed",
+      "start_time": "2026-07-13T11:56:24.702774",
+      "end_time": "2026-07-13T11:56:24.722785",
+      "duration_ms": 119334.1429233551,
+      "suite_run_id": "1629245d-a192-4eb7-908a-87bb1fbd9ec5",
+      "config_snapshot": {
+        "directories": {
+          "base_dir": "D:\\Src_Repos\\september\\testing\\sweep_results\\sweep_20260713_113822_c15462\\config_94c6ea045e303d2d\\workspace",
+          "log_dir": "D:\\Src_Repos\\september\\logs",
+          "rag_db_dir": "D:\\Src_Repos\\september\\rag_databases",
+          "metrics_output_dir": "D:\\Src_Repos\\september\\metrics"
+        },
+        "model": {
+          "provider": "openai-standard",
+          "model": "claude-sonnet-4",
+          "temperature": 0.0
+        },
+        "rag": {
+          "embedding_model": "text-embedding-3-large",
+          "episodic_top_k": 5,
+          "contextual_top_k": 1,
+          "chunk_size": 1000,
+          "chunk_overlap": 500,
+          "similarity_threshold": 0.8,
+          "cache_enabled": true
+        },
+        "message_management": {
+          "max_messages": 100,
+          "max_tokens": 20000,
+          "pruning_strategy": "smart",
+          "preserve_recent_messages": 10
+        },
+        "agent": {
+          "timeout": 10000,
+          "max_retries": 5,
+          "recursion_limit": 250,
+          "graph_topology": "two_agent"
+        },
+        "tools_enabled": {
+          "instrument": true,
+          "image": true,
+          "geometry": true,
+          "recipe": true,
+          "code_execution": true
+        },
+        "metrics": {
+          "enabled": true,
+          "token_counting_method": "tiktoken",
+          "retention_days": 30,
+          "cost_per_1k_input": 0.0025,
+          "cost_per_1k_output": 0.01
+        },
+        "testing": {
+          "is_test_config": true,
+          "mock_mode": false,
+          "timeout_seconds": 300000,
+          "fail_fast": false
+        },
+        "test_id": "unknown",
+        "test_name": "Unnamed Test"
+      },
+      "config_hash": "d37c50e258b4cc20",
+      "failures": [
+        {
+          "check_name": "file_content",
+          "expected": "optimal_exposure.json::optimal_exposure approx 0.4",
+          "actual": 3.744622721771536,
+          "message": "Key 'optimal_exposure' = 3.744622721771536, expected approx 0.4"
+        }
+      ],
+      "error_message": null,
+      "error_traceback": null,
+      "total_tokens": 50089,
+      "llm_calls": 12,
+      "tool_calls": 5,
+      "tool_names_used": [
+        "execute_python_code",
+        "read_json_file",
+        "otsu_segment_properties",
+        "single_acquisition"
+      ],
+      "tool_invocations": [
+        {
+          "name": "single_acquisition",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "otsu_segment_properties",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "read_json_file",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "read_json_file",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        }
+      ],
+      "agents_visited": [
+        "supervisor",
+        "worker",
+        "supervisor",
+        "worker",
+        "supervisor",
+        "worker",
+        "supervisor"
+      ],
+      "tasks_completed": 5,
+      "estimated_cost": 0.1488,
+      "input_tokens": 46949,
+      "output_tokens": 3140,
+      "rag_retrievals": [
+        {
+          "agent": "supervisor",
+          "query_type": "episodic",
+          "query_text": "Acquire an image using a 1 second exposure time and binning 2. Segment the image to find the sample and measure\nthe average intensity in the sample region. Calculate a new exposure time that achieves an average of ~5000\ncounts inside the sample region. Save this exposure time in a file called optimal_exposure.json under the key optimal_exposure.\n",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1104,
+          "latency_ms": 474.0152359008789,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "reference001",
+            "center001",
+            "setup001_v2",
+            "segmentcenter",
+            "magnification001"
+          ],
+          "timestamp": "2026-07-13T11:54:25.873300",
+          "step_number": 1
+        },
+        {
+          "agent": "instrument",
+          "query_type": "episodic",
+          "query_text": "Acquire an image using 1 second exposure time and binning 2 Segment the acquired image using lower otsu segmentation to identify sample regions Measure the average intensity in the segmented sample region",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 653,
+          "latency_ms": 551.2759685516357,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "singleacquisitionprotocol",
+            "transmissionimagetool",
+            "generalimagingcond",
+            "recipeexecutionacquisitioninstrument",
+            "turnonxrayinstrument"
+          ],
+          "timestamp": "2026-07-13T11:54:32.825266",
+          "step_number": 1
+        },
+        {
+          "agent": "image",
+          "query_type": "episodic",
+          "query_text": "Acquire an image using 1 second exposure time and binning 2 Segment the acquired image using lower otsu segmentation to identify sample regions Measure the average intensity in the segmented sample region",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 2130,
+          "latency_ms": 405.3020477294922,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "segmentimageotsuimage",
+            "referenceimageprotocolimage",
+            "computesizeprotocolimage",
+            "segment3ddataimage",
+            "samplecenteringimage"
+          ],
+          "timestamp": "2026-07-13T11:54:33.230710",
+          "step_number": 1
+        },
+        {
+          "agent": "supervisor",
+          "query_type": "episodic",
+          "query_text": "Acquire an image using a 1 second exposure time and binning 2. Segment the image to find the sample and measure\nthe average intensity in the sample region. Calculate a new exposure time that achieves an average of ~5000\ncounts inside the sample region. Save this exposure time in a file called optimal_exposure.json under the key optimal_exposure.\n",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1104,
+          "latency_ms": 476.5312671661377,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "reference001",
+            "center001",
+            "setup001_v2",
+            "segmentcenter",
+            "magnification001"
+          ],
+          "timestamp": "2026-07-13T11:55:25.267970",
+          "step_number": 1
+        },
+        {
+          "agent": "instrument",
+          "query_type": "episodic",
+          "query_text": "Calculate a new exposure time that achieves ~5000 counts average intensity in the sample region using the measured intensity from task_3 Save the calculated optimal exposure time to optimal_exposure.json under the key 'optimal_exposure' in the metadata directory",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 732,
+          "latency_ms": 1132.7977180480957,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "singleacquisitionprotocol",
+            "transmissionimagetool",
+            "recipeexecutionacquisitioninstrument",
+            "generalimagingcond",
+            "createrecipeinstrument"
+          ],
+          "timestamp": "2026-07-13T11:55:32.226980",
+          "step_number": 2
+        },
+        {
+          "agent": "image",
+          "query_type": "episodic",
+          "query_text": "Calculate a new exposure time that achieves ~5000 counts average intensity in the sample region using the measured intensity from task_3 Save the calculated optimal exposure time to optimal_exposure.json under the key 'optimal_exposure' in the metadata directory",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1320,
+          "latency_ms": 543.0335998535156,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "referenceimageprotocolimage",
+            "computesizeprotocolimage",
+            "segmentimageotsuimage",
+            "tiffinfoimageinfoimage",
+            "geometrycalculationmagnificiationimage"
+          ],
+          "timestamp": "2026-07-13T11:55:32.770157",
+          "step_number": 2
+        },
+        {
+          "agent": "supervisor",
+          "query_type": "episodic",
+          "query_text": "Acquire an image using a 1 second exposure time and binning 2. Segment the image to find the sample and measure\nthe average intensity in the sample region. Calculate a new exposure time that achieves an average of ~5000\ncounts inside the sample region. Save this exposure time in a file called optimal_exposure.json under the key optimal_exposure.\n",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1104,
+          "latency_ms": 459.9738121032715,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "reference001",
+            "center001",
+            "setup001_v2",
+            "segmentcenter",
+            "magnification001"
+          ],
+          "timestamp": "2026-07-13T11:55:50.925472",
+          "step_number": 2
+        },
+        {
+          "agent": "instrument",
+          "query_type": "episodic",
+          "query_text": "Save the calculated optimal exposure time to optimal_exposure.json under the key 'optimal_exposure' in the metadata directory",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 683,
+          "latency_ms": 2227.1666526794434,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "singleacquisitionprotocol",
+            "createrecipeinstrument",
+            "recipeexecutionacquisitioninstrument",
+            "transmissionimagetool",
+            "turnonxrayinstrument"
+          ],
+          "timestamp": "2026-07-13T11:55:59.246731",
+          "step_number": 3
+        },
+        {
+          "agent": "image",
+          "query_type": "episodic",
+          "query_text": "Save the calculated optimal exposure time to optimal_exposure.json under the key 'optimal_exposure' in the metadata directory",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1255,
+          "latency_ms": 425.2433776855469,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "tiffinfoimageinfoimage",
+            "readjsonimage",
+            "referenceimageprotocolimage",
+            "geometrycalculationmagnificiationimage",
+            "computesizeprotocolimage"
+          ],
+          "timestamp": "2026-07-13T11:55:59.672143",
+          "step_number": 3
+        },
+        {
+          "agent": "supervisor",
+          "query_type": "episodic",
+          "query_text": "Acquire an image using a 1 second exposure time and binning 2. Segment the image to find the sample and measure\nthe average intensity in the sample region. Calculate a new exposure time that achieves an average of ~5000\ncounts inside the sample region. Save this exposure time in a file called optimal_exposure.json under the key optimal_exposure.\n",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1104,
+          "latency_ms": 498.760461807251,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "reference001",
+            "center001",
+            "setup001_v2",
+            "segmentcenter",
+            "magnification001"
+          ],
+          "timestamp": "2026-07-13T11:56:19.089171",
+          "step_number": 3
+        }
+      ],
+      "rag_entry_ids": [
+        "reference001",
+        "center001",
+        "setup001_v2",
+        "segmentcenter",
+        "magnification001",
+        "singleacquisitionprotocol",
+        "transmissionimagetool",
+        "generalimagingcond",
+        "recipeexecutionacquisitioninstrument",
+        "turnonxrayinstrument",
+        "segmentimageotsuimage",
+        "referenceimageprotocolimage",
+        "computesizeprotocolimage",
+        "segment3ddataimage",
+        "samplecenteringimage",
+        "createrecipeinstrument",
+        "tiffinfoimageinfoimage",
+        "geometrycalculationmagnificiationimage",
+        "readjsonimage"
+      ],
+      "final_output": "supervisor\u2192FINISH batch=[] done=5 pend=0 fail=0",
+      "files_created": [
+        "artifacts\\af70\\0001.tiff",
+        "metadata\\af70.json",
+        "metadata\\optimal_exposure.json",
+        "metadata/optimal_exposure.json",
+        "artifacts\\19bd.xrm",
+        "artifacts\\2e68.xrm",
+        "artifacts\\443d.xrm",
+        "artifacts\\88af.xrm",
+        "artifacts\\af70.xrm",
+        "artifacts\\sample_size.json",
+        "artifacts\\script_20260713_114303.py",
+        "artifacts\\script_20260713_114441.py",
+        "artifacts\\script_20260713_114453.py",
+        "artifacts\\script_20260713_114926.py",
+        "artifacts\\script_20260713_114940.py",
+        "artifacts\\script_20260713_115210.py",
+        "artifacts\\script_20260713_115225.py",
+        "artifacts\\script_20260713_115341.py",
+        "artifacts\\script_20260713_115357.py",
+        "artifacts\\script_20260713_115515.py",
+        "artifacts\\setup_position.json",
+        "metadata\\19bd.json",
+        "metadata\\2e68.json",
+        "metadata\\443d.json",
+        "metadata\\88af.json",
+        "metadata\\sample_dimensions.json",
+        "metadata\\script_20260713_114303_execution.json",
+        "metadata\\script_20260713_114441_execution.json",
+        "metadata\\script_20260713_114453_execution.json",
+        "metadata\\script_20260713_114926_execution.json",
+        "metadata\\script_20260713_114940_execution.json",
+        "metadata\\script_20260713_115225_execution.json",
+        "metadata\\script_20260713_115357_execution.json",
+        "metadata\\script_20260713_115515_execution.json"
+      ],
+      "message_trace": [
+        {
+          "type": "human",
+          "content": "Acquire an image using a 1 second exposure time and binning 2. Segment the image to find the sample and measure\nthe average intensity in the sample region. Calculate a new exposure time that achieves an average of ~5000\ncounts inside the sample region. Save this exposure time in a file called optimal_exposure.json under the key optimal_exposure.\n"
+        },
+        {
+          "type": "ai",
+          "content": "supervisor\u2192worker batch=['task_1', 'task_2', 'task_3'] done=0 pend=5 fail=0"
+        },
+        {
+          "type": "ai",
+          "content": "worker batch done=['task_1', 'task_2', 'task_3'] fail=[]"
+        },
+        {
+          "type": "ai",
+          "content": "supervisor\u2192worker batch=['task_4', 'task_5'] done=3 pend=2 fail=0"
+        },
+        {
+          "type": "ai",
+          "content": "worker batch done=['task_4'] fail=[]"
+        },
+        {
+          "type": "ai",
+          "content": "supervisor\u2192worker batch=['task_5'] done=4 pend=1 fail=0"
+        },
+        {
+          "type": "ai",
+          "content": "worker batch done=['task_5'] fail=[]"
+        },
+        {
+          "type": "ai",
+          "content": "supervisor\u2192FINISH batch=[] done=5 pend=0 fail=0"
+        }
+      ],
+      "workspace_dir": "D:\\Src_Repos\\september\\testing\\sweep_results\\sweep_20260713_113822_c15462\\config_94c6ea045e303d2d\\workspace"
+    },
+    {
+      "test_id": "unknown",
+      "test_name": "Unnamed Test",
+      "status": "passed",
+      "start_time": "2026-07-13T11:58:40.163178",
+      "end_time": "2026-07-13T11:58:40.178310",
+      "duration_ms": 135410.24208068848,
+      "suite_run_id": "1629245d-a192-4eb7-908a-87bb1fbd9ec5",
+      "config_snapshot": {
+        "directories": {
+          "base_dir": "D:\\Src_Repos\\september\\testing\\sweep_results\\sweep_20260713_113822_c15462\\config_94c6ea045e303d2d\\workspace",
+          "log_dir": "D:\\Src_Repos\\september\\logs",
+          "rag_db_dir": "D:\\Src_Repos\\september\\rag_databases",
+          "metrics_output_dir": "D:\\Src_Repos\\september\\metrics"
+        },
+        "model": {
+          "provider": "openai-standard",
+          "model": "claude-sonnet-4",
+          "temperature": 0.0
+        },
+        "rag": {
+          "embedding_model": "text-embedding-3-large",
+          "episodic_top_k": 5,
+          "contextual_top_k": 1,
+          "chunk_size": 1000,
+          "chunk_overlap": 500,
+          "similarity_threshold": 0.8,
+          "cache_enabled": true
+        },
+        "message_management": {
+          "max_messages": 100,
+          "max_tokens": 20000,
+          "pruning_strategy": "smart",
+          "preserve_recent_messages": 10
+        },
+        "agent": {
+          "timeout": 10000,
+          "max_retries": 5,
+          "recursion_limit": 250,
+          "graph_topology": "two_agent"
+        },
+        "tools_enabled": {
+          "instrument": true,
+          "image": true,
+          "geometry": true,
+          "recipe": true,
+          "code_execution": true
+        },
+        "metrics": {
+          "enabled": true,
+          "token_counting_method": "tiktoken",
+          "retention_days": 30,
+          "cost_per_1k_input": 0.0025,
+          "cost_per_1k_output": 0.01
+        },
+        "testing": {
+          "is_test_config": true,
+          "mock_mode": false,
+          "timeout_seconds": 300000,
+          "fail_fast": false
+        },
+        "test_id": "unknown",
+        "test_name": "Unnamed Test"
+      },
+      "config_hash": "d37c50e258b4cc20",
+      "failures": [],
+      "error_message": null,
+      "error_traceback": null,
+      "total_tokens": 42731,
+      "llm_calls": 10,
+      "tool_calls": 7,
+      "tool_names_used": [
+        "get_stage_position",
+        "list_directory_files",
+        "read_json_file",
+        "recipe_modify_and_save",
+        "recipe_open_and_run",
+        "get_source_detector_geometry"
+      ],
+      "tool_invocations": [
+        {
+          "name": "get_stage_position",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "get_source_detector_geometry",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "read_json_file",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "list_directory_files",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "read_json_file",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "recipe_modify_and_save",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "recipe_open_and_run",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        }
+      ],
+      "agents_visited": [
+        "supervisor",
+        "worker",
+        "supervisor"
+      ],
+      "tasks_completed": 4,
+      "estimated_cost": 0.1183,
+      "input_tokens": 41204,
+      "output_tokens": 1527,
+      "rag_retrievals": [
+        {
+          "agent": "supervisor",
+          "query_type": "episodic",
+          "query_text": "- Get the current sample stage, source, and detector positions. Open the file optimal_exposure.json to get the optimal\nexposure time for the sample. Create a recipe file that uses the current instrument sample stage position as the \ninitial sample position and uses the current source and detector positions. The recipe should also use the \noptimal exposure time from optimal_exposure.json and set the reference axis as 'Sample X.' Save the recipe file\nas 'TDP_006_optimal.rcp.' Begin a recipe acquis",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1171,
+          "latency_ms": 452.61526107788086,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "createrecipe",
+            "setup001_v2",
+            "center001",
+            "reference001",
+            "twoviewcenter002"
+          ],
+          "timestamp": "2026-07-13T11:56:25.232566",
+          "step_number": 1
+        },
+        {
+          "agent": "instrument",
+          "query_type": "episodic",
+          "query_text": "Get the current sample stage, source, and detector positions using get_stage_position tool Open and read the file optimal_exposure.json to extract the optimal exposure time value Create a recipe file using recipe_modify_and_save tool with current instrument positions as initial sample position, current source and detector positions, optimal exposure time from optimal_exposure.json, reference axis set to 'Sample X', and save as 'artifacts/TDP_006_optimal.rcp' Begin recipe acquisition by running t",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 714,
+          "latency_ms": 550.238847732544,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "createrecipeinstrument",
+            "recipeexecutionacquisitioninstrument",
+            "singleacquisitionprotocol",
+            "generalimagingcond",
+            "modifyrecipeinstrumenttool"
+          ],
+          "timestamp": "2026-07-13T11:56:32.857009",
+          "step_number": 1
+        },
+        {
+          "agent": "image",
+          "query_type": "episodic",
+          "query_text": "Get the current sample stage, source, and detector positions using get_stage_position tool Open and read the file optimal_exposure.json to extract the optimal exposure time value Create a recipe file using recipe_modify_and_save tool with current instrument positions as initial sample position, current source and detector positions, optimal exposure time from optimal_exposure.json, reference axis set to 'Sample X', and save as 'artifacts/TDP_006_optimal.rcp' Begin recipe acquisition by running t",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1323,
+          "latency_ms": 746.4866638183594,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "referenceimageprotocolimage",
+            "tiffinfoimageinfoimage",
+            "geometrycalculationmagnificiationimage",
+            "segmentimageotsuimage",
+            "centercalculationimage"
+          ],
+          "timestamp": "2026-07-13T11:56:33.603644",
+          "step_number": 1
+        },
+        {
+          "agent": "supervisor",
+          "query_type": "episodic",
+          "query_text": "- Get the current sample stage, source, and detector positions. Open the file optimal_exposure.json to get the optimal\nexposure time for the sample. Create a recipe file that uses the current instrument sample stage position as the \ninitial sample position and uses the current source and detector positions. The recipe should also use the \noptimal exposure time from optimal_exposure.json and set the reference axis as 'Sample X.' Save the recipe file\nas 'TDP_006_optimal.rcp.' Begin a recipe acquis",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1171,
+          "latency_ms": 535.0463390350342,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "createrecipe",
+            "setup001_v2",
+            "center001",
+            "reference001",
+            "twoviewcenter002"
+          ],
+          "timestamp": "2026-07-13T11:58:33.465399",
+          "step_number": 1
+        }
+      ],
+      "rag_entry_ids": [
+        "createrecipe",
+        "setup001_v2",
+        "center001",
+        "reference001",
+        "twoviewcenter002",
+        "createrecipeinstrument",
+        "recipeexecutionacquisitioninstrument",
+        "singleacquisitionprotocol",
+        "generalimagingcond",
+        "modifyrecipeinstrumenttool",
+        "referenceimageprotocolimage",
+        "tiffinfoimageinfoimage",
+        "geometrycalculationmagnificiationimage",
+        "segmentimageotsuimage",
+        "centercalculationimage"
+      ],
+      "final_output": "supervisor\u2192FINISH batch=[] done=4 pend=0 fail=0",
+      "files_created": [
+        "metadata/optimal_exposure.json",
+        "artifacts/TDP_006_optimal.rcp",
+        "metadata/TDP_006_optimal_sidecar.json",
+        "artifacts\\19bd.xrm",
+        "artifacts\\2e68.xrm",
+        "artifacts\\443d.xrm",
+        "artifacts\\88af.xrm",
+        "artifacts\\af70.xrm",
+        "artifacts\\sample_size.json",
+        "artifacts\\script_20260713_114303.py",
+        "artifacts\\script_20260713_114441.py",
+        "artifacts\\script_20260713_114453.py",
+        "artifacts\\script_20260713_114926.py",
+        "artifacts\\script_20260713_114940.py",
+        "artifacts\\script_20260713_115210.py",
+        "artifacts\\script_20260713_115225.py",
+        "artifacts\\script_20260713_115341.py",
+        "artifacts\\script_20260713_115357.py",
+        "artifacts\\script_20260713_115515.py",
+        "artifacts\\setup_position.json",
+        "artifacts\\TDP_006_optimal.rcp",
+        "metadata\\19bd.json",
+        "metadata\\2e68.json",
+        "metadata\\443d.json",
+        "metadata\\88af.json",
+        "metadata\\af70.json",
+        "metadata\\optimal_exposure.json",
+        "metadata\\sample_dimensions.json",
+        "metadata\\script_20260713_114303_execution.json",
+        "metadata\\script_20260713_114441_execution.json",
+        "metadata\\script_20260713_114453_execution.json",
+        "metadata\\script_20260713_114926_execution.json",
+        "metadata\\script_20260713_114940_execution.json",
+        "metadata\\script_20260713_115225_execution.json",
+        "metadata\\script_20260713_115357_execution.json",
+        "metadata\\script_20260713_115515_execution.json",
+        "metadata\\TDP_006_optimal_sidecar.json"
+      ],
+      "message_trace": [
+        {
+          "type": "human",
+          "content": "- Get the current sample stage, source, and detector positions. Open the file optimal_exposure.json to get the optimal\nexposure time for the sample. Create a recipe file that uses the current instrument sample stage position as the \ninitial sample position and uses the current source and detector positions. The recipe should also use the \noptimal exposure time from optimal_exposure.json and set the reference axis as 'Sample X.' Save the recipe file\nas 'TDP_006_optimal.rcp.' Begin a recipe acquisition.\n"
+        },
+        {
+          "type": "ai",
+          "content": "supervisor\u2192worker batch=['task_1', 'task_2', 'task_3', 'task_4'] done=0 pend=4 fail=0"
+        },
+        {
+          "type": "ai",
+          "content": "worker batch done=['task_1', 'task_2', 'task_3', 'task_4'] fail=[]"
+        },
+        {
+          "type": "ai",
+          "content": "supervisor\u2192FINISH batch=[] done=4 pend=0 fail=0"
+        }
+      ],
+      "workspace_dir": "D:\\Src_Repos\\september\\testing\\sweep_results\\sweep_20260713_113822_c15462\\config_94c6ea045e303d2d\\workspace"
+    },
+    {
+      "test_id": "unknown",
+      "test_name": "Unnamed Test",
+      "status": "failed",
+      "start_time": "2026-07-13T12:15:09.311375",
+      "end_time": "2026-07-13T12:15:09.346679",
+      "duration_ms": 989139.8415565491,
+      "suite_run_id": "1629245d-a192-4eb7-908a-87bb1fbd9ec5",
+      "config_snapshot": {
+        "directories": {
+          "base_dir": "D:\\Src_Repos\\september\\testing\\sweep_results\\sweep_20260713_113822_c15462\\config_94c6ea045e303d2d\\workspace",
+          "log_dir": "D:\\Src_Repos\\september\\logs",
+          "rag_db_dir": "D:\\Src_Repos\\september\\rag_databases",
+          "metrics_output_dir": "D:\\Src_Repos\\september\\metrics"
+        },
+        "model": {
+          "provider": "openai-standard",
+          "model": "claude-sonnet-4",
+          "temperature": 0.0
+        },
+        "rag": {
+          "embedding_model": "text-embedding-3-large",
+          "episodic_top_k": 5,
+          "contextual_top_k": 1,
+          "chunk_size": 1000,
+          "chunk_overlap": 500,
+          "similarity_threshold": 0.8,
+          "cache_enabled": true
+        },
+        "message_management": {
+          "max_messages": 100,
+          "max_tokens": 20000,
+          "pruning_strategy": "smart",
+          "preserve_recent_messages": 10
+        },
+        "agent": {
+          "timeout": 10000,
+          "max_retries": 5,
+          "recursion_limit": 250,
+          "graph_topology": "two_agent"
+        },
+        "tools_enabled": {
+          "instrument": true,
+          "image": true,
+          "geometry": true,
+          "recipe": true,
+          "code_execution": true
+        },
+        "metrics": {
+          "enabled": true,
+          "token_counting_method": "tiktoken",
+          "retention_days": 30,
+          "cost_per_1k_input": 0.0025,
+          "cost_per_1k_output": 0.01
+        },
+        "testing": {
+          "is_test_config": true,
+          "mock_mode": false,
+          "timeout_seconds": 300000,
+          "fail_fast": false
+        },
+        "test_id": "unknown",
+        "test_name": "Unnamed Test"
+      },
+      "config_hash": "d37c50e258b4cc20",
+      "failures": [
+        {
+          "check_name": "file_content",
+          "expected": "number_of_defects.json::number_of_defects equals 5",
+          "actual": 10,
+          "message": "Key 'number_of_defects' = 10, expected equals 5"
+        }
+      ],
+      "error_message": null,
+      "error_traceback": null,
+      "total_tokens": 292630,
+      "llm_calls": 31,
+      "tool_calls": 26,
+      "tool_names_used": [
+        "list_directory_files",
+        "read_json_file",
+        "execute_python_code",
+        "get_file_info",
+        "tiff_info"
+      ],
+      "tool_invocations": [
+        {
+          "name": "list_directory_files",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "get_file_info",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "tiff_info",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "tiff_info",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "tiff_info",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "tiff_info",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "tiff_info",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "list_directory_files",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "read_json_file",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "read_json_file",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "list_directory_files",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "read_json_file",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "execute_python_code",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        },
+        {
+          "name": "read_json_file",
+          "args_keys": [],
+          "agent": "unknown",
+          "timestamp": "",
+          "tool_call_id": "",
+          "source": "results"
+        }
+      ],
+      "agents_visited": [
+        "supervisor",
+        "worker",
+        "supervisor",
+        "worker",
+        "supervisor"
+      ],
+      "tasks_completed": 5,
+      "estimated_cost": 0.8772,
+      "input_tokens": 273217,
+      "output_tokens": 19413,
+      "rag_retrievals": [
+        {
+          "agent": "supervisor",
+          "query_type": "episodic",
+          "query_text": "- Open the most recently collected 3D tomography reconstruction (saved as a tiff stack). Segment the 3D dataset\nusing a multi-otsu filter. Find all pore regions inside the sample that have a diameter larger than 1mm. Create a \nplot that shows a 2D slice through every one of these defects. Count how many defects there are and save them\nin a json file called 'number_of_defects.json' under the key 'number_of_defects.' The saved value should be an\ninteger.\n",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1036,
+          "latency_ms": 476.8679141998291,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "reference001",
+            "center001",
+            "segmentcenter",
+            "createrecipe",
+            "setup001_v2"
+          ],
+          "timestamp": "2026-07-13T11:58:40.711861",
+          "step_number": 1
+        },
+        {
+          "agent": "instrument",
+          "query_type": "episodic",
+          "query_text": "Find and open the most recently collected 3D tomography reconstruction (tiff stack) from the artifacts directory Segment the 3D dataset using multi-otsu filter to identify different material phases Identify all pore regions inside the sample that have a diameter larger than 1mm using 3D analysis",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 732,
+          "latency_ms": 531.6698551177979,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "createrecipeinstrument",
+            "singleacquisitionprotocol",
+            "recipeexecutionacquisitioninstrument",
+            "generalimagingcond",
+            "transmissionimagetool"
+          ],
+          "timestamp": "2026-07-13T11:58:48.884397",
+          "step_number": 1
+        },
+        {
+          "agent": "image",
+          "query_type": "episodic",
+          "query_text": "Find and open the most recently collected 3D tomography reconstruction (tiff stack) from the artifacts directory Segment the 3D dataset using multi-otsu filter to identify different material phases Identify all pore regions inside the sample that have a diameter larger than 1mm using 3D analysis",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 2078,
+          "latency_ms": 441.4653778076172,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "segment3ddataimage",
+            "segmentimageotsuimage",
+            "referenceimageprotocolimage",
+            "computesizeprotocolimage",
+            "tiffinfoimageinfoimage"
+          ],
+          "timestamp": "2026-07-13T11:58:49.326005",
+          "step_number": 1
+        },
+        {
+          "agent": "supervisor",
+          "query_type": "episodic",
+          "query_text": "- Open the most recently collected 3D tomography reconstruction (saved as a tiff stack). Segment the 3D dataset\nusing a multi-otsu filter. Find all pore regions inside the sample that have a diameter larger than 1mm. Create a \nplot that shows a 2D slice through every one of these defects. Count how many defects there are and save them\nin a json file called 'number_of_defects.json' under the key 'number_of_defects.' The saved value should be an\ninteger.\n",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1036,
+          "latency_ms": 522.402286529541,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "reference001",
+            "center001",
+            "segmentcenter",
+            "createrecipe",
+            "setup001_v2"
+          ],
+          "timestamp": "2026-07-13T12:07:41.987604",
+          "step_number": 1
+        },
+        {
+          "agent": "instrument",
+          "query_type": "episodic",
+          "query_text": "Create a plot showing a 2D slice through every defect larger than 1mm diameter Count the total number of defects and save the count as an integer in 'number_of_defects.json' under the key 'number_of_defects'",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 711,
+          "latency_ms": 465.6522274017334,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "singleacquisitionprotocol",
+            "transmissionimagetool",
+            "recipeexecutionacquisitioninstrument",
+            "modifyrecipeinstrumenttool",
+            "createrecipeinstrument"
+          ],
+          "timestamp": "2026-07-13T12:07:48.461761",
+          "step_number": 2
+        },
+        {
+          "agent": "image",
+          "query_type": "episodic",
+          "query_text": "Create a plot showing a 2D slice through every defect larger than 1mm diameter Count the total number of defects and save the count as an integer in 'number_of_defects.json' under the key 'number_of_defects'",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 2154,
+          "latency_ms": 470.14808654785156,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "computesizeprotocolimage",
+            "segment3ddataimage",
+            "referenceimageprotocolimage",
+            "geometrycalculationmagnificiationimage",
+            "segmentimageotsuimage"
+          ],
+          "timestamp": "2026-07-13T12:07:48.932059",
+          "step_number": 2
+        },
+        {
+          "agent": "supervisor",
+          "query_type": "episodic",
+          "query_text": "- Open the most recently collected 3D tomography reconstruction (saved as a tiff stack). Segment the 3D dataset\nusing a multi-otsu filter. Find all pore regions inside the sample that have a diameter larger than 1mm. Create a \nplot that shows a 2D slice through every one of these defects. Count how many defects there are and save them\nin a json file called 'number_of_defects.json' under the key 'number_of_defects.' The saved value should be an\ninteger.\n",
+          "results_count": 5,
+          "context_used": true,
+          "context_tokens": 1036,
+          "latency_ms": 514.5320892333984,
+          "retrieved_context_preview": null,
+          "retrieved_sources": null,
+          "retrieved_entry_ids": [
+            "reference001",
+            "center001",
+            "segmentcenter",
+            "createrecipe",
+            "setup001_v2"
+          ],
+          "timestamp": "2026-07-13T12:15:00.094991",
+          "step_number": 2
+        }
+      ],
+      "rag_entry_ids": [
+        "reference001",
+        "center001",
+        "segmentcenter",
+        "createrecipe",
+        "setup001_v2",
+        "createrecipeinstrument",
+        "singleacquisitionprotocol",
+        "recipeexecutionacquisitioninstrument",
+        "generalimagingcond",
+        "transmissionimagetool",
+        "segment3ddataimage",
+        "segmentimageotsuimage",
+        "referenceimageprotocolimage",
+        "computesizeprotocolimage",
+        "tiffinfoimageinfoimage",
+        "modifyrecipeinstrumenttool",
+        "geometrycalculationmagnificiationimage"
+      ],
+      "final_output": "supervisor\u2192FINISH batch=[] done=5 pend=0 fail=0",
+      "files_created": [
+        "artifacts\\af70\\0001.tiff",
+        "artifacts\\88af\\0001.tiff",
+        "artifacts\\19bd\\0001.tiff",
+        "artifacts\\2e68\\0001.tiff",
+        "artifacts\\443d\\0001.tiff",
+        "artifacts\\synthetic_recon.tiff",
+        "metadata\\synthetic_recon_metadata.json",
+        "artifacts\\labeled_pores.npy",
+        "artifacts\\number_of_defects.json",
+        "artifacts\\segmented_volume.npy",
+        "metadata\\pore_analysis_results.json",
+        "artifacts\\large_defects_visualization.png",
+        "artifacts/number_of_defects.json",
+        "metadata/synthetic_recon_metadata.json",
+        "artifacts\\19bd.xrm",
+        "artifacts\\2e68.xrm",
+        "artifacts\\443d.xrm",
+        "artifacts\\88af.xrm",
+        "artifacts\\af70.xrm",
+        "artifacts\\large_defects_slices.png",
+        "artifacts\\sample_size.json",
+        "artifacts\\script_20260713_114303.py",
+        "artifacts\\script_20260713_114441.py",
+        "artifacts\\script_20260713_114453.py",
+        "artifacts\\script_20260713_114926.py",
+        "artifacts\\script_20260713_114940.py",
+        "artifacts\\script_20260713_115210.py",
+        "artifacts\\script_20260713_115225.py",
+        "artifacts\\script_20260713_115341.py",
+        "artifacts\\script_20260713_115357.py",
+        "artifacts\\script_20260713_115515.py",
+        "artifacts\\script_20260713_120047.py",
+        "artifacts\\script_20260713_120114.py",
+        "artifacts\\script_20260713_120131.py",
+        "artifacts\\script_20260713_120212.py",
+        "artifacts\\script_20260713_120240.py",
+        "artifacts\\script_20260713_120440.py",
+        "artifacts\\script_20260713_120622.py",
+        "artifacts\\script_20260713_120652.py",
+        "artifacts\\script_20260713_120711.py",
+        "artifacts\\script_20260713_120821.py",
+        "artifacts\\script_20260713_120842.py",
+        "artifacts\\script_20260713_120931.py",
+        "artifacts\\script_20260713_121313.py",
+        "artifacts\\setup_position.json",
+        "artifacts\\TDP_006_optimal.rcp",
+        "metadata\\19bd.json",
+        "metadata\\2e68.json",
+        "metadata\\443d.json",
+        "metadata\\88af.json",
+        "metadata\\af70.json",
+        "metadata\\optimal_exposure.json",
+        "metadata\\sample_dimensions.json",
+        "metadata\\script_20260713_114303_execution.json",
+        "metadata\\script_20260713_114441_execution.json",
+        "metadata\\script_20260713_114453_execution.json",
+        "metadata\\script_20260713_114926_execution.json",
+        "metadata\\script_20260713_114940_execution.json",
+        "metadata\\script_20260713_115225_execution.json",
+        "metadata\\script_20260713_115357_execution.json",
+        "metadata\\script_20260713_115515_execution.json",
+        "metadata\\script_20260713_120047_execution.json",
+        "metadata\\script_20260713_120131_execution.json",
+        "metadata\\script_20260713_120240_execution.json",
+        "metadata\\script_20260713_120440_execution.json",
+        "metadata\\script_20260713_120622_execution.json",
+        "metadata\\script_20260713_120711_execution.json",
+        "metadata\\script_20260713_120842_execution.json",
+        "metadata\\script_20260713_120931_execution.json",
+        "metadata\\script_20260713_121313_execution.json",
+        "metadata\\TDP_006_optimal_sidecar.json"
+      ],
+      "message_trace": [
+        {
+          "type": "human",
+          "content": "- Open the most recently collected 3D tomography reconstruction (saved as a tiff stack). Segment the 3D dataset\nusing a multi-otsu filter. Find all pore regions inside the sample that have a diameter larger than 1mm. Create a \nplot that shows a 2D slice through every one of these defects. Count how many defects there are and save them\nin a json file called 'number_of_defects.json' under the key 'number_of_defects.' The saved value should be an\ninteger.\n"
+        },
+        {
+          "type": "ai",
+          "content": "supervisor\u2192worker batch=['task_1', 'task_2', 'task_3'] done=0 pend=5 fail=0"
+        },
+        {
+          "type": "ai",
+          "content": "worker batch done=['task_1', 'task_2', 'task_3'] fail=[]"
+        },
+        {
+          "type": "ai",
+          "content": "supervisor\u2192worker batch=['task_4', 'task_5'] done=3 pend=2 fail=0"
+        },
+        {
+          "type": "ai",
+          "content": "worker batch done=['task_4', 'task_5'] fail=[]"
+        },
+        {
+          "type": "ai",
+          "content": "supervisor\u2192FINISH batch=[] done=5 pend=0 fail=0"
+        }
+      ],
+      "workspace_dir": "D:\\Src_Repos\\september\\testing\\sweep_results\\sweep_20260713_113822_c15462\\config_94c6ea045e303d2d\\workspace"
+    }
+  ]
+}

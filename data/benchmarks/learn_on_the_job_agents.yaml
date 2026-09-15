@@ -1,0 +1,108 @@
+id: learn_on_the_job_agents
+record_type: system
+name: Operating advanced scientific instruments with AI agents that learn on the job
+short_name: Learn-on-the-job agents
+year: 2025
+venue: npj Computational Materials 12, 160 (2026); arXiv Sep 2025
+authors_short: Vriza et al.
+arxiv: '2509.00098'
+doi: 10.1038/s41524-026-02005-0
+url: https://arxiv.org/abs/2509.00098
+code_url: null
+data_url: null
+license: null
+status: published
+summary: |
+  Human-in-the-loop LLM-agent pipeline (Argonne) for operating an X-ray nanoprobe beamline and an autonomous robotic materials station. Multiple LLMs are evaluated as trainable assistants orchestrating multi-task, multimodal workflows: from function execution via logical/algebraic inference to acquire a 2D scan, to image analysis that picks coordinates to zoom and rescan, coordinating a vision agent that locates suitable nanoparticle candidates. Performance is reported as percentages with standard deviations over four trials per condition, with and without human feedback.
+benchmark_features:
+  agents_evaluated: []
+  evaluation_target:
+  - instrument_control
+  - perception
+  - protocol_planning
+  execution_mode: hybrid
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results:
+  - Human feedback improves text-based and sequential tasks but not visual reasoning (search-snippet summary)
+  holdout_or_split_design: null
+  instruments:
+  - name: APS X-ray nanoprobe beamline
+    modality: synchrotron
+    real_or_simulated: real
+  - name: Autonomous robotic materials design/characterization station (Polybot-class, Argonne)
+    modality: robotics
+    real_or_simulated: real
+  leakage_or_contamination_risk: null
+  metric_types:
+  - success_rate
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: null
+  open_source: null
+  primary_metric: Percentage task success (mean +/- SD over four trials per condition)
+  repetitions_per_task: 4
+  sampling_strategy: null
+  scientific_domains:
+  - X-ray nanoprobe imaging
+  - nanoparticle characterization
+  - autonomous materials labs
+  scoring_granularity: binary
+  target_population: Multi-step instrument workflows combining function calls, arithmetic/logical inference and
+    image-based decisions
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: image_interpretation
+  quantitative_tolerance: null
+  reasoning_demand: mixed
+  safety_criticality: medium
+  task_taxonomy:
+  - function execution with logical/algebraic inference (2D scan)
+  - image analysis to select zoom coordinates and rescan
+  - nanoparticle candidate identification
+  tool_composition: Orchestrator LLM coordinates function-execution and a vision agent; optional iterative human
+    feedback
+  tool_interface:
+  - python_api
+  - natural_language
+  workflow_depth: multi_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Nanoprobe beamline scans and robotic station; details unverified
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: real
+  sample_types:
+  - nanoparticles
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: some
+  models: []
+  multi_agent: true
+  planner: varied
+  rag_or_memory: some
+  tools: []
+  verifier_or_self_debug: null
+  vision_used: true
+transfer_relevant_findings:
+- Iterative human feedback ('learning on the job') helps sequential/text tasks but does not fix visual-reasoning
+  failures of current models
+limitations:
+- Model list, task count and numeric results unverified in this session
+related:
+- experiment_automation_agents
+notes: |
+  Authors: Aikaterini Vriza, Michael H. Prince, Tao Zhou, Henry Chan, Mathew J. Cherukara. All content from search snippets of Nature/arXiv pages; not fetched directly.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2509.00098
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

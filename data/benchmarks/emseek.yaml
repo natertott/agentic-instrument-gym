@@ -1,0 +1,136 @@
+id: emseek
+record_type: benchmark
+name: Bridging electron microscopy and materials analysis with an autonomous agentic platform (EMSeek)
+short_name: EMSeek
+year: 2026
+venue: Science Advances 12, eaed0583 (published 2026-04-01)
+authors_short: Chen, Yuan & You (Cornell University)
+arxiv: null
+doi: 10.1126/sciadv.aed0583
+url: https://www.science.org/doi/10.1126/sciadv.aed0583
+code_url: https://github.com/PEESEgroup/EMSeek
+data_url: null
+license: Apache-2.0 (code)
+status: published
+summary: |
+  A provenance-tracked multi-agent platform (Maestro planner delegating to specialised controllers, with Guardian and Scribe agents attaching provenance and uncertainty summaries) that turns raw EM images into materials insight: segmentation, crystal-structure determination, property prediction, literature comparison and report generation. Evaluated on 20 material systems and five canonical tasks; it analyses images rather than controlling the microscope.
+benchmark_features:
+  agents_evaluated:
+  - EMSeek multi-agent system (LLM via LiteLLM
+  - configurable)
+  - Segment Anything (baseline)
+  - single-expert property models (baselines)
+  evaluation_target:
+  - data_analysis
+  - perception
+  - question_answering
+  execution_mode: static_code_eval
+  has_abstention_eval: false
+  has_human_baseline: true
+  has_safety_eval: false
+  headline_results:
+  - End-to-end analysis in 2–5 min per image, ~50x faster than expert workflows (phys.org / HyperAI summaries)
+  - ~2x faster and higher accuracy than Segment Anything on segmentation (secondary)
+  - Structural similarity >90% on STEM2Mat (secondary)
+  - With ~2% labelled data for calibration, meets or exceeds strong single-expert models on three OOD property-prediction
+    benchmarks (secondary)
+  holdout_or_split_design: Out-of-distribution property-prediction benchmarks with calibration on ~2% labelled data
+    (secondary source)
+  instruments:
+  - name: none (offline EM/STEM images)
+    modality: microscopy
+    real_or_simulated: none
+  leakage_or_contamination_risk: Uses published datasets; LLM planner may have seen literature used for reasoning;
+    not discussed in accessible text
+  metric_types:
+  - other
+  - time
+  n_agent_configs: 1
+  n_instances_or_runs_reported: null
+  n_task_families: 5
+  n_tasks: 5
+  open_source: true
+  primary_metric: task-specific accuracy metrics (segmentation accuracy vs SAM; structural similarity on STEM2Mat;
+    property-prediction error vs single-expert models); wall-clock time per image
+  repetitions_per_task: null
+  sampling_strategy: 20 material systems x 5 canonical tasks (segmentation, structure modelling, property inference,
+    literature reasoning, reporting); uses public datasets such as STEM2Mat and three out-of-distribution property
+    benchmarks (names not verified)
+  scientific_domains:
+  - electron microscopy
+  - materials science
+  - catalysis
+  - energy storage
+  - semiconductors
+  scoring_granularity: continuous
+  target_population: End-to-end EM image-to-insight analysis across diverse material systems
+  task_source: mixed
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: image_interpretation
+  quantitative_tolerance: null
+  reasoning_demand: high
+  safety_criticality: none
+  task_taxonomy:
+  - perception/segmentation
+  - structure modelling
+  - property inference
+  - literature reasoning
+  - report generation
+  tool_composition: Segmentation models (PyTorch/segmentation-models-pytorch), structure tools (ASE, pymatgen, CIF
+    library), property models (UMA, MACE, MatterSim), literature QA (paper-qa)
+  tool_interface:
+  - python_api
+  - natural_language
+  workflow_depth: long_horizon
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Offline agentic pipeline with shared memory and provenance tracking; no instrument in
+    the loop
+  injected_faults: null
+  novelty_control: OOD property benchmarks (secondary)
+  sample_real_or_simulated: dataset
+  sample_types:
+  - HR-TEM/STEM images of catalysts
+  - battery and semiconductor materials; 20 material systems
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: some
+  models:
+  - configurable LLM/MLLM via LiteLLM (defaults not verified)
+  multi_agent: true
+  planner: plan_and_execute
+  rag_or_memory: some
+  tools:
+  - segmentation
+  - CIF/structure library
+  - ML interatomic potentials
+  - paper-qa literature retrieval
+  verifier_or_self_debug: external_verifier
+  vision_used: true
+transfer_relevant_findings:
+- Agentic decomposition of the EM analysis chain with small-data calibration generalised to OOD property tasks (per
+  secondary summaries)
+limitations:
+- No instrument control; analysis-only
+- Quantitative results obtained only from press summaries (phys.org, HyperAI); science.org blocked — numbers should
+  be re-verified against the paper
+- Number of images/runs, repetitions, and per-task metrics not verified
+related:
+- tem_agent
+- microscopygpt
+- xrm_agent_benchmarks
+notes: 'Abstract fragment confirmed via a Nature-paper-hub index mirror: ''Electron microscopy (EM) reveals atomic-scale
+  structures that underpin catalysis, energy storage, and semiconductor reliability, yet current workflows remain
+  fragmented across segmentat...''. All headline numbers are secondary-sourced.'
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://www.science.org/doi/10.1126/sciadv.aed0583
+  - https://github.com/PEESEgroup/EMSeek
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

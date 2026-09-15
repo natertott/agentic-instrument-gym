@@ -1,0 +1,179 @@
+id: scienceagentbench
+record_type: benchmark
+name: 'ScienceAgentBench: Toward Rigorous Assessment of Language Agents for Data-Driven Scientific Discovery'
+short_name: ScienceAgentBench
+year: 2024
+venue: ICLR 2025 (poster); arXiv preprint first posted Oct 2024 (v3 is the ICLR camera-ready)
+authors_short: Chen et al.
+arxiv: '2410.05080'
+doi: null
+url: https://arxiv.org/abs/2410.05080
+code_url: https://github.com/OSU-NLP-Group/ScienceAgentBench
+data_url: https://huggingface.co/datasets/osunlp/ScienceAgentBench (annotation sheet / agent inputs only); full
+  benchmark (datasets, gold programs, eval programs, rubrics) is a password-protected zip linked from the README
+  (password 'scienceagentbench'); 'benchmark_verified.zip' since 2026-04-30
+license: 'Code: MIT. Tasks: most under CC BY 4.0; tasks adapted from rasterio (instances 32, 46, 53, 54, 84) and
+  matminer (instance 3) keep their original licenses (repo-verified)'
+status: published
+summary: |
+  ScienceAgentBench evaluates LLM-based language agents on 102 individual tasks from real data-driven scientific discovery workflows, extracted from 44 peer-reviewed publications in bioinformatics, computational chemistry, geographical information science, and psychology & cognitive neuroscience, and validated by nine subject-matter experts. Every task is a code-generation problem: given a natural-language instruction, a dataset (directory listing + preview) and optional expert-provided knowledge, the agent must write a self-contained Python program whose execution output is checked by task-specific evaluation scripts, with GPT-4o used to judge figure outputs against rubrics. The best agent (Claude-3.5-Sonnet with self-debug) solved only 32.4% of tasks independently and 34.3% with expert knowledge; o1-preview reached 42.2% at roughly ten times the cost.
+benchmark_features:
+  agents_evaluated:
+  - Direct prompting
+  - Self-debug
+  - OpenHands CodeAct
+  - 'each run with: Claude-3.5-Sonnet, GPT-4o, Llama-3.1-Instruct-405B, Mistral-Large-2 (2407), and one more open-weight
+    LLM (paper says five LLMs; fifth not verifiable here)'
+  - OpenAI o1-preview (self-debug, added in v2/v3)
+  evaluation_target:
+  - code_generation
+  - data_analysis
+  execution_mode: static_code_eval
+  has_abstention_eval: false
+  has_human_baseline: false
+  has_safety_eval: false
+  headline_results:
+  - Best agent (Claude-3.5-Sonnet, self-debug) solved 32.4% of tasks independently and 34.3% with expert-provided
+    knowledge (best of 3 runs)
+  - OpenAI o1-preview with self-debug solved 42.2% but at roughly 10x the API cost
+  - Direct prompting is poor (16.7% SR for Claude-3.5-Sonnet); self-debug roughly doubles SR
+  - Self-debug outperformed OpenHands CodeAct for 4 of the 5 LLMs
+  - Over 75% of successfully solved tasks had shorter-than-average gold programs (avg 58.6 lines); longer programs
+    mostly failed (search-snippet)
+  - 'Later external result: OpenAI o3 (medium) 33.3% on SAB self-debug at $11.69 total cost (HAL leaderboard via
+    search-snippet; unverified primary)'
+  holdout_or_split_design: Single evaluation set of 102 tasks; no training split. Since 2026-04-30 the HF dataset
+    carries a 'verified' split (repo-verified) whose exact content could not be inspected here.
+  instruments: []
+  leakage_or_contamination_risk: 'Tasks derive from public repositories, so memorization is a real concern. Two
+    mitigations (search-snippet quoting paper): (1) five data points are randomly removed from each test set so
+    programs relying on memorized automatic data loaders produce misaligned results; (2) for model-development tasks,
+    datasets are re-split and test labels replaced by dummy values (e.g. -1) so agents cannot shortcut by reading
+    ground-truth labels. Full benchmark is distributed as a password-protected archive and redistribution is prohibited
+    to limit crawling. BenchGuard (arXiv 2604.24955) later reported author-confirmed benchmark defects, and the
+    authors released a ''verified'' version on 2026-04-30 to mitigate false negatives (repo-verified).'
+  metric_types:
+  - success_rate
+  - rubric
+  - llm_judge
+  - cost
+  - other
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: 4
+  n_tasks: 102
+  open_source: true
+  primary_metric: 'Success Rate (SR): fraction of tasks whose generated program executes and whose output satisfies
+    the task-specific success criteria (best of 3 runs)'
+  repetitions_per_task: 3
+  sampling_strategy: Tasks adapted from open-source code released with 44 peer-reviewed publications across four
+    disciplines; annotators (many with domain background) converted programs into self-contained tasks, then multiple
+    rounds of manual validation by annotators and nine subject-matter experts (senior PhD students and professors).
+    Distribution per discipline not verifiable here (arXiv blocked).
+  scientific_domains:
+  - Bioinformatics
+  - Computational Chemistry
+  - Geographical Information Science
+  - Psychology & Cognitive Neuroscience
+  scoring_granularity: mixed
+  target_population: Essential, individually verifiable tasks (data processing, analysis, modeling, visualization)
+    in real data-driven discovery workflows -- i.e. what a scientist 'co-pilot' would be asked to code -- rather
+    than end-to-end discovery
+  task_source: literature_derived
+task_features:
+  closed_loop_feedback: false
+  perceptual_demand: mixed
+  quantitative_tolerance: 'Task-specific evaluation programs compare outputs (CSV predictions, numeric results,
+    saved models, figures) against gold outputs; numeric tasks use task-defined criteria (e.g. metric thresholds
+    relative to gold program); figures are judged by GPT-4o against fine-grained rubrics (five stages: Data Loading,
+    Data Processing, Modeling/Visualization, Output Formatting, Output Saving). Exact tolerance values per task
+    are in eval_programs (not inspected).'
+  reasoning_demand: high
+  safety_criticality: none
+  task_taxonomy:
+  - 'Sub-task types (paper Fig. 1): data loading/processing, feature analysis, modeling (training/prediction), molecular
+    visualization, geospatial mapping, time-series analysis, statistical analysis, visualization'
+  - 'Disciplines: Bioinformatics; Computational Chemistry; Geographical Information Science; Psychology & Cognitive
+    Neuroscience'
+  tool_composition: Agent must chain domain libraries (e.g. DeepChem, RDKit, GeoPandas, rasterio, BioPsyKit, MNE,
+    scikit-learn, PyTorch) inside one Python file; self-debug agents may execute code and read tracebacks; OpenHands
+    CodeAct uses a sandboxed bash/Python runtime
+  tool_interface:
+  - python_api
+  - cli
+  workflow_depth: multi_step
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Local Python execution; each task has its own dependency set. Since Jan 2025 a SWE-bench-style
+    dockerized harness builds per-task containers and evaluates all 102 tasks in 20-30 min with 8 threads; the authors
+    report 100% (102/102) agreement with the original conda-based evaluation (repo-verified).
+  injected_faults: false
+  novelty_control: Datasets are perturbed (5 test rows removed; re-split with dummy test labels) so memorized loaders/labels
+    fail; otherwise tasks are public-paper-derived
+  sample_real_or_simulated: dataset
+  sample_types:
+  - cell microscopy images (e.g. BBBC002 Drosophila KC167 TIFFs)
+  - molecular datasets (SDF, SMILES; ClinTox, Tetrahymena toxicity)
+  - geospatial rasters and shapefiles (GeoTIFF elevation, building footprints, animal GPS tracks)
+  - physiological time series (EEG Muse CSV, respiration signals)
+  - genomic/sequence and tabular scientific data
+  signal_quality_variation: Real published datasets with their native heterogeneity; no controlled noise injection
+  novelty_levels_tested:
+  - held_out_instance
+agent_features_evaluated:
+  deterministic_execution: false
+  guards_or_safety_layer: none
+  models:
+  - Claude-3.5-Sonnet
+  - GPT-4o
+  - Llama-3.1-Instruct-405B
+  - Mistral-Large-2 (2407)
+  - OpenAI o1-preview
+  - (fifth base LLM unverified)
+  multi_agent: false
+  planner: varied
+  rag_or_memory: none
+  tools:
+  - Python interpreter (self-debug loop)
+  - OpenHands sandbox (bash + IPython + file editing)
+  verifier_or_self_debug: varied
+  vision_used: false
+transfer_relevant_findings:
+- Expert-provided knowledge helps only modestly (32.4% -> 34.3% for the best agent) and can hurt some agents that
+  misuse the hints (paper analysis; search-snippet)
+- Large variance across runs motivates best-of-3 reporting; the README explicitly supports changing the number of
+  runs
+- 'Agentic scaffolding matters more than base model: self-debug beats a heavier OpenHands CodeAct scaffold for 4/5
+  LLMs while being far cheaper'
+- Failures concentrate in data loading/processing of heterogeneous scientific formats and in incorrect use of specialized
+  libraries (GeoPandas, BioPsyKit); bioinformatics and computational chemistry tasks hardest
+- Contamination mitigations (row removal, dummy labels) are needed because agents were observed to take shortcuts
+  such as reading test labels
+- Follow-up AutoSDT (EMNLP 2025) shows fine-tuning Qwen2.5-Coder-32B on 5,404 auto-collected tasks lifts SAB SR
+  to 7.8%, matching GPT-4o (2024-05-13) -- open-weight gap is closable with in-distribution data
+limitations:
+- Only 102 tasks; single evaluation split; per-discipline counts are small so discipline-level comparisons are noisy
+- No human baseline; success criteria and rubrics are author-defined and GPT-4o acts as figure judge
+- Benchmark defects (false negatives) were later confirmed (BenchGuard) leading to a 'verified' re-release in April
+  2026; pre-2026 numbers may under-count successes
+- No instrument control, no closed-loop interaction with an environment; purely code generation over static datasets
+- Full data distributed via a password-protected SharePoint archive rather than an open mirror
+related:
+- discoverybench
+- scienceboard
+- autosdt
+- sciagentbench
+- scireplicate_bench
+- researchcodebench
+- discoveryworld
+notes: |
+  Verified from GitHub (README, LICENSE, docs/20250110_docker, project-site source in gh-pages): task count, source count, expert count, disciplines, metrics names, frameworks, three-run best-of selection, licensing, docker harness, update timeline (2024-10-24 o1 results added; 2024-10-31 OpenHands integration; 2025-01-10 docker; 2026-04-30 verified release). Headline percentages (32.4/34.3/42.2/16.7), contamination strategies, rubric stages and per-framework comparisons come from search snippets quoting the arXiv abstract/HTML and could not be re-read on arxiv.org. Not verifiable here: exact per-discipline task counts, the fifth base LLM name, n_agent_configs, human-rubric agreement statistics, and the HF split structure of the verified release. DOI: none (ICLR/OpenReview id 6z4YKr0GK6).
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted_reviewed
+  sources_consulted:
+  - https://arxiv.org/abs/2410.05080
+  - https://github.com/OSU-NLP-Group/ScienceAgentBench
+  confidence: medium
+  review_status: reviewed
+  reviewer_notes: Reviewed 2026-09-15 against the repository README and evaluation scripts.

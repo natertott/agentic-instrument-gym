@@ -1,0 +1,145 @@
+id: scigym
+record_type: benchmark
+name: 'SciGym: Measuring Scientific Capabilities of Language Models with a Systems Biology Dry Lab'
+short_name: SciGym
+year: 2025
+venue: NeurIPS 2025 Datasets and Benchmarks Track (poster); arXiv v1 2 Jul 2025, v2 14 Jul 2025
+authors_short: Haonan Duan et al. (Duan*, Lu*, Harrigan, Desai, Lu, Koziarski, Cotta, Maddison; U. Toronto / SickKids
+  / Vector)
+arxiv: '2507.02083'
+doi: null
+url: https://arxiv.org/abs/2507.02083
+code_url: 'https://github.com/h4duan/SciGym (project page: https://h4duan.github.io/scigym-benchmark/)'
+data_url: HuggingFace (downloaded via data/download.py --split small|large); 350 SBML systems total
+license: null
+status: published
+summary: |
+  SciGym is an agentic 'dry lab' benchmark: curated SBML models of biological systems from BioModels serve as hidden ground-truth simulators, the agent receives a partial model with reactions removed, and it must iteratively request perturbation experiments (observe; change initial concentrations), analyse the returned time series in Python, and finally submit a complete SBML model. Submissions are scored by reaction-recovery precision/recall/F1 (with and without modifiers) and by simulation trajectory error (SMAPE) under both observed and unseen perturbations. Six frontier LLMs were evaluated on the 137-system 'small' split (<10 reactions); Gemini-2.5-Pro was best, and all models degrade sharply as system complexity grows.
+benchmark_features:
+  agents_evaluated:
+  - 'ReAct-style Thoughts-Actions-Observations agent with: Gemini-2.5-Pro-Preview-03-25, Gemini-2.5-Flash-Preview-04-17,
+    Claude-3.7-Sonnet-20250219, Claude-3.5-Haiku-20241022, GPT-4.1-2025-04-14, GPT-4.1-mini-2025-04-14'
+  evaluation_target:
+  - simulation_control
+  - protocol_planning
+  - data_analysis
+  - code_generation
+  execution_mode: simulator
+  has_abstention_eval: false
+  has_human_baseline: false
+  has_safety_eval: false
+  headline_results:
+  - 'Gemini-2.5-Pro best: STE 0.3212, RMS-with-modifiers F1 0.1817, RMS-without-modifiers F1 0.3383 (project page
+    Table 1)'
+  - 'Claude-3.7-Sonnet: STE 0.3615, F1 0.1688 / 0.3047; GPT-4.1: STE 0.4611, F1 0.1740 / 0.3038'
+  - 'Mini variants worse: Gemini-2.5-Flash STE 0.4181 (F1 0.1217/0.2005), GPT-4.1-mini STE 0.6007 (0.1320/0.2322),
+    Claude-3.5-Haiku STE 0.6281 (0.0530/0.0987)'
+  - Simulation error rises from ~0.1 to ~0.55 for top models as reactions grow from 2 to 10
+  - Best model's F1 is ~5x higher for reactant-product links than for modifier links
+  holdout_or_split_design: small (137, evaluated) vs large (213, unevaluated) splits; within a task, evaluation
+    simulates the submitted model under perturbations not seen during the episode (evaluate_smape_noise in repo)
+  instruments:
+  - name: SBML ODE simulator (libRoadRunner / tellurium / COPASI) acting as the experimental apparatus
+    modality: none
+    real_or_simulated: simulated
+  leakage_or_contamination_risk: BioModels is public, so identifiers are anonymized and components shuffled; the
+    harness also has a test_memorize flag to probe one-shot recall of the model
+  metric_types:
+  - partial_credit
+  - other
+  n_agent_configs: 6
+  n_instances_or_runs_reported: null
+  n_task_families: null
+  n_tasks: 137
+  open_source: true
+  primary_metric: Reaction Matching Score (F1 over recovered reactions, with and without modifiers) together with
+    Simulation Trajectory Error (SMAPE between predicted and true time series, including under held-out perturbations)
+  repetitions_per_task: Not verifiable; default config uses temperature 1.0, max_iterations 5 and eval_debug_rounds
+    5 (repo configs/default.yml); paper's iteration budget not confirmed
+  sampling_strategy: 350 manually curated SBML models from BioModels, preprocessed by anonymizing identifiers and
+    shuffling components to prevent memorization; 'small' split = 137 models with fewer than 10 reactions (evaluated),
+    'large' = remaining 213 models with up to 400 reactions (released, not evaluated)
+  scientific_domains:
+  - 'systems biology: metabolic pathways, gene regulatory networks, cell signalling, epidemiological models'
+  scoring_granularity: continuous
+  target_population: 'End-to-end experimental science on realistically complex mechanistic systems: hypothesis formation,
+    experiment design, data analysis and model proposal, without wet-lab cost'
+  task_source: literature_derived
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: structured_readout
+  quantitative_tolerance: 'Continuous: SMAPE between trajectories; reaction matching is exact on reactant/product(/modifier)
+    sets; graph-edit-distance, species-interaction F1 and kinetic-law similarity also implemented in evaluator'
+  reasoning_demand: high
+  safety_criticality: none
+  task_taxonomy:
+  - SciGym-small (<10 reactions) vs SciGym-large (up to 400 reactions)
+  - 'biology areas: metabolic, gene-regulatory, signalling, epidemiological models'
+  tool_composition: 'Three action types: request experiment (observe / change_initial_concentration JSON), write
+    Python (numpy, pandas, math, scipy, sklearn, libsbml + provided simulate(sbml_string) and shared_variables store),
+    submit SBML model; typically chained over several iterations'
+  tool_interface:
+  - python_api
+  - natural_language
+  workflow_depth: long_horizon
+sample_environment_features:
+  calibration_or_api_state_variation: Boundary/constant species cannot be perturbed; experiment budget controlled
+    by max_iterations
+  environment_description: 'Controller loop: agent emits an action; experiments are executed by modifying the reference
+    SBML and simulating; code runs in a sandbox with truncation of large prints; submitted SBML is validated with
+    up to eval_debug_rounds resubmissions on errors; final scoring via SciGym evaluator'
+  injected_faults: false
+  novelty_control: Anonymized/shuffled models; held-out perturbations at evaluation; large split kept unevaluated
+    as future headroom
+  sample_real_or_simulated: simulated
+  sample_types:
+  - ODE models of biochemical reaction networks (SBML) with species concentrations as observables
+  signal_quality_variation: Simulated deterministic time series; evaluator applies perturbation 'noise' levels to
+    initial conditions to test generalization
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: none
+  models:
+  - Gemini-2.5-Pro
+  - Gemini-2.5-Flash
+  - Claude-3.7-Sonnet
+  - Claude-3.5-Haiku
+  - GPT-4.1
+  - GPT-4.1-mini
+  multi_agent: false
+  planner: react
+  rag_or_memory: some
+  tools:
+  - perturbation experiments
+  - Python sandbox with simulate()
+  - SBML submission
+  verifier_or_self_debug: self_debug
+  vision_used: false
+transfer_relevant_findings:
+- Proposed mechanisms overfit to the specific experiments run and fail to generalize to unseen initial conditions
+  -- direct evidence that agents fit data rather than mechanisms
+- Steep degradation with system size (2 -> 10 reactions) even for frontier models; large split (up to 400 reactions)
+  left unevaluated
+- Subtle (modifier) relationships are systematically missed relative to mass-action reactant/product links
+- '''Pro'' models beat ''mini'' models consistently across families, suggesting capability rather than family drives
+  performance'
+limitations:
+- Perturbation space is narrow (initial-concentration changes only in the released prompt)
+- No human baseline; no cost/time reporting verified
+- Only 137 of 350 systems evaluated; no repository license file
+related:
+- discoveryworld
+- scienceworld
+- discoverybench
+notes: |
+  Repo-verified: split sizes (137/213), supported model IDs, default config (temperature 1.0, max_iterations 5, eval_debug_rounds 5, test_memorize), action prompts, allowed libraries, evaluator metric functions, dependency stack (tellurium, libroadrunner, copasi), project-page results table and abstract (h4duan/scigym-benchmark index.html). Search-snippet: NeurIPS 2025 D&B venue (OpenReview Cmx6b7w2nk), six-model list with dates, BioModels curation. Not verifiable: license, paper iteration budget/cost, n_task_families, exact 'Network Topology Score' definition (mentioned in a snippet; evaluator has species-interaction F1), DOI.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://arxiv.org/abs/2507.02083
+  - 'https://github.com/h4duan/SciGym (project page: https://h4duan.github.io/scigym-benchmark/)'
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null

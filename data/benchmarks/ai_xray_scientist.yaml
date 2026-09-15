@@ -1,0 +1,105 @@
+id: ai_xray_scientist
+record_type: system
+name: An agentic artificially intelligent X-ray scientist
+short_name: AI X-ray Scientist
+year: 2026
+venue: Nature Machine Intelligence 8, 1075-1086 (2026)
+authors_short: Chen et al.
+arxiv: null
+doi: 10.1038/s42256-026-01261-5
+url: https://www.nature.com/articles/s42256-026-01261-5
+code_url: null
+data_url: null
+license: null
+status: published
+summary: |
+  An LLM-driven agent (SLAC/Stanford) autonomously performs single-crystal sample alignment at a synchrotron beamline by planning actions, issuing instrument-control commands, interpreting experimental feedback and iterating. The procedure was developed and tested on an in-house virtual six-circle diffractometer mirroring an operational beamline (two detector motors, four sample motors) and then transferred to the real beamline without modification.
+benchmark_features:
+  agents_evaluated: []
+  evaluation_target:
+  - instrument_control
+  - simulation_control
+  execution_mode: hybrid
+  has_abstention_eval: false
+  has_human_baseline: null
+  has_safety_eval: false
+  headline_results:
+  - Agent aligned single crystals autonomously at a real synchrotron beamline; procedure transferred from virtual
+    to real setup without modification (press/journal summaries)
+  holdout_or_split_design: 'Sim-to-real: developed in the virtual diffractometer, then deployed on the real beamline'
+  instruments:
+  - name: Virtual six-circle diffractometer (digital twin of an operational synchrotron beamline)
+    modality: diffraction
+    real_or_simulated: digital_twin
+  - name: Real synchrotron X-ray scattering beamline (SLAC; SSRL beamline not verified)
+    modality: synchrotron
+    real_or_simulated: real
+  leakage_or_contamination_risk: null
+  metric_types:
+  - success_rate
+  - other
+  n_agent_configs: null
+  n_instances_or_runs_reported: null
+  n_task_families: 1
+  n_tasks: null
+  open_source: null
+  primary_metric: null
+  repetitions_per_task: null
+  sampling_strategy: null
+  scientific_domains:
+  - X-ray diffraction / scattering
+  - single-crystal alignment
+  scoring_granularity: null
+  target_population: Sample-alignment procedures a beamline scientist performs before diffraction measurements
+  task_source: expert_curated
+task_features:
+  closed_loop_feedback: true
+  perceptual_demand: structured_readout
+  quantitative_tolerance: null
+  reasoning_demand: high
+  safety_criticality: medium
+  task_taxonomy:
+  - single-crystal sample alignment
+  tool_composition: null
+  tool_interface:
+  - python_api
+  - natural_language
+  workflow_depth: long_horizon
+sample_environment_features:
+  calibration_or_api_state_variation: null
+  environment_description: Virtual six-axis diffractometer (2 detector + 4 sample motors) modeled on a real facility;
+    then the physical beamline
+  injected_faults: null
+  novelty_control: null
+  sample_real_or_simulated: real
+  sample_types:
+  - single crystals
+  signal_quality_variation: null
+  novelty_levels_tested: []
+agent_features_evaluated:
+  deterministic_execution: null
+  guards_or_safety_layer: null
+  models: []
+  multi_agent: false
+  planner: react
+  rag_or_memory: null
+  tools: []
+  verifier_or_self_debug: null
+  vision_used: null
+transfer_relevant_findings:
+- Digital-twin-first development with zero-shot transfer to hardware is a viable pattern for beamline agents
+limitations:
+- Single task family; models, trial counts and success rates unverified here
+related:
+- envtrace
+- experiment_automation_agents
+notes: |
+  Only journal metadata (title, first author Zhantao Chen, volume/pages, DOI) and press descriptions (phys.org July 2026, Pebblous blog) were retrievable via search snippets; Nature page blocked. arXiv id, code URL, LLM models and all numbers are unverified.
+provenance:
+  extracted_on: '2026-09-14'
+  extraction_method: llm_assisted
+  sources_consulted:
+  - https://www.nature.com/articles/s42256-026-01261-5
+  confidence: medium
+  review_status: unreviewed
+  reviewer_notes: null
