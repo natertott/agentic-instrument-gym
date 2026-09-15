@@ -1,5 +1,7 @@
 # WP1 status note — first ingest (2026-09-15)
 
+> Counts in this note describe the 65 fully extracted cards of the first ingest. The discovery sweep later added 31 identity-level stub cards (`confidence: low`); with those included the comparable set is 86 works, 44 on real hardware, and the family-holdout axis is covered by one work (the XRM benchmark's held-out tasks). Run `python -m aig report` for current numbers.
+
 This note records what the first pass of the benchmark evidence schema shows, so the numbers here can be checked
 against `python -m aig report` and the atlas as the dataset grows. Everything below is derived from the cards and
 execution rows in this repository; nothing is quoted from memory.
