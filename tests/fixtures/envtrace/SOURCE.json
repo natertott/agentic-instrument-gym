@@ -1,0 +1,11 @@
+{
+  "source": "https://zenodo.org/records/17526264",
+  "license": "CC-BY-4.0",
+  "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/gpt-4o/20250920_130058/run_0/results_op_agent.csv",
+  "records_1based": [
+    1,
+    82,
+    17
+  ],
+  "note": "Three verbatim parsed CSV records, reserialized by csv.DictWriter. Authors: van der Vleuten et al., Brookhaven National Laboratory."
+}

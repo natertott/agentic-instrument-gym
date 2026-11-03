@@ -4,6 +4,11 @@
   "n_success": 509,
   "n_with_success": 1200
  },
+ "envtrace": {
+  "n_rows": 8432,
+  "n_success": 6464,
+  "n_with_success": 8432
+ },
  "xrm_agent_benchmarks": {
   "n_rows": 696,
   "n_success": 570,

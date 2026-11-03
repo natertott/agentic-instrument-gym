@@ -14,7 +14,7 @@ what it was pointed at, and how the evidence was generated — rather than a sin
 |---|---|
 | `schema/` | The execution-level evidence schema: `benchmark_card.schema.json` (one record per benchmark), `execution_record.schema.json` (one row per agent run), `vocab.yaml` (every controlled vocabulary, with glosses), `SCHEMA.md` (field-by-field rationale) |
 | `data/benchmarks/` | One YAML card per benchmark, system, framework or survey (96 after the first ingest and discovery sweep). Each card carries `inclusion: core` or `inclusion: reference` |
-| `data/executions/` | The transfer dataset: per-run rows re-encoded from released benchmark logs (1,896 rows so far: AFMBench 1,200 trials, X-ray microscopy agent benchmarks 660 runs) |
+| `data/executions/` | The transfer dataset: per-run rows re-encoded from released benchmark logs (10,328 rows: 1,896 existing AFMBench/X-ray microscopy records plus 8,432 EnvTrace evaluation trials; see the EnvTrace audit for exclusions and shortcut scoring) |
 | `data/raw/` | Verbatim extraction batches, released run logs, and their provenance notes |
 | `data/candidates.yaml` | Works examined in the discovery sweep and not given a card (adjacent or excluded), with the reason |
 | `aig/` | Python package: validation, feature encoding, Gower distances, axis-coverage / gap analysis, site export |
@@ -80,7 +80,27 @@ supplementary files and search snippets were not). Each card's `notes` says what
 - [x] Comparison tooling: encoding, Gower distances, axis coverage, gap report
 - [x] Interactive atlas
 - [x] Execution rows for the two benchmarks with released per-run logs (AFMBench, X-ray microscopy)
-- [ ] Execution rows for the remaining benchmarks with released logs (EnvTrace, ScienceAgentBench, LabOSBench)
+- [x] Conservative EnvTrace import with explicit per-trial labels (8,432 rows; older score-only results excluded)
+- [ ] Execution rows for ScienceAgentBench and LabOSBench
 - [ ] Human review of every core card (`review_status: reviewed`)
 - [ ] Cross-benchmark `capability_tags` on task families (feeds WP2 transfer representations)
 - [ ] Universal schema draft for multiple agents and instruments (WP1 → WP3 hand-off)
+
+## EnvTrace released evaluations
+
+See [the ingestion assessment](docs/envtrace_ingestion.md) for field mappings, exclusions, scientific limitations,
+and validation. The converter reads the pinned Zenodo ZIP without executing any released code:
+
+```bash
+curl -L --fail https://zenodo.org/records/17526264/files/EnvTrace_experiments.zip -o /tmp/EnvTrace_experiments.zip
+python scripts/ingest_envtrace_runs.py /tmp/EnvTrace_experiments.zip
+python -m aig validate
+python -m pytest -q
+python -m aig export
+```
+
+The archive is not vendored. Its published size and MD5 are checked before conversion.
+`data/raw/envtrace/ingestion_audit.json` inventories every result CSV; `envtrace_evidence.jsonl`
+retains source locators, prompt hashes, model aliases, reported inference times and scoring-path flags.
+These are **hybrid evaluation trials**: some exact-code matches bypass simulation, and trace results can be cached.
+They are not evidence of independent physical instrument runs.
