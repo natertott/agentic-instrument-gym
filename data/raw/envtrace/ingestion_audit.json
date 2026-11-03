@@ -1,0 +1,3501 @@
+{
+  "source": "https://zenodo.org/records/17526264",
+  "doi": "10.5281/zenodo.17526264",
+  "license": "CC-BY-4.0",
+  "published_archive_md5": "61229997d75dea73f0ef2cba3a039f3f",
+  "published_archive_bytes": 98090917,
+  "result_files": [
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/archived/qwen3-thinking/20250717_235441/run_0/results_op_agent.csv",
+      "sha256": "a57433b4912be1d6401791f823249b80ce53144443f93a246acedc33c7b3651d",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/archived/qwen3-thinking/20250717_235441/run_1/results_op_agent.csv",
+      "sha256": "285392fc74ef36b62063f553b6f6d960961ece1a40d7a6447463e834d1cd0c58",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/archived/qwen3-thinking/20250717_235441/run_2/results_op_agent.csv",
+      "sha256": "b73c5b4021c9250c2e7995a66feed454642257611652615ebe4a4ebc278f2702",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/archived/qwen3-thinking/20250726_120133/run_0/results_op_agent.csv",
+      "sha256": "2d6b523742992a4e960abe22db00a08a42691a3bff8a2467bf6a34ae0538394e",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/archived/qwen3-thinking/20250726_120133/run_1/results_op_agent.csv",
+      "sha256": "3479dc10930eb03e62e2ad4f8fc126469016a0295216be30bbade53f1a6f00de",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/archived/qwen3-thinking/20250726_120133/run_2/results_op_agent.csv",
+      "sha256": "f6c00bff6ef174d521224f53c0fdfc47e1cf51294d4d815ae30a5d54d4d31edb",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/athene-v2/20250726_042804/run_0/results_op_agent.csv",
+      "sha256": "dcfdd5f98a5c11a2205213a476f1e1e504f85cfd1eeeeaa645941fbf77092f3a",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/athene-v2/20250726_042804/run_1/results_op_agent.csv",
+      "sha256": "5168cc63ba347adacf4cbf44abea9566f5a56b59d32f82c67db2f9d0437b13b3",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/athene-v2/20250726_042804/run_2/results_op_agent.csv",
+      "sha256": "9b1943aecc6b94933b4d7afece43d402af58b1aaa531d96f2166216957691149",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/claude-3.5-sonnet/20250725_220245/run_0/results_op_agent.csv",
+      "sha256": "c35640de680bfda0f4d1eae9b3504ca38d616517d7b067418bd7741029ccad59",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/claude-3.5-sonnet/20250725_220245/run_1/results_op_agent.csv",
+      "sha256": "1bb3b4b28f19682eabe1cc2367fb4c6d9b71e3fc256eb75ab0df379b23fdb9a2",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/claude-3.5-sonnet/20250725_220245/run_2/results_op_agent.csv",
+      "sha256": "560be5c8bdf73176581dd241aa192b6b62704f1aa10082a24554d934c8654f25",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/claude-opus-4-20250514-thinking/20250726_172243/run_0/results_op_agent.csv",
+      "sha256": "dbffb6e9d40c8eaf7139bcdb2649057728a4cad3f6f8a4e54a27c4a83fd686be",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/claude-opus-4-20250514-thinking/20250726_172243/run_1/results_op_agent.csv",
+      "sha256": "e28e0c780f6474e0402701a1eed0c81bdb18fb1baab7e5377e92e8a59e1c9c58",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/claude-opus-4-20250514-thinking/20250726_172243/run_2/results_op_agent.csv",
+      "sha256": "5485ec30e5f589328b979ce51909e76658f7641062fe57f64f4af4d182aea200",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/claude-sonnet-4-20250514-thinking/20250726_161050/run_0/results_op_agent.csv",
+      "sha256": "8a91256c4df41908decf26f1b8a312b41f9eefba393dad6f592d34be7954e67a",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/claude-sonnet-4-20250514-thinking/20250726_161050/run_1/results_op_agent.csv",
+      "sha256": "cf961c074e9367d36dbf291e76781d9f5077cca0a4739b94394963e45a366391",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/claude-sonnet-4-20250514-thinking/20250726_161050/run_2/results_op_agent.csv",
+      "sha256": "5e822c4c1efd0b6660b2efc4563028471d46192e3d24e3cf3490d14f6772a2ad",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/gpt-4o-abacus/20250726_081015/run_0/results_op_agent.csv",
+      "sha256": "f991cb05a63d130c1fd5832d7830022131168a9c91e499573e4e12debcbcd04b",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/gpt-4o-abacus/20250726_081015/run_1/results_op_agent.csv",
+      "sha256": "a6031c90212e1a1480e3e15df02ffc89deb5f84e79bd2d04ed28a62a37e7a2c9",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/gpt-4o-abacus/20250726_081015/run_2/results_op_agent.csv",
+      "sha256": "f95ded1eb1bd13fcded5e39bc301b89b036417d3ccf7494802f097a5b78a994f",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/gpt-4o/20250726_010856/run_0/results_op_agent.csv",
+      "sha256": "5209cb74d169b58e5a231bfaa0f52f38b4e72153c5a2e918d1982a7f39220029",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/gpt-4o/20250726_010856/run_1/results_op_agent.csv",
+      "sha256": "dd6a2fd49ebb0e0e5beaf78307034438ec1751ea4e3e3560c8509d967adf3b4c",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/gpt-4o/20250726_010856/run_2/results_op_agent.csv",
+      "sha256": "1311f2d028572c2db52013d01a4706c15de168bf5b71548940240c0c8d67c0fe",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250311_104203/run_0/results_op_agent.csv",
+      "sha256": "2f444e361ab16ee577b0bffc3fd644fc7623d2f9d8027162c1efdb38907ccf42",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250311_104203/run_1/results_op_agent.csv",
+      "sha256": "3226f3d1615efed25feac6447c180ae1e092b1920c43972c99f200bd922f184a",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250312_204431/run_0/results_op_agent.csv",
+      "sha256": "c17925389232850a502b88039ea3390e7f614785714fff15526902e4b73f4074",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250312_204431/run_1/results_op_agent.csv",
+      "sha256": "430862e0ff6e765d90eda03adf76e0db017652ec440e5246ec59e42c3fa8e2e1",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250312_204431/run_2/results_op_agent.csv",
+      "sha256": "8e32c9f2f1d347cfa615d52d68c2723cc30f82093e59127c4e8fc08893671ad5",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250312_204431/run_3/results_op_agent.csv",
+      "sha256": "94d7bea8226688787fc6cae30644bb7f3e4c6a54c6adceb4ab9c2fc76dbda43b",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250312_204431/run_4/results_op_agent.csv",
+      "sha256": "39c8c39d366ed11db0d25bfe682becfccd045ac6e90f86b97cd778fcf1435720",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250313_152427/run_0/results_op_agent.csv",
+      "sha256": "bf0e39b19a026e253950d25defc54c70114a83edf13d02ce85e56a5d50367e0e",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250319_235708/run_0/results_op_agent.csv",
+      "sha256": "a28894c1057c53da51936ac7dccba55a6fc0f049552a8deb53f747053a51eb9b",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250319_235708/run_1/results_op_agent.csv",
+      "sha256": "48d29f3d81e6a981e4254e902b023a88d22cf3809217bae393b11076553d3446",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250324_185453/run_0/results_op_agent.csv",
+      "sha256": "0c5536bda83b9760ba3cbbd62865fd5fb15d97881d5c24d42c5a84560fc26211",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250324_185453/run_1/results_op_agent.csv",
+      "sha256": "77c9710d6433b3793388d8ce1a6839f16c807676b6725d87c004cc6c4d607100",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250327_052721/run_0/results_op_agent.csv",
+      "sha256": "320be53cbea73f9d3d34fa2b36d0da9d0b0ba35f410d167a76239436bd4701fa",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250327_052721/run_1/results_op_agent.csv",
+      "sha256": "8f439a6de837eeeac4159d63e5600dc549fc4469e29907bd417c3f4f1ec0b8ef",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250327_052721/run_2/results_op_agent.csv",
+      "sha256": "657e5efa34803dce20113f0a78499e929a0b0773f96ebc37388e4a9241ba6558",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250327_052721/run_3/results_op_agent.csv",
+      "sha256": "619b1d222e325716035f2969f3d08d4b9bd9ef1d3eb4438c973c8fd1694867d3",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250327_052721/run_4/results_op_agent.csv",
+      "sha256": "55e79539fca8063636c8186a1be730e01abbc333002dbff0633056b849d82cc0",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250509_185943/run_0/results_op_agent.csv",
+      "sha256": "f9811cfd5778cce7b8b1b51dcaeb5fd0929c1f93f345b294c8d0d76ceab6c58d",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250509_185943/run_1/results_op_agent.csv",
+      "sha256": "27a50827ccd64b314e60d9079767d47b2acbc07abd94f1fec7e9b5ab97763a06",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250509_185943/run_2/results_op_agent.csv",
+      "sha256": "4d92468896687889fc8fc4149a7456f2f864ddd17aca7b0a721915abdff1f690",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250509_215953/run_0/results_op_agent.csv",
+      "sha256": "fa216cd53a6daeb24c980d95acbeb04370e97b9d715c5e022af4ef148fd8ee41",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250509_215953/run_1/results_op_agent.csv",
+      "sha256": "b0f4c211258f0031a5748c0fe2da8d3389b51418b01c3420541c37d948ea86bd",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250509_215953/run_2/results_op_agent.csv",
+      "sha256": "2a858ae18a59be856ed9f916b8623a042587f4a6d84811be3ad8353a6e5f4ec1",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250510_205435/run_0/results_op_agent.csv",
+      "sha256": "965bb6a06d82109f7721ce59ebd66dac2a91b60ee7d83c0ac26f087093dcbbf8",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250510_205435/run_1/results_op_agent.csv",
+      "sha256": "8103b844b497770c23791c9ae8f0c03e63f38c840b33e200c67e4184fbb93590",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250510_205435/run_2/results_op_agent.csv",
+      "sha256": "a5e435db6d1f9303e06fe02a2695f6e69bb8ad7f84a3cfe1d7d7e9ce5263992f",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250607_132023/run_0/results_op_agent.csv",
+      "sha256": "357abed23c1b42f28ad2b3552d0bce20def6236db532c303f8e18b7d0e6aa7c4",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250607_132023/run_1/results_op_agent.csv",
+      "sha256": "23ac142e9b2949c2e36942597d7bf257018355491b757859aa1df356a410dcba",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250607_132023/run_2/results_op_agent.csv",
+      "sha256": "cb6ad8ec07915a8abffdb5de0946ffbbbf8411415385591711ed6a103443e9c3",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250623_010355/run_0/results_op_agent.csv",
+      "sha256": "6a0df33866d41c6d03938c80c112d3e12c5cb9b81df5e3fd1670e9ff500c74f3",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250623_010355/run_1/results_op_agent.csv",
+      "sha256": "c23f140382931914bfd1573a996c37e462ab843fca8a3c01e0ea7db96bbdb6d9",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250623_010355/run_2/results_op_agent.csv",
+      "sha256": "516441b26d7c09fa3f0e4005328effe79243547ed0ba694ca69b5204d17d9559",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250710_152827/run_0/results_op_agent.csv",
+      "sha256": "3b9d1372fce3eb87d0a7af0e54fa6fb356acff282e7e1067d0086dc0fb21a680",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250710_152827/run_1/results_op_agent.csv",
+      "sha256": "ee4f3f0c4638589fabacec29162e0f2aeb622964a5a47a2a4ffa7f910bb57e44",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250710_152827/run_2/results_op_agent.csv",
+      "sha256": "56251489c6f803ab6bf8ce2d94afda4ab99b935c52296250c357d3c1a88a8155",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250713_141041/run_0/results_op_agent.csv",
+      "sha256": "6f9da8a89cb0ea1980b1d293a146db65573020a3492f92bb6812e5d058faf07b",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250713_141041/run_1/results_op_agent.csv",
+      "sha256": "d56fff6922fbcccad9f9c3955974d5c3162aa50fd6246ef4540db63d4f9821aa",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250713_141041/run_2/results_op_agent.csv",
+      "sha256": "b6c99a12f1ffb77364f981e21b3c76afb185e2562e01df0a05c94f2547344fcd",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250717_081257/run_0/results_op_agent.csv",
+      "sha256": "65c1e0c8541fc4e95c1127f7e928064ef88ffb7c7b222d212aa0c6188db9708b",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250717_081257/run_1/results_op_agent.csv",
+      "sha256": "a2a35f42ff0695d90bc930108ecbbd97b3538fefcf01ae59329c60602d4ec9c9",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250717_081257/run_2/results_op_agent.csv",
+      "sha256": "9580361d2826435968253c120d16572a574079ae1f361e4048645b6dfd0e03b6",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250721_032908/run_0/results_op_agent.csv",
+      "sha256": "fa6f76b46d3b2b94ce2b2cd0747f0e0e8a1fbed2edad9acd23589d2d6f168408",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250721_032908/run_1/results_op_agent.csv",
+      "sha256": "0d2779daa8803b03c0672b93ce3afdc5b8ea985e0b13161e646265c3b1e101a8",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250721_032908/run_2/results_op_agent.csv",
+      "sha256": "b74bb5a00d9a31a5307b18aa49a75f46d6d57d09a49795bd53b2bab1d55a5b0c",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250726_062420/run_0/results_op_agent.csv",
+      "sha256": "1f8c1cc5ed302b754a3f56e20f3cfb4c21e31539cf69ccb308bea07447e478d2",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250726_062420/run_1/results_op_agent.csv",
+      "sha256": "95e597b35821002ff5b0e6b6ecd6aa0adb134fa380dde486920b9e24d7a5cccb",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/llama3.3/20250726_062420/run_2/results_op_agent.csv",
+      "sha256": "48984375bb31783aa9714d697088562a7cd4c1f3f2f371610f5378e0107487f5",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250311_095044/run_0/results_op_agent.csv",
+      "sha256": "c8ee27829fba9f6626833d8a7c950b9709699fe9f852f5f2b2aa1a787e0b74fa",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250311_095044/run_1/results_op_agent.csv",
+      "sha256": "51932402e7f56140091e66ab043216fc826124be575efcd59d35e62bf0f1e104",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250312_135235/run_0/results_op_agent.csv",
+      "sha256": "1998e16848884e1bdaf7aad0313efb95658c657f506a0464626cfbc4d0608adb",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250312_135235/run_1/results_op_agent.csv",
+      "sha256": "9adf46fe21c9a68be742d7125044a59b088eeab3164324d830f879794f2337b3",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250312_135235/run_2/results_op_agent.csv",
+      "sha256": "aaf6971f65f57793403cd3aca2a882fa3c762bfa6844bfda0357802031efee17",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250312_135235/run_3/results_op_agent.csv",
+      "sha256": "08df8aa026a8ddf71945894d69eb0787a3f9a19a73679ec1f71e0e6ed4b69c68",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250312_135235/run_4/results_op_agent.csv",
+      "sha256": "5474294b041f2191d9f0758ba1c96469afa8fbf03e295cd73788819b3e93ff02",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250313_140425/run_0/results_op_agent.csv",
+      "sha256": "f0c7e291e5df5a161e790865938e5ee5ddebfa0e62fc19e266a84849b754ff63",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250319_204136/run_0/results_op_agent.csv",
+      "sha256": "4ff8bb2bb4733bc2e4eea7d7d6dbd7db4206df000bbd93d43f9750a125eec133",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250319_204136/run_1/results_op_agent.csv",
+      "sha256": "3731c68f495bc6a2f956b8ea83654fadce880e160df15b914da86e906d1ef964",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250324_154018/run_0/results_op_agent.csv",
+      "sha256": "a4ee0e44823830e7219ff06406ccffa872da8ce7993c42662211f28b735fa119",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250324_154018/run_1/results_op_agent.csv",
+      "sha256": "16d6c2be4842eb9107de4e79c4a4f0fc027c186d0498e58592f3d76150eab315",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250326_212154/run_0/results_op_agent.csv",
+      "sha256": "c51a1254432ef2e45ff00d388852e90f43992a98b7e5e6fe56fb53770b4c4562",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250326_212154/run_1/results_op_agent.csv",
+      "sha256": "9592552d2ffa76673f1d907548f18273f0650806494ee24495bcaeec79e5ef30",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250326_212154/run_2/results_op_agent.csv",
+      "sha256": "49af1e846388a1a2f28884f56a60eac529f83c012dcca7bbed7204779700e49c",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250326_212154/run_3/results_op_agent.csv",
+      "sha256": "39452ade949ee4d3a9226e520732949d3c5c657da0925bd6ab004e76d9c0b3a5",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250326_212154/run_4/results_op_agent.csv",
+      "sha256": "aa8103d1661b4f89846bf12aa8d94672fffad2afac28f1c92bfa717c4169ea85",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250510_100241/run_0/results_op_agent.csv",
+      "sha256": "5a91ecded46ab1db2fdc58670845f075cb244a2bc5d1e73ef98cb4d410e7099d",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250510_100241/run_1/results_op_agent.csv",
+      "sha256": "38a27aa8eb4f1f8a8a3ec9fec5e71b06ebcf098e0ce646e4253868358073e2d2",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250510_100241/run_2/results_op_agent.csv",
+      "sha256": "1c42b7c30e1cb801d75e37518f8fbaee497d0d46ae1eb0b76348da12e38f8674",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250607_022042/run_0/results_op_agent.csv",
+      "sha256": "d205711e9f266770d3ccb998fba5ea9868642447c96894d282c823562d48bd01",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250607_022042/run_1/results_op_agent.csv",
+      "sha256": "c80c24a40d8c25e5def68594a06014cd42a80da69c0eb6ad007982bc68d6fb6b",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250607_022042/run_2/results_op_agent.csv",
+      "sha256": "a3cdeafdffa6e026b33f44ccc02c659162ff97c2ff54fbba1804a5e295ed9528",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250622_085547/run_0/results_op_agent.csv",
+      "sha256": "89a37a2d9f4c22d7e241c461b445aa7d57df3d68553e17dced6ea8b3e73e6fc3",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250622_085547/run_1/results_op_agent.csv",
+      "sha256": "984014b33d9792e10147fd3e9135c0d49903e9cefc4223808da8569f687d16df",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250622_085547/run_2/results_op_agent.csv",
+      "sha256": "a7025539ccd06a3699c35414283f3220b854c91eaf3fed7018e1880deba004a7",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250709_141517/run_0/results_op_agent.csv",
+      "sha256": "f6d325ad2c6c0e8d3d17f346cd1107e64b5629762e71b56e8f3e97e120291d81",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250709_141517/run_1/results_op_agent.csv",
+      "sha256": "dd868b4bbc87824c298dd1ba1606c8f6d15a810c1b97e5b9553a1fc6f2eeeac4",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250709_141517/run_2/results_op_agent.csv",
+      "sha256": "cfb07b5845063701d3f9dd29058d36d3d4d36e08b6385dea269f657c3529ac01",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250712_170331/run_0/results_op_agent.csv",
+      "sha256": "1bac5a7ab456a3b5a184edff13fdc2bb461f16a49938114f289394cbb1fe6f71",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250712_170331/run_1/results_op_agent.csv",
+      "sha256": "74a1a46f167d42eaaefd866f83394abe70605f98c54f1c5f411b514d3663e897",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250712_170331/run_2/results_op_agent.csv",
+      "sha256": "6b5877fa1c4f605b0c8e29361d37435358d6221a9ced6ee2518ad18b43c60fc2",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250716_143416/run_0/results_op_agent.csv",
+      "sha256": "b0827a73c89cfa82609f55145878ddcb0cebc244c67643565449937100988384",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250716_143416/run_1/results_op_agent.csv",
+      "sha256": "f833fa1b99539760106169e249ee0b7f0646fe5785e19a223121b6f48a3d2300",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250716_143416/run_2/results_op_agent.csv",
+      "sha256": "f5138435edb1b2de5c891262cc35d299df5cbb3ca02705682e9fda67d7b4654a",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250721_000903/run_0/results_op_agent.csv",
+      "sha256": "6915958f180da10d61b499d6f34e5fba0566420a18f470792c21d807fdcdee1a",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250721_000903/run_1/results_op_agent.csv",
+      "sha256": "a2f77246ce54a73ef03486ec0b2c7c89b3fd3b71d62559ed2a455239b62b2ff1",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250721_000903/run_2/results_op_agent.csv",
+      "sha256": "cfecad9e796e944709aa4a5277b2214e86559b53f9c99d4122b2e5d0f0e44331",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250725_230210/run_0/results_op_agent.csv",
+      "sha256": "178ba3b2dd0efb49d65fa25ef911ed0ce3d6566ce75ac3820ba68d8f2c23e840",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250725_230210/run_1/results_op_agent.csv",
+      "sha256": "40a68769dd6145aeaa1312d5c20e77c8da260f23e39aa4db0f46fc82268183a9",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/mistral-nemo/20250725_230210/run_2/results_op_agent.csv",
+      "sha256": "96832879d3897bac75a42e1f1f3869caab229fc6c5d45088b122820f194c79a6",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/o3-high/20250722_232825/run_0/results_op_agent.csv",
+      "sha256": "36c2a701045da50eb4ebc51852b523ae7d22ce9c25295543727b2742fd25e00a",
+      "rows": 21,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/o3-high/20250722_233116/run_0/results_op_agent.csv",
+      "sha256": "781e19516656c67672b46f83f1d043d4f3c43b57a9161d1225b7beb78e3896f3",
+      "rows": 21,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/o3-high/20250722_234709/run_0/results_op_agent.csv",
+      "sha256": "fe097f0f69f9f107d226a910a5c94aa596221a76d59d341835943c1636431222",
+      "rows": 25,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/o3-high/20250722_235027/run_0/results_op_agent.csv",
+      "sha256": "52bfe32e90d59fb8cfa0f0ac1933501c5dff5f9585e8253fa670a97d8ef64e11",
+      "rows": 19,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/o3-high/20250722_235554/run_0/results_op_agent.csv",
+      "sha256": "3692eb1f88a527fb2a6d801c94ddcedd787a1aabec428649b9fbc8ce9c3902c4",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/o3-high/20250723_000146/run_0/results_op_agent.csv",
+      "sha256": "74672a3eb83b96e288c220e0361584f28b31a83b98df36be4bd879a0dbcf5bdc",
+      "rows": 118,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/o3-high/20250723_001223/run_0/results_op_agent.csv",
+      "sha256": "5a43eaa7dab367f2e70c7a986aad763554ff7e56f67c848f90081b2ff9f3d7a1",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/o3-high/20250723_001223/run_1/results_op_agent.csv",
+      "sha256": "2d8a47ac240b663fd87c3f957aebe578ddbc81d1b17ed9e3a765d9f44cc20614",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/o3-high/20250726_183646/run_0/results_op_agent.csv",
+      "sha256": "812d4662a25af67154ec465671cbe9e0689f5f4d063654b01bc969bfe8c2b257",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/o3-high/20250726_183646/run_1/results_op_agent.csv",
+      "sha256": "6c8cd705d9ec7c00c1e583cd5aa805e80fed1829662720313ee0c8198726ae6a",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/o3-high/20250726_183646/run_2/results_op_agent.csv",
+      "sha256": "200b5985bcb776c59b64ab1e966d2d29dfb87378a66019d0172b92783f9b3999",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250311_100201/run_0/results_op_agent.csv",
+      "sha256": "fad2aff11174ff9064df2ba4abd34a6a36a7cff4f516719273f1c80fa54a3f2d",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250311_100201/run_1/results_op_agent.csv",
+      "sha256": "6d527826eae8a1ef98f20af0150fcf606b0e2e30d0360da8659da4f535532ed8",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250312_151644/run_0/results_op_agent.csv",
+      "sha256": "a56ae2964b1e406492bb87fe6d032827bffd76d2bf559ede87ee669a1d82a611",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250312_151644/run_1/results_op_agent.csv",
+      "sha256": "05a693953ee69121a7a691773899b2779f47a1e8f048cbe15c859fa73b350ee5",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250312_151644/run_2/results_op_agent.csv",
+      "sha256": "05e8670cef7324633f173333cd4545b69509020bee0fc1288654c54d28bb1890",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250312_151644/run_3/results_op_agent.csv",
+      "sha256": "f1e209ce1ba805446e979f8ae2c3dd890548e7fdfc1aa62c8ea722352d2c74c7",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250312_151644/run_4/results_op_agent.csv",
+      "sha256": "c4859bf9b90b54b0dfd7888afd0a1688501c3442d547db5d6999355493a49e47",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250313_141523/run_0/results_op_agent.csv",
+      "sha256": "08efd90040621a4cd63d923fc8ab6ba9e2d15ddb53b49224c7a6a061e1c79d51",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250319_212329/run_0/results_op_agent.csv",
+      "sha256": "422969786283e197adc2755b414b3cf3f281247e2e569da02db300c6981624eb",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250319_212329/run_1/results_op_agent.csv",
+      "sha256": "0c5446289a97b3cf584aae014afa0b8f05a705fd28e4dae6cb4c615c8f7526bb",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250324_162534/run_0/results_op_agent.csv",
+      "sha256": "14cea305ac639f5b4479ed80b50a2ffe73bde9a48833ed7db16fb5d189559112",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250324_162534/run_1/results_op_agent.csv",
+      "sha256": "c2c70740bc39044feb679592fa3f183d56a47f43f94839b5a44b3ba93c314334",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250326_231450/run_0/results_op_agent.csv",
+      "sha256": "b5e154d7fa044976e2fbf7d864c259552b26f1a68af6dd9f8c12d5f268a38848",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250326_231450/run_1/results_op_agent.csv",
+      "sha256": "493e31b50275edf5caab8e961a4d3325a3b8cb69d4a0dc613c3ad7430902e5c0",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250326_231450/run_2/results_op_agent.csv",
+      "sha256": "a11b9acc65aed6593c5e5dbf5ac47c52a9699973e034f96203f279a8e3f1221b",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250326_231450/run_3/results_op_agent.csv",
+      "sha256": "8d1ca8d5ec02b0213be8e20035e9ef0d98fa11bf1275e658b5da980fd89ff000",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250326_231450/run_4/results_op_agent.csv",
+      "sha256": "7f49b2847577fbeba83ddb63694c9fba69387399e44c6be6eeea4a12865f1c52",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250510_122751/run_0/results_op_agent.csv",
+      "sha256": "ad89f2d99c89f46ae130fbb5130cd16c87cf52c6a577ec41f201d3d87a860dca",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250510_122751/run_1/results_op_agent.csv",
+      "sha256": "8dc587a7f50ff3125dab8deebe21cc11a7e60173c8cc52610bc1b24c60e54c3e",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250510_122751/run_2/results_op_agent.csv",
+      "sha256": "f22a464bf8876a0f7186d80d958edbed7aad001cc4572e21c076d57ceb6b6e0a",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250607_043716/run_0/results_op_agent.csv",
+      "sha256": "efd53846c2e235e9dec6fa6570e791c7381e9beb363ce1261fa28508ec082fa3",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250607_043716/run_1/results_op_agent.csv",
+      "sha256": "880314ad683e2eeca798cdcd2005c7869a54d87ac737fd66abf273204fe02958",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250607_043716/run_2/results_op_agent.csv",
+      "sha256": "b33d7bd67e26f92cdb4411c7e92d5a429506d573f1d77684a78b75b39716eb6f",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250622_131408/run_0/results_op_agent.csv",
+      "sha256": "1553038188e89526c443076ac5a96a182bdb10ac94ec65a30c5ec271c0ff415a",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250622_131408/run_1/results_op_agent.csv",
+      "sha256": "0f415115162f03f8bac870f821ee32f270f4b26cd47d56ca84deb9206b76d02f",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250622_131408/run_2/results_op_agent.csv",
+      "sha256": "f9d9c18f4485c2a6e9bae17cb50f1bdbae36963fb20f4e153a1fa18416bf0fbd",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250709_213553/run_0/results_op_agent.csv",
+      "sha256": "81abf70533b1159f929e754955f0b6d65538d7b648e8bb313bcc485e78b697dc",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250709_213553/run_1/results_op_agent.csv",
+      "sha256": "f4006cae1a290736e45afe970ba5ad2f4c604611a18fda7920370e5cf76a4d7b",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250709_213553/run_2/results_op_agent.csv",
+      "sha256": "23d13d3f21fee14d3c12ab1198c12c5e6e022c2624f46b7116543bcd2d8b7797",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250712_232438/run_0/results_op_agent.csv",
+      "sha256": "6dc1b7365ccc9d395a9b4c1a0aab612cfd60041de7335dad1186f9e2f354d1d3",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250712_232438/run_1/results_op_agent.csv",
+      "sha256": "c00cfc640545d641ca8bd8d794257b4660beadbe6ae07c96487ba26948b1d405",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250712_232438/run_2/results_op_agent.csv",
+      "sha256": "e07df7e98c6d8665acba6dca213ef911682da97e688eb8f0af41fc93d1612299",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250716_165347/run_0/results_op_agent.csv",
+      "sha256": "f5f0df00a64174a0e7bf3c7de07ad5d32ba94459ff46e72bc1fdc6bf397ad24d",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250716_165347/run_1/results_op_agent.csv",
+      "sha256": "6c109266cf948cb926c8c73bb662eaba06cafd90333bcfef0c5d60018c6ca83e",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250716_165347/run_2/results_op_agent.csv",
+      "sha256": "dda7cb1c3817c4a8d9bfb5e14eabbc83bd18c184afa7bc889434100bd5382f98",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250721_004219/run_0/results_op_agent.csv",
+      "sha256": "ae5bfb1509e09a6f8af6accc348cf966ea39721fc1de223791b789fb1ed5c6fe",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250721_004219/run_1/results_op_agent.csv",
+      "sha256": "125cabba426d1d4c6831b172c427c5e083f90e8f5d290486333ca98e51ef315d",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250721_004219/run_2/results_op_agent.csv",
+      "sha256": "6c8c2702031e611b0a8de25bde09e2798c91b272ca1712c18313333ec3f7b95b",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250726_020918/run_0/results_op_agent.csv",
+      "sha256": "cd7ea5e71ff24571ef3c2cd16c7e0db71bd5217b832e6104ece8434d69d1107f",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250726_020918/run_1/results_op_agent.csv",
+      "sha256": "33be968c7b722d9839c4b44f2efe06ce7551befbc08cb4c619e56ef693f5d12a",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/phi3.5/20250726_020918/run_2/results_op_agent.csv",
+      "sha256": "9b93d0186614613906c40c2d9176875b8f7d78cf161e5f4a60f8f3c3cae5ebcd",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250203_152107/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250205_143049/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250205_144807/run_0/results_op_agent.csv",
+      "sha256": "5f85af5518fe124956e25f752ef7b75a593594b2cc21e97a86055e02e9d864c5",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250205_145135/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250205_171503/run_0/results_op_agent.csv",
+      "sha256": "acb2dcfb0442fdf34db15d8bf20603c15337951de84259364d049a22c9855162",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250205_172111/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250205_173823/run_0/results_op_agent.csv",
+      "sha256": "03d7695fc7c6f11da25ed7e11bf2f642d4935ce1a8ec6cd93a54d03f6a0f2d50",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250205_174633/run_0/results_op_agent.csv",
+      "sha256": "28ed27c91e3c52018d9e033efeff3a58a3e09c912b3438fe1ac46ce79a978ccf",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250205_175120/run_0/results_op_agent.csv",
+      "sha256": "3c1c14276bcb04e4474e8bb1ad27a80387ff77c58510ca753dedfce29caf0488",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250205_175327/run_0/results_op_agent.csv",
+      "sha256": "883b4c452821e08163981996a09190ec6eea5ae2b38b887e260548a6231d12c1",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250205_180356/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250205_181852/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250205_182725/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250205_182857/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250205_183358/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250205_184059/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250205_184632/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250205_185134/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250205_185250/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250206_113551/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250206_113919/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250206_124243/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250206_124556/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250206_124715/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250206_125242/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250206_125456/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250206_125730/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250206_131048/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250206_132357/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250206_132730/run_0/results_op_agent.csv",
+      "sha256": "4b47642723aa5d645211a7515b407528889dffd71966b4662da00ced26d51fb5",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250207_105908/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250207_120836/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250207_122223/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250207_122454/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250207_160454/run_0/results_op_agent.csv",
+      "sha256": "ff20400f2f04d8d0e79c7b282ca954b474f0fd1849e754b8408850e30ea1c6ff",
+      "rows": 3,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250207_161842/run_0/results_op_agent.csv",
+      "sha256": "bc42ebcaeec01a2a4aee4dc0fb9c04bfdc097d9d63bc66eade0b3042f2c1c06a",
+      "rows": 3,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250207_162309/run_0/results_op_agent.csv",
+      "sha256": "383f4278b67d2eaead6d0f551fc55d8e94f3b4e02987dcb524c1b4dda5b8bffb",
+      "rows": 3,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250207_163314/run_0/results_op_agent.csv",
+      "sha256": "7726133605c822151bd0683e70bb959aa6ccefbfbe8be4fa7852aaa806c2ee29",
+      "rows": 3,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250211_090004/run_0/results_op_agent.csv",
+      "sha256": "2784669273e5c63e7e04a25b477aa88a8715f8375cddc5035ecd6d4dba6acb42",
+      "rows": 15,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250211_093836/run_0/results_op_agent.csv",
+      "sha256": "7f987225b8737e329d91dcb20133d800418d8fbc078615c24d152bb60137179f",
+      "rows": 25,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250211_103244/run_0/results_op_agent.csv",
+      "sha256": "9eed786c7bf16df52369f9604a590df95b2b37fa8438ef8806bdd17b9520fc44",
+      "rows": 18,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250211_110043/run_0/results_op_agent.csv",
+      "sha256": "de605c293a9fa145b056ae17e55cd6dfdca2f0cfe2c578fa883189352f1ac2eb",
+      "rows": 15,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250211_113154/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250211_114008/run_0/results_op_agent.csv",
+      "sha256": "39b8ad64ef994082877612d003ffd63d400bc24597b1d033200fcf5779460e92",
+      "rows": 94,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250211_131955/run_0/results_op_agent.csv",
+      "sha256": "c8488bc1d6f5d534bbd6018973d23e1c64c2a98287d0839dabb5d89fd192361d",
+      "rows": 94,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250212_155654/run_0/results_op_agent.csv",
+      "sha256": "8ee284b6d1a63c12dd4ad81e09bbc2ab903a732aa27657ea141f2a809a39eaca",
+      "rows": 32,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250212_170713/run_0/results_op_agent.csv",
+      "sha256": "7dfb32fe71a26315426517fa18de34587cbb431aa8ba91aee44cee35b4b8a34b",
+      "rows": 105,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250212_173249/run_0/results_op_agent.csv",
+      "sha256": "9af54c27aecaf6a28efe9825b853a7025dd6a9f62648d91824b08e984a8c542b",
+      "rows": 111,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250213_102208/run_0/results_op_agent.csv",
+      "sha256": "606e372c88fb4ecc4c951b5f171ac856bd98138965621ed8b894d0041b477f55",
+      "rows": 30,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250213_113602/run_0/results_op_agent.csv",
+      "sha256": "98d6c0832a0559d2538710a4892fdc4715fdd8892634ed84ecb4af1a6f58d262",
+      "rows": 111,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250220_122422/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250220_135044/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250220_145237/run_0/results_op_agent.csv",
+      "sha256": "e4a707faedfd8ea4e307554dcceda1da6daa8331f6e7cbdc85f279477abc34bf",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250220_150532/run_0/results_op_agent.csv",
+      "sha256": "ea9b37bf0a4226f9e2f0c2fa8c7f63d92039c0d21831f1ceed28b364872d091c",
+      "rows": 15,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250220_153908/run_0/results_op_agent.csv",
+      "sha256": "c07b2908ed3e91236c109f13d91834ef9a8f998133c7c6d3b01511e9ca013376",
+      "rows": 15,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250220_155744/run_0/results_op_agent.csv",
+      "sha256": "a8019bf09f3ebe134757dde3c9a188c34e446483ad7f940194917cfebf80543d",
+      "rows": 15,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250220_161649/run_0/results_op_agent.csv",
+      "sha256": "82b95fa2df87622fa0b84aef08a87bf2bb3776653ba18b46d47857b074ccadae",
+      "rows": 3,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250220_163041/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_151324/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_151721/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_152356/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_152613/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_153451/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_153738/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_184256/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_190150/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_191051/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_191712/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_191953/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_192510/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_203520/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_204237/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_205155/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_205549/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_210109/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_210917/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_211533/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_211806/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_211954/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_212201/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_212910/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250221_213202/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_085133/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_090743/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_090940/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_091129/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_092819/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_093436/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_101628/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_102644/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_103001/run_0/results_op_agent.csv",
+      "sha256": "8725037498f9e3134ea9a898f93436837a861180227f3d003273c2bff5a56cc6",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_110025/run_0/results_op_agent.csv",
+      "sha256": "33cce30400af67551bc8e53e4a9c679b3eb8eeff2cefeeebd892d268815dd767",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_111905/run_0/results_op_agent.csv",
+      "sha256": "fb840bb08680a541557c170a21eb6331e7225363d09ec78ff423685dc5fb85dd",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_115034/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_115548/run_0/results_op_agent.csv",
+      "sha256": "6c5d82b9f65fc1b3cb4f22fa95e96f0228d10986ab86ea66e097527af34f8ee8",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_120235/run_0/results_op_agent.csv",
+      "sha256": "1d64fdba1ef993e28f69327229ce9a8953093175b4c9d6c39383b8c6ffb1f0a1",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_120440/run_0/results_op_agent.csv",
+      "sha256": "c6c9db9af9754bb0396814757fd886b2ad95f7e8030cf93d23c499577cf2d909",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_150009/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_151026/run_0/results_op_agent.csv",
+      "sha256": "296e725dfbfea92e9e8214ad26220e6c1e94c2f98e344e2b990684710af41c11",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_152011/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_152852/run_0/results_op_agent.csv",
+      "sha256": "d7b172889e109e4e489ba0830f27ef8626c7b9921480e74886b042440be60341",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_154053/run_0/results_op_agent.csv",
+      "sha256": "a5a9b352a25379eb6aee50b95667d99a97a323d8692a133dfd971284a510b189",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_154326/run_0/results_op_agent.csv",
+      "sha256": "c835fc7ed8d81498c026897c2f0eae6a81e721e3ce310898335383e2c57e1df2",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_160042/run_0/results_op_agent.csv",
+      "sha256": "3ae58ea5cee4fc7d3d47eaec2a26ef6fdcd385524026702701653780b648cdb5",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_160551/run_0/results_op_agent.csv",
+      "sha256": "01ec75abae19f8f132a69b7c1894d9a6a0008c92a9a0cf4d19d038412f7ea651",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_163554/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250224_170622/run_0/results_op_agent.csv",
+      "sha256": "4e6ce16c58bd999a1a34216ef8b626ddd0b81348572b33d3b03a90b1670b4d41",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250225_131906/run_0/results_op_agent.csv",
+      "sha256": "bbd25f132c473878d24818aefe8c33c7456c8243e076a6a688538de12b5b48ee",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250225_133144/run_0/results_op_agent.csv",
+      "sha256": "c0b30fc6ead433c2f0620515631bd592f31309c9583ff8e2db5d6f74970a5aa1",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250225_133504/run_0/results_op_agent.csv",
+      "sha256": "2b39b526b4f7928c2ab85f7b92a3fa086c105ab99e1953d73a64d6f4fd5b26c0",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250225_135017/run_0/results_op_agent.csv",
+      "sha256": "4e6b5653980a15063fe044ed231529a35c83f3e0e0301dc8ce05f20605ad48a0",
+      "rows": 19,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250226_165351/run_0/results_op_agent.csv",
+      "sha256": "d247313082542ec73c5f200bbaca2aea4b3a5ff51c087cb8655e482041907ff4",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250226_180711/run_0/results_op_agent.csv",
+      "sha256": "f00f489a3f7a13d9447c3bd1c953c62011ea064252a17bf953dadb79f89cb620",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250226_181603/run_0/results_op_agent.csv",
+      "sha256": "b69fa49b508c8f5a53d3d636860114de99e7362a3cee02b4a7b5da9b5cb7be85",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250226_182100/run_0/results_op_agent.csv",
+      "sha256": "03b2dc022931179c651030443b90d90b5169c2545c1ee575ce85747bc14a5078",
+      "rows": 60,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250303_045343/run_0/results_op_agent.csv",
+      "sha256": "b0d111c50ede4f3a2c5ff9b3c61dfd6b11a0addd07d9bb8d03693f9ec604f351",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250303_094620/run_0/results_op_agent.csv",
+      "sha256": "ce8c0bb8ed4ed8f518f0c64d865b6d8dc91b29af882f89a96ae9cc88750c657d",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250303_095323/run_0/results_op_agent.csv",
+      "sha256": "dc09308f4cf09fd9d38e847efa227b06413a701418231ae1e0c372687ff18bb9",
+      "rows": 2,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250305_095201/run_0/results_op_agent.csv",
+      "sha256": "4ea8125289b742d7f7b2c847def48404bcbd32510e4f69d446f9743d29047c57",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250307_064404/run_0/results_op_agent.csv",
+      "sha256": "44bdd0b91c960f503a87f2df48d0aef035aad2fa07f62bd09cf586cc19ddf7ab",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250307_085953/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250307_092151/run_0/results_op_agent.csv",
+      "sha256": "47211b19f092cab831708adb62a7b22f62d6832bcf66db2007ddbc6e151aac9b",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250307_092713/run_0/results_op_agent.csv",
+      "sha256": "a9c67a98d2fab5d033caac4cc591f87502d2202565a81a0009ed4cabb3b9e2c2",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250307_093622/run_0/results_op_agent.csv",
+      "sha256": "7b88e8e61905f696df56d8bb60742271a4a9fab4d3e586194100589cfe1179d2",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250310_055543/run_0/results_op_agent.csv",
+      "sha256": "3d330da358236b94a17c40f6f0c6f729c0739c70681780171fff35e9bbf0cdc3",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250310_060230/run_0/results_op_agent.csv",
+      "sha256": "bcb880cdc111ec71621bf33140dd37e5824d24b64855010d13b9afacaaa7b094",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250310_103924/run_0/results_op_agent.csv",
+      "sha256": "045247bc1c52f4e996fffd4de24a0eb532f32d8331b6d74ce64547b8eadc1a69",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250310_110156/run_0/results_op_agent.csv",
+      "sha256": "307f0bfa4ee2abce647ec7388323c954d3f32b3c9db79e2b216fa82e655b63d6",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250310_110747/run_0/results_op_agent.csv",
+      "sha256": "500e45acf264c909b915faa5679854fa8dbb2f8aeda5a3e03efaf51f60616120",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250310_114645/run_0/results_op_agent.csv",
+      "sha256": "0d338f75056aebfba3f68e8b4f54900a65aa8f5a10bec45849ae9388ba8004ff",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250310_122344/run_0/results_op_agent.csv",
+      "sha256": "12184b3a43b73258f56363786e75dbd6bcfb1a3b2e898d0862f35f44f84627e0",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250311_072313/run_0/results_op_agent.csv",
+      "sha256": "a06fc874d6affe7aa7f505904e5cdee80897391900acae3eb32129ff6b89f09b",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250311_072313/run_1/results_op_agent.csv",
+      "sha256": "df648cfedbca22ad9e1fa24463283ac69d78584b61cd4f3a6557556ba95c0cbc",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250311_072313/run_2/results_op_agent.csv",
+      "sha256": "6b377ad0ec1f91dabecef5f6228440877d53c5ec474dc924f13afd94fccc3cae",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250311_072313/run_3/results_op_agent.csv",
+      "sha256": "aa6bb7a8208522e49cbd1b4e7c04b8f99ec38b8e22f6bdd926af5516459151ba",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250311_072313/run_4/results_op_agent.csv",
+      "sha256": "705bf15d8deb0af009e52d062a5c03e920facc8d738c690cba7768839c9baf5e",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250311_080515/run_0/results_op_agent.csv",
+      "sha256": "568dd8b6105282c6661b7a830b7b5b50df12abf8b726b7b3aecb8087be4dfa99",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250311_080515/run_1/results_op_agent.csv",
+      "sha256": "fa496afcd267bd1c05b294d59fdf0afb1630fa561270c1e217a940bff8153fa7",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250311_090627/run_0/results_op_agent.csv",
+      "sha256": "c28011ad5fa1c6debbe330baf1d76c2b3266e841d017b5040920bf0e7c33dcc6",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250311_091402/run_0/results_op_agent.csv",
+      "sha256": "25d831b0701df02aa87379e9593f56d6d1512d2f23e6e44633f852e8e9e5fe7b",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250311_091402/run_1/results_op_agent.csv",
+      "sha256": "eb73d8e99c94cb8c290b88990c3abdb19eff554b60342dbaf965022c93fea521",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250312_091612/run_0/results_op_agent.csv",
+      "sha256": "1441076352870026dc15e17ef3f56d3d7435890f87e1e6681491389ce63b256e",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250312_091612/run_1/results_op_agent.csv",
+      "sha256": "4ec4300b76ffb121f640901e92b318900ca23aa1faba7ecd5e3bd15c7d792f24",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250312_091612/run_2/results_op_agent.csv",
+      "sha256": "1c4f2d46ef37113fa59b402b2474e53292045a31425fcaadf863f5cf4b3c0474",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250312_091612/run_3/results_op_agent.csv",
+      "sha256": "b062526d43e6b41340f0c12a061bb8fbb61eb1b447a84b590405d12fffd49201",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250312_091612/run_4/results_op_agent.csv",
+      "sha256": "ee85a2a35650d6fc6fa284dd3e427db4e1dc0de8d84bbf5a899bec305339fcd1",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250313_130533/run_0/results_op_agent.csv",
+      "sha256": "03aef47c450559abf4967c59c9c80add12485ebc59bd60d242a1bf156b3b96bb",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250319_162753/run_0/results_op_agent.csv",
+      "sha256": "0ce8bccd18416948f0285a56509789afb9981519315f76aec218a660dad3f296",
+      "rows": 5,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250319_162753/run_1/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250319_180454/run_0/results_op_agent.csv",
+      "sha256": "ad97409883dfceaf670b95720f1097df05e6617f2aa4ca4525ef80ce09909e04",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250319_180454/run_1/results_op_agent.csv",
+      "sha256": "b40d5f68f3176249e78f915315689bd1cc8733bc216bd3aa7994753a90b8b272",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250324_130641/run_0/results_op_agent.csv",
+      "sha256": "2ef07819fe5e5cb8cb8421100d2b4a6b0c40248497eebe4739fbe9aed0d0e337",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250324_130641/run_1/results_op_agent.csv",
+      "sha256": "c2e620ae5bab6faeca10805577788d7b4cee752332bcc9869e7674656a8221c8",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250326_145812/run_0/results_op_agent.csv",
+      "sha256": "cd939c6ecbae6cc634b5d49e48fe4e44fa46078ba57e11bb6001762f708c9963",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250326_145812/run_1/results_op_agent.csv",
+      "sha256": "b7a21700381fbfa1d146eff1e921a21c401f8c7685c380ee4a13fbca3c9bd974",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250326_145812/run_2/results_op_agent.csv",
+      "sha256": "ae4862e20bf78cd9f70745b50770ccad713c9b5e86722e78e7ed78c983355ea4",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250326_145812/run_3/results_op_agent.csv",
+      "sha256": "3f337235764e7650870e7e09db7d1c0fcd10a22aa4630e3ee403f022d75d6355",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250326_145812/run_4/results_op_agent.csv",
+      "sha256": "2b9c1233aa1420ee5605d8567c38b31fde865696efce7f16b1970d2ee96bd030",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250407_131923/run_0/results_op_agent.csv",
+      "sha256": "e13bcab583f43876f1f1117358edac35010f8899b26e412f25b915b13b53b20a",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250407_145345/run_0/results_op_agent.csv",
+      "sha256": "fe776382ebf0f83d0c0162c3c623a7086195d54ee9ba299d986a37d66822e3b8",
+      "rows": 3,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250425_151505/run_0/results_op_agent.csv",
+      "sha256": "2241825d66d5c6eb88ea5aa10172b9073bcc274929c6b883e9fc6856bbd0853c",
+      "rows": 5,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250425_155220/run_0/results_op_agent.csv",
+      "sha256": "740eb6acadc65c2741c1785e21ea3143ab901d35be02c68463779eff468c8ea7",
+      "rows": 5,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250425_161022/run_0/results_op_agent.csv",
+      "sha256": "7c62acd8ebe727d66cfe54d568afcb6c9f291e520674a9d7ccfc3d88879d838f",
+      "rows": 5,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250425_161949/run_0/results_op_agent.csv",
+      "sha256": "93f101624956e9f8c60fa88ce2297a25dc3181a2054f0a5b7095ce4595bd1509",
+      "rows": 11,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250428_122932/run_0/results_op_agent.csv",
+      "sha256": "94f9e7609c6f0292c43b1ddbd067c03ddd9f5efca92ca66652149af8d5538cfe",
+      "rows": 11,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250429_162827/run_0/results_op_agent.csv",
+      "sha256": "68bdb98c6942899a4724d06e61cfe818abfc81fb1df93e5aad0c7f0cd41bce06",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250429_163411/run_0/results_op_agent.csv",
+      "sha256": "1643eff30cf0685e16279d749daa9733d9ac007fd8ac6c61deecd1522b7a8c32",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250430_163227/run_0/results_op_agent.csv",
+      "sha256": "2902a277b77ee7cda5e7f8328996e97bdaade676e4fabec19eee34bd9f4b744e",
+      "rows": 4,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250430_165447/run_0/results_op_agent.csv",
+      "sha256": "af44a458363f2522d4d1c74a1a5eb8827b60bf84d008b35632fdf5aa554fdb24",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250430_173134/run_0/results_op_agent.csv",
+      "sha256": "01d2764ad78727f3583387f5a937b4892df05bfc675edd7636ea6acf7eacbf69",
+      "rows": 7,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250501_111320/run_0/results_op_agent.csv",
+      "sha256": "152c031dfedc5365204f78fc9088d17ac7783bfad3f794b53ae5b4425897c844",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250501_113955/run_0/results_op_agent.csv",
+      "sha256": "f02979383ef24508b15d87d040dfdf126d9605f23847e5cb24c9a435f9a67529",
+      "rows": 16,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250501_123640/run_0/results_op_agent.csv",
+      "sha256": "f44a2981a163b45a64718acf461bb28d8694005bdc9057d2ba1fb998314e2cb9",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250501_151251/run_0/results_op_agent.csv",
+      "sha256": "aec7551b5a2175fc9ffeaafd7b39d16b0542a36ea855e19af3f4eb7e36cca23b",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250501_171514/run_0/results_op_agent.csv",
+      "sha256": "1dd277979fd29fe49cd8d683f05750d567389990b6583c23189433aa54091a70",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250502_124724/run_0/results_op_agent.csv",
+      "sha256": "bc785d3e6fa82baa64b06ed74522a42a11ae5c64104a27a4a4ec2fc170df79c4",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250502_144946/run_0/results_op_agent.csv",
+      "sha256": "466770ff7fcae1f848b867ca526c6916c3feae05dc9b3222c50281acc02a9ada",
+      "rows": 30,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250505_113528/run_0/results_op_agent.csv",
+      "sha256": "1af9dfe3a9b4d3b1045c03ab1070a1bd8ff273c8075607126defdfeca6c63fab",
+      "rows": 92,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250505_134609/run_0/results_op_agent.csv",
+      "sha256": "d2a3b873298036a37168f992e641f7f39a7e18c36db3988fb65783f309526a04",
+      "rows": 94,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250505_172408/run_0/results_op_agent.csv",
+      "sha256": "ef9f5f791d61686365393943574ed81a2f9fa17cc96ff8f793682c0c50c00f59",
+      "rows": 94,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250506_173616/run_0/results_op_agent.csv",
+      "sha256": "0a07c114c8176950cbec33182f4db9bd4e9063b4f117b0e828115360251eefc3",
+      "rows": 114,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250506_190639/run_0/results_op_agent.csv",
+      "sha256": "e04fba50f43afec531bfddf2d7e6b056b79f7b364b5f4dc5a43a47fe1d297ee7",
+      "rows": 120,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250507_171052/run_0/results_op_agent.csv",
+      "sha256": "1a8a3c1598b10faa4fd9c9f3a21cf6180bd54dd2667c2d808a925322b14dda5f",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250507_173602/run_0/results_op_agent.csv",
+      "sha256": "96e1299798aa0667f1e2460c757a8feeb165471586140375c3da46482bf94d5d",
+      "rows": 120,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250508_132302/run_0/results_op_agent.csv",
+      "sha256": "b3b4714fd39d06c541f4204cd89ceac970ea28151d6201689f16fb16b86eed1d",
+      "rows": 120,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250508_161751/run_0/results_op_agent.csv",
+      "sha256": "9d8327d1f1752c5841531c8a75513dc56b89845bc60be65ada6665b8112eb120",
+      "rows": 120,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250508_164213/run_0/results_op_agent.csv",
+      "sha256": "76e1570e3bbf57844200775563df4ddc1018e39caee71bcb061ae62fbbbbdb02",
+      "rows": 140,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250509_235740/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250510_033707/run_0/results_op_agent.csv",
+      "sha256": "10d737b49dc3f47e8a4f1c8d3da6bf7f0c5dea687361efc91b0451511b33f36f",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250510_033707/run_1/results_op_agent.csv",
+      "sha256": "554260c32b7ebee7f7efba05f8c57afba6e9584d3df6daeb2c98d8121fe50fc2",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250510_033707/run_2/results_op_agent.csv",
+      "sha256": "81dff1bd0c58305f6ea74cb937b21d407bd7f44ed639c315a037d44eb40bf29b",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250519_171656/run_0/results_op_agent.csv",
+      "sha256": "b171dd097449f1d4f56e4a91c32c0f20a2952b478e3ce107d25bde4878d1a926",
+      "rows": 1,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250519_172419/run_0/results_op_agent.csv",
+      "sha256": "6b6a8e059f05dbfa6b59425242ee79d7615dc5a50feae7b1f31ba858ec64f917",
+      "rows": 3,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250519_172541/run_0/results_op_agent.csv",
+      "sha256": "6d655b694be606ed132c1c9db63a1e367a0757980b11dc4493efa1e185379b87",
+      "rows": 120,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250519_173354/run_0/results_op_agent.csv",
+      "sha256": "e84f013eec4e98f1803e930cc05a1b336c05b03910ba99285626d5a355bffc6d",
+      "rows": 120,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250519_183350/run_0/results_op_agent.csv",
+      "sha256": "f37209400478f1e3a81bb825287b64089bb8fd83496684bb912943c3d2056fbf",
+      "rows": 8,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250519_185942/run_0/results_op_agent.csv",
+      "sha256": "06c86e719fdae1c2983d50383732ce7e0ec47d4f3ec0abbaef5ae77b2e7445d6",
+      "rows": 120,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250519_193018/run_0/results_op_agent.csv",
+      "sha256": "4d976df0aae9d7f9393b8b1b05e9254871dcd0138cddcdc986cd27513822761c",
+      "rows": 120,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250523_152456/run_0/results_op_agent.csv",
+      "sha256": "9b341aa2228ca834d5751907ab00915e6dfe9ba53d67bb130b0907ae4fac85b7",
+      "rows": 120,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250605_153204/run_0/results_op_agent.csv",
+      "sha256": "4e0315aff58fe83e991ac771e5003d11100c2d0dedba7a3a034984111d5b7b03",
+      "rows": 4,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250606_121217/run_0/results_op_agent.csv",
+      "sha256": "e4248f9f812392a9eb6eaa03fade627abccacb58156b70e4880248a5c8e7f761",
+      "rows": 5,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250606_121908/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250606_201548/run_0/results_op_agent.csv",
+      "sha256": "01b10296edf0376c4964af33b64ba21da9185d88e71a1695eb4988cce08db38a",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250606_201548/run_1/results_op_agent.csv",
+      "sha256": "60bbe064548a15a40dcad2393ed1c7f14e5113d3b1b3486edcc2fb104549e75a",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250606_201548/run_2/results_op_agent.csv",
+      "sha256": "9fb3556d9c657ab031d28f40eae52cf20e0147852c23037d3cefe3d9682c0ab0",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250613_173949/run_0/results_op_agent.csv",
+      "sha256": "66c951e5b435836893bfe80a76567917d179e406e0933d12558ef891aa94d0c5",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250618_145701/run_0/results_op_agent.csv",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rows": 0,
+      "disposition": "excluded_empty"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250618_145955/run_0/results_op_agent.csv",
+      "sha256": "8206ff67c72eada0518ce16321f2aae451c1e108b294ed04d427308977442b10",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250620_150433/run_0/results_op_agent.csv",
+      "sha256": "55c3303aec8e341b05d9b5a1ffacfa7604aeac01e1fdbf340975c259dc2acedc",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250620_164847/run_0/results_op_agent.csv",
+      "sha256": "b4e59ac01610cf31172191920b7b326485a4332b45327de5364be3816d8c47bd",
+      "rows": 6,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250622_003819/run_0/results_op_agent.csv",
+      "sha256": "c61692be7fdb1b510829948987071078fa1ed4eba992057d3659522c32a616bd",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250622_003819/run_1/results_op_agent.csv",
+      "sha256": "dcc031fd004548bfcccdcbd8e6fd0c537207773677de9a3304a24be96cb8eed0",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250622_003819/run_2/results_op_agent.csv",
+      "sha256": "cf07f397bcb8f9da1f38cad51ddc2f7efdaceee43b0cec134939cc3a77067be6",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250629_202828/run_0/results_op_agent.csv",
+      "sha256": "f761fd786180c96c5b44d39b37091640d809647672045548c217d2d7df49a761",
+      "rows": 87,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250629_204446/run_0/results_op_agent.csv",
+      "sha256": "4c2544abae7b03f61610e6ac2f800466c1bdfdc13e1c0f79e87ee1f9967c6738",
+      "rows": 138,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250629_204446/run_1/results_op_agent.csv",
+      "sha256": "e3a4e3e8970c9f2c36577edfe4c16cf17321d84c43103c9101adf05f35779d1b",
+      "rows": 138,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250629_204446/run_2/results_op_agent.csv",
+      "sha256": "6a9db85e807c52a5be812569e4d6836624b95d659ff4d319c654662402fe060a",
+      "rows": 138,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250708_234914/run_0/results_op_agent.csv",
+      "sha256": "725f6ba837757d43e558ec76a103f2759b46ab88b47b0a8bb2e342ce56483657",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250708_234914/run_1/results_op_agent.csv",
+      "sha256": "69c7737ebea09cc29de14aefdb418d23ef4f9f62000a62be399ac20a97c85d08",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250708_234914/run_2/results_op_agent.csv",
+      "sha256": "bf4bbf96b4ce74b1871ae6cc61e9f296411a6862f4bdb8a80ef8ed05bfe7f699",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250712_035316/run_0/results_op_agent.csv",
+      "sha256": "cfe8ee49d5f414e2613451d095333bc9605f8b0927041cbdea8a00291b6514e3",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250712_035316/run_1/results_op_agent.csv",
+      "sha256": "a581376ac2f296b2940b0eb42026c9414592ddf770cba9f5c20c14719d1f1cae",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250712_035316/run_2/results_op_agent.csv",
+      "sha256": "dbffc863521a1feb1beb0893b76d235341d1b7e980dbe07eff276c3a0d667f1b",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250716_045048/run_0/results_op_agent.csv",
+      "sha256": "b6dc647151c0c7389da3d3cd2864b94b6fb07a39c37991bc82f2566a5895e3e2",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250716_045048/run_1/results_op_agent.csv",
+      "sha256": "8adfc10881e9c0e42cf8752160a53c7fa7af27e819994b5c1c8b7e34a7c9e784",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250716_045048/run_2/results_op_agent.csv",
+      "sha256": "7ea677b9869d1a263bf562e8b94c5b2fdea5ce10a0ffe098f9de1ff7e3d4b9f4",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250720_222955/run_0/results_op_agent.csv",
+      "sha256": "7ff6183483cc6c5b5dd489b03858ada49dd32e984edb6b74dd622847b825be6e",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250720_222955/run_1/results_op_agent.csv",
+      "sha256": "2258468a81a4e59db325ecade89ed9a2bf32df03a23109ab541d0e1bd48c3774",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250720_222955/run_2/results_op_agent.csv",
+      "sha256": "c99382d341afc7ccd0f1a6f63eef9a4ad447463716ea250cc632b1b796f50943",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250725_131702/run_0/results_op_agent.csv",
+      "sha256": "5f25e5d00a21b2889c03ffa2753f3cca4abeda768edc31e0641e2c04d4eec0e8",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250725_131702/run_1/results_op_agent.csv",
+      "sha256": "5f657696a339f950b6bb54ab7ae5beca17f47fcbd5bf62fb15bdc3dbd59c7c7b",
+      "rows": 13,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250725_203418/run_0/results_op_agent.csv",
+      "sha256": "44ebf9cf109fab3d6c2cabbe080b955ebef26d994c70dcc2ccc661bf8c9eb8c0",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250725_203418/run_1/results_op_agent.csv",
+      "sha256": "c60fe6d33db2dffa9186e0d5ae66b6377d459f9839479c868d705c7a33fcd095",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen2.5-coder/20250725_203418/run_2/results_op_agent.csv",
+      "sha256": "9d5124da6453b585404a69baa98dc66ea6abe149371eb44ff13329078da5dd06",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen3/20250717_215609/run_0/results_op_agent.csv",
+      "sha256": "1ee5a83843cb0457db83cdbd449d457429c60cf81b7cc8c1b9b6a8c3795e6be2",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen3/20250717_215609/run_1/results_op_agent.csv",
+      "sha256": "e219a3dcb33438e01fafd3e5228d94c97f9fac3949177a9e92d54e2acda941c6",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen3/20250717_215609/run_2/results_op_agent.csv",
+      "sha256": "4b99736ebcbaa794e8af819d51158f1a06c8c5ac871111aa48c676d8e29e76c9",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen3/20250726_090531/run_0/results_op_agent.csv",
+      "sha256": "11d7e11c99ce21eb65655d70a322a9d9bd6c2eba3bc70e62f6bdf0319629b29d",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen3/20250726_090531/run_1/results_op_agent.csv",
+      "sha256": "557a8c431342c8b230ca4534786a05c88a92d76e6b4d82dd47baee57976e5ea7",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/bluesky_runs_07-26/qwen3/20250726_090531/run_2/results_op_agent.csv",
+      "sha256": "2900198a38c07d517f7f348d29e360da09c854555e4d44f7d49c4f80fbbfbc29",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/athene-v2-agent/20250921_025114/run_0/results_op_agent.csv",
+      "sha256": "8483693404a5f6ab77e2c3abfcd44c6dbbdf2ab7797263f4ecc65ef84be4be6e",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/athene-v2-agent/20250921_025114/run_1/results_op_agent.csv",
+      "sha256": "e466fdd71605e612e660b6489f6e256fe8994d10a619e8e49c6c92a642b5d39e",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/athene-v2-agent/20250921_025114/run_2/results_op_agent.csv",
+      "sha256": "3f6f00322ebaa0c05fd99d7562ac23da48c5ac4cd729f604be943f65bce0f7d3",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/athene-v2/20250921_015051/run_0/results_op_agent.csv",
+      "sha256": "0a3ffc475df7f97aab5828edff39e0acb9ca7e1bd44f8e38a49a66fabb1bc257",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/athene-v2/20250921_015051/run_1/results_op_agent.csv",
+      "sha256": "80d2346e8e3704e1e186e8d9e20479c9a08f3281bd031a236c1973da869e64b4",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/athene-v2/20250921_015051/run_2/results_op_agent.csv",
+      "sha256": "bd146f1eb7bf327d497fe0bbfe4e4fc8b8fa5511a4957728584aa06ed20a899e",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/claude-3.5-sonnet/20250920_051640/run_0/results_op_agent.csv",
+      "sha256": "cae281f6b1f9b45ae4be5565aef7b8d3c1374a9e17507175502502003a86f26a",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/claude-3.5-sonnet/20250920_051640/run_1/results_op_agent.csv",
+      "sha256": "5150d65d153de830cc089a0e0df516f4a97b2854598501f18213ff2f8743179e",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/claude-3.5-sonnet/20250920_051640/run_2/results_op_agent.csv",
+      "sha256": "30b18c9a0ccee08377dd4a1894050d04259d15cfcf86cdd76d42ab8767eb20be",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/claude-sonnet-4-20250514-thinking/20250921_052033/run_0/results_op_agent.csv",
+      "sha256": "f22527c9dcbd030c58d9b5edfce0d05d2401048df623671e6edac6b31e6390b1",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/claude-sonnet-4-20250514-thinking/20250921_052033/run_1/results_op_agent.csv",
+      "sha256": "a21e3834a91c3a32400468569aaa40d1c57f5f73594205756a4feb9d4e620deb",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/claude-sonnet-4-20250514-thinking/20250921_052033/run_2/results_op_agent.csv",
+      "sha256": "471573581b62712626c6a23b10ae609617d3a0dc25f7ed41a653df91e850d771",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/gpt-4o/20250920_130058/run_0/results_op_agent.csv",
+      "sha256": "f59d31f4e9ee743d849da88abbe2d05c9d1a425d1a5a1103cd13fb9171581c6f",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/gpt-4o/20250920_130058/run_1/results_op_agent.csv",
+      "sha256": "927d57a7b44a9178614efb4fa495cc7d9dafdeefb778b1c89d14a165122509fa",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/gpt-4o/20250920_130058/run_2/results_op_agent.csv",
+      "sha256": "3ecc7648e066cfb6c5a272c088a91dc2c6834f113f65fc6e37a739991038aeda",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/llama3.3/20250921_040001/run_0/results_op_agent.csv",
+      "sha256": "5f1eb11a090032f25070b4f760529d99b2e9dbf57c0a9846d2e800711b7a2f3c",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/llama3.3/20250921_040001/run_1/results_op_agent.csv",
+      "sha256": "c96ba692f947d5f6ca989045bafd22581fb0d1579e127bf144a24e2a32695221",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/llama3.3/20250921_040001/run_2/results_op_agent.csv",
+      "sha256": "49a92e4a36d006497cf9c8f38ef32e754ce1a87e0a40771b4e60c002c7eead5d",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/mistral-nemo/20250920_111136/run_0/results_op_agent.csv",
+      "sha256": "6e266cbb6b2cfd111eb59e7905faa9c9a6fdcb8d9a78f609bfa6d7f5793b8bc4",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/mistral-nemo/20250920_111136/run_1/results_op_agent.csv",
+      "sha256": "c46c4689f2d882813b1ce2d3b9ac74cf0d0e262df171c1d22fdbb2d74aef0c2e",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/mistral-nemo/20250920_111136/run_2/results_op_agent.csv",
+      "sha256": "f8d32af7285025f8ec7f660407fcc985810c4bd1893f2d9fe8855f99c75b2d5c",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/mistral/20250919_224542/run_0/results_op_agent.csv",
+      "sha256": "b6d7be5a7d02d3b0967de36414390a6ebbbd57196fbe0c12a88e5019c3d10ecc",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/mistral/20250919_224542/run_1/results_op_agent.csv",
+      "sha256": "2b3db2cf9761d2f9351c5e20acd8db4b391ee97119f017c954d3987c4fbab6c5",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/mistral/20250919_224542/run_2/results_op_agent.csv",
+      "sha256": "8be1469fc0eb806fa3fc54c9912450e01d7cd45d4eed29b755607abed577bc92",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/phi3.5-fp16/20250920_195426/run_0/results_op_agent.csv",
+      "sha256": "d82191d0fbec04165507cd18c9d49a3b6f0d067c4ed48dba6b72f3a6ee01f0b2",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/phi3.5-fp16/20250920_195426/run_1/results_op_agent.csv",
+      "sha256": "07dc79e1ea06d4bb0dea8b3445f2fe33b6a7cd9370640864144ff166655d072f",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/phi3.5-fp16/20250920_195426/run_2/results_op_agent.csv",
+      "sha256": "dd9abd07571d99418f48fa79d026d71e11f1ba7d4e879ad30f05a23e6f385c9f",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/phi3.5/20250920_135442/run_0/results_op_agent.csv",
+      "sha256": "0f52a555d83f4044f4e20334ecfbe26734be689e744b5cbd13fa30c18bb10b34",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/phi3.5/20250920_135442/run_1/results_op_agent.csv",
+      "sha256": "2173a068f8e7e5e1064bfddf4828c698d086f46102c5fd49e78700e5cf009608",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/phi3.5/20250920_135442/run_2/results_op_agent.csv",
+      "sha256": "2c62fe1fe8cf999620afbbe2906fa37d0b8bcb5a493d326bfc0b732aa31b74d6",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/qwen2.5-coder/20250920_035727/run_0/results_op_agent.csv",
+      "sha256": "c0db30198226b4b3371629782e03df8898a8fcde7a850901e3ff6037f90efc08",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/qwen2.5-coder/20250920_035727/run_1/results_op_agent.csv",
+      "sha256": "c64752d0fb51ac61dbd89842e094590550b32f052689a8c4c0ce0e744ce608b0",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/qwen2.5-coder/20250920_035727/run_2/results_op_agent.csv",
+      "sha256": "366bac134414a75ab6491eaa3df493e7643b8db9a16d58349de8c91d2d36057f",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/qwen2.5/20250920_082505/run_0/results_op_agent.csv",
+      "sha256": "5af1658d122d4a6fc82fd581f5915e00d6c861d0c1ec4dde9f24f461b8f2fbd8",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/qwen2.5/20250920_082505/run_1/results_op_agent.csv",
+      "sha256": "169f51db77e3896481a66f2c8dbb327623debe6855b20fb2d9889f7cf2fddea1",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/qwen2.5/20250920_082505/run_2/results_op_agent.csv",
+      "sha256": "dd95730c4a331089bc8d6fc7f9551b9aa62b26a740286c476968ca377685d79f",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/qwen2/20250920_061433/run_0/results_op_agent.csv",
+      "sha256": "062822ceb4dc2a6c922ef543e18858e15700ac4172ef0e3671eb90b328419b28",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/qwen2/20250920_061433/run_1/results_op_agent.csv",
+      "sha256": "c38fa19ccb3b72b17812d3c67091c71fdb1173cf2a975d1354fa9e3a8ea62389",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_dataset_old_prompt_switch_linkam_on_adj_19_09/qwen2/20250920_061433/run_2/results_op_agent.csv",
+      "sha256": "7501045798cb45f4669e1b6af9c8ab4bc61929e8fe99e76a40c374b5cfc8ff06",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/archived/qwen3-thinking/20250806_030757/run_0/results_op_agent.csv",
+      "sha256": "27461e99b24f24afe19b0cc0092bf57de86ac5d473c5a1fb8edccd0f38fd51d3",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/archived/qwen3-thinking/20250806_030757/run_1/results_op_agent.csv",
+      "sha256": "a07f855c43bf9deddad083a611a72005e6cbb1c138b98a7fed890e3102ff0c9f",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/archived/qwen3-thinking/20250806_030757/run_2/results_op_agent.csv",
+      "sha256": "2c61155d5e8df58b0f959f77be679de0262fe31c9b0d8b629e6cb28bf2cf314c",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/athene-v2-agent/20250801_011408/run_0/results_op_agent.csv",
+      "sha256": "d57b8de93697f7adc9b7a9dd92d4ef1b7755d69a0f618e2b5008f024e47ee2a9",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/athene-v2-agent/20250801_011408/run_1/results_op_agent.csv",
+      "sha256": "ca6f4f07a1446e9c050689ca33193723466e323d3f52e1a743f9a082b657a151",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/athene-v2-agent/20250801_011408/run_2/results_op_agent.csv",
+      "sha256": "ece78991ba6d0dc8d7168a471b966f54aa3c0ff3747b9441ed7d240193908170",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/athene-v2/20250731_204242/run_0/results_op_agent.csv",
+      "sha256": "b120e4810653e827fac33a720bf87261453a3f024b88924a00373be8be773b3e",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/athene-v2/20250731_204242/run_1/results_op_agent.csv",
+      "sha256": "a5472ea3b92b37a4040ad12cf51cbfff88d472b2d7f2efffa061384ade40d0bf",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/athene-v2/20250731_204242/run_2/results_op_agent.csv",
+      "sha256": "d5b4483b3d93cde752a07ac3a48f9a9aea417b9d9ae876969947eaacef5c3d4b",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/bs_1/20250729_132359/run_0/results_op_agent.csv",
+      "sha256": "4e6d24c8644083f1a0b055818c24424a07ef280b189ef8e9a8096dc2ea9b3940",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/bs_2/20250729_133545/run_0/results_op_agent.csv",
+      "sha256": "9f2b5b8070b6f42074cf2652485ae5aa70e73b12e08d6677786150bae61f9e8d",
+      "rows": 20,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-3.5-sonnet/20250812_060058/run_0/results_op_agent.csv",
+      "sha256": "929d8006da2766a981ac1c0c78df6a8c48d161f8d15ec0f9b892e82b17473080",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-3.5-sonnet/20250812_060058/run_1/results_op_agent.csv",
+      "sha256": "e929e28a433d4af7fe09edef1dbc0c18351042578c1550201b958492aadd823a",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-3.5-sonnet/20250812_060058/run_2/results_op_agent.csv",
+      "sha256": "4dd984cc21f52a985fc7e30c59f80c6cea40e6936f21a4ac08401e5afd3ee709",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-opus-4-20250514-thinking/20250806_150659/run_0/results_op_agent.csv",
+      "sha256": "45a1c4e3a4726acea682e160c7a260769a7da7aa5c0fd9c16dd4a41d559551fe",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-opus-4-20250514-thinking/20250806_150659/run_1/results_op_agent.csv",
+      "sha256": "58afe9249e19f121586691412722db22202f7ccdadb47cabd277ede04cb7cc4d",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-opus-4-20250514-thinking/20250806_150659/run_2/results_op_agent.csv",
+      "sha256": "6b6260bf4074a24ce9b48fed4196cc0c8c470ceea459564b162c4770cc73af33",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-sonnet-4-20250514-thinking/20250806_124319/run_0/results_op_agent.csv",
+      "sha256": "990d6f4c411cbd744dc3b89121638ca1a9bfa9503c8392c48eba0cde87a6751b",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-sonnet-4-20250514-thinking/20250806_124319/run_1/results_op_agent.csv",
+      "sha256": "2df140ba739beb63847c2fd3b6e61fa9a0371eff4e0fb84e37c0a627a04d0b70",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-sonnet-4-20250514-thinking/20250806_124319/run_2/results_op_agent.csv",
+      "sha256": "ec3734f6455ad3d4259018c7402b8384bc18a83d7a3b8a17dfe7aa367e67d36a",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-sonnet-4-5-20250929-thinking/20251001_115439/run_0/results_op_agent.csv",
+      "sha256": "39438f1506aae122e023226a3081455de934e83db1c4c28ac9d752dc29dd72c9",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-sonnet-4-5-20250929-thinking/20251001_115439/run_1/results_op_agent.csv",
+      "sha256": "83555b9ee862a2d72d21b29667027b259406876c04693a6bdc7fcb35da0890d9",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-sonnet-4-5-20250929-thinking/20251001_115439/run_2/results_op_agent.csv",
+      "sha256": "3f7ac9f8cb1af4f63331a22a2427db1d3bb814627ee8ff58b4702411745d25d3",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-sonnet-4-bedrock/20250805_152711/run_0/results_op_agent.csv",
+      "sha256": "b1e56b67d69ef51f19fdfd72c8d7e282f99a97ddfa58f1cf31dceb27bca03e4b",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-sonnet-4-bedrock/20250805_152711/run_1/results_op_agent.csv",
+      "sha256": "9e4074a8b474e090d87159a2201f6954871bbd4225f3326d092b87996f1d3ff0",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-sonnet-4-bedrock/20250805_152711/run_2/results_op_agent.csv",
+      "sha256": "92fdad8ecde6951d56d207e579c9c06afaf26636efc74ee74b554df631e18f89",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-v4-opus-abacus/20250806_205616/run_0/results_op_agent.csv",
+      "sha256": "a45540e2791e83d2aa25ee45382f9a0374f5ba84884960ccaa006945e14344a6",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-v4-opus-abacus/20250806_205616/run_1/results_op_agent.csv",
+      "sha256": "9c5077a6eec2ac5c409afdaf96a0da3cf2def0cf127beec85c004948b9eb3421",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-v4-opus-abacus/20250806_205616/run_2/results_op_agent.csv",
+      "sha256": "c5932abce5b5029fd302401f34717ffb3b98f0433171d53fb1c9fc18e6bc9d9c",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-v4-sonnet-abacus/20250806_200817/run_0/results_op_agent.csv",
+      "sha256": "663c383056840b8a93795bb757771e3fd2ee78890dd26ff10bb7e1f8e406e8bc",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-v4-sonnet-abacus/20250806_200817/run_1/results_op_agent.csv",
+      "sha256": "6944594b6a7b4885466e82e0f76d71c41773bd30101aa73ed9a93aa49136749a",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/claude-v4-sonnet-abacus/20250806_200817/run_2/results_op_agent.csv",
+      "sha256": "77910e42e5b502df5221244427416e375f3eeda657d510cba29f82227c9ab30f",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/debug/20250915_185437/run_0/results_op_agent.csv",
+      "sha256": "0198708545b281c155c224532de1dc74ae25d11aa4dd9ca3b41fc409892a8a85",
+      "rows": 136,
+      "disposition": "excluded_debug_reference"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/debug/20250915_185437/run_1/results_op_agent.csv",
+      "sha256": "230498440f6d30570bd04ac94d8eda2c281f84fbaba1a74cac05eadeea3a8fd6",
+      "rows": 136,
+      "disposition": "excluded_debug_reference"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/debug/20250915_185437/run_2/results_op_agent.csv",
+      "sha256": "4862c9e303d61d929651d002407a01deb7203ffa9f2422a1f89b64ab33a9a4bd",
+      "rows": 136,
+      "disposition": "excluded_debug_reference"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/devstral-med-or/20250917_003333/run_0/results_op_agent.csv",
+      "sha256": "4c2e0ce8941db017d5b59b9a18a74fa199be2824fae2f930c895c4f48eaafd29",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/devstral-med-or/20250917_003333/run_1/results_op_agent.csv",
+      "sha256": "79fcc832621c5a2f1160de22fcd34a9fa05f1fd3a29260e06b49734968a9eed4",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/devstral-med-or/20250917_003333/run_2/results_op_agent.csv",
+      "sha256": "ed9d9200d7af09dfb6137e2742f768a78c43ca30cd3e72914966e154cba5047e",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/gemini-2.5-pro-native/20250915_225846/run_0/results_op_agent.csv",
+      "sha256": "9e8caaf5fb9eb3a227054bca93b32cc0f1bbd5e211816ac66fa5710f404d9925",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/gemini-2.5-pro-native/20250915_225846/run_1/results_op_agent.csv",
+      "sha256": "0fe44ff1e54947fb794f8acd793d1d06dc36a8df0873fa0b2cf309a60a0c1669",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/gemini-2.5-pro-native/20250915_225846/run_2/results_op_agent.csv",
+      "sha256": "f222b198fda094f34c2896386946a471e506d943f147e69c6b7ca7a20925b62e",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/gpt-4o-abacus/20250801_105311/run_0/results_op_agent.csv",
+      "sha256": "9ef2fba43cea7b2700fcb5f81d6b548416d57663e6bf66adc8fc719318f02f85",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/gpt-4o-abacus/20250801_105311/run_1/results_op_agent.csv",
+      "sha256": "5b44a490a727cacdadafd688afa7d140f12bfab0797244cf3e4baa4ae08c370b",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/gpt-4o-abacus/20250801_105311/run_2/results_op_agent.csv",
+      "sha256": "e859a31f6f306825fb1c7c759205abdda3de2fc1f3167f3428a609d9a0695c5f",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/gpt-4o/20250731_074706/run_0/results_op_agent.csv",
+      "sha256": "5716a713f262b23919bd81e9d9db4fe4f54b6c1c8b63ff35d8eb79ef27882f93",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/gpt-4o/20250731_074706/run_1/results_op_agent.csv",
+      "sha256": "2688761ea351417e0080ca6f45f8b1a2b45dcbfbeccc846213eb87f0c52e4a81",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/gpt-4o/20250731_074706/run_2/results_op_agent.csv",
+      "sha256": "4edb16b9999ab0388f4e3b93eecb083a58207c83bc3cf372e5bddc21ef7f3da2",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/gpt-5-high/20250918_205726/run_0/results_op_agent.csv",
+      "sha256": "b6dec1b2adcc7e1231376a24b0bb9ac7d26a64b83ab211e2b4786f5246c026be",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/gpt-5-high/20250918_205726/run_1/results_op_agent.csv",
+      "sha256": "493de5c7faaa8065634fd246effeee94ad86471924127ea4b5547a654bd41862",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/gpt-5-high/20250918_205726/run_2/results_op_agent.csv",
+      "sha256": "144676837f66baa3cdbf7eb3b4b879cd2257ed2b1da91e857172e9d23924ac58",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/gpt-5-minimal/20250819_164312/run_0/results_op_agent.csv",
+      "sha256": "dcf12089dff6be25786f86cb440fe02c6b99a04010b9b0287ca3bdc6c1351487",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/gpt-5-minimal/20250819_164312/run_1/results_op_agent.csv",
+      "sha256": "15096dc238e500ee9ee8a4d5517110b2b7864ac5658cd57b652dfed1aa2b5b3a",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/gpt-5-minimal/20250819_164312/run_2/results_op_agent.csv",
+      "sha256": "d2c3d85a12ebae8ea909d4721182b20ff403dfdbf4412806490d44ffb0e5d884",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/gpt-oss:120b/20250809_140011/run_0/results_op_agent.csv",
+      "sha256": "d74b390af0f6263c77c0c16db39cc96636594a3c371f97244b2114a6d436c2ae",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/gpt-oss:120b/20250809_140011/run_1/results_op_agent.csv",
+      "sha256": "4ac6af02edf9c18f31d543d1269154c507a6a0603beeae0fb32982129c11d4c3",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/gpt-oss:120b/20250809_140011/run_2/results_op_agent.csv",
+      "sha256": "ea1cdc47f7ddf847bbeb94ff7dc0eef34a8a8cfe01a828c308c9430b03ae6cd1",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/grok-4-fast-or/20250922_121054/run_0/results_op_agent.csv",
+      "sha256": "5f3405319cb05182eb709336d2b09ab6719aabe911261107dd71615950711543",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/grok-4-fast-or/20250922_121054/run_1/results_op_agent.csv",
+      "sha256": "ce06f5525819c69fd7b69164582e270518ca7e3aeaab5abe028da346ef8fd008",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/grok-4-fast-or/20250922_121054/run_2/results_op_agent.csv",
+      "sha256": "5cd2e2072aae15ba796a70c6081f95ff71efa3ef57bdde4a72eb135d23d23c06",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/grok-4-or/20250916_225002/run_0/results_op_agent.csv",
+      "sha256": "5b7823dc46f9374a983df8c79691272e31d15429139ed6eb74708d10be8cd710",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/grok-4-or/20250916_225002/run_1/results_op_agent.csv",
+      "sha256": "644abc59519016231e66a2d60fc0cdbae2ae2d5eea8c60133f55764ecf719d2b",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/grok-4-or/20250916_225002/run_2/results_op_agent.csv",
+      "sha256": "644abc59519016231e66a2d60fc0cdbae2ae2d5eea8c60133f55764ecf719d2b",
+      "rows": 136,
+      "disposition": "excluded_identical_result_file",
+      "duplicate_of": "saved_named_runs/new_prompt_new_dataset_12_8/grok-4-or/20250916_225002/run_1/results_op_agent.csv"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/grok-code-fast-1-or/20250917_015011/run_0/results_op_agent.csv",
+      "sha256": "6e5003142aefc03ced883c43a3d693707c4275a2caafddaae2ec3f7eab0f21fb",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/grok-code-fast-1-or/20250917_015011/run_1/results_op_agent.csv",
+      "sha256": "5ec907e41cc299a8ddf0d0ffba7627d4f928dc7442e085d08b756aaca0e4f4f6",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/grok-code-fast-1-or/20250917_015011/run_2/results_op_agent.csv",
+      "sha256": "92df626bfa92aa9fadcb9ea04989299a9c84b95770d11ce0608ae87888291915",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/llama3.3/20250801_052946/run_0/results_op_agent.csv",
+      "sha256": "edcad27dfd441017cb256276d471f9858084aec2bf56ad11f34af3614347460a",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/llama3.3/20250801_052946/run_1/results_op_agent.csv",
+      "sha256": "b529becac1137b7990cec465a26825368aaa897d66c238e2c161d0ad2f8e5ef7",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/llama3.3/20250801_052946/run_2/results_op_agent.csv",
+      "sha256": "12219bba3630b1e99e703259e6d10a76ca699e1e37fa8ec22454f7b99255d359",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/mistral-nemo/20250731_011537/run_0/results_op_agent.csv",
+      "sha256": "f68b544912cc4dd8d38dc4ee3a24f40a011e78feb184cde670cea2924743f0b6",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/mistral-nemo/20250731_011537/run_1/results_op_agent.csv",
+      "sha256": "ef2adb3218e789bfed76758ddc0a12d75cc32883604b243ebd1f4e7a7b4ec1ca",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/mistral-nemo/20250731_011537/run_2/results_op_agent.csv",
+      "sha256": "391af1eca3203c793105c951355eee6a2ca69b3b59e4be91b7463811ce1c69ea",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/mistral/20250811_173940/run_0/results_op_agent.csv",
+      "sha256": "46b49f936b25daaa38469353200dfa38317fd24d4c38b701b46cd6b406805f28",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/mistral/20250811_173940/run_1/results_op_agent.csv",
+      "sha256": "fa56fa47c14b5883e8271633d99dad5ca9cbc6ae2fb537756518e43d660c0200",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/mistral/20250811_173940/run_2/results_op_agent.csv",
+      "sha256": "fcb50019b722aaa5e34e3329044551a60fe84626a7522b3463cf677ca771711e",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/o3-high/20250806_173410/run_0/results_op_agent.csv",
+      "sha256": "f52dd73abfc73662efb51fd98357f9fbf6b02a123dc69cb240ac7abc2320b918",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/o3-high/20250806_173410/run_1/results_op_agent.csv",
+      "sha256": "86f3d0d974083b1e9c42b314094ff379f698a03a19d4c2f1d11197e4211b05df",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/o3-high/20250806_173410/run_2/results_op_agent.csv",
+      "sha256": "993f7ab49d3022aa91bb4759bdf31b239a53e95779459e67fc994919271fef41",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/phi3.5-fp16/20250731_144735/run_0/results_op_agent.csv",
+      "sha256": "42e1c8530242a47fe1ef2d7a8362dd7f30b00aa6a85e9aa2d3310eda67baf0df",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/phi3.5-fp16/20250731_144735/run_1/results_op_agent.csv",
+      "sha256": "c1db232535f806809201e1e068dc41eb696328fe5c4fe1795c7dabe2f732f681",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/phi3.5-fp16/20250731_144735/run_2/results_op_agent.csv",
+      "sha256": "fb83698eb7ee140a19b0c1f5c458f63514fe7be9431d741413ca16f4ccc0e4ba",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/phi3.5/20250731_085332/run_0/results_op_agent.csv",
+      "sha256": "faa9955fee1a7554651dd97d86aa973a1fa6e91a13f1db19273c45df89bfe5b1",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/phi3.5/20250731_085332/run_1/results_op_agent.csv",
+      "sha256": "1ba971978ea5324eb091ced80c11440bac219c1677d044e7674e31d4a7da5a3b",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/phi3.5/20250731_085332/run_2/results_op_agent.csv",
+      "sha256": "f263dfa0ba6edbb4fa58d96f01f33f8ce2e9077c131b10b25d8b37667f07ad7f",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/qwen2.5-coder/20250812_003108/run_0/results_op_agent.csv",
+      "sha256": "cfdec460ae380b9d5978cade2899968bb30db07cf825810e4927c6400f9253fd",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/qwen2.5-coder/20250812_003108/run_1/results_op_agent.csv",
+      "sha256": "094585fb2d29028beb5d0e1f249b83cd5942fbdab7c7aefa76578b46f427a804",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/qwen2.5-coder/20250812_003108/run_2/results_op_agent.csv",
+      "sha256": "df9d65e3d837ce12325cb84ed7bf4cfbd865b3465e0cd01d27baa185daa983de",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/qwen2.5/20250812_120719/run_0/results_op_agent.csv",
+      "sha256": "a4c6d105819c17b087c470d2bded7e20c856214829a61b67b7a4722f859eed11",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/qwen2.5/20250812_120719/run_1/results_op_agent.csv",
+      "sha256": "b182c924319af9c5c493c680cdcb7131f0b7560942ad60db2d93c0aeb73c895b",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/qwen2.5/20250812_120719/run_2/results_op_agent.csv",
+      "sha256": "8c582d077545e312ab169337a9683375cac0073f1094bacdd6e92c4b9f4ea2d7",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/qwen2/20250812_071215/run_0/results_op_agent.csv",
+      "sha256": "3dea8870063d8b2413cf89aa3f82d7afbf95cc437f11d4115e80b4313b10b371",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/qwen2/20250812_071215/run_1/results_op_agent.csv",
+      "sha256": "630702b3a37b041ecddffbfe0799773572f28edcc3c98a3bc2f28681da79557f",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/qwen2/20250812_071215/run_2/results_op_agent.csv",
+      "sha256": "2e8d4a28684e3018bf667fed5206d1a727ac67de173d499784d4d9b1a436b890",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/qwen3-coder-480b-or/20250930_154240/run_0/results_op_agent.csv",
+      "sha256": "df50dd191cfcacd7f5f02b7ec863b85778ec9e0cb7b539154a1663621744bb18",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/qwen3-coder-480b-or/20250930_154240/run_1/results_op_agent.csv",
+      "sha256": "213f91d90f770ad47a83c2b98f050ef6e95e906bc388d452952eaf835e46abea",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/qwen3-coder-480b-or/20250930_154240/run_2/results_op_agent.csv",
+      "sha256": "ba7df67de9bf3435aff4e2924e9f13d9e8a15a11e346ee24ea0ffc3d80d57d8e",
+      "rows": 136,
+      "disposition": "imported"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/qwen3-coder/20250816_205726/run_0/results_op_agent.csv",
+      "sha256": "b5871c5e93d3884cf3930a27fc849b7bb99744565043e9a747e93892eba6734c",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/qwen3-coder/20250816_205726/run_1/results_op_agent.csv",
+      "sha256": "e737fea6abc5dd8bbf89a52ef2c0659542dc9dc60bddd1b674282c5a7f4adc78",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/qwen3-coder/20250816_205726/run_2/results_op_agent.csv",
+      "sha256": "562f7ea5943e4f21487289b5b4d5a9ce68634e971bea3153add25c3501804c26",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/qwen3/20250805_192531/run_0/results_op_agent.csv",
+      "sha256": "fab4a56a4f804ac9d78b98e5a707521f3d64acb43f4db64349c358d5f5533500",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/qwen3/20250805_192531/run_1/results_op_agent.csv",
+      "sha256": "63b1566e3e268897c2b9fc20cad8c351a4b5d890cbc6d95b253c4ab00f95c970",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/new_prompt_new_dataset_12_8/qwen3/20250805_192531/run_2/results_op_agent.csv",
+      "sha256": "e480b28b0a324efd676fe29bdadab7aa93c9909731c41b03a934335a37c2ddb5",
+      "rows": 136,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/athene-v2-agent/20250826_155717/run_0/results_op_agent.csv",
+      "sha256": "1f0f4d647669d99673f18e35abfbb790497e25726206fef860d87d8a116dbbef",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/athene-v2-agent/20250826_155717/run_1/results_op_agent.csv",
+      "sha256": "4b9ddd2ee4747a271494a660de96875015772a11f8d9542116887c76d8536a58",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/athene-v2-agent/20250826_155717/run_2/results_op_agent.csv",
+      "sha256": "44ce3a1bf2ba7c489b87259e8bfe5bc661214f8ad3f205bfc7fbca07584a70a3",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/athene-v2/20250826_144845/run_0/results_op_agent.csv",
+      "sha256": "906e00ea243d7b4332bf7f7047c53e6fde0bb7b8c199ccb678ae487286921714",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/athene-v2/20250826_144845/run_1/results_op_agent.csv",
+      "sha256": "0baf07bd68255fa7da9e61291003798c56e63ae57568be24a1c7f6be9ee948a5",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/athene-v2/20250826_144845/run_2/results_op_agent.csv",
+      "sha256": "e6b95f2c74df26308b29723f8bd446a28a1537319668d5a4f33616b1206741ad",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/claude-3.5-sonnet/20250825_210619/run_0/results_op_agent.csv",
+      "sha256": "927b5c17785e3ef37f7faa52a4be4219d95f214e130d1380e667a89afc84c56d",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/claude-3.5-sonnet/20250825_210619/run_1/results_op_agent.csv",
+      "sha256": "a6e09371d86ea72aefeabde0d70872b6005ab3f9395971c49a8f62666a574a3d",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/claude-3.5-sonnet/20250825_210619/run_2/results_op_agent.csv",
+      "sha256": "032c942fe66e003bbb02ca0c3a6edf9257b5fe86c298032c29b5d63f992bb228",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/gpt-4o/20250826_030323/run_0/results_op_agent.csv",
+      "sha256": "78303c36ae73ed158c323e7aa4dbbcedff74611ab9761624162d6f8af8940931",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/gpt-4o/20250826_030323/run_1/results_op_agent.csv",
+      "sha256": "a43df5174376fc20349dd00c6683b6f5e3d9cd37367a6990726bdb1cc5c3d9ae",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/gpt-4o/20250826_030323/run_2/results_op_agent.csv",
+      "sha256": "359f962e412f0e87e1995abf87005b67adc5047cad0c812fdfa01ed2ca248bc5",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/llama3.3/20250826_171715/run_0/results_op_agent.csv",
+      "sha256": "6ded4d14afa2b5186541976d7b1467184d7f0ff8f9c50d88cff6f1eaa4057bf0",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/llama3.3/20250826_171715/run_1/results_op_agent.csv",
+      "sha256": "c181ab1b44192a961cbc47c6bf93d39b47bc8fc8f2c4ee85f2582fb1e1c987cf",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/llama3.3/20250826_171715/run_2/results_op_agent.csv",
+      "sha256": "0dee6541f00ebb95744b893d1be55a119d5b25a829d8d41503bb964a8cbca3c7",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/mistral-nemo/20250826_014040/run_0/results_op_agent.csv",
+      "sha256": "1fd4f64839a3e4178ce9713dece8ec44590e387c5b0893a0166e7214039a8389",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/mistral-nemo/20250826_014040/run_1/results_op_agent.csv",
+      "sha256": "1fabb1f72e4eede8a4a0072d1914ed45fbb8b7303d0cc668d53d9bf187b047fd",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/mistral-nemo/20250826_014040/run_2/results_op_agent.csv",
+      "sha256": "6bf141bdad8f5188e5aef2864fbadbddbf6e56dba9219d207db037e24fad8071",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/mistral/20250825_153920/run_0/results_op_agent.csv",
+      "sha256": "31b15c7c5b50ff50e95f4d4a025f6750ce3e5f81c15e7eb2eebc51ffd441c701",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/mistral/20250825_153920/run_1/results_op_agent.csv",
+      "sha256": "594d7c14a0ec9c2e7cdf34a7316f0848c72613410ea8d4c6208f61889d8a04b8",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/mistral/20250825_153920/run_2/results_op_agent.csv",
+      "sha256": "cfdb52e2f321c92be4f3c4bb3db455c122a6f548c31e616edb04085e5d57fac2",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/phi3.5-fp16/20250826_092206/run_0/results_op_agent.csv",
+      "sha256": "1e5e84da1c91165db910d0b50b37a894c750a689c3d40f7ff883b07ecb3e0d76",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/phi3.5-fp16/20250826_092206/run_1/results_op_agent.csv",
+      "sha256": "d755d7a0ec89e3a790a651d319794516c49b65d87546f5ccfd9ded8a27207b5b",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/phi3.5-fp16/20250826_092206/run_2/results_op_agent.csv",
+      "sha256": "f7025ace78513b8c15c7cd174148e10c3e07ed55ea856e5fda6c01ce77b1a9c2",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/phi3.5/20250826_042141/run_0/results_op_agent.csv",
+      "sha256": "919949d6123dd2fd38cf6eff6134e9ba9ae474c0fe568eaa9a3fd52674a7245c",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/phi3.5/20250826_042141/run_1/results_op_agent.csv",
+      "sha256": "b831b01a9d1258c48caf879ae261203d55758b78a478b71f826472cbd7cf839b",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/phi3.5/20250826_042141/run_2/results_op_agent.csv",
+      "sha256": "221842331b6aa4fa465c9a80723461c31f2cc5e79ed2ecb6f7a625e83b8dda80",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/qwen2.5-coder/20250825_194823/run_0/results_op_agent.csv",
+      "sha256": "907d55b1f4109807866ea6aa73527df7a7df1710eb23f4e420287046deb283a0",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/qwen2.5-coder/20250825_194823/run_1/results_op_agent.csv",
+      "sha256": "d2a73fb19eea067c16af1647be3828fdeef373647f4ecb56b012fe106b3e15ca",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/qwen2.5-coder/20250825_194823/run_2/results_op_agent.csv",
+      "sha256": "dc778546737a18477d59b6e4da8479a29b839aa32525a222265f535e9154f908",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/qwen2.5/20250826_000027/run_0/results_op_agent.csv",
+      "sha256": "cb2fa7de5345299b359cb3b7324aebcee722e04f75a01b61a5d4dd98d21cbfc5",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/qwen2.5/20250826_000027/run_1/results_op_agent.csv",
+      "sha256": "1c33101580fc32992038749221a5cae99e72a52636ffe93c16649eef0f989eaa",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/qwen2.5/20250826_000027/run_2/results_op_agent.csv",
+      "sha256": "e457d08069bfdf8b9fc8c6c475528d66ebf7ec9c01a9aa6329ee231b862ece14",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/qwen2/20250825_222837/run_0/results_op_agent.csv",
+      "sha256": "da707fd44a61a1ac288528fb0771383c694a7c972bc00405f810dbe34bec5cb6",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/qwen2/20250825_222837/run_1/results_op_agent.csv",
+      "sha256": "a379db205b13937ca3f42eb27c4fd963612213dccaca78b7c912ad5f9bc8fcaf",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    },
+    {
+      "member": "saved_named_runs/old_prompt_old_dataset_25_08/qwen2/20250825_222837/run_2/results_op_agent.csv",
+      "sha256": "f05d05bb0558e111cb9022c69afc632e80599160b89be42fb1691a7978a72684",
+      "rows": 126,
+      "disposition": "excluded_no_trial_binary_label"
+    }
+  ],
+  "dispositions": {
+    "excluded_no_trial_binary_label": 440,
+    "excluded_empty": 74,
+    "imported": 62,
+    "excluded_debug_reference": 3,
+    "excluded_identical_result_file": 1
+  },
+  "imported_records": 8432,
+  "known_successes": 6464,
+  "known_failures": 1968,
+  "unknown_success": 0
+}

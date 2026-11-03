@@ -13,7 +13,7 @@ doi: null
 url: https://arxiv.org/abs/2511.09964
 code_url: https://github.com/CFN-softbio/EnvTrace
 data_url: https://zenodo.org/records/17526264
-license: Apache-2.0 (EnvTrace package); dataset/Zenodo license not verified
+license: Apache-2.0 (EnvTrace package); CC-BY-4.0 (Zenodo experimental dataset)
 status: preprint
 summary: |
   EnvTrace evaluates LLM-generated instrument-control code by executing both the generated code and a ground-truth reference inside a sandboxed beamline "control-logic digital twin" (Bluesky/IPython driving EPICS IOCs in Docker) and aligning the resulting execution traces (time-stamped EPICS PV state changes) rather than comparing code text. Traces are scored on state (discrete sequence), temporal, continuous-profile and structural equivalence, yielding a continuous "full score" and a strict binary "EnvTrace accuracy". Over 30 LLMs were benchmarked on natural-language-to-beamline-code tasks from the VISION system at NSLS-II, with top closed models approaching beamline-scientist (human) performance.
@@ -180,6 +180,7 @@ related:
 - lightfall
 - osprey_als_bl531
 notes: |
+  Release audit 2026-11-03: Zenodo 17526264 (version 1.0.0, CC-BY-4.0) contains 580 result CSVs with 40,072 rows. The conservative execution import selects 62 nonduplicate, nondebug CSVs with explicit full_match labels: 8,432 trials, 136 tasks (116 simple / 20 complex), 21 model aliases and 23 model/campaign/prompt-hash configurations. This is an imported subset, not a verified paper-wide total; n_instances_or_runs_reported remains null. One byte-identical run CSV is collapsed; three debug-reference CSVs and older score-only or empty files are excluded. 5,490 imported rows have exact-code shortcut scoring with no predicted PV trace. Other rows may use cached traces; these are hybrid evaluation trials, not independent live instrument executions. See docs/envtrace_ingestion.md and data/raw/envtrace/ingestion_audit.json. Canonical model snapshots and historical evaluator versions are not recoverable from these files.
   Author list (van der Vleuten, Flores, Mathur, Rakitin, Hopkins, Yager, Tsai) and the '>30 LLMs' / '116 simple + 20 complex' figures come from search snippets of the arXiv page/HTML; arXiv itself was egress-blocked, so numeric per-model results, confidence intervals, the LLM-judge comparison (if any) and the exact human-baseline size are unverified. The GitHub VISION repo contains op_cog_dataset.json (105 entries: 76 simple / 29 flagged complex), op_cog_dataset_after_envtrace_paper_fixes.json (157 entries: 136 simple / 21 complex) and an archived original (127 entries, 6 complex); none matches 116+20 exactly, so n_tasks=136 follows the paper snippet. Human baseline inferred from datasets/op_cog_beamline_scientists/ (bs_1.toml, bs_2.toml, possibly more) and README_TESTING 'human-based scientist agents'. n_agent_configs=31 is the count of LLM configs enumerated in backend/src/hal_beam_com/utils.py, consistent with 'over 30'. The EnvTrace README lists citation as 'to be updated'.
 provenance:
   extracted_on: '2026-09-14'
@@ -187,6 +188,7 @@ provenance:
   sources_consulted:
   - https://arxiv.org/abs/2511.09964
   - https://github.com/CFN-softbio/EnvTrace
+  - https://zenodo.org/records/17526264
   confidence: medium
   review_status: reviewed
   reviewer_notes: Reviewed 2026-09-15 against the repository (metric definitions, simulator, model list, human-baseline
